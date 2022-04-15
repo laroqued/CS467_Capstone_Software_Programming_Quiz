@@ -60,7 +60,33 @@ app.get("/", function(req, res) {
     res.render("index");
 });
 
+app.get("/sign_in", function(req, res) {
+    res.render("sign_in");
+});
 
+app.get("/create_account", function(req, res) {
+    res.render("create_account");
+});
+
+app.get("/welcome", function(req, res) {
+    res.render("welcome");
+});
+
+app.get("/create_quiz", function(req, res) {
+    res.render("create_quiz");
+});
+app.get("/quiz_results", function(req, res) {
+    res.render("quiz_results");
+});
+app.get("/canidate_quiz", function(req, res) {
+    res.render("canidate_quiz");
+});
+app.get("/canidate_survey", function(req, res) {
+    res.render("canidate_survey");
+});
+app.get("/canidate_complete", function(req, res) {
+    res.render("canidate_complete");
+});
 // Error page
 app.use(function(req, res) {
     res.status(404);
