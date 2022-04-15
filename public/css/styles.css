@@ -1,7 +1,4 @@
-.divider:after,
-.divider:before {
-content: "";
-flex: 1;
-height: 1px;
-background: #eee;
+#login-form {
+    margin: 50px auto;
+    width: 300px;
 }
