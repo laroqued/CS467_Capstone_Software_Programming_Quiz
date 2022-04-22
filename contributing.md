@@ -10,6 +10,6 @@ A variable's purpose should be clear from its name
 3. Indent using 1 tab or 4 spaces consistently  
 It is important to have the indentation be consistent within a file
 
-# Submittin Changes
+# Submitting Changes
 In order to contribute, follow these steps:  
 Fork the repository -> Create a new branch -> Make changes -> Commit and push changes -> Make a pull request
