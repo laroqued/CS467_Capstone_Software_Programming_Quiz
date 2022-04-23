@@ -30,6 +30,12 @@ app.use(express.urlencoded({ extended: true }));
 // log requests
 app.use(morgan('tiny'))
 
+// connect to database
+const connectDB = require("./server/database/connection");
+// mongoDB conncection
+connectDB();
+
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use((req, res, next) => {
