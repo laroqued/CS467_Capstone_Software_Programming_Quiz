@@ -5,17 +5,15 @@ const axios = require("axios");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-
+let ejs = require("ejs");
 
 
 
 // Global base directory for file downloads
 global.__basedir = __dirname;
 
-// Handlebars initialization
-const handlebars = require("express-handlebars").create({
-    defaultLayout: "main",
-});
+// EJS initialization
+app.set("view engine", "ejs");
 
 // Route setup
 const path = require("path");
@@ -67,8 +65,7 @@ app.use(
 
 // Static page
 app.use(express.static("public"));
-app.engine("handlebars", handlebars.engine);
-app.set("view engine", "handlebars");
+
 
 
 // load routes
