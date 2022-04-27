@@ -4,7 +4,7 @@ const route = express.Router();
 const services = require("../services/render");
 
 // Routes
-route.get("/", services.homeRoutes);
+route.get("/app", services.homeRoutes);
 route.get("/login", services.login);
 route.get("/register", services.register);
 route.get("/welcome", services.welcome);

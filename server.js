@@ -10,6 +10,11 @@ global.__basedir = __dirname;
 // EJS initialization
 app.set("view engine", "ejs");
 
+// JSON Encoding
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
 // Route setup
 const path = require("path");
 app.use("/", require("./server/routes/router"));
@@ -21,8 +26,6 @@ const postRoute = require('./server/routes/posts')
 app.use('/api/user', authRoute)
 app.use('/api/posts', postRoute)
 
-// JSON Encoding
-app.use(express.urlencoded({ extended: true }));
 
 // log requests
 app.use(morgan('tiny'))
@@ -33,8 +36,7 @@ const connectDB = require("./server/database/connection");
 connectDB();
 
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+
 
 
 app.use((req, res, next) => {

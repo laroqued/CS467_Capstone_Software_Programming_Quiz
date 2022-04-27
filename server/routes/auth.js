@@ -6,27 +6,32 @@ const bcrypt = require("bcryptjs");
 
 // Routes
 router.post("/register", async (req, res) => {
-  console.log(req.body);
   //res.send('Register (This is a test message for Postman)')// send post test message 'Register'
+
+
+
   const { error } = registerValidation(req.body);
   // LETS VALIDATE THE DATA BEFORE SUBMITTING
   if (error) return res.status(400).send(error.details[0].message);
-
   // Check if the user is already in the database
   const emailExist = await User.findOne({ email: req.body.email });
   if (emailExist) return res.status(400).send("Email already exists");
-
   // use bcrypt to hash the password
   const salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(req.body.password, salt);
+
+
 
   // Create a new User
   const user = new User({
     name: req.body.name,
     email: req.body.email,
+    //email: req.body.password,
     password: hashPassword, // use hashPassword instead of req.body.password
   });
 
+
+  console.log(user)
   // Save after post request
   try {
     const savedUser = await user.save();
@@ -35,6 +40,8 @@ router.post("/register", async (req, res) => {
   } catch (err) {
     res.status(400).send(err);
   }
+
+  //=================================================================================
 });
 
 // LOGIN
