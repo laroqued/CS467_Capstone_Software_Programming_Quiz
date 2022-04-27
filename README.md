@@ -4,7 +4,7 @@ as well as each individual candidate's scores and answers.
 
 ## Built With
 * [Express](https://github.com/expressjs/express)
-* [Handlebars](https://github.com/handlebars-lang/handlebars.js)
+* [EJS](https://github.com/mde/ejs)
 * [MongoDB](https://github.com/mongodb/mongo)
 * [Bootstrap](https://github.com/twbs/bootstrap)
 
