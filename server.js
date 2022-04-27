@@ -4,27 +4,31 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 
+
+// JSON Encoding
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // Global base directory for file downloads
 global.__basedir = __dirname;
 
 // EJS initialization
 app.set("view engine", "ejs");
 
-// JSON Encoding
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-
 // Route setup
 const path = require("path");
 app.use("/", require("./server/routes/router"));
-// Import routes
-const authRoute = require('./server/routes/auth')
-const postRoute = require('./server/routes/posts')
 
-// Route Middleware (/api/user is prefixed for the auth.js routes)
-app.use('/api/user', authRoute)
-app.use('/api/posts', postRoute)
+
+// // Import routes
+// const authRoute = require('./server/routes/auth')
+// const postRoute = require('./server/routes/posts')
+
+// // Route Middleware (/api/user is prefixed for the auth.js routes)
+// app.use('/api/user', authRoute)
+// app.use('/api/posts', postRoute)
+
+
 
 
 // log requests
@@ -35,6 +39,9 @@ const connectDB = require("./server/database/connection");
 // mongoDB conncection
 connectDB();
 
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 
 
@@ -69,6 +76,11 @@ app.use(
 // Static page
 app.use(express.static("public"));
 
+
+
+
+
+
 // Error page
 app.use(function(req, res) {
     res.status(404);
@@ -82,6 +94,7 @@ app.use(function(err, req, res, next) {
     res.status(500);
     res.render("500");
 });
+
 
 // Create a .env file to use process.env
 let port = process.env.PORT; // OR let port = '3001'
