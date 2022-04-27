@@ -23,6 +23,8 @@
     "express-sessions": "^1.0.6",
     "fs": "^0.0.1-security",
     "https": "^1.0.0",
+    "joi": "^17.6.0",
+    "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
     "mongoose": "^6.3.0",
     "morgan": "^1.10.0",

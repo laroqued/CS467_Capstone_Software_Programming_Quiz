@@ -1,0 +1,28 @@
+<%- include('includes/_header') %>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('layouts/head') %>
+    <title>Register</title>
+</head>
+
+<body>
+    <div class="main">
+
+        <h1>SIGN UP</h1>
+
+
+        <form action="/login" method="POST">
+            <input type="name" name="name" placeholder="Name" />
+            <input type="email" name="email" placeholder="example@gmail.com" />
+            <input type="password" name="password" placeholder="* * * * * *" />
+            <button>SIGN UP</button>
+        </form>
+    </div>
+</body>
+
+
+</html>
+<%- include('includes/_footer') %>

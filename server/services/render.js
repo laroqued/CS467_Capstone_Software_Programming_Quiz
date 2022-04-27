@@ -2,12 +2,12 @@ exports.homeRoutes = (req, res) => {
   res.render("index");
 };
 
-exports.sign_in = (req, res) => {
-  res.render("sign_in");
+exports.login = (req, res) => {
+  res.render("login");
 };
 
-exports.create_account = (req, res) => {
-  res.render("create_account");
+exports.register = (req, res) => {
+  res.render("register");
 };
 
 exports.welcome = (req, res) => {

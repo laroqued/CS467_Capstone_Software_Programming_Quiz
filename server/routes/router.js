@@ -5,8 +5,8 @@ const services = require("../services/render");
 
 // Routes
 route.get("/", services.homeRoutes);
-route.get("/sign_in", services.sign_in);
-route.get("/create_account", services.create_account)
+route.get("/login", services.login);
+route.get("/register", services.register);
 route.get("/welcome", services.welcome);
 route.get("/create_quiz", services.create_quiz);
 route.get("/quiz_results", services.quiz_results);
