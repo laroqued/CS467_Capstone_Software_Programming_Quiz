@@ -51,13 +51,15 @@ app.use((req, res, next) => {
     next();
 });
 
-
+// Create a .env file to use process.env
+let port = process.env.PORT; // OR let port = '3001'
+let host = process.env.HOST;
+// let host = 'localhost'
+// let port = '3001'
 // Cross Origin Whitelist
 const cors = require("cors");
-const allowedOrigins = [
-    "http://localhost:3001",
 
-];
+const allowedOrigins = [`http//:${host}:${port}`];
 app.use(
     cors({
         origin: function(origin, callback) {
@@ -96,11 +98,7 @@ app.use(function(err, req, res, next) {
 });
 
 
-// Create a .env file to use process.env
-let port = process.env.PORT; // OR let port = '3001'
-let host = process.env.HOST;
-// let host = 'localhost'
-// let port = '3001'
+
 app.listen(port, host, () => {
     console.log(
         `Express started \on http//:${host}:${port} press Ctrl-C to terminate.`
