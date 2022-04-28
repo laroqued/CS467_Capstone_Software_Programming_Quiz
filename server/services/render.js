@@ -41,10 +41,11 @@ app.use(
 // ========================================================
 // GET
 // ========================================================
+// Donnyves
 exports.homeRoutes = (req, res) => {
   res.render("index", { name: req.user.name });
 };
-
+// Donnyves
 exports.login = (req, res) => {
   res.render("login");
 };
@@ -56,6 +57,7 @@ exports.register = (req, res) => {
 // ========================================================
 // POST
 // ========================================================
+// Donnyves
 exports.post_login =
   ("/login",
   passport.authenticate("local", {
@@ -64,7 +66,7 @@ exports.post_login =
     failureFlash: true,
   }));
 
-
+// Donnyves
 exports.post_register =
   ("/register",
   async (req, res) => {
@@ -90,7 +92,7 @@ exports.post_register =
       }
     }
   });
-
+// Donnyves
 exports.post_delete = (req, res) => {
   req.logOut();
   res.redirect("/login");
@@ -99,27 +101,29 @@ exports.post_delete = (req, res) => {
 // ========================================================
 
 // ========================================================
-
+// Donnyves
 exports.welcome = (req, res) => {
   res.render("welcome");
 };
-
+// Aaron
 exports.create_quiz = (req, res) => {
   res.render("create_quiz");
 };
-
+// Aaron
 exports.quiz_results = (req, res) => {
   res.render("quiz_results");
 };
 
+
+//Dominique
 exports.canidate_quiz = (req, res) => {
   res.render("canidate_quiz");
 };
-
+//Dominique
 exports.canidate_survey = (req, res) => {
   res.render("canidate_survey");
 };
-
+//Dominique
 exports.canidate_complete = (req, res) => {
   res.render("canidate_complete");
 };
