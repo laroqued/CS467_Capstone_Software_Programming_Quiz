@@ -6,7 +6,7 @@ const morgan = require("morgan");
 
 
 // JSON Encoding
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Global base directory for file downloads
@@ -14,6 +14,7 @@ global.__basedir = __dirname;
 
 // EJS initialization
 app.set("view engine", "ejs");
+
 
 // Route setup
 const path = require("path");
@@ -46,34 +47,39 @@ app.use(express.json());
 
 
 
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    next();
-});
 
 // Create a .env file to use process.env
 let port = process.env.PORT; // OR let port = '3001'
 let host = process.env.HOST;
 // let host = 'localhost'
 // let port = '3001'
-// Cross Origin Whitelist
-const cors = require("cors");
 
-const allowedOrigins = [`http//:${host}:${port}`];
-app.use(
-    cors({
-        origin: function(origin, callback) {
-            if (!origin) return callback(null, true);
-            if (allowedOrigins.indexOf(origin) === -1) {
-                var msg =
-                    "The CORS policy for this site does not " +
-                    "allow access from the specified Origin.";
-                return callback(new Error(msg), false);
-            }
-            return callback(null, true);
-        },
-    })
-);
+
+
+// Cross Origin Whitelist
+// const cors = require("cors");
+// const allowedOrigins = [
+//   `http//:${host}:${port}`,
+//   "https://cloud.mongodb.com",
+// ];
+// app.use(
+//     cors({
+//         origin: function(origin, callback) {
+//             if (!origin) return callback(null, true);
+//             if (allowedOrigins.indexOf(origin) === -1) {
+//                 var msg =
+//                     "The CORS policy for this site does not " +
+//                     "allow access from the specified Origin.";
+//                 return callback(new Error(msg), false);
+//             }
+//             return callback(null, true);
+//         },
+//     })
+// );
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   next();
+// });
 
 // Static page
 app.use(express.static("public"));

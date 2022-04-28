@@ -26,9 +26,7 @@ initializePassport(
     return userFound;
   }
 );
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(methodOverride("_method"));
+
 app.use(flash());
 app.use(
   session({
@@ -37,7 +35,9 @@ app.use(
     saveUninitialized: false,
   })
 );
-
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(methodOverride("_method"));
 // ========================================================
 // GET
 // ========================================================
@@ -58,13 +58,16 @@ exports.register = (req, res) => {
 // POST
 // ========================================================
 // Donnyves
-exports.post_login =
-  ("/login",
+exports.post_login=(  "/login",
+  checkNotAuthenticated,
   passport.authenticate("local", {
     successRedirect: "/welcome",
     failureRedirect: "/login",
     failureFlash: true,
-  }));
+  }))
+
+
+
 
 // Donnyves
 exports.post_register =
@@ -85,16 +88,19 @@ exports.post_register =
         });
 
         await user.save();
-        res.redirect("/login");
+        await res.redirect("/login");
       } catch (error) {
         console.log(error);
         res.redirect("/register");
       }
     }
   });
+
+
+
 // Donnyves
-exports.post_delete = (req, res) => {
-  req.logOut();
+exports.post_delete = async(req, res) => {
+  await req.logOut();
   res.redirect("/login");
 };
 

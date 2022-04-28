@@ -86,4 +86,4 @@ module.exports = {
   checkAuthenticated,
 };
 
-module.exports = router;
+// module.exports = router;
