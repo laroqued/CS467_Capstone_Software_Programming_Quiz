@@ -8,7 +8,7 @@ const session = require("express-session");
 const User = require("../model/User");
 const bcrypt = require("bcryptjs");
 const app = express();
-
+const methodOverride = require("method-override");
 
 const initializePassport = require("../../passport-config");
 initializePassport(
@@ -36,6 +36,8 @@ const {
   checkAuthenticated,
   checkNotAuthenticated,
 } = require("../middlewares/auth");
+app.use(methodOverride("_method"));
+
 // ========================================================
 // GET
 // ========================================================
