@@ -24,6 +24,7 @@ route.delete("/logout"),checkAuthenticated, services.post_delete;
 
 route.get("/welcome", services.welcome);
 // Aaron
+route.get("/quizzes/:id", services.quizzes);
 route.get("/create_quiz", services.create_quiz); 
 route.get("/quiz_results", services.quiz_results);
 //-----------------------------

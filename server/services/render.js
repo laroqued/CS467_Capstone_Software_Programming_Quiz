@@ -113,6 +113,11 @@ exports.welcome = (req, res) => {
   res.render("welcome");
 };
 // Aaron
+exports.quizzes = (req, res) => {
+  let userId = req.params.id;
+  res.render("quizzes", {userId: userId});
+}
+// Aaron
 exports.create_quiz = (req, res) => {
   res.render("create_quiz");
 };
