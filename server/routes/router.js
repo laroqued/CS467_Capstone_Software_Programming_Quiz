@@ -17,7 +17,7 @@ route.post("/login",checkNotAuthenticated, services.post_login);
 route.get("/register",checkNotAuthenticated, services.register);
 route.post("/register",checkNotAuthenticated, services.post_register);
 
-route.delete("/logout"),checkAuthenticated, services.post_delete;
+route.delete("/logout"), checkNotAuthenticated, services.post_delete;
 // ============================================================================================
 
 
