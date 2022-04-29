@@ -24,9 +24,10 @@ route.delete("/logout"),checkAuthenticated, services.post_delete;
 
 route.get("/welcome", services.welcome);
 // Aaron
-route.get("/quizzes/:id", services.quizzes);
+route.get("/quizzes/:userId", services.quizzes);
 route.get("/create_quiz", services.create_quiz); 
 route.get("/quiz_results", services.quiz_results);
+route.get("/create_question/:quizId", services.create_question);
 //-----------------------------
 //Dominique
 route.get("/canidate_quiz", services.canidate_quiz);

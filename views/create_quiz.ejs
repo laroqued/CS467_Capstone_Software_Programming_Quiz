@@ -4,13 +4,13 @@
 
 <%- include('includes/_header') %>
 
-<div class="main2">
-<h1>This is the Create Quiz in Page</h1>
-</div>
-
-<form action="/create_quiz" method="POST">
-    <input type="text" name="name" placeholder="Quiz Name" />
-    <button>Create</button>
-</form>
+<body>
+    <div class="main">
+        <form action="/create_quiz" method="POST">
+            <input type="text" name="name" placeholder="Quiz Name" />
+            <button>Create</button>
+        </form>
+    </div>
+</body>
 
 <%- include('includes/_footer') %>
