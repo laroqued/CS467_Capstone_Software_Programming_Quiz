@@ -1,18 +1,14 @@
 require("dotenv").config();
 const express = require("express");
-const mongoose = require("mongoose");
+
 const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
-const methodOverride = require("method-override");
+
 const User = require("../model/User");
 const bcrypt = require("bcryptjs");
 const app = express();
-
-const {
-  checkAuthenticated,
-  checkNotAuthenticated,
-} = require("../middlewares/auth");
+const methodOverride = require("method-override");
 
 const initializePassport = require("../../passport-config");
 initializePassport(
@@ -27,51 +23,58 @@ initializePassport(
   }
 );
 
+
 app.use(flash());
 app.use(
   session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.TOKEN_SECRET,
     resave: false,
     saveUninitialized: false,
   })
 );
-app.use(passport.initialize());
-app.use(passport.session());
+const {
+  checkAuthenticated,
+  checkNotAuthenticated,
+} = require("../middlewares/auth");
 app.use(methodOverride("_method"));
+
 // ========================================================
 // GET
 // ========================================================
 // Donnyves
-exports.homeRoutes = (req, res) => {
+exports.homeRoutes = (checkAuthenticated,(req, res) => {
   res.render("index", { name: req.user.name });
-};
+})
 // Donnyves
-exports.login = (req, res) => {
+exports.login = (checkNotAuthenticated,(req, res) => {
   res.render("login");
-};
+})
 
-exports.register = (req, res) => {
+exports.register = (checkNotAuthenticated,(req, res) => {
   res.render("register");
-};
+})
+
 
 // ========================================================
 // POST
 // ========================================================
 // Donnyves
-exports.post_login=(  "/login",
-  checkNotAuthenticated,
+exports.post_login=
   passport.authenticate("local", {
-    successRedirect: "/welcome",
+    successRedirect: "/",
     failureRedirect: "/login",
     failureFlash: true,
-  }))
+  })
 
+  
+  
 
 
 
 // Donnyves
 exports.post_register =
   ("/register",
+  checkNotAuthenticated,
   async (req, res) => {
     const userFound = await User.findOne({ email: req.body.email });
 
@@ -88,7 +91,7 @@ exports.post_register =
         });
 
         await user.save();
-        await res.redirect("/login");
+         res.redirect("/login");
       } catch (error) {
         console.log(error);
         res.redirect("/register");
@@ -99,10 +102,10 @@ exports.post_register =
 
 
 // Donnyves
-exports.post_delete = async(req, res) => {
+exports.post_delete = (checkNotAuthenticated,async(req, res) => {
   await req.logOut();
-  res.redirect("/login");
-};
+  res.redirect("/login")
+})
 
 // ========================================================
 

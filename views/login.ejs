@@ -11,7 +11,9 @@
 <body>
     <div class="main">
         <h1>SIGN IN TO YOUR ACCOUNT</h1>
-
+    <% if (messages) { %>
+    <p><%= messages.error %></p>
+    <% } %>
         <form action="/login" method="POST">
             <input type="email" name="email" placeholder="name@gmail.com" />
             <input type="password" name="password" placeholder="* * * * * *" />

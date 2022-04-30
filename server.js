@@ -1,8 +1,38 @@
 dotenv = require("dotenv").config();
-const axios = require("axios");
+
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
+const flash = require("express-flash");
+const session = require("express-session");
+const passport = require("passport");
+const methodOverride = require("method-override");
+
+
+// Create a .env file to use process.env
+let port = process.env.PORT; // OR let port = '3001'
+let host = process.env.HOST;
+// let host = 'localhost'
+// let port = '3001'
+
+
+
+
+app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: true }));
+
+app.use(flash());
+app.use(
+  session({
+    secret: process.env.TOKEN_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(methodOverride("_method"));
+
 
 
 // JSON Encoding
@@ -14,11 +44,20 @@ global.__basedir = __dirname;
 
 // EJS initialization
 app.set("view engine", "ejs");
+// Static page
+app.use(express.static("public"));
+
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+// log requests
+app.use(morgan('tiny'))
+
+
 
 
 // Route setup
 const path = require("path");
-app.use("/", require("./server/routes/router"));
+app.use( require("./server/routes/router"));
 
 
 // // Import routes
@@ -30,10 +69,12 @@ app.use("/", require("./server/routes/router"));
 // app.use('/api/posts', postRoute)
 
 
+app.delete("/logout", (req, res) => {
+  req.logOut();
+  res.redirect("/login");
+});
 
 
-// log requests
-app.use(morgan('tiny'))
 
 // connect to database
 const connectDB = require("./server/database/connection");
@@ -41,18 +82,10 @@ const connectDB = require("./server/database/connection");
 connectDB();
 
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
 
 
 
 
-
-// Create a .env file to use process.env
-let port = process.env.PORT; // OR let port = '3001'
-let host = process.env.HOST;
-// let host = 'localhost'
-// let port = '3001'
 
 
 
@@ -80,9 +113,6 @@ let host = process.env.HOST;
 //   res.header("Access-Control-Allow-Origin", "*");
 //   next();
 // });
-
-// Static page
-app.use(express.static("public"));
 
 
 
