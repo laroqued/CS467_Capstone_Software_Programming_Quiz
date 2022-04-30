@@ -26,6 +26,7 @@ route.get("/welcome", services.welcome);
 // Aaron
 route.get("/quizzes/:userId", services.quizzes);
 route.get("/create_quiz", services.create_quiz); 
+route.post("/create_quiz", services.post_create_quiz);
 route.get("/quiz_results", services.quiz_results);
 route.get("/create_question/:quizId", services.create_question);
 //-----------------------------

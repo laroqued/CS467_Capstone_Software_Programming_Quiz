@@ -3,13 +3,12 @@ const mongoose = require("mongoose");
 const quizSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
         min: 6,
         max: 255
     },
-    questions: {
-        type: [ObjectId]
+    owner: {
+        type: String,
     }
 });
 
-module.exports = mongoose.model("Quiz", userSchema);
+module.exports = mongoose.model("Quiz", quizSchema);

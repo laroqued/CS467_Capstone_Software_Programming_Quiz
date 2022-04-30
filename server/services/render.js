@@ -6,6 +6,7 @@ const flash = require("express-flash");
 const session = require("express-session");
 const methodOverride = require("method-override");
 const User = require("../model/User");
+const Quiz = require("../model/Quiz")
 const bcrypt = require("bcryptjs");
 const app = express();
 
@@ -114,13 +115,31 @@ exports.welcome = (req, res) => {
 };
 // Aaron
 exports.quizzes = (req, res) => {
-  let userId = req.params.userId;
-  res.render("quizzes", {userId: userId});
+  res.render("quizzes");
 };
 // Aaron
 exports.create_quiz = (req, res) => {
   res.render("create_quiz");
 };
+// Aaron
+exports.post_create_quiz =
+  ("/create_quiz",
+    async (req, res) => {
+      console.log(req.body);
+      try {
+        const quiz = new Quiz({
+          name: req.body.name,
+          owner: req.body.owner
+        });
+        await quiz.save();
+        await res.redirect("/quizzes");
+        res.status(201);
+      } catch (error) {
+        console.log(error);
+        res.redirect("/create_quiz");
+      }
+    }
+  );
 // Aaron
 exports.quiz_results = (req, res) => {
   res.render("quiz_results");
@@ -128,7 +147,7 @@ exports.quiz_results = (req, res) => {
 // Aaron
 exports.create_question = (req, res) => {
   let quizId = req.params.quizId;
-  res.render("create_question", {quizId: quizId});
+  res.render("create_question", {quizId: req.params.quizId});
 };
 
 
