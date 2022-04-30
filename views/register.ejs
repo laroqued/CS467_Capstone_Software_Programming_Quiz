@@ -11,6 +11,9 @@
 <body>
     <div class="main">
      <h1>SIGN UP</h1>
+           <% if (messages) { %>
+           <p><%= messages.error %></p>
+           <% } %>
         <form action="/register" method="POST">
             <input type="name" name="name" placeholder="Name" />
             <input type="email" name="email" placeholder="example@gmail.com" />
