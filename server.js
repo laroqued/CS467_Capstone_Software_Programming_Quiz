@@ -69,8 +69,8 @@ app.use( require("./server/routes/router"));
 // app.use('/api/posts', postRoute)
 
 
-app.delete("/logout", (req, res) => {
-  req.logOut();
+app.delete("/logout",async (req, res) => {
+  await req.logOut();
   res.redirect("/login");
 });
 
