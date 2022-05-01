@@ -10,13 +10,13 @@
 
 <body>
     <div class="main">
-        <h1>SIGN IN TO YOUR ACCOUNT</h1>
+         <h1><%=login_greeting %></h1>
     <% if (messages) { %>
     <p><%= messages.error %></p>
     <% } %>
         <form action="/login" method="POST">
-            <input type="email" name="email" placeholder="name@gmail.com" />
-            <input type="password" name="password" placeholder="* * * * * *" />
+            <input type="email" name="email" placeholder="name@gmail.com" required />
+            <input type="password" name="password" placeholder="* * * * * *" required />
             <button>SIGN IN</button>
 
             <!-- 2 column grid layout for inline styling -->

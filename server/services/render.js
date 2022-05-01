@@ -47,11 +47,11 @@ exports.homeRoutes = (checkAuthenticated,(req, res) => {
 })
 // Donnyves
 exports.login = (checkNotAuthenticated,(req, res) => {
-  res.render("login");
+  res.render("login", { login_greeting: "SIGN IN TO YOUR ACCOUNT" });
 })
 
 exports.register = (checkNotAuthenticated,(req, res) => {
-  res.render("register");
+  res.render("register" ,{register_greeting:"Register"});
 })
 
 
@@ -59,23 +59,18 @@ exports.register = (checkNotAuthenticated,(req, res) => {
 // POST
 // ========================================================
 // Donnyves
-exports.post_login=
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/login",
-    failureFlash: true,
-  })
-
-  
-  
-
-
+exports.post_login = passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/login",
+  failureFlash: true, // shows messages from passort.config
+});
 
 // Donnyves
 exports.post_register =
   ("/register",
   checkNotAuthenticated,
   async (req, res) => {
+    
     const userFound = await User.findOne({ email: req.body.email });
 
     if (userFound) {
@@ -102,7 +97,7 @@ exports.post_register =
 
 
 // Donnyves
-exports.post_delete = (checkNotAuthenticated,async(req, res) => {
+exports.post_delete = (checkNotAuthenticated, async(req, res) => {
   await req.logOut();
   res.redirect("/login")
 })
