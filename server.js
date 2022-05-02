@@ -82,13 +82,6 @@ const connectDB = require("./server/database/connection");
 connectDB();
 
 
-
-
-
-
-
-
-
 // Cross Origin Whitelist
 // const cors = require("cors");
 // const allowedOrigins = [
@@ -132,7 +125,6 @@ app.use(function(err, req, res, next) {
     res.status(500);
     res.render("500");
 });
-
 
 
 app.listen(port, host, () => {
