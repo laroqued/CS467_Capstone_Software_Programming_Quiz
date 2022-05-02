@@ -92,4 +92,12 @@ body{
 #nav.fixed {
   position: fixed;
   box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  
+}
+#div-greeting{
+  position:relative; 
+  left:40em; top:.5em;
+  font-weight: bold;
+  font-family: 'Encode Sans SC', sans-serif;
 }
