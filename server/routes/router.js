@@ -20,7 +20,6 @@ route.post("/register",checkNotAuthenticated, services.post_register);
 route.delete("/logout"), checkNotAuthenticated, services.post_delete;
 // ============================================================================================
 
-
 route.get("/welcome", services.welcome);
 // Aaron
 route.get("/quizzes", checkAuthenticated, services.quizzes);
@@ -31,6 +30,7 @@ route.get(
   "/create_question/:quizId",
   checkNotAuthenticated,services.create_question
 );
+
 //-----------------------------
 //Dominique
 route.get("/canidate_quiz", services.canidate_quiz);
