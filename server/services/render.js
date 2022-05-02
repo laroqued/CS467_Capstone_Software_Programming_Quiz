@@ -153,7 +153,11 @@ exports.create_question =
   (checkAuthenticated,
   (req, res) => {
     let quizId = req.params.quizId;
-    res.render("create_question", { quizId: req.params.quizId });
+    res.render(
+      "create_question", 
+      { quizId: req.params.quizId, name: req.user.name  }
+    
+    );
   });
 
 

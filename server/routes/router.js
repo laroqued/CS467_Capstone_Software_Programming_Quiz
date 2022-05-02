@@ -26,9 +26,11 @@ route.get("/quizzes", checkAuthenticated, services.quizzes);
 route.get("/create_quiz", checkAuthenticated, services.create_quiz); 
 route.post("/create_quiz", checkAuthenticated, services.post_create_quiz);
 route.get("/quiz_results", checkAuthenticated, services.quiz_results);
+
 route.get(
   "/create_question/:quizId",
-  checkNotAuthenticated,services.create_question
+  checkAuthenticated,
+  services.create_question
 );
 
 //-----------------------------
