@@ -21,7 +21,6 @@ route.delete("/logout"), checkNotAuthenticated, services.post_delete;
 // ============================================================================================
 
 
-
 route.get("/welcome", services.welcome);
 // Aaron
 route.get("/quizzes", services.quizzes);
