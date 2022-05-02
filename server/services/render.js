@@ -48,11 +48,11 @@ exports.homeRoutes = (checkAuthenticated,(req, res) => {
 })
 // Donnyves
 exports.login = (checkNotAuthenticated,(req, res) => {
-  res.render("login", { login_greeting: "SIGN IN TO YOUR ACCOUNT" });
+  res.render("login", { login_form_greeting: "SIGN IN TO YOUR ACCOUNT" });
 })
 
 exports.register = (checkNotAuthenticated,(req, res) => {
-  res.render("register" ,{register_greeting:"Register"});
+  res.render("register" ,{register_form_greeting:"Register"});
 })
 
 
@@ -108,56 +108,64 @@ exports.post_delete = (checkNotAuthenticated, async(req, res) => {
 
 // ========================================================
 // Donnyves
-exports.welcome = (req, res) => {
-  res.render("welcome");
-};
+exports.welcome = (checkAuthenticated,(req, res) => {
+  res.render("layouts/welcome", { name: req.user.name });
+});
 // Aaron
-exports.quizzes = (req, res) => {
-  res.render("quizzes");
-};
+exports.quizzes =
+  (checkAuthenticated,
+  (req, res) => {
+    res.render("quizzes", { name: req.user.name });
+  });
 // Aaron
-exports.create_quiz = (req, res) => {
-  res.render("create_quiz");
-};
+exports.create_quiz =
+  (checkAuthenticated,
+  (req, res) => {
+    res.render("create_quiz", { name: req.user.name });
+  });
 // Aaron
 exports.post_create_quiz =
   ("/create_quiz",
-    async (req, res) => {
-      console.log(req.body);
-      try {
-        const quiz = new Quiz({
-          name: req.body.name,
-          owner: req.body.owner
-        });
-        await quiz.save();
-        await res.redirect("/quizzes");
-        res.status(201);
-      } catch (error) {
-        console.log(error);
-        res.redirect("/create_quiz");
-      }
+  checkAuthenticated,
+  async (req, res) => {
+    console.log(req.body);
+    try {
+      const quiz = new Quiz({
+        name: req.body.name,
+        owner: req.body.owner,
+      });
+      await quiz.save();
+      await res.redirect("/quizzes");
+      res.status(201);
+    } catch (error) {
+      console.log(error);
+      res.redirect("/create_quiz");
     }
-  );
+  });
 // Aaron
-exports.quiz_results = (req, res) => {
-  res.render("quiz_results");
-};
+exports.quiz_results =
+  (checkAuthenticated,
+  (req, res) => {
+    res.render("quiz_results", { name: req.user.name });
+  });
 // Aaron
-exports.create_question = (req, res) => {
-  let quizId = req.params.quizId;
-  res.render("create_question", {quizId: req.params.quizId});
-};
+exports.create_question =
+  (checkAuthenticated,
+  (req, res) => {
+    let quizId = req.params.quizId;
+    res.render("create_question", { quizId: req.params.quizId });
+  });
 
 
 //Dominique
 exports.canidate_quiz = (req, res) => {
-  res.render("canidate_quiz");
+  res.render("canidate_quiz", { name: req.user.name });
 };
 //Dominique
 exports.canidate_survey = (req, res) => {
-  res.render("canidate_survey");
+  res.render("canidate_survey", { name: req.user.name });
 };
 //Dominique
 exports.canidate_complete = (req, res) => {
-  res.render("canidate_complete");
+  res.render("canidate_complete", { name: req.user.name });
 };
