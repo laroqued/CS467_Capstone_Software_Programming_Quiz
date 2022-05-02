@@ -33,12 +33,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"));
 
-
-
-// JSON Encoding
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-
 // Global base directory for file downloads
 global.__basedir = __dirname;
 
@@ -67,10 +61,24 @@ app.use( require("./server/routes/router"));
 // // Route Middleware (/api/user is prefixed for the auth.js routes)
 // app.use('/api/user', authRoute)
 // app.use('/api/posts', postRoute)
+const {
+  checkAuthenticated,
+  checkNotAuthenticated,
+} = require("./server/middlewares/auth");
+app.use(methodOverride("_method"));
 
+app.get("/", checkAuthenticated, (req, res) => {
+     res.header(
+       "Cache-Control",
+       "private, no-cache, no-store, must-revalidate"
+     );
+  res.render("index", { name: req.user.name });
+});
 
-app.delete("/logout",async (req, res) => {
+app.delete("/logout", checkAuthenticated, async (req, res) => {
   await req.logOut();
+  if (!req.user)
+    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
   res.redirect("/login");
 });
 

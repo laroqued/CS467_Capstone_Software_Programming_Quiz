@@ -33,6 +33,7 @@ app.use(
     saveUninitialized: false,
   })
 );
+
 const {
   checkAuthenticated,
   checkNotAuthenticated,
@@ -44,6 +45,10 @@ app.use(methodOverride("_method"));
 // ========================================================
 // Donnyves
 exports.homeRoutes = (checkAuthenticated,(req, res) => {
+     res.header(
+       "Cache-Control",
+       "private, no-cache, no-store, must-revalidate"
+     );
   res.render("index", { name: req.user.name });
 })
 // Donnyves
@@ -98,10 +103,14 @@ exports.post_register =
 
 
 // Donnyves
-exports.post_delete = (checkNotAuthenticated, async(req, res) => {
+exports.post_delete =
+  (checkAuthenticated,
+  async (req, res, next) => {
   await req.logOut();
-  res.redirect("/login")
-})
+  if (!req.user)
+    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+  res.redirect("/login");
+  });
 
 // ========================================================
 
@@ -109,18 +118,27 @@ exports.post_delete = (checkNotAuthenticated, async(req, res) => {
 // ========================================================
 // Donnyves
 exports.welcome = (checkAuthenticated,(req, res) => {
+  
   res.render("layouts/welcome", { name: req.user.name });
 });
 // Aaron
 exports.quizzes =
   (checkAuthenticated,
   (req, res) => {
+      res.header(
+        "Cache-Control",
+        "private, no-cache, no-store, must-revalidate"
+      );
     res.render("quizzes", { name: req.user.name });
   });
 // Aaron
 exports.create_quiz =
   (checkAuthenticated,
   (req, res) => {
+      res.header(
+        "Cache-Control",
+        "private, no-cache, no-store, must-revalidate"
+      );
     res.render("create_quiz", { name: req.user.name });
   });
 // Aaron
@@ -146,16 +164,24 @@ exports.post_create_quiz =
 exports.quiz_results =
   (checkAuthenticated,
   (req, res) => {
+      res.header(
+        "Cache-Control",
+        "private, no-cache, no-store, must-revalidate"
+      );
     res.render("quiz_results", { name: req.user.name });
   });
 // Aaron
 exports.create_question =
   (checkAuthenticated,
   (req, res) => {
+      res.header(
+        "Cache-Control",
+        "private, no-cache, no-store, must-revalidate"
+      );
     let quizId = req.params.quizId;
     res.render(
       "create_question", 
-      { quizId: req.params.quizId, name: req.user.name  }
+      { quizId:quizId, name: req.user.name  }
     
     );
   });
