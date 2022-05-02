@@ -1,0 +1,20 @@
+<head>
+    <%- include('layouts/head') %>
+</head>
+
+<%- include('includes/_header') %>
+
+<body>
+    <div class="main">
+        <form action="/create_question" method="POST">
+            <input type="text" name="prompt" placeholder="Question Prompt" />
+            <input type="text" name="answer" placeholder="Correct Answer" />
+            <input type="text" name="option2" placeholder="Incorrect Answer" />
+            <input type="text" name="option3" placeholder="Incorrect Answer" />
+            <input type="text" name="option4" placeholder="Incorrect Answer" />
+            <button>Create</button>
+        </form>
+    </div>
+</body>
+
+<%- include('includes/_footer') %>
