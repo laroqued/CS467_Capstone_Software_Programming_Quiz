@@ -6,7 +6,7 @@ const flash = require("express-flash");
 const session = require("express-session");
 
 const User = require("../model/User");
-const Quiz = require("../model/Quiz")
+const Quiz = require("../model/quiz")
 const bcrypt = require("bcryptjs");
 const app = express();
 const methodOverride = require("method-override");
