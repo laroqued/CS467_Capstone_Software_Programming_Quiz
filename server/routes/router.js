@@ -35,9 +35,9 @@ route.get(
 
 //-----------------------------
 //Dominique
-route.get("/canidate_quiz", services.canidate_quiz);
-route.get("/canidate_survey", services.canidate_survey);
-route.get("/canidate_complete", services.canidate_complete);
+route.get("/canidate_quiz", checkAuthenticated, services.canidate_quiz);
+route.get("/canidate_survey", checkAuthenticated, services.canidate_survey);
+route.get("/canidate_complete", checkAuthenticated, services.canidate_complete);
 //-----------------------------
 
 
