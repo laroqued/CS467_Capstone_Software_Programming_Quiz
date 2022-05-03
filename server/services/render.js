@@ -175,10 +175,12 @@ exports.quiz_results =
 exports.create_question =
   (checkAuthenticated,
   (req, res) => {
+
       res.header(
         "Cache-Control",
         "private, no-cache, no-store, must-revalidate"
       );
+
     let quizId = req.params.quizId;
     res.render(
       "create_question", 
@@ -192,17 +194,32 @@ exports.create_question =
 exports.canidate_quiz = 
   (checkAuthenticated,
   (req, res) => {
-    res.render("canidate_quiz", { name: req.user.name });
+          res.header(
+            "Cache-Control",
+            "private, no-cache, no-store, must-revalidate"
+          );
+      
+    res.render("candidate_quiz", { name: req.user.name });
 });
 //Dominique
 exports.canidate_survey = 
   (checkAuthenticated,
   (req, res) => {
-    res.render("canidate_survey", { name: req.user.name });
+          res.header(
+            "Cache-Control",
+            "private, no-cache, no-store, must-revalidate"
+          );
+      
+    res.render("candidate_survey", { name: req.user.name });
 });
 //Dominique
 exports.canidate_complete = 
   (checkAuthenticated,
   (req, res) => {
-    res.render("canidate_complete", { name: req.user.name });
+          res.header(
+            "Cache-Control",
+            "private, no-cache, no-store, must-revalidate"
+          );
+      
+    res.render("candidate_complete", { name: req.user.name });
 });
