@@ -55,10 +55,17 @@ exports.homeRoutes = (checkAuthenticated,(req, res) => {
 exports.login = (checkNotAuthenticated,(req, res) => {
   res.render("login", { login_form_greeting: "SIGN IN TO YOUR ACCOUNT" });
 })
-
+// Donnyves
 exports.register = (checkNotAuthenticated,(req, res) => {
   res.render("register" ,{register_form_greeting:"Register"});
 })
+
+exports.get_email =
+  (checkAuthenticated,
+  (req, res) => {
+    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+    res.render("email", { name: req.user.name });
+  });
 
 
 
