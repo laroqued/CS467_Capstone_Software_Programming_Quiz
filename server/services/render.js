@@ -189,20 +189,20 @@ exports.create_question =
 
 
 //Dominique
-exports.candidate_quiz = (req, res) => {
-  res.render("candidate_quiz", { name: req.user.name });
-};
-//Dominique
-exports.candidate_survey = (req, res) => {
-  res.render("candidate_survey", { name: req.user.name });
-};
-//Dominique
-exports.candidate_complete =
+exports.canidate_quiz = 
   (checkAuthenticated,
   (req, res) => {
-      res.header(
-        "Cache-Control",
-        "private, no-cache, no-store, must-revalidate"
-      );
-    res.render("candidate_complete", { name: req.user.name });
-  });
+    res.render("canidate_quiz", { name: req.user.name });
+});
+//Dominique
+exports.canidate_survey = 
+  (checkAuthenticated,
+  (req, res) => {
+    res.render("canidate_survey", { name: req.user.name });
+});
+//Dominique
+exports.canidate_complete = 
+  (checkAuthenticated,
+  (req, res) => {
+    res.render("canidate_complete", { name: req.user.name });
+});
