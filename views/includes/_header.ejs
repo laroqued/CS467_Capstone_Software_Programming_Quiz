@@ -1,5 +1,5 @@
-<header id="header"></header>
-<nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav">
+
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light"  id="nav-makestick">
 	
 	<a class="navbar-brand" href="/">Software Programming Quiz</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -28,8 +28,12 @@
 		<form class="form-inline my-2 my-lg-0">
 			<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			
 		</form>
-		
+		            <form action="/logout?_method=DELETE" method="POST">
+           		<button type="submit" class="btn btn-elegant"><i class="far fa-user pr-2" aria-hidden="true"></i>Logout</button>
+            </form>
+
 	</div>
 </nav>
 
