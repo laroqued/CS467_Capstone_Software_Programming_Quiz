@@ -7,8 +7,16 @@
 
 <body>
       <%- include('layouts/welcome') %>
+    <a href="/create_quiz" class="btn btn-success">Create New Quiz</a>
     <div class="main">
-        
+        <h2>Your Quizzes:</h2>
+        <% quizzes %>
+        <% quizzes.forEach(quiz => { %>
+        <div class="card">
+            <h5 class="card-title"> <%= quiz.name %> </h5>
+            <% console.log(quiz) %>
+        </div>
+        <% }) %>
     </div>
 </body>
 
