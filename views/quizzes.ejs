@@ -12,10 +12,9 @@
         <h2>Your Quizzes:</h2>
         <% quizzes %>
         <% quizzes.forEach(quiz => { %>
-        <div class="card">
-            <h5 class="card-title"> <%= quiz.name %> </h5>
-            <% console.log(quiz) %>
-        </div>
+        <a class="btn btn-primary" href=<%= "/quiz/" + quiz._id %> >
+            <h5> <%= quiz.name %> </h5>
+        </a>
         <% }) %>
     </div>
 </body>
