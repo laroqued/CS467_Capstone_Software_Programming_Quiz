@@ -23,6 +23,7 @@ route.delete("/logout"), checkNotAuthenticated, services.post_delete;
 route.get("/welcome", services.welcome);
 // Aaron
 route.get("/quizzes", checkAuthenticated, services.quizzes);
+route.get("/quiz/:id", checkAuthenticated, services.quiz);
 route.get("/create_quiz", checkAuthenticated, services.create_quiz); 
 route.post("/create_quiz", checkAuthenticated, services.post_create_quiz);
 route.get("/quiz_results", checkAuthenticated, services.quiz_results);
