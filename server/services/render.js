@@ -59,12 +59,12 @@ exports.login = (checkNotAuthenticated,(req, res) => {
 exports.register = (checkNotAuthenticated,(req, res) => {
   res.render("register" ,{register_form_greeting:"Register"});
 })
-
-exports.get_email =
+// Donnyves
+exports.get_contact =
   (checkAuthenticated,
   (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    res.render("email", { name: req.user.name });
+    res.render("contact", { name: req.user.name });
   });
 
 
@@ -168,6 +168,9 @@ exports.post_create_quiz =
       res.redirect("/create_quiz");
     }
   });
+
+
+
 // Aaron
 exports.quiz_results =
   (checkAuthenticated,

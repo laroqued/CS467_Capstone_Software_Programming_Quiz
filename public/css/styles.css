@@ -10,8 +10,7 @@ body{
     background-color: darkgrey;
     display: grid;
     place-items: center;
-    width: 100vw;
-    height: 100vh;
+
     font-family: 'Encode Sans SC', sans-serif;
 
 }
@@ -33,6 +32,63 @@ body{
 
     margin-bottom: 40rem;
 }
+
+
+
+
+
+
+
+.main3{   
+    flex-grow: inherit;
+    width: 50%;
+    max-width: 90%;
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20rem;
+
+
+}
+
+
+
+
+ .contact-form-text{
+    width: 95%;
+    padding: 15px;
+    background-color: #ccc;
+    color: gray;
+    border: 0;
+    margin: 10px 5px;
+    border-radius: 8px;
+}
+.contact-form-message{
+     width: 95%;
+    padding: 15px;
+    background-color: #ccc;
+    color: gray;
+    border: 0;
+    margin: 10px 5px;
+    border-radius: 8px;
+}
+.contact-form-btn{
+
+    padding: 15px;
+    background-color: #6a5acd;
+    color: white;
+    border: none;
+    width: 95%;
+    margin: 10px 5px;
+    margin-top: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+
+
 
 .main > h1{
     font-size: 30px;
