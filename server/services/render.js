@@ -6,7 +6,8 @@ const flash = require("express-flash");
 const session = require("express-session");
 
 const User = require("../model/User");
-const Quiz = require("../model/quiz")
+const Quiz = require("../model/Quiz");
+const Question = require("../model/Question");
 const bcrypt = require("bcryptjs");
 const app = express();
 const methodOverride = require("method-override");
@@ -125,12 +126,28 @@ exports.welcome = (checkAuthenticated,(req, res) => {
 // Aaron
 exports.quizzes =
   (checkAuthenticated,
-  (req, res) => {
-      res.header(
-        "Cache-Control",
-        "private, no-cache, no-store, must-revalidate"
-      );
-    res.render("quizzes", { name: req.user.name });
+  async (req, res) => {
+    res.header(
+      "Cache-Control",
+      "private, no-cache, no-store, must-revalidate"
+    );
+
+    const quizzes = await Quiz.find({owner: req.user.email});
+    //console.log(quizzes);
+
+    res.render("quizzes", { name: req.user.name, email: req.user.email, quizzes: quizzes });
+  });
+// Aaron
+exports.quiz =
+  (checkAuthenticated,
+  async (req, res) => {
+    res.header(
+      "Cache-Control",
+      "private, no-cache, no-store, must-revalidate"
+    );
+    let id = req.params.id;
+    const questions = await Question.find({quiz: id});
+    res.render("quiz", {name: req.user.name, questions: questions });
   });
 // Aaron
 exports.create_quiz =
@@ -140,14 +157,13 @@ exports.create_quiz =
         "Cache-Control",
         "private, no-cache, no-store, must-revalidate"
       );
-    res.render("create_quiz", { name: req.user.name });
+    res.render("create_quiz", { name: req.user.name, email: req.user.email });
   });
 // Aaron
 exports.post_create_quiz =
   ("/create_quiz",
   checkAuthenticated,
   async (req, res) => {
-    console.log(req.body);
     try {
       const quiz = new Quiz({
         name: req.body.name,
