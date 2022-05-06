@@ -8,7 +8,7 @@ const questionSchema = new mongoose.Schema({
         max: 255
     },
     choices: {
-        type: map
+        type: [String]
     },
     answer: {
         type: String
@@ -18,4 +18,4 @@ const questionSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model("Question", userSchema);
+module.exports = mongoose.model("Question", questionSchema);
