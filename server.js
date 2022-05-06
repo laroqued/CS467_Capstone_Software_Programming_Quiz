@@ -53,14 +53,18 @@ app.use(morgan('tiny'))
 const path = require("path");
 app.use( require("./server/routes/router"));
 
-
+// //======================================================================
+// // Possible JWT routes to implement later?
+// //======================================================================
 // // Import routes
-// const authRoute = require('./server/routes/auth')
+// const authRoute = require('./server/middlewares/auth')
 // const postRoute = require('./server/routes/posts')
 
 // // Route Middleware (/api/user is prefixed for the auth.js routes)
 // app.use('/api/user', authRoute)
 // app.use('/api/posts', postRoute)
+// //======================================================================
+
 const {
   checkAuthenticated,
   checkNotAuthenticated,
@@ -91,29 +95,29 @@ connectDB();
 
 
 // Cross Origin Whitelist
-// const cors = require("cors");
-// const allowedOrigins = [
-//   `http//:${host}:${port}`,
-//   "https://cloud.mongodb.com",
-// ];
-// app.use(
-//     cors({
-//         origin: function(origin, callback) {
-//             if (!origin) return callback(null, true);
-//             if (allowedOrigins.indexOf(origin) === -1) {
-//                 var msg =
-//                     "The CORS policy for this site does not " +
-//                     "allow access from the specified Origin.";
-//                 return callback(new Error(msg), false);
-//             }
-//             return callback(null, true);
-//         },
-//     })
-// );
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   next();
-// });
+const cors = require("cors");
+const allowedOrigins = [
+  `http//:${host}:${port}`,
+  "https://cloud.mongodb.com",
+];
+app.use(
+    cors({
+        origin: function(origin, callback) {
+            if (!origin) return callback(null, true);
+            if (allowedOrigins.indexOf(origin) === -1) {
+                var msg =
+                    "The CORS policy for this site does not " +
+                    "allow access from the specified Origin.";
+                return callback(new Error(msg), false);
+            }
+            return callback(null, true);
+        },
+    })
+);
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  next();
+});
 
 
 
