@@ -104,8 +104,8 @@ exports.post_contact =
       port: 465,
       secure: true,
       auth: {
-        user: "softwareprogrammingquiz@gmail.com",
-        pass: "Password123!@$",
+        user: process.env.GMAIL_USER,
+        pass: process.env.PASSWORD,
       },
       // tls:{
       //     rejectUnauthorized:false
