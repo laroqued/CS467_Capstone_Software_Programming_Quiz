@@ -3,11 +3,24 @@
          <h1>Send Quiz Link</h1>
          <div class="form-div"></div>
 
-         <form action="http://localhost:3001/contact" method="post" class="contact-form">
-             <input type="text" class="contact-form-text" placeholder="Your name" name="yourname" required />
-             <input type="email" class="contact-form-text" placeholder="Your email" name="youremail" required />
-             <input type="text" class="contact-form-text" name="yoursubject" placeholder="Subject" required />
-             <textarea class="contact-form-message" placeholder="Your message" name="yourmessage"></textarea>
-             <input type="submit" id="form-submit" class="contact-form-btn" value="Send" required />
-         </form>
+           <form method="POST" action="send" class="contact-form">
+          <p>
+            <input type="text" name="name" class="contact-form-text" placeholder="Your name" required>
+          </p>
+          <p>
+            <input type="text" name="company" class="contact-form-text" placeholder="Your Company"   required>
+          </p>
+          <p>
+            <input type="email" name="email" class="contact-form-text" placeholder="Your email"  required>
+          </p>
+          <p>
+            <input type="text" name="phone" class="contact-form-text" placeholder="Your phone number"  required>
+          </p>
+          <p class="full">
+            <textarea class="contact-form-message" name="message" rows="5" placeholder="Your Message" ></textarea>
+          </p>
+          <p class="full">
+            <button type="submit" id="form-submit" class="contact-form-btn">Submit</button>
+          </p>
+        </form>
      </div>

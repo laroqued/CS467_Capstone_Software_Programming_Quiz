@@ -18,13 +18,12 @@ route.get("/register",checkNotAuthenticated, services.register);
 route.post("/register",checkNotAuthenticated, services.post_register);
 
 route.get("/contact", checkAuthenticated, services.get_contact);
-// route.post("/contact", checkNotAuthenticated, services.post_contact);
+route.post("/send", checkAuthenticated, services.post_contact);
 
 
 route.delete("/logout"), checkNotAuthenticated, services.post_delete;
 // ============================================================================================
 
-route.get("/welcome", services.welcome);
 // Aaron
 route.get("/quizzes", checkAuthenticated, services.quizzes);
 route.get("/quiz/:id", checkAuthenticated, services.quiz);

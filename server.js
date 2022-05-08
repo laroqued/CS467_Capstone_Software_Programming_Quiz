@@ -33,6 +33,33 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"));
 
+// // Cross Origin Whitelist
+// const cors = require("cors");
+// const allowedOrigins = [
+//   `http//:${host}:${port}`,
+//   "https://cloud.mongodb.com",
+// ];
+// app.use(
+//     cors({
+//         origin: function(origin, callback) {
+//             if (!origin) return callback(null, true);
+//             if (allowedOrigins.indexOf(origin) === -1) {
+//                 var msg =
+//                     "The CORS policy for this site does not " +
+//                     "allow access from the specified Origin.";
+//                 return callback(new Error(msg), false);
+//             }
+//             return callback(null, true);
+//         },
+//     })
+// );
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   next();
+// });
+//==============================================================
+//==============================================================
+
 // Global base directory for file downloads
 global.__basedir = __dirname;
 
@@ -79,6 +106,7 @@ app.get("/", checkAuthenticated, (req, res) => {
   res.render("index", { name: req.user.name });
 });
 
+
 app.delete("/logout", checkAuthenticated, async (req, res) => {
   await req.logOut();
   if (!req.user)
@@ -94,30 +122,6 @@ const connectDB = require("./server/database/connection");
 connectDB();
 
 
-// Cross Origin Whitelist
-const cors = require("cors");
-const allowedOrigins = [
-  `http//:${host}:${port}`,
-  "https://cloud.mongodb.com",
-];
-app.use(
-    cors({
-        origin: function(origin, callback) {
-            if (!origin) return callback(null, true);
-            if (allowedOrigins.indexOf(origin) === -1) {
-                var msg =
-                    "The CORS policy for this site does not " +
-                    "allow access from the specified Origin.";
-                return callback(new Error(msg), false);
-            }
-            return callback(null, true);
-        },
-    })
-);
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
 
 
 
