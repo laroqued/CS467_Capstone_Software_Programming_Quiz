@@ -39,7 +39,7 @@ async function mainMail(name, company, email, phone, message) {
   // send mail with defined transport object
   let info = transporter.sendMail({
     from: '"Donnyves Laroque" <softwareprogrammingquiz@gmail.com>', // sender address
-    to: "donnyves@gmail.com, donnyves.laroque@outlook.com", // list of receivers
+    to: "donnyves.laroque@outlook.com", // list of receivers
     subject: "Hello ✔", // Subject line
     text: "Hello world?", // plain text body
     html: output, // html body
