@@ -9,21 +9,29 @@
 </head>
 
 <body>
-    <div class="main">
-        <h1><%=register_form_greeting %></h1>
- 
-           <% if (messages) { %>
-           <p><%= messages.error %></p>
-           <% } %>
+    <div class="container-fluid setup-bg d-flex flex-column">
+        <div class='row justify-content-center'>
+            <div class="container my-auto">
 
-        <form action="/register" method="POST">
-            <input type="name" name="name" placeholder="Name" required />
-            <input type="email" name="email" placeholder="example@gmail.com" required />
-            <input type="password" name="password" placeholder="* * * * * *" required />
-            <button>SIGN UP</button>
-        </form>
-    <a href="/login">Back to Login</a>
 
+                <div class="main">
+                    <h1><%=register_form_greeting %></h1>
+
+                    <% if (messages) { %>
+                    <p><%= messages.error %></p>
+                    <% } %>
+
+                    <form action="/register" method="POST">
+                        <input type="name" name="name" placeholder="Name" required />
+                        <input type="email" name="email" placeholder="example@gmail.com" required />
+                        <input type="password" name="password" placeholder="* * * * * *" required />
+                        <button>SIGN UP</button>
+                    </form>
+                    <a href="/login">Back to Login</a>
+
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 

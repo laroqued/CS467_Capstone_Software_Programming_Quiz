@@ -9,36 +9,47 @@
 </head>
 
 <body>
-    <div class="main">
-         <h1><%=login_form_greeting %></h1>
-    <% if (messages) { %>
-    <p><%= messages.error %></p>
-    <% } %>
-        <form action="/login" method="POST">
-            <input type="email" name="email" placeholder="name@gmail.com" required />
-            <input type="password" name="password" placeholder="* * * * * *" required />
-            <button>SIGN IN</button>
+    <div class="container-fluid setup-bg d-flex flex-column">
+        <div class='row justify-content-center'>
+            <div class="container my-auto">
+                <div class="main">
+                    <h1><%=login_form_greeting %></h1>
+                    <% if (messages) { %>
+                    <p><%= messages.error %></p>
+                    <% } %>
 
-            <!-- 2 column grid layout for inline styling -->
-            <div class="row mb-4">
-                <div class="col d-flex justify-content-center">
-                    <!-- Checkbox -->
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-                        <label class="form-check-label" for="form2Example31"> Remember me </label>
-                    </div>
-                </div>
 
-                <div class="col">
-                    <!-- Simple link -->
-                    <a href="#!">Forgot password?</a>
+                    <form action="/login" method="POST">
+                        <input type="email" name="email" placeholder="name@gmail.com" required />
+                        <input type="password" name="password" placeholder="* * * * * *" required />
+                        <button>SIGN IN</button>
+
+                        <!-- 2 column grid layout for inline styling -->
+                        <div class="row mb-4">
+                            <div class="col d-flex justify-content-center">
+                                <!-- Checkbox -->
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="form2Example31"
+                                        checked />
+                                    <label class="form-check-label" for="form2Example31"> Remember me </label>
+                                </div>
+                            </div>
+
+                            <div class="col">
+                                <!-- Simple link -->
+                                <a href="#!">Forgot password?</a>
+                            </div>
+                        </div>
+                        <a href="/register">Create Account</a>
+
+                    </form>
                 </div>
             </div>
-    <a href="/register">Create Account</a>
+        </div>
 
-        </form>
     </div>
-</body>
+
+
 
 </body>
 <%- include('includes/_footer') %>

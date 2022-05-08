@@ -10,7 +10,7 @@ body {
   background-color: darkgrey;
   display: grid;
   place-items: center;
-
+  overflow:scroll;
   font-family: "Encode Sans SC", sans-serif;
 }
 
@@ -23,27 +23,34 @@ body {
   border-radius: 10px;
   margin-bottom: 10rem;
   margin-top: 10em;
-
+  margin-left: auto;
+  margin-right: auto;
 }
-.main2 {
+.index-page {
   max-width: 90%;
   text-align: center;
-
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 40rem;
 }
+#manage-quiz-button{
+ 
+text-align: center;
+  align-items: center;
 
-.main3 {
+}
+
+.email-form {
   flex-grow: inherit;
-  width: 50%;
   max-width: 90%;
   text-align: center;
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  margin-bottom: 20rem;
+  margin-bottom: 2rem;
+  margin-left: auto;
+  margin-right: auto;
 }
-
-
 
 .contact-form-text {
   width: 95%;
@@ -108,20 +115,22 @@ body {
   outline: none;
 }
 
-#nav-makestick {
-  position: fixed;
+nav {
+
   background-color: #000;
-  top: 0;
-  width: 100%;
   box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 }
 
 #div-greeting {
-  margin-top: 3em;
-
-  padding: 2em;
+  margin-top: 4em;
+text-align: center;
+  align-items: center;
+  padding: 4em;
   font-weight: bold;
   font-family: "Encode Sans SC", sans-serif;
+
+    margin-left: auto;
+  margin-right: auto;
 }
 
 #footer-links {
@@ -135,4 +144,45 @@ body {
 
   background-color: #f5f5f5;
   box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+}
+
+
+.navbarstyle {
+  background-color:#f2f4f4;
+  font-family: 'playfair display', sans-serif;
+  display:block;
+}
+.navbar-brand {
+  font-size:1.5em;
+}
+.navbar-text.navbar-brand {
+  color:black;
+}
+.nav.navbar-nav.navbar-right li a {
+    color: black;
+  font-family:"playfair display", sans-serif;
+}
+.navbar-text.navbar-brand:hover {
+  color:black;
+  cursor:default;
+}
+.navbar-collapse {
+    overflow: hidden;
+}
+header{
+    position: absolute;
+    z-index:2;
+    width: 100%;
+}
+
+#index-first-row{
+  padding: 2em;
+}
+
+#index-second-row{
+  padding: 2em;
+}
+
+#index-third-row{
+  padding: 2em;
 }

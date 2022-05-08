@@ -3,12 +3,21 @@
 <head>
   <%- include('layouts/head') %>
 </head>
+
 <body>
-    <%- include('layouts/welcome') %>
-    <main class="main3">
-            <%- include('layouts/email_form') %>
-    </main>
-<script src="../utils/email.js"></script>
+  <div class="container-fluid setup-bg d-flex flex-column">
+    <div class='row justify-content-center'>
+      <div class="container my-auto " >
+        <%- include('layouts/welcome') %>
+
+        <main class="email-form">
+
+          <%- include('layouts/email_form') %>
+        </main>
+        <script src="../utils/email.js"></script>
+      </div>
+    </div>
+  </div>
 </body>
 
 <%- include('includes/_footer') %>

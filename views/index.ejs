@@ -1,19 +1,85 @@
-
 <head>
   <%- include('layouts/head') %>
-<%- include('includes/_header') %>
+  <%- include('includes/_header') %>
 
 </head>
 
 <body>
 
-  <a href="/quizzes" class="btn btn-success">Manage Quizzes</a>
-  <div class="main2">
-  <%- include('layouts/welcome') %>
 
-    <h1>This is the Splash Page</h1>
 
+
+  <div class="container-fluid setup-bg d-flex flex-column">
+    <div class='row justify-content-center'>
+      <div class="container my-auto">
+        <%- include('layouts/welcome') %>
+
+        <div class="index-page">
+
+
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-auto" id="index-first-row">
+  <!-- 1 of 3 rows -->
+      <h1>This is the Splash Page</h1>
+    </div>
+    <div class="col-md-auto" id="index-second-row">
+  <!-- 1 of 2 rows -->
+
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Manage Quizzes for Candidates</h5>
+              <p class="card-text">Navigate here to create quizzes for candidates.</p>
+              <a id="manage-quiz-button" href="/quizzes" class="btn btn-success">Manage Quizzes</a>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Special title treatment</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+    <div class="col-md-auto" id="index-third-row">
+  <!-- 1 of 3 rows -->
+
+<h5>Another row to add content for the Splash Page</h5>
+    </div>
   </div>
+</div>
+
+
+
+
+
+
+    
+
+
+
+          
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
 </body>
 
 <%- include('includes/_footer') %>
