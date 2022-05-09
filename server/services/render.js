@@ -89,11 +89,14 @@ exports.post_contact =
     const output = `
 <p>You have a new contact request</p>
 <ul>
-<li>Name: ${req.body.name}</li>
-<li>Company: ${req.body.company}</li>
-<li>Email: ${req.body.email}</li>
-<li>Phone: ${req.body.phone}</li>
+<li>Name: Donnyves Laroque, Dominique Lazaros, Aaron Harris </li>
+<li>Company: SoftWare Programming Quiz</li>
+<li>Email: softwareprogrammingquiz@gmail.com</li>
+<li>Quiz: http://localhost:3001/candidate_complete</li>
+<li>Phone: 555-555-5555</li>
 <h3>Message </h3>
+<p>Hello, ${req.body.name}, </p>
+<p></p>
 <p>${req.body.message}</p>
 
 </ul>
@@ -115,8 +118,8 @@ exports.post_contact =
     // send mail with defined transport object
     let info = await transporter.sendMail({
       from: '"Donnyves Laroque" <softwareprogrammingquiz@gmail.com>', // sender address
-      to: "donnyves@gmail.com, donnyves.laroque@outlook.com", // list of receivers
-      subject: "Hello ✔", // Subject line
+      to: req.body.email, // list of receivers
+      subject: req.body.subject, // Subject line
       text: "Hello world?", // plain text body
       html: output, // html body
     });
