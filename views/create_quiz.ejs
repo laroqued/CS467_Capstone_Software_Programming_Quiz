@@ -5,8 +5,19 @@
 <%- include('includes/_header') %>
 
 <body>
-    <%- include('layouts/welcome') %>
-    <a href="/quizzes" class="btn btn-success">Manage Quizzes</a>
+      <div class="create-quiz-page">
+    <div class="container-fluid setup-bg d-flex flex-column">
+        <div class='row justify-content-center'>
+            <div class="container my-auto">
+                <div class="container">
+                    <div id="welcome-create-quiz">
+                        <%- include('layouts/welcome') %>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="main">
         <form action="/create_quiz" method="POST">
             <input type="text" name="name" placeholder="Quiz Name" />

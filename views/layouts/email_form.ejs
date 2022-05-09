@@ -1,26 +1,59 @@
 
-     <div class="email-form">
-         <h1>Send Quiz Link</h1>
-         <div class="form-div"></div>
+  <div class="email-form">
+  <h4 class="font-weight-bolder">Compose New Email</h4>
 
-           <form method="POST" action="send" class="contact-form">
-          <p>
-            <input type="text" name="name" class="contact-form-text" placeholder="Your name" required>
-          </p>
-          <p>
-            <input type="text" name="company" class="contact-form-text" placeholder="Your Company"   required>
-          </p>
-          <p>
-            <input type="email" name="email" class="contact-form-text" placeholder="Your email"  required>
-          </p>
-          <p>
-            <input type="text" name="phone" class="contact-form-text" placeholder="Your phone number"  required>
-          </p>
-          <p class="full">
-            <textarea class="contact-form-message" name="message" rows="5" placeholder="Your Message" ></textarea>
-          </p>
-          <p class="full">
-            <button type="submit" id="form-submit" class="contact-form-btn">Submit</button>
-          </p>
-        </form>
-     </div>
+    <form method="POST" action="send" class="contact-form">
+      <!-- Name Field ROW 1 -->
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <p>
+              <input type="text" name="name" class="contact-form-text" placeholder="Your name" required>
+            </p>
+          </div>
+        </div>
+        <!-- Company Field -->
+        <div class="col-6">
+          <div class="form-group">
+            <p>
+              <input type="text" name="company" class="contact-form-text" placeholder="Your Company" required>
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Email Field  ROW 2-->
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+            <p>
+              <input type="email" name="email" class="contact-form-text" placeholder="Your email" />
+            </p>
+          </div>
+        </div>
+        <!-- Phone Field -->
+        <div class="col-6">
+          <div class="form-group">
+            <p>
+              <input type="text" name="phone" class="contact-form-text" placeholder="Your phone number" required>
+            </p>
+          </div>
+        </div>
+ 
+
+
+
+
+
+      <!-- Message Field -->
+
+      <p class="full">
+        <textarea class="contact-form-message" name="message" rows="5" placeholder="Your Message"></textarea>
+      </p>
+      <p class="full">
+        <button type="submit" id="form-submit" class="contact-form-btn">Submit</button>
+      </p>
+    </form>
+  </div>
+
+
+</div>
