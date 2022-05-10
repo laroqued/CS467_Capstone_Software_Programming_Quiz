@@ -66,8 +66,8 @@ exports.register =
     res.render("register", { register_form_greeting: "Register" });
   });
 // ==============================================================
-// CONTACT
-
+// CONTACT/EMAIL
+// ==============================================================
 
 exports.get_contact =
   (checkAuthenticated,
@@ -75,17 +75,10 @@ exports.get_contact =
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     res.render("contact", { name: req.user.name });
   });
-// ==============================================================
-exports.welcome =
-  (checkAuthenticated,
-  (req, res) => {
-    res.render("layouts/welcome", { name: req.user.name });
-  });
-
 
 exports.post_contact =
   ("/send",
-  checkAuthenticated, 
+  checkAuthenticated,
   async (req, res) => {
     const output = `
 <p>You have a new contact request</p>
@@ -117,7 +110,6 @@ exports.post_contact =
       // }
     });
 
-    
     // send mail with defined transport object
     let info = await transporter.sendMail({
       from: '"Donnyves Laroque" <softwareprogrammingquiz@gmail.com>', // sender address
@@ -126,16 +118,23 @@ exports.post_contact =
       text: "Hello world?", // plain text body
       html: output, // html body
     });
-
+    transporter.verify(function (error, success) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Mail server is running...");
+      }
+    });
     console.log("Message sent: %s", info.messageId);
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-    // Preview only available when sending through an Ethereal account
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
 
-    // Rerender if there is an error
-    res.render("contact", { msg: "Email has been sent", name: req.user.name });
+    res.render("contact", {
+      msg: "Email has been sent",
+      name: req.user.name,
+    });
   });
+// ==============================================================
+
 // ==============================================================
 // ==============================================================
 
@@ -191,17 +190,9 @@ exports.post_delete =
   });
 
 // // Donnyves
-// exports.welcome =
-//   (checkAuthenticated,
-//   (req, res) => {
-//     res.render("layouts/welcome", { name: req.user.name });
-//   });
+
 // ========================================================
-exports.welcome =
-  (checkAuthenticated,
-  (req, res) => {
-    res.render("layouts/welcome", { name: req.user.name });
-  });
+
 // ========================================================
 
 // Aaron
