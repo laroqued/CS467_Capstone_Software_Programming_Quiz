@@ -224,3 +224,10 @@ header {
 #label-spacing {
   margin-left: 2.5em;
 }
+
+#email-success{
+  color: green;
+  text-shadow: #6a5acd;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
