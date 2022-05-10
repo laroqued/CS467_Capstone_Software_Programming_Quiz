@@ -31,7 +31,7 @@ body {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 40rem;
+  margin-bottom: 10rem;
 }
 
 .create-quiz-page {
@@ -49,10 +49,11 @@ text-align: center;
   align-items: center;
 
 }
-
+.jumbotron{
+  margin-top: 3em;
+}
 .email-form {
-  flex-grow: inherit;
-  max-width: 85%;
+
   text-align: center;
   background-color: white;
   padding: 20px;
@@ -132,7 +133,7 @@ nav {
 }
 
 #div-greeting {
-  margin-top: 3em;
+
 
 
   padding: .5em;
@@ -207,4 +208,9 @@ header{
 }
 
 
-
+#icon-spacing{
+  margin-right: .5em;
+}
+#label-spacing{
+  margin-left: 2.5em;
+}
