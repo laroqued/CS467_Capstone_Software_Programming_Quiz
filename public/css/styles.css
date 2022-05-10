@@ -22,10 +22,12 @@ body {
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 15rem;
-  margin-top: 1em;
+  margin-top: 5em;
   margin-left: auto;
   margin-right: auto;
 }
+
+
 .index-page {
   max-width: 90%;
   text-align: center;
