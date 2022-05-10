@@ -73,10 +73,8 @@ exports.get_contact =
   (checkAuthenticated,
   (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    res.render("contact", { name: req.user.name,msg: "" });
-
+    res.render("contact", { name: req.user.name, msg: "" });
   });
-
 
 exports.post_contact =
   ("/send",
@@ -127,7 +125,7 @@ exports.post_contact =
         console.log("Mail server is running...");
         res.render("contact", {
           name: req.user.name,
-          msg: "Email Successful!!! Click here to return to the Home Page"
+          msg: "Email Successful!!! Click here to return to the Home Page",
         });
         console.log("Message sent: %s", info.messageId);
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
