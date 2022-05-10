@@ -1,0 +1,31 @@
+<%- include('includes/_header') %>
+
+<head>
+    
+    <%- include('layouts/head') %>
+
+</head>
+
+
+<body>
+      <%- include('layouts/welcome') %>
+  <div class="main">
+        <form action="/question" method="POST">
+            <h5>Question Prompt</h5>
+            <input type="text" name="prompt" value="<%= question.prompt %>" />
+            <h5>Correct Answer</h5>
+            <input type="text" name="answer" value="<%= question.answer %>" />
+            <h5>Incorrect Answer 1</h5>
+            <input type="text" name="choice2" value="<%= question.choices[0] %>" />
+            <h5>Incorrect Answer 2</h5>
+            <input type="text" name="choice3" value="<%= question.choices[1] %>" />
+            <h5>Incorrect Answer 3</h5>
+            <input type="text" name="choice4" value="<%= question.choices[2] %>" />
+            <input type="hidden" name="id" value=<%= question.id %>>
+            <input type="hidden" name="quiz" value=<%= question.quiz %>>
+            <button>Save</button>
+        </form>
+    </div>
+</body>
+
+<%- include('includes/_footer') %>
