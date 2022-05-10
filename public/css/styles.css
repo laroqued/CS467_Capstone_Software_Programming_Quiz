@@ -51,7 +51,12 @@ body {
   margin-bottom: 0.5rem;
 }
 #email-form-greeting{
-padding: 2rem;
+padding-top: 2em;
+padding-bottom: 1rem;
+}
+#welcome-button{
+padding-top: 8rem;
+
 }
 #quiz-greeting{
 padding: 2rem;
@@ -64,7 +69,7 @@ padding: 2rem;
   margin-bottom: 0.5rem;
 }
 #new-quiz-card {
-  margin-bottom: 5em;
+  margin-bottom: 15em;
 }
 #manage-quiz-button {
   text-align: center;
@@ -76,7 +81,7 @@ padding: 2rem;
 .email-form {
   text-align: center;
   background-color: white;
-  padding: 20px;
+
   border-radius: 10px;
   margin-bottom: 1rem;
   margin-left: auto;
@@ -84,21 +89,21 @@ padding: 2rem;
 }
 
 .contact-form-text {
-  width: 95%;
+  width: 100%;
   padding: 15px;
   background-color: #ccc;
   color: gray;
   border: 0;
-  margin: 10px 5px;
+
   border-radius: 8px;
 }
 .contact-form-message {
-  width: 95%;
+  width: 100%;
   padding: 15px;
   background-color: #ccc;
   color: gray;
   border: 0;
-  margin: 10px 5px;
+
   border-radius: 8px;
 }
 .contact-form-btn {
@@ -106,7 +111,7 @@ padding: 2rem;
   background-color: #6a5acd;
   color: white;
   border: none;
-  width: 95%;
+  width: 50%;
   margin: 10px 5px;
   margin-top: 20px;
   border-radius: 8px;

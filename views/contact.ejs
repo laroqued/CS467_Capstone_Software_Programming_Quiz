@@ -5,48 +5,29 @@
 </head>
 
 <body>
+  <div id="email-form-greeting"><%- include('layouts/welcome') %></div>
 
-  <div id="email-form-greeting">
-    <%- include('layouts/welcome') %>
-  </div>
-
-
-
-
-  <div class="container-fluid setup-bg d-flex flex-column">
-    <div class='row justify-content-center'>
-      <div class="container my-auto ">
-
-
-        <main class="email-form">
-          <div class="container-fluid setup-bg d-flex flex-column">
-            <div class='row justify-content-center'>
-              <div class="container my-auto">
-                <div class="container">
-                  <div id="welcome">
-                    <div class="row">
-                      <div class="col">
-                        <!-- include('layouts/email_msg') HERE -->
-                        <div>
-                          <a href="/"> <%- include('layouts/email_msg') %></a>
-                        </div>
-
-
-                        <%- include('layouts/email_form') %>
-
-                      </div>
-                    </div>
-                  </div>
+  <main class="email-form">
+    <div class="container-fluid setup-bg d-flex flex-column">
+      <div class="row justify-content-center">
+        <div class="container">
+          <div id="welcome">
+            <div class="row">
+              <div class="col">
+                <!-- include('layouts/email_msg') HERE -->
+                <div>
+                  <a href="/"> <%- include('layouts/email_msg') %></a>
                 </div>
+
+                <%- include('layouts/email_form') %>
               </div>
             </div>
           </div>
-
-        </main>
-        <script src="../utils/email.js"></script>
+        </div>
       </div>
     </div>
-  </div>
+  </main>
+  <script src="../utils/email.js"></script>
 </body>
 
 <%- include('includes/_footer') %>
