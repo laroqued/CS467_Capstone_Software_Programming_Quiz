@@ -6,19 +6,30 @@
 
 
 <body>
-      <%- include('layouts/welcome') %>
-    <a href="/create_quiz" class="btn btn-success">Create New Quiz</a>
+    <div id="quiz-greeting">    <%- include('layouts/welcome') %></div>
+
     <div class="create-quiz-page">
         <h2>Your Quizzes:</h2>
         <ul class="list-group">
             <% quizzes.forEach(quiz => { %>
             <li class="list-group-item">
-                <a class="btn btn-primary" href=<%= "/quiz/" + quiz._id %> >
-                <h5> <%= quiz.name %> </h5>
+                <a class="btn btn-primary" href=<%= "/quiz/" + quiz._id %>>
+                    <h5> <%= quiz.name %> </h5>
                 </a>
             </li>
             <% }) %>
         </ul>
+    </div>
+    <div class="card" id="new-quiz-card">
+        <div class="card-header">
+            Add Quiz
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Add a new quiz for new candidates</h5>
+            <p class="card-text"></p>
+            <a href="/create_quiz" class="btn btn-success">Create New Quiz</a>
+
+        </div>
     </div>
 </body>
 
