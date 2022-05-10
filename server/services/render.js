@@ -201,25 +201,24 @@ exports.quizzes =
   (checkAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-
     const quizzes = await Quiz.find({ owner: req.user.email });
-    //console.log(quizzes);
-
     res.render("quizzes", {
       name: req.user.name,
       email: req.user.email,
       quizzes: quizzes,
     });
   });
+
 // Aaron
 exports.quiz =
   (checkAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    let id = req.params.id;
+    let id = req.query.id;
     const questions = await Question.find({ quiz: id });
-    res.render("quiz", { name: req.user.name, questions: questions });
+    res.render("quiz", { name: req.user.name, questions: questions, id: id});
   });
+
 // Aaron
 exports.create_quiz =
   (checkAuthenticated,
@@ -227,6 +226,7 @@ exports.create_quiz =
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     res.render("create_quiz", { name: req.user.name, email: req.user.email });
   });
+
 // Aaron
 exports.post_create_quiz =
   ("/create_quiz",
@@ -247,21 +247,128 @@ exports.post_create_quiz =
   });
 
 // Aaron
+exports.del_quiz =
+  (checkAuthenticated,
+  async (req, res) => {
+    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+
+    let id = req.query.id;
+    const quiz = await Quiz.findById(id);
+    res.render("delete_quiz", { id: id, name: req.user.name, quiz: quiz });
+  });
+
+// Aaron
+exports.delete_quiz =
+  ("/delete_question",
+  checkAuthenticated,
+  async (req, res) => {
+    try {
+      Quiz.findByIdAndDelete(req.body.id).then(() => {
+        res.redirect("quizzes");
+      });
+    } catch (error) {
+      console.log(error);
+      res.redirect("create_quiz");
+    }
+  });
+
+// Aaron
 exports.quiz_results =
   (checkAuthenticated,
   (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     res.render("quiz_results", { name: req.user.name });
   });
+
 // Aaron
 exports.create_question =
   (checkAuthenticated,
   (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
-    let quizId = req.params.quizId;
-    res.render("create_question", { quizId: quizId, name: req.user.name });
+    let quizId = req.query.id;
+    res.render("create_question", { quizId: quizId, name: req.user.name});
   });
+
+// Aaron
+exports.post_create_question =
+  ("/create_question",
+  checkAuthenticated,
+  async (req, res) => {
+    try {
+      const question = new Question({
+        prompt: req.body.prompt,
+        quiz: req.body.quiz,
+        answer: req.body.answer,
+        choices: [req.body.choice2, req.body.choice3, req.body.choice4]
+      });
+      await question.save();
+      await res.redirect("/quiz?id=" + req.body.quiz);
+      res.status(201);
+    } catch (error) {
+      console.log(error);
+      res.redirect("/create_quiz");
+    }
+  });
+
+// Aaron
+exports.question =
+  (checkAuthenticated,
+  async (req, res) => {
+    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+
+    let id = req.query.id;
+    const question = await Question.findById(id);
+    res.render("question", { id: id, name: req.user.name, question: question});
+  });
+
+// Aaron
+exports.update_question =
+  ("/question",
+  checkAuthenticated,
+  async (req, res) => {
+    try {
+      Question.findByIdAndUpdate(req.body.id, 
+        {
+          prompt: req.body.prompt, 
+          answer: req.body.answer, 
+          choices: [req.body.choice2, req.body.choice3, req.body.choice4]
+        }
+      ).then(() => {
+        res.redirect("/quiz?id=" + req.body.quiz);
+      });
+    } catch (error) {
+      console.log(error);
+      res.redirect("/create_quiz");
+    }
+  });
+
+// Aaron
+exports.del_question =
+  (checkAuthenticated,
+  async (req, res) => {
+    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+
+    let id = req.query.id;
+    const question = await Question.findById(id);
+    res.render("delete_question", { id: id, name: req.user.name, question: question});
+  });
+
+// Aaron
+exports.delete_question =
+  ("/delete_question",
+  checkAuthenticated,
+  async (req, res) => {
+    try {
+      Question.findByIdAndDelete(req.body.id).then(() => {
+        res.redirect("quiz?id=" + req.body.quiz);
+      });
+    } catch (error) {
+      console.log(error);
+      res.redirect("create_quiz");
+    }
+  });
+
 
 //Dominique
 exports.canidate_quiz =
