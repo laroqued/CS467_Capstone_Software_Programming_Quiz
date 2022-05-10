@@ -1,17 +1,18 @@
+<!-- Display flex can be used for responsive cases as well with the help of .flex-{sm|md|lg|xl|xxl}-row class -->
 
-
-<div class="dropdown" id="div-greeting">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false">
-            <div >
-                <p> Hello, <%= name %> </p>           
-            </div>
+<div class="flex flex-center">
+<div class="btn-group dropstart">
+    <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+        <div>
+            <p> Hello, <%= name %> </p>
+        </div>
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <ul class="dropdown-menu">
         <a class="dropdown-item" href="/">Home</a>
         <a class="dropdown-item" href="/contact">Contact</a>
         <a class="dropdown-item" href="/quizzes">Quizzes</a>
-    </div>
-        
+    </ul>
 </div>
+
+ </div>
 
