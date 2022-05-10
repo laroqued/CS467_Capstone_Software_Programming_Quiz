@@ -1,0 +1,21 @@
+<%- include('includes/_header') %>
+
+<head>
+    
+    <%- include('layouts/head') %>
+
+</head>
+
+
+<body>
+      <%- include('layouts/welcome') %>
+  <div class="main">
+        <h1>Are you sure you want to delete the following quiz: <%= quiz.name %></h1>
+        <form action="/delete_quiz" method="POST">
+            <input type="hidden" name="id" value=<%= quiz.id %>>
+            <button>DELETE</button>
+        </form>
+    </div>
+</body>
+
+<%- include('includes/_footer') %>
