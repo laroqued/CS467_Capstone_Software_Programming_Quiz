@@ -73,8 +73,10 @@ exports.get_contact =
   (checkAuthenticated,
   (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    res.render("contact", { name: req.user.name });
+    res.render("contact", { name: req.user.name,msg: "" });
+
   });
+
 
 exports.post_contact =
   ("/send",
@@ -90,7 +92,7 @@ exports.post_contact =
 <li>Quiz: https://software-programming-quiz.herokuapp.com/candidate_complete</li>
 <li>Phone: 555-555-5555</li>
 <h3>Message </h3>
-<p>Hello, ${req.body.name}, </p>
+<p>Hello ${req.body.name}, </p>
 <p></p>
 <p>${req.body.message}</p>
 
@@ -123,14 +125,13 @@ exports.post_contact =
         console.log(error);
       } else {
         console.log("Mail server is running...");
+        res.render("contact", {
+          name: req.user.name,
+          msg: "Email has been sent"
+        });
+        console.log("Message sent: %s", info.messageId);
+        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
       }
-    });
-    console.log("Message sent: %s", info.messageId);
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-
-    res.render("contact", {
-      msg: "Email has been sent",
-      name: req.user.name,
     });
   });
 // ==============================================================
