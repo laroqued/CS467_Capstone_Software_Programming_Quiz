@@ -27,16 +27,24 @@ route.delete("/logout"), checkNotAuthenticated, services.post_delete;
 
 // Aaron
 route.get("/quizzes", checkAuthenticated, services.quizzes);
-route.get("/quiz/:id", checkAuthenticated, services.quiz);
-route.get("/create_quiz", checkAuthenticated, services.create_quiz); 
+route.get("/quiz", checkAuthenticated, services.quiz);
+
+route.get("/create_quiz", checkAuthenticated, services.create_quiz);
 route.post("/create_quiz", checkAuthenticated, services.post_create_quiz);
+
+route.get("/delete_quiz", checkAuthenticated, services.del_quiz);
+route.post("/delete_quiz", checkAuthenticated, services.delete_quiz);
+
 route.get("/quiz_results", checkAuthenticated, services.quiz_results);
 
-route.get(
-  "/create_question/:quizId",
-  checkAuthenticated,
-  services.create_question
-);
+route.get("/create_question", checkAuthenticated, services.create_question);
+route.post("/create_question", checkAuthenticated, services.post_create_question);
+
+route.get("/question", checkAuthenticated, services.question);
+route.post("/question", checkAuthenticated, services.update_question);
+
+route.get("/delete_question", checkAuthenticated, services.del_question);
+route.post("/delete_question", checkAuthenticated, services.delete_question);
 
 //-----------------------------
 //Dominique

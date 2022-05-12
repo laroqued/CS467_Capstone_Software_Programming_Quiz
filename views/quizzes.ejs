@@ -13,7 +13,7 @@
         <ul class="list-group">
             <% quizzes.forEach(quiz => { %>
             <li class="list-group-item">
-                <a class="btn btn-primary" href=<%= "/quiz/" + quiz._id %>>
+                <a class="btn btn-primary" href=<%= "/quiz?id=" + quiz._id %>>
                     <h5> <%= quiz.name %> </h5>
                 </a>
             </li>
