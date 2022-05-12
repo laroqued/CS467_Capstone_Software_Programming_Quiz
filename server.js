@@ -9,7 +9,6 @@ const passport = require("passport");
 const methodOverride = require("method-override");
 
 
-
 // Create a .env file to use process.env
 let port = process.env.PORT; // OR let port = '3001'
 let host = process.env.HOST;
