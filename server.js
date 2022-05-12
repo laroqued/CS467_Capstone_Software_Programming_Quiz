@@ -7,7 +7,7 @@ const flash = require("express-flash");
 const session = require("express-session");
 const passport = require("passport");
 const methodOverride = require("method-override");
-const cors = require("cors");
+
 
 
 // Create a .env file to use process.env
@@ -33,7 +33,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"));
 
-app.use(cors());
+
 
 // // Cross Origin Whitelist
 // const cors = require("cors");
