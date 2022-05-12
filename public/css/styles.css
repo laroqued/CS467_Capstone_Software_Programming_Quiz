@@ -226,9 +226,9 @@ header {
 #icon-spacing {
   margin-right: 0.5em;
 }
-#label-spacing {
-  margin-left: 2.5em;
-}
+/* #label-spacing {
+  margin-left: 1.5em;
+} */
 
 #email-success{
   color: green;

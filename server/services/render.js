@@ -125,7 +125,7 @@ exports.post_contact =
         console.log("Mail server is running...");
         res.render("contact", {
           name: req.user.name,
-          msg: "Email Successful!!! Click here to return to the Home Page",
+          msg: "Email Successful!!!",
         });
         console.log("Message sent: %s", info.messageId);
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
