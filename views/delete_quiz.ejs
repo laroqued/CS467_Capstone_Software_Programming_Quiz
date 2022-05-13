@@ -8,7 +8,14 @@
 
 
 <body>
-      <%- include('layouts/welcome') %>
+<div id="email-form-greeting">
+    <%- include('layouts/welcome') %>
+</div>
+                <div id="back-button">
+                    <div class="filter">
+                        <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to Quizzes</a>
+                    </div>
+                </div>
   <div class="main">
         <h1>Are you sure you want to delete the following quiz: <%= quiz.name %></h1>
         <form action="/delete_quiz" method="POST">

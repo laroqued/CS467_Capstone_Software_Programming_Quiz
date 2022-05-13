@@ -10,6 +10,11 @@
         <div id="email-form-greeting">
             <%- include('layouts/welcome') %>
         </div>
+                <div id="back-button">
+                    <div class="filter">
+                        <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to Quizzes</a>
+                    </div>
+                </div>
     <a href="/quizzes" class="btn btn-success">Manage Quizzes</a>
     <a href=<%= "/create_question?id=" + id %> class="btn btn-success">Create Question</a>
     <a class="btn btn-danger" href=<%= "/delete_quiz?id=" + id%> >Delete Quiz</a>

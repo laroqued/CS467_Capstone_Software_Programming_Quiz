@@ -28,6 +28,9 @@ body {
   margin-right: auto;
 }
 
+#back-buttonf{
+  text-align: right;
+}
 
 .index-page {
   max-width: 90%;
