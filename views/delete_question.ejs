@@ -1,22 +1,26 @@
 <%- include('includes/_header') %>
 
-<head>
-    
-    <%- include('layouts/head') %>
+    <head>
 
-</head>
+        <%- include('layouts/head') %>
+
+    </head>
 
 
-<body>
-      <%- include('layouts/welcome') %>
-  <div class="main">
-        <h1>Are you sure you want to delete the following question: <%= question.prompt %></h1>
-        <form action="/delete_question" method="POST">
-            <input type="hidden" name="id" value=<%= question.id %>>
-            <input type="hidden" name="quiz" value=<%= question.quiz %>>
-            <button>DELETE</button>
-        </form>
-    </div>
-</body>
+    <body>
+        <div id="email-form-greeting">
+            <%- include('layouts/welcome') %>
+        </div>
 
-<%- include('includes/_footer') %>
+        <div class="main">
+            <h1>Are you sure you want to delete the following question: <%= question.prompt %>
+            </h1>
+            <form action="/delete_question" method="POST">
+                <input type="hidden" name="id" value=<%=question.id %>>
+                <input type="hidden" name="quiz" value=<%=question.quiz %>>
+                <button>DELETE</button>
+            </form>
+        </div>
+    </body>
+
+    <%- include('includes/_footer') %>

@@ -5,7 +5,9 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+.app-container{
+  margin-top: 6em;
+}
 body {
   background-color: darkgrey;
   display: grid;
@@ -15,8 +17,7 @@ body {
 }
 
 .main {
-  width: 500px;
-  max-width: 90%;
+
   text-align: center;
   background-color: white;
   padding: 20px;
@@ -54,10 +55,14 @@ body {
 padding-top: 2em;
 padding-bottom: 1rem;
 }
-#welcome-button{
+#quiz-form-greeting{
+padding-top: 2em;
+padding-bottom: 1rem;
+}
+/* #welcome-button{
 padding-top: 8rem;
 
-}
+} */
 #quiz-greeting{
 padding: 2rem;
 }
@@ -75,9 +80,7 @@ padding: 2rem;
   text-align: center;
   align-items: center;
 }
-.jumbotron {
-  margin-top: 3em;
-}
+
 .email-form {
   text-align: center;
   background-color: white;

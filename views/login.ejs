@@ -1,22 +1,21 @@
 <%- include('includes/_header') %>
 
+    <head>
+        <%- include('layouts/head') %>
+    </head>
 
-<!DOCTYPE html>
-<html lang="en">
+    <body>
 
-<head>
-    <%- include('layouts/head') %>
-</head>
-
-<body>
-    <div class="container-fluid setup-bg d-flex flex-column">
-        <div class='row justify-content-center'>
-            <div class="container my-auto">
-                <div class="main">
-                    <h1><%=login_form_greeting %></h1>
-                    <% if (messages) { %>
-                    <p><%= messages.error %></p>
-                    <% } %>
+        <div class="main">
+            
+            <h1>
+                <%=login_form_greeting %>
+            </h1>
+            <% if (messages) { %>
+                <p>
+                    <%= messages.error %>
+                </p>
+                <% } %>
 
 
                     <form action="/login" method="POST">
@@ -41,17 +40,8 @@
                             </div>
                         </div>
                         <a href="/register">Create Account</a>
-
                     </form>
-                </div>
-            </div>
+
         </div>
-
-    </div>
-
-
-
-</body>
-<%- include('includes/_footer') %>
-
-</html>
+    </body>
+    <%- include('includes/_footer') %>
