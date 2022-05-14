@@ -4,32 +4,33 @@
 
 <%- include('includes/_header') %>
 
-<body>
-    <div class="create-quiz-page1">
-        <div class="container-fluid setup-bg d-flex flex-column">
-            <div class='row justify-content-center'>
-                <div class="container my-auto">
-                    <div class="container">
-                        <div id="welcome-create-quiz">
-                            <%- include('layouts/welcome') %>
+    <body>
+        <div class="create-quiz-page1">
+            <div class="container-fluid setup-bg d-flex flex-column">
+                <div class='row justify-content-center'>
+                    <div class="container my-auto">
+                        <div class="container">
+                            <div id="welcome-create-quiz">
+                                <%- include('layouts/welcome') %>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-                    <div id="back-button">
-                        <div class="filter">
-                            <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to Quizzes</a>
-                        </div>
-                    </div>
-    <div class="main">
-        <form action="/create_quiz" method="POST">
-            <input type="text" name="name" placeholder="Quiz Name" required />
-            <input type="hidden" name="owner" value=<%= email %> />
-            <button>Create</button>
-        </form>
-    </div>
-</body>
+        <div id="back-button">
+            <div class="filter">
+                <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to
+                    Quizzes</a>
+            </div>
+        </div>
+        <div class="main">
+            <form action="/create_quiz" method="POST">
+                <input type="text" name="name" placeholder="Quiz Name" required />
+                <input type="hidden" name="owner" value=<%=email %> />
+                <button>Create</button>
+            </form>
+        </div>
+    </body>
 
-<%- include('includes/_footer') %>
+    <%- include('includes/_footer') %>

@@ -5,7 +5,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-.app-container{
+.app-container {
   margin-top: 6em;
 }
 body {
@@ -17,7 +17,6 @@ body {
 }
 
 .main {
-
   text-align: center;
   background-color: white;
   padding: 20px;
@@ -28,7 +27,7 @@ body {
   margin-right: auto;
 }
 
-#back-buttonf{
+#back-buttonf {
   text-align: right;
 }
 
@@ -54,20 +53,20 @@ body {
   margin-right: auto;
   margin-bottom: 0.5rem;
 }
-#email-form-greeting{
-padding-top: 2em;
-padding-bottom: 1rem;
+#email-form-greeting {
+  padding-top: 2em;
+  padding-bottom: 1rem;
 }
-#quiz-form-greeting{
-padding-top: 2em;
-padding-bottom: 1rem;
+#quiz-form-greeting {
+  padding-top: 2em;
+  padding-bottom: 1rem;
 }
 /* #welcome-button{
 padding-top: 8rem;
 
 } */
-#quiz-greeting{
-padding: 2rem;
+#quiz-greeting {
+  padding: 2rem;
 }
 
 .create-quiz-page-card {
@@ -236,7 +235,7 @@ header {
   margin-left: 1.5em;
 } */
 
-#email-success{
+#email-success {
   color: green;
 
   font-weight: bold;

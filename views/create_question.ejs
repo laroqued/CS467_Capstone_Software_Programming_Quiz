@@ -1,37 +1,38 @@
 <%- include('includes/_header') %>
 
-<head>
-    
-    <%- include('layouts/head') %>
+    <head>
 
-</head>
+        <%- include('layouts/head') %>
+
+    </head>
 
 
-<body>
-<div id="email-form-greeting">
-    <%- include('layouts/welcome') %>
-</div>
-                <div id="back-button">
-                    <div class="filter">
-                        <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to Quizzes</a>
-                    </div>
-                </div>
-  <div class="main">
-        <form action="/create_question" method="POST">
-            <h5>Question Prompt</h5>
-            <input type="text" name="prompt" placeholder="Question Prompt" />
-            <h5>Correct Answer</h5>
-            <input type="text" name="answer" placeholder="Correct Answer" />
-            <h5>Incorrect Answer 1</h5>
-            <input type="text" name="choice2" placeholder="Incorrect Answer" />
-            <h5>Incorrect Answer 2</h5>
-            <input type="text" name="choice3" placeholder="Incorrect Answer" />
-            <h5>Incorrect Answer 3</h5>
-            <input type="text" name="choice4" placeholder="Incorrect Answer" />
-            <input type="hidden" name="quiz" value=<%= quizId %>>
-            <button>Create</button>
-        </form>
-    </div>
-</body>
+    <body>
+        <div id="email-form-greeting">
+            <%- include('layouts/welcome') %>
+        </div>
+        <div id="back-button">
+            <div class="filter">
+                <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to
+                    Quizzes</a>
+            </div>
+        </div>
+        <div class="main">
+            <form action="/create_question" method="POST">
+                <h5>Question Prompt</h5>
+                <input type="text" name="prompt" placeholder="Question Prompt" />
+                <h5>Correct Answer</h5>
+                <input type="text" name="answer" placeholder="Correct Answer" />
+                <h5>Incorrect Answer 1</h5>
+                <input type="text" name="choice2" placeholder="Incorrect Answer" />
+                <h5>Incorrect Answer 2</h5>
+                <input type="text" name="choice3" placeholder="Incorrect Answer" />
+                <h5>Incorrect Answer 3</h5>
+                <input type="text" name="choice4" placeholder="Incorrect Answer" />
+                <input type="hidden" name="quiz" value=<%=quizId %>>
+                <button>Create</button>
+            </form>
+        </div>
+    </body>
 
-<%- include('includes/_footer') %>
+    <%- include('includes/_footer') %>

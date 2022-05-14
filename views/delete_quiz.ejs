@@ -1,28 +1,30 @@
 <%- include('includes/_header') %>
 
-<head>
-    
-    <%- include('layouts/head') %>
+    <head>
 
-</head>
+        <%- include('layouts/head') %>
+
+    </head>
 
 
-<body>
-<div id="email-form-greeting">
-    <%- include('layouts/welcome') %>
-</div>
-                <div id="back-button">
-                    <div class="filter">
-                        <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to Quizzes</a>
-                    </div>
-                </div>
-  <div class="main">
-        <h1>Are you sure you want to delete the following quiz: <%= quiz.name %></h1>
-        <form action="/delete_quiz" method="POST">
-            <input type="hidden" name="id" value=<%= quiz.id %>>
-            <button>DELETE</button>
-        </form>
-    </div>
-</body>
+    <body>
+        <div id="email-form-greeting">
+            <%- include('layouts/welcome') %>
+        </div>
+        <div id="back-button">
+            <div class="filter">
+                <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to
+                    Quizzes</a>
+            </div>
+        </div>
+        <div class="main">
+            <h1>Are you sure you want to delete the following quiz: <%= quiz.name %>
+            </h1>
+            <form action="/delete_quiz" method="POST">
+                <input type="hidden" name="id" value=<%=quiz.id %>>
+                <button>DELETE</button>
+            </form>
+        </div>
+    </body>
 
-<%- include('includes/_footer') %>
+    <%- include('includes/_footer') %>
