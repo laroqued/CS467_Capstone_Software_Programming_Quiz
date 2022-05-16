@@ -241,3 +241,12 @@ header {
   font-weight: bold;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+label { 
+  color: #071463; 
+  font-weight:bold; 
+  display:flow-root; 
+  width:inherit; 
+  float: center; } 
+
+label:after { content: ": " }
