@@ -391,3 +391,18 @@ exports.canidate_complete =
 
     res.render("candidate_complete", { name: req.user.name });
   });
+
+  
+
+exports.add_survey = (req, res) =>{
+    res.render('add_survey');
+}
+
+
+  exports.update_user = 
+  (checkAuthenticated,
+    (req, res) => {
+      res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+  
+      res.render("update_user", { user : userdata.data})
+    });
