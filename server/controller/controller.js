@@ -23,7 +23,7 @@ exports.create = (req,res)=>{
         .save(user)
         .then(data => {
             //res.send(data)
-            res.redirect('/add-survey');
+            res.redirect('/candidate_complete');
         })
         .catch(err =>{
             res.status(500).send({
