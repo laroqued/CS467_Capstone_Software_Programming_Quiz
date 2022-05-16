@@ -1,6 +1,4 @@
 dotenv = require("dotenv").config();
-
-
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
@@ -11,17 +9,33 @@ const methodOverride = require("method-override");
 
 
 // Create a .env file to use process.env
-let port = process.env.PORT; // OR let port = '3001'
+let port = process.env.PORT; 
 let host = process.env.HOST;
-// let host = 'localhost'
-// let port = '3001'
 
 
-
+// EJS initialization
 app.set("view engine", "ejs");
-app.use(express.urlencoded({ extended: true }));
 
+// Static page
+app.use(express.static("public"));
+
+// JSON Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// ===========================================================================================
+/*
+The express-flash module exposes getter and setter methods for a flash message of the form, { flash: { type: 'type', message: 'message' }} and depends on the express-session module. The method req. flash(type, message) sets the value of a new flash message and adds it to an array of messages of the same type 
+ */
+// ===========================================================================================
 app.use(flash());
+
+
+// ===========================================================================================
+/* 
+Express-session - an HTTP server-side framework used to create and manage a session middleware. This tutorial is all about sessions. Thus Express-session library will be the main focus. Cookie-parser - used to parse cookie header to store data on the browser whenever a session is established on the server-side
+*/
+// ===========================================================================================
 app.use(
   session({
     secret: process.env.TOKEN_SECRET,
@@ -29,10 +43,22 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+// ===========================================================================================
+/* 
+Passport is authentication middleware for Node. js. As it's extremely flexible and modular, Passport can be unobtrusively dropped into any Express-based web application. A comprehensive set of strategies supports authentication using a username and password, Facebook, Twitter, and more.
+*/
+// ===========================================================================================
+
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(methodOverride("_method"));
 
+// ===========================================================================================
+/* 
+Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
+*/
+// ===========================================================================================
+app.use(methodOverride("_method"));
 
 
 // // Cross Origin Whitelist
@@ -65,17 +91,15 @@ app.use(methodOverride("_method"));
 // Global base directory for file downloads
 global.__basedir = __dirname;
 
-// EJS initialization
-app.set("view engine", "ejs");
-// Static page
-app.use(express.static("public"));
 
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-// log requests
+
+// app.use(express.urlencoded({ extended: false }));
+// app.use(express.json());
+
+/* 
+morgan is a Node. js and Express middleware to log HTTP requests and errors, and simplifies the process. In Node. js and Express, middleware is a function that has access to the request and response lifecycle methods, and the next() method to continue logic in your Express server.
+*/
 app.use(morgan('tiny'))
-
-
 
 
 // Route setup
@@ -117,18 +141,10 @@ app.delete("/logout", checkAuthenticated, async (req, res) => {
 });
 
 
-
 // connect to database
 const connectDB = require("./server/database/connection");
 // mongoDB conncection
 connectDB();
-
-
-
-
-
-
-
 
 // Error page
 app.use(function(req, res) {
