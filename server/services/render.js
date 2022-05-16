@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-
 const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
@@ -65,6 +64,12 @@ exports.register =
   (req, res) => {
     res.render("register", { register_form_greeting: "Register" });
   });
+
+  exports.get_take_quiz =
+  (checkNotAuthenticated, (req, res) => {
+    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+    res.render("take_quiz", { name: req.user.name });
+  });
 // ==============================================================
 // CONTACT/EMAIL
 // ==============================================================
@@ -127,8 +132,8 @@ exports.post_contact =
           name: req.user.name,
           msg: "Email Successful!!!",
         });
-        console.log("Message sent: %s", info.messageId);
-        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+        console.log(`Message sent: ${info.messageId}`);
+        console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
       }
     });
   });
