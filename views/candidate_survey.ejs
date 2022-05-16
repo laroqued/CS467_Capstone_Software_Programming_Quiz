@@ -7,10 +7,25 @@
 
 <body>
     <%- include('layouts/welcome') %>
-    <h1>Candidate Survey</h1>
-    <div class="main">
+    <h1>Candidate Survey </h1>
 
-    </div>
 </body>
+
+<div class="main">
+    <div class="container">
+        <div class="box-nav d-flex justify-between">
+
+        </div>
+        <div class="form-title text-left">
+            <!-- <h2 class="text-dark">New User</h2> -->
+            <span class="text-dark">We highly value your feedback. Use the below form to share your thoughts on our candidate evaluation</span>
+            
+        </div>
+        <br>
+        <!-- add user form -->
+        <%- include('includes/_form') %>
+       
+    </div>
+</div>
 
 <%- include('includes/_footer') %>
