@@ -377,12 +377,13 @@ exports.canidate_quiz =
   (checkAuthenticated,
   async(req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+    i=1
         let id = req.query.id;
         const quizzes = await Quiz.find({ owner: req.user.email });
             const questions = await Question.find({ quiz: id });
     const question = await Question.findById(id);
 
-    res.render("candidate_quiz", {  id: id,quiz: id, name: req.user.name, questions: questions, owner: req.user.email });
+    res.render("candidate_quiz", {i:i,  id: id,quiz: id, name: req.user.name, questions: questions, owner: req.user.email });
   });
 //Dominique
 exports.canidate_survey =

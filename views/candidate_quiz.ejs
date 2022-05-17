@@ -20,12 +20,13 @@
         <card class="card-body" id="quiz-cards">
 
             <!-- OUTER LOOP -->
-            <% questions.forEach(question=> { %>
+            <% questions.forEach((question,i)=> { %>
 
                 <div id="quiz-card-background">
                     <form id="d1">
                         <h5>
-                            <%= question.prompt %>
+              <%= i + 1 %>) 
+                            <%= question.prompt  %>
                         </h5>
                         <hr>
                         <p>
