@@ -78,9 +78,16 @@ padding-top: 8rem;
 #new-quiz-card {
   margin-bottom: 15em;
 }
+.manage-quiz-button{
+  background-color: white;
+  padding: 1em;
+  border-radius: 8px;
+}
+
 #manage-quiz-button {
   text-align: center;
   align-items: center;
+  
 }
 
 .email-form {
@@ -250,3 +257,19 @@ label {
   float: center; } 
 
 label:after { content: ": " }
+
+#quiz-cards{
+  width: 30rem;
+
+}
+#quiz-card-background{
+  text-align: left;
+  padding: 1em;
+  background-color:white;
+    border-radius: 10px;
+}
+#quiz-card-button{
+  margin-top: .25em;
+  text-align: center;
+  
+}
