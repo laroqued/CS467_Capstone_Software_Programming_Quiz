@@ -1,18 +1,51 @@
 <%- include('includes/_header') %>
 
-<head>
-    <%- include('layouts/head') %>
-</head>
+    <head>
+        <%- include('layouts/head') %>
+    </head>
 
 
-<body>
-<div id="email-form-greeting">
-    <%- include('layouts/welcome') %>
-</div>
-    <h1>Candidate Quiz</h1>
-    <div class="main">
+    <body>
+        <div id="email-form-greeting">
+            <%- include('layouts/welcome') %>
+        </div>
+        <h1>Candidate Quiz</h1>
+
+        <p>
+            <%- owner %>
+        </p>
+        <p>
+            <%- name %>
+        </p>
+        <!-- OUTER LOOP -->
+        <% questions.forEach(question=> { %>
+            <div style="background-color:white">
+                <form id="d1">
+                    <h5>
+                        <%= question.prompt %>
+                    </h5>
+                    <%= question.answer %> 
+<input type="radio" name="choice" value="Programming"><br>
+
+
+                        <!-- INNER LOOP -->
+                        <% question.choices.forEach(choice=> { %>
+                            <%=choice%>
+                            <input type="radio" name="choice" value="Programming"><br>
+
+                                <% }) %>
+                                    <input type="submit" value="submit" class="btn btn-success"
+                                    )>       <br>
+                </form>
+            </div>
+            <br>
+            <% }) %>
+     
+                <div class="main">
                     <a id="manage-quiz-button" href="/take_quiz" class="btn btn-success">Take Quiz</a>
-    </div>
-</body>
 
-<%- include('includes/_footer') %>
+                </div>
+    </body>
+
+
+    <%- include('includes/_footer') %>
