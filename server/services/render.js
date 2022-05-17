@@ -50,7 +50,7 @@ exports.homeRoutes =
   (checkAuthenticated,
   (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    res.render("index", { name: req.user.name });
+    res.render("index", { login_name: req.user.login_name });
   });
 // Donnyves
 exports.login =
@@ -68,17 +68,19 @@ exports.register =
   exports.get_take_quiz =
   (checkNotAuthenticated, (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    res.render("take_quiz", { name: req.user.name });
+    res.render("take_quiz", {
+      name: req.user.name,
+      login_name: req.user.login_name,
+    });
   });
 // ==============================================================
 // CONTACT/EMAIL
 // ==============================================================
-
 exports.get_contact =
   (checkAuthenticated,
   async(req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    res.render("contact", { name: req.user.name, msg: "" });
+    res.render("contact", { login_name: req.user.login_name, msg: "" });
   });
 
 exports.post_contact =
@@ -95,7 +97,7 @@ exports.post_contact =
 <li>Quiz: https://software-programming-quiz.herokuapp.com/candidate_complete</li>
 <li>Phone: 555-555-5555</li>
 <h3>Message </h3>
-<p>Hello ${req.body.name}, </p>
+<p>Hello ${req.body.email_name}, </p>
 <p></p>
 <p>${req.body.message}</p>
 
@@ -129,7 +131,7 @@ exports.post_contact =
       } else {
         console.log("Mail server is running...");
         res.render("contact", {
-          name: req.user.name,
+          login_name: req.user.login_name,
           msg: "Email Successful!!!",
         });
         console.log(`Message sent: ${info.messageId}`);
@@ -138,8 +140,9 @@ exports.post_contact =
     });
   });
 // ==============================================================
-
+// EMAIL END
 // ==============================================================
+
 // ==============================================================
 
 // ========================================================
@@ -166,10 +169,9 @@ exports.post_register =
       try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const user = new User({
-          name: req.body.name,
+          login_name: req.body.login_name,
           email: req.body.email,
           password: hashedPassword,
-          
         });
 
         await user.save();
@@ -206,9 +208,10 @@ exports.quizzes =
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     const quizzes = await Quiz.find({ owner: req.user.email });
     res.render("quizzes", {
-      name: req.user.name,
+      login_name: req.user.login_name,
       email: req.user.email,
       quizzes: quizzes,
+      
     });
   });
 
@@ -219,7 +222,11 @@ exports.quiz =
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     let id = req.query.id;
     const questions = await Question.find({ quiz: id });
-    res.render("quiz", { name: req.user.name, questions: questions, id: id});
+    res.render("quiz", {
+      login_name: req.user.login_name,
+      questions: questions,
+      id: id,
+    });
   });
 
 // Aaron
@@ -227,7 +234,11 @@ exports.create_quiz =
   (checkAuthenticated,
   (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    res.render("create_quiz", { name: req.user.name, email: req.user.email });
+    res.render("create_quiz", {
+      name: req.user.name,
+      email: req.user.email,
+      login_name: req.user.login_name,
+    });
   });
 
 // Aaron
@@ -239,6 +250,7 @@ exports.post_create_quiz =
       const quiz = new Quiz({
         name: req.body.name,
         owner: req.body.owner,
+        login_name: req.user.login_name,
       });
       await quiz.save();
       await res.redirect("/quizzes");
@@ -257,7 +269,11 @@ exports.del_quiz =
 
     let id = req.query.id;
     const quiz = await Quiz.findById(id);
-    res.render("delete_quiz", { id: id, name: req.user.name, quiz: quiz });
+    res.render("delete_quiz", {
+      id: id,
+      login_name: req.user.login_name,
+      quiz: quiz,
+    });
   });
 
 // Aaron
@@ -280,7 +296,7 @@ exports.quiz_results =
   (checkAuthenticated,
   (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    res.render("quiz_results", { name: req.user.name });
+    res.render("quiz_results", { login_name: req.user.login_name });
   });
 
 // Aaron
@@ -290,7 +306,10 @@ exports.create_question =
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
     let quizId = req.query.id;
-    res.render("create_question", { quizId: quizId, name: req.user.name});
+    res.render("create_question", {
+      quizId: quizId,
+      login_name: req.user.login_name,
+    });
   });
 
 // Aaron
@@ -322,7 +341,11 @@ exports.question =
 
     let id = req.query.id;
     const question = await Question.findById(id);
-    res.render("question", { id: id, name: req.user.name, question: question});
+    res.render("question", {
+      id: id,
+      login_name: req.user.login_name,
+      question: question,
+    });
   });
 
 // Aaron
@@ -354,7 +377,11 @@ exports.del_question =
 
     let id = req.query.id;
     const question = await Question.findById(id);
-    res.render("delete_question", { id: id, name: req.user.name, question: question});
+    res.render("delete_question", {
+      id: id,
+      login_name: req.user.login_name,
+      question: question,
+    });
   });
 
 // Aaron
@@ -380,11 +407,20 @@ exports.canidate_quiz =
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     i=1
         let id = req.query.id;
-        const quizzes = await Quiz.find({ owner: req.user.email });
+        const quizzes = await Quiz.find({ owner: req.user.email,  });
+        const quiz_names = await Quiz.find({  name:req.user.name });
             const questions = await Question.find({ quiz: id });
     const question = await Question.findById(id);
 
-    res.render("candidate_quiz", {i:i,  id: id,quiz: id, name: req.user.name, questions: questions, owner: req.user.email });
+    res.render("candidate_quiz", {
+      i: i,
+      id: id,
+      quiz: id,
+      login_name: req.user.login_name,
+      name: req.user.name,
+      questions: questions,
+      owner: req.user.email,
+    });
   });
 //Dominique
 exports.canidate_survey =
@@ -392,7 +428,10 @@ exports.canidate_survey =
   (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
-    res.render("candidate_survey", { name: req.user.name });
+    res.render("candidate_survey", {
+      name: req.user.name,
+      login_name: req.user.login_name,
+    });
   });
 //Dominique
 exports.canidate_complete =
@@ -400,7 +439,10 @@ exports.canidate_complete =
   (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
-    res.render("candidate_complete", { name: req.user.name });
+    res.render("candidate_complete", {
+      login_name: req.user.login_name,
+      name: req.user.name,
+    });
   });
 
   
