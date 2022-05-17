@@ -169,6 +169,7 @@ exports.post_register =
           name: req.body.name,
           email: req.body.email,
           password: hashedPassword,
+          
         });
 
         await user.save();
