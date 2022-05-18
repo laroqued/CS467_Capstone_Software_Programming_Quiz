@@ -56,6 +56,7 @@ body {
 #email-form-greeting {
   padding-top: 2em;
   padding-bottom: 1rem;
+  
 }
 #quiz-form-greeting {
   padding-top: 2em;
@@ -268,9 +269,19 @@ label:after {
   padding: 1em;
   background-color: white;
   border-radius: 10px;
+  box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 
 }
 #quiz-card-button {
   margin-top: 0.25em;
   text-align: center;
+}
+
+.card{
+  box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+
+}
+#question-form{
+  box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+
 }

@@ -93,8 +93,8 @@ exports.post_contact =
 <li>Name: Donnyves Laroque, Dominique Lazaros, Aaron Harris </li>
 <li>Company: SoftWare Programming Quiz</li>
 <li>Email: softwareprogrammingquiz@gmail.com</li>
-<li>Quiz: http://localhost:3001/candidate_complete</li>
-<li>Quiz: https://software-programming-quiz.herokuapp.com/candidate_complete</li>
+<li>Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_complete</li>
+
 <li>Phone: 555-555-5555</li>
 <h3>Message </h3>
 <p>Hello ${req.body.email_name}, </p>
@@ -405,10 +405,15 @@ exports.canidate_quiz =
   (checkAuthenticated,
   async(req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    i=1
+        let i=1
         let id = req.query.id;
-        const quizzes = await Quiz.find({ owner: req.user.email,  });
-        const quiz_names = await Quiz.find({  name:req.user.name });
+        
+        const quizzes = await Quiz.find({
+          name: req.user.name,
+
+          owner: req.user.email,
+        });
+
             const questions = await Question.find({ quiz: id });
     const question = await Question.findById(id);
 
@@ -420,6 +425,8 @@ exports.canidate_quiz =
       name: req.user.name,
       questions: questions,
       owner: req.user.email,
+      quizzes:quizzes,
+
     });
   });
 //Dominique

@@ -19,8 +19,23 @@
 
 
         <p>
-            <%- name %>
+            Employer Name: <%=login_name %>
         </p>
+        <p>
+            Quiz Name: <%= name %> 
+        </p>
+        <p>
+          ID: <%= id %>
+        </p>
+        <p>
+           QuizID:  <%= quiz %>
+        </p>
+
+        <p>
+            Owner: <%= owner %>
+        </p>
+
+
         <card class="card-body" id="quiz-cards">
 
             <!-- OUTER LOOP -->
@@ -43,13 +58,9 @@
 
                         <!-- INNER LOOP -->
                         <% question.choices.forEach(choice=> { %>
-
                             <p> <input type="radio" name="choice" value="Programming">
-
                                 <%=choice%>
                             </p>
-
-
                             <% }) %>
                                 <hr>
                                 <input type="submit" value="submit" class="btn btn-success" id="quiz-card-button" )>
