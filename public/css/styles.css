@@ -289,7 +289,9 @@ label:after {
     width: 160px;
 }
 
-h1{
+
+/* Source: https://bootsnipp.com/snippets/j68mq */
+#splash-title-animation{
      color: black; 
   font-family: "arial";
   font-size: 3em;
