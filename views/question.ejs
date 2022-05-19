@@ -20,20 +20,58 @@
         <div class="main">
             <form action="/question" method="POST">
                 <h5>Question Prompt</h5>
-                <input type="text" name="prompt" value="<%= question.prompt %>" />
-                <h5>Correct Answer</h5>
-                <input type="text" name="answer" value="<%= question.answer %>" />
-                <h5>Incorrect Answer 1</h5>
-                <input type="text" name="choice2" value="<%= question.choices[0] %>" />
-                <h5>Incorrect Answer 2</h5>
-                <input type="text" name="choice3" value="<%= question.choices[1] %>" />
-                <h5>Incorrect Answer 3</h5>
-                <input type="text" name="choice4" value="<%= question.choices[2] %>" />
+                <input type="text" name="prompt" value="<%= question.prompt %>" >
+                <% if (question.type == "multiple_choice") { %>
+                    <h5>Correct Answer</h5>
+                    <input type="text" name="answer" value="<%= question.answer %>" >
+                    <h5>Incorrect Answer 1</h5>
+                    <input type="text" name="choice2" value="<%= question.choices[0] %>" >
+                    <h5>Incorrect Answer 2</h5>
+                    <input type="text" name="choice3" value="<%= question.choices[1] %>" >
+                    <h5>Incorrect Answer 3</h5>
+                    <input type="text" name="choice4" value="<%= question.choices[2] %>" >
+                <% } else if (question.type == "true_or_false") { %>
+                    <label for="true">True</label>
+                    <% if (question.answer == "true") { %>
+                        <input type="radio" id="true" name="answer" value="true" checked>
+                        <label for="false">False</label>
+                        <input type="radio" id="false" name="answer" value="false" >
+                    <% } else { %>
+                        <input type="radio" id="true" name="answer" value="true" >
+                        <label for="false">False</label>
+                        <input type="radio" id="false" name="answer" value="false" checked>
+                    <% } %>
+                <% } else if (question.type == "check_all") { %>
+                    <% let current = "1"; %>
+                    <% question.answer_multiple.forEach(answer => { %>
+                        <h5 style="margin-top: 20px"><%="Option "+current%></h5>
+                        <input type="text" id=<%="input"+current%> name=<%="answer"+current%> value=<%=answer%>>
+                        <div type="button" id=<%="a"+current%> class="btn btn-success col-3">Correct</div>
+                        <% current = parseInt(current); %>
+                        <% current += 1; %>
+                        <% current = current.toString(); %>
+                    <% }) %>
+                    <% question.choices.forEach(answer => { %>
+                        <h5 style="margin-top: 20px"><%="Option "+current%></h5>
+                        <input type="text" id=<%="input"+current%> name=<%="option"+current%> value=<%=answer%>>
+                        <div type="button" id=<%="a"+current%> class="btn btn-danger col-3">Incorrect</div>
+                        <% current = parseInt(current); %>
+                        <% current += 1; %>
+                        <% current = current.toString(); %>
+                    <% }) %>
+                <% } else if (question.type == "fill") { %>
+                    <% let answers = question.answer_multiple.join(); %>
+                    <h5>Enter all correct answers separated by commas</h5>
+                    <textarea name="answer"><%=answers%></textarea>
+                <% } %>
                 <input type="hidden" name="id" value=<%=question.id %>>
+                <input type="hidden" name="type" value=<%=question.type %> >
                 <input type="hidden" name="quiz" value=<%=question.quiz %>>
                 <button>Save</button>
             </form>
         </div>
     </body>
+
+    <script src="js/create_question.js"></script>
 
     <%- include('includes/_footer') %>
