@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const questionSchema = new mongoose.Schema({
+    type: {
+        type: String,
+        required: true
+    },
     prompt: {
         type: String,
         required: true,
@@ -13,8 +17,12 @@ const questionSchema = new mongoose.Schema({
     answer: {
         type: String
     },
+    answer_multiple: {
+        type: [String]
+    },
     quiz: {
-        type: String
+        type: String,
+        required: true
     }
 });
 

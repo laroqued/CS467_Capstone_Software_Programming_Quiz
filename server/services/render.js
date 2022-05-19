@@ -306,10 +306,20 @@ exports.create_question =
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
     let quizId = req.query.id;
+
+    let type = null;
+    if (!req.query.type){
+      type = "multiple_choice";
+    } else{
+      type = req.query.type;
+    }
+
     res.render("create_question", {
       quizId: quizId,
-      login_name: req.user.login_name,
+      login_name: req.user.login_name, 
+      type: type
     });
+
   });
 
 // Aaron
@@ -317,13 +327,41 @@ exports.post_create_question =
   ("/create_question",
   checkAuthenticated,
   async (req, res) => {
+    console.log(req.body);
     try {
+      let answer = null;
+      let answers = null;
+      let choices = null;
+
+      if (req.body.type == "multiple_choice") {
+        answer = req.body.answer;
+        choices = [req.body.choice2, req.body.choice3, req.body.choice4];
+      } else if (req.body.type == "true_or_false") {
+        answer = req.body.answer;
+      } else if (req.body.type == "check_all") {
+        answers = [];
+        choices = [];
+        if (req.body.answer1) answers.push(req.body.answer1);
+        if (req.body.answer2) answers.push(req.body.answer2);
+        if (req.body.answer3) answers.push(req.body.answer3);
+        if (req.body.answer4) answers.push(req.body.answer4);
+        if (req.body.option1) choices.push(req.body.option1);
+        if (req.body.option2) choices.push(req.body.option2);
+        if (req.body.option3) choices.push(req.body.option3);
+        if (req.body.option4) choices.push(req.body.option4);
+      } else if (req.body.type == "fill") {
+        answers = req.body.answer.split(",");
+      }
+
       const question = new Question({
+        type: req.body.type,
         prompt: req.body.prompt,
         quiz: req.body.quiz,
-        answer: req.body.answer,
-        choices: [req.body.choice2, req.body.choice3, req.body.choice4]
+        answer: answer,
+        answer_multiple: answers,
+        choices: choices
       });
+      
       await question.save();
       await res.redirect("/quiz?id=" + req.body.quiz);
       res.status(201);
@@ -354,11 +392,36 @@ exports.update_question =
   checkAuthenticated,
   async (req, res) => {
     try {
+      let answer = null;
+      let answers = null;
+      let choices = null;
+
+      if (req.body.type == "multiple_choice") {
+        answer = req.body.answer;
+        choices = [req.body.choice2, req.body.choice3, req.body.choice4];
+      } else if (req.body.type == "true_or_false") {
+        answer = req.body.answer;
+      } else if (req.body.type == "check_all") {
+        answers = [];
+        choices = [];
+        if (req.body.answer1) answers.push(req.body.answer1);
+        if (req.body.answer2) answers.push(req.body.answer2);
+        if (req.body.answer3) answers.push(req.body.answer3);
+        if (req.body.answer4) answers.push(req.body.answer4);
+        if (req.body.option1) choices.push(req.body.option1);
+        if (req.body.option2) choices.push(req.body.option2);
+        if (req.body.option3) choices.push(req.body.option3);
+        if (req.body.option4) choices.push(req.body.option4);
+      } else if (req.body.type == "fill") {
+        answers = req.body.answer.split(",");
+      }
+
       Question.findByIdAndUpdate(req.body.id, 
         {
-          prompt: req.body.prompt, 
-          answer: req.body.answer, 
-          choices: [req.body.choice2, req.body.choice3, req.body.choice4]
+          prompt: req.body.prompt,
+          answer: answer,
+          answer_multiple: answers,
+          choices: choices
         }
       ).then(() => {
         res.redirect("/quiz?id=" + req.body.quiz);

@@ -17,29 +17,65 @@
                     Quizzes</a>
             </div>
         </div>
-        <div class="container my-auto">
-        <div class="container-fluid setup-bg d-flex flex-column">
-            <div class="row justify-content-center">
-                <div class="main" id="question-form">
+        <div class="main">
+            <form action="/create_question" method="POST">
+                <h5>Choose a question type:</h5>
+                <a type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId + "&type=multiple_choice" %> >Multiple Choice</a>
+                <a type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId + "&type=true_or_false" %> >True/False</a>
+                <a type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId + "&type=check_all" %> >Check All That Apply</a>
+                <a type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId + "&type=fill" %> >Fill in the Blank</a>
+                <h5 style="margin-top: 20px">Question Prompt</h5>
+                <input type="text" name="prompt" placeholder="Question Prompt" >
+                <% if (type == "multiple_choice") { %>
+                    <h5>Correct Answer</h5>
+                    <input type="text" name="answer" placeholder="Correct Answer" >
 
-                    <form action="/create_question" method="POST">
-                        <h5>Question Prompt</h5>
-                        <input type="text" name="prompt" placeholder="Question Prompt" />
-                        <h5>Correct Answer</h5>
-                        <input type="text" name="answer" placeholder="Correct Answer" />
-                        <h5>Incorrect Answer 1</h5>
-                        <input type="text" name="choice2" placeholder="Incorrect Answer" />
-                        <h5>Incorrect Answer 2</h5>
-                        <input type="text" name="choice3" placeholder="Incorrect Answer" />
-                        <h5>Incorrect Answer 3</h5>
-                        <input type="text" name="choice4" placeholder="Incorrect Answer" />
-                        <input type="hidden" name="quiz" value=<%=quizId %>>
-                        <button>Create</button>
-                    </form>
-                </div>
-                </div>
-            </div>
+                    <h5>Incorrect Answer 1</h5>
+                    <input type="text" name="choice2" placeholder="Incorrect Answer" >
+
+                    <h5>Incorrect Answer 2</h5>
+                    <input type="text" name="choice3" placeholder="Incorrect Answer" >
+
+                    <h5>Incorrect Answer 3</h5>
+                    <input type="text" name="choice4" placeholder="Incorrect Answer" >
+                <% } else if (type == "true_or_false") { %>
+                    <label for="true">True</label>
+                    <input type="radio" id="true" name="answer" value="true" >
+                    
+                    <label for="false">False</label>
+                    <input type="radio" id="false" name="answer" value="false" >
+                <% } else if (type == "check_all") { %>
+                    
+                    <h5 style="margin-top: 20px">Option 1</h5>
+                    <input type="text" id="input1" name="answer1" placeholder="Option 1" >
+                    <div type="button" id="a1" class="btn btn-success col-3">Correct</div>
+
+
+                    <h5 style="margin-top: 20px">Option 2</h5>
+                    <input type="text" id="input2" name="answer2" placeholder="Option 2" >
+                    <div type="button" id="a2" class="btn btn-success col-3">Correct</div>
+
+                    <h5 style="margin-top: 20px">Option 3</h5>
+                    <input type="text" id="input3" name="answer3" placeholder="Option 3" >
+                    <div type="button" id="a3" class="btn btn-success col-3">Correct</div>
+
+                    <h5 style="margin-top: 20px">Option 4</h5>
+                    <input type="text" id="input4" name="answer4" placeholder="Option 4" >
+                    <div type="button" id="a4" class="btn btn-success col-3">Correct</div>
+                <% } else if (type == "fill") { %>
+                    <h5>Enter all correct answers separated by commas</h5>
+                    <textarea name="answer"></textarea>
+                <% } %>
+                <input type="hidden" name="type" value=<%=type %> >
+                <input type="hidden" name="quiz" value=<%=quizId %> >
+                <button>Create</button>
+            </form>
         </div>
     </body>
+
+
+    <script src="js/create_question.js"></script>
+
+    
 
     <%- include('includes/_footer') %>
