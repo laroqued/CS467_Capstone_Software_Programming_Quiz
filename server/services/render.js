@@ -81,13 +81,21 @@ exports.get_contact =
   (checkAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    res.render("contact", { login_name: req.user.login_name, msg: "" });
+    let quizId = req.query.id;
+    res.render("contact", {
+      login_name: req.user.login_name,
+      msg: "",
+      quizId: quizId,
+    });
   });
 
 exports.post_contact =
   ("/send",
   checkAuthenticated,
   async (req, res) => {
+
+    let quizId = req.query.id;
+    
     const output = `
 <p>You have a new contact request</p>
 <ul>
@@ -95,6 +103,7 @@ exports.post_contact =
 <li>Company: SoftWare Programming Quiz</li>
 <li>Email: softwareprogrammingquiz@gmail.com</li>
 <li>Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_complete</li>
+<li>Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_quiz?id=${req.body.quiz}</li>
 
 <li>Phone: 555-555-5555</li>
 <h3>Message </h3>
@@ -134,6 +143,7 @@ exports.post_contact =
         res.render("contact", {
           login_name: req.user.login_name,
           msg: "Email Successful!!!",
+          quizId:quizId
         });
         console.log(`Message sent: ${info.messageId}`);
         console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
