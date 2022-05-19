@@ -30,7 +30,7 @@ body {
   font-family: 'Anton', sans-serif;
 }
 #middle-row-cards{
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 .main {
   text-align: center;
@@ -326,7 +326,7 @@ label:after {
 
 #animation :last-of-type {
   width:0px;
-  animation: reveal 10s infinite;
+  animation: reveal 15s infinite;
 }
 
 #animation :last-of-type span {

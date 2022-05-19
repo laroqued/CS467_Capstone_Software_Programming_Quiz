@@ -82,10 +82,14 @@ exports.get_contact =
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     let quizId = req.query.id;
+     const name = await Quiz.find({
+       name: req.user.name,
+     });
     res.render("contact", {
       login_name: req.user.login_name,
       msg: "",
       quizId: quizId,
+      name: name,
     });
   });
 
@@ -93,9 +97,8 @@ exports.post_contact =
   ("/send",
   checkAuthenticated,
   async (req, res) => {
-
     let quizId = req.query.id;
-    
+
     const output = `
 <p>You have a new contact request</p>
 <ul>
@@ -148,7 +151,7 @@ exports.post_contact =
         res.render("contact", {
           login_name: req.user.login_name,
           msg: "Email Successful!!!",
-          quizId:quizId
+          quizId: quizId,
         });
         console.log(`Message sent: ${info.messageId}`);
         console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
@@ -482,19 +485,21 @@ exports.canidate_quiz =
     let id = req.query.id;
 
     const quizzes = await Quiz.find({
-      name: req.user.name,
       owner: req.user.email,
     });
-
+     const name = await Quiz.find({
+       owner: req.user.name,
+     });
     const questions = await Question.find({ quiz: id });
     const question = await Question.findById(id);
+
 
     res.render("candidate_quiz", {
       i: i,
       id: id,
       quiz: id,
       login_name: req.user.login_name,
-      name: req.user.name,
+      name: name,
       questions: questions,
       owner: req.user.email,
       quizzes: quizzes,
