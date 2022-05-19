@@ -311,17 +311,17 @@ label:after {
                        ID/Class should've been used. 
                        For a small demo 
                        it's okaish for now */
-  animation: showup 10s infinite;
+  animation: showup 1s infinite;
 }
 
 #animation :last-of-type {
   width:0px;
-  animation: reveal 7s infinite;
+  animation: reveal 20s infinite;
 }
 
 #animation :last-of-type span {
   margin-left:-355px;
-  animation: slidein 7s infinite;
+  animation: slidein 10s infinite;
 }
 
 @keyframes showup {
