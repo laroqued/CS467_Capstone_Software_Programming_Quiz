@@ -1,16 +1,85 @@
 <%- include('includes/_header') %>
 
-<head>
-    <%- include('layouts/head') %>
-</head>
+    <head>
+        <%- include('layouts/head') %>
+    </head>
 
 
-<body>
-    <%- include('layouts/welcome') %>
-    <h1>Candidate Quiz</h1>
-    <div class="main">
+    <body>
+        <div id="email-form-greeting">
+            <%- include('layouts/welcome') %>
+        </div>
+        <div id="back-button">
+            <div class="filter">
+                <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to
+                    Quizzes</a>
+            </div>
+        </div>
+        <br>
+        <h2>Candidate Quiz</h2>
 
-    </div>
-</body>
 
-<%- include('includes/_footer') %>
+        <p>
+            Employer Name: <%=login_name %>
+        </p>
+        <p>
+            Quiz Name: <%= name %> 
+        </p>
+        <p>
+          ID: <%= id %>
+        </p>
+        <p>
+           QuizID:  <%= quiz %>
+        </p>
+
+        <p>
+            Owner: <%= owner %>
+        </p>
+
+
+        <card class="card-body" id="quiz-cards">
+
+            <!-- OUTER LOOP -->
+            <% questions.forEach((question,i)=> { %>
+
+                <div id="quiz-card-background">
+                    <form id="d1">
+                        <h5>
+                            <%= i + 1 %>)
+                                <%= question.prompt %>
+                        </h5>
+                        <hr>
+                        <p>
+                            <input type="radio" name="choice" value="Programming">
+
+                            <%= question.answer %>
+                        </p>
+
+
+
+                        <!-- INNER LOOP -->
+                        <% question.choices.forEach(choice=> { %>
+                            <p> <input type="radio" name="choice" value="Programming">
+                                <%=choice%>
+                            </p>
+                            <% }) %>
+                                <hr>
+                                <input type="submit" value="submit" class="btn btn-success" id="quiz-card-button" )>
+                                <br>
+                    </form>
+        </card>
+
+        </div>
+        <br>
+        <% }) %>
+            </card>
+
+
+            <!-- Submission Button -->
+            <div class="manage-quiz-button">
+                <a id="manage-quiz-button" href="/contact" class="btn btn-success">Send Quiz</a>
+
+            </div>
+            <%- include('includes/_footer') %>
+
+    </body>

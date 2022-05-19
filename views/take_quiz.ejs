@@ -1,0 +1,120 @@
+<head>
+    <%- include('layouts/head') %>
+
+
+        <%- include('includes/_header') %>
+
+</head>
+
+<body>
+    <div class="index-page">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto" id="index-first-row">
+                    <!-- Outer Row -->
+
+                    <div class="container-fluid setup-bg d-flex flex-column">
+                        <div class='row justify-content-center'>
+                            <div class="container my-auto">
+                                <div class="container ">
+                                    <div id="welcome">
+                                        <div class="row ">
+                                            <div class="col ">
+                                                <%- include('layouts/welcome') %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h1>Take your quiz</h1>
+                    </div>
+                    <!-- ======================END OF ROW 1============================= -->
+                    <!-- ======================END OF ROW 1============================= -->
+
+                    <div class="col-md-auto" id="index-second-row">
+                        <!-- 2 of 3 rows -->
+                        <h5>Render Quiz Here</h5>
+
+                        <div style="background-color:white">
+                            <h5>JavaScript is a <span id='a1'>______</span> Language.</h5>
+                            <form id="d1">
+                                <input type="radio" name="choice" value="Scripting"> Scripting<br>
+                                <input type="radio" name="choice" value="Programming"> Programming<br>
+                                <input type="radio" name="choice" value="Application"> Application<br>
+                                <input type="radio" name="choice" value="None of These"> None of These
+                                <br>
+                                <input type="submit" value="submit" class="btn btn-success"
+                                    onclick="validate(choice.value, 'Scripting', 'd1','a1')">
+                            </form>
+                        </div>
+
+                        <hr>
+
+                        <div style="background-color:white">
+                            <h5>Python is a <span id='a2'>______</span> Language.</h5>
+                            <form id="d2">
+
+
+
+                                <input type="radio" name="choice" value="Scripting"> Scripting <br>
+                                <input type="radio" name="choice" value="Wonderful"> Wonderful <br>
+                                <input type="radio" name="choice" value="Application"> Application <br>
+                                <input type="radio" name="choice" value="None of These"> None of These
+                                <br>
+                                <input type="submit" value="submit" class="btn btn-success"
+                                    onclick="validate(choice.value, 'Wonderful', 'd2', 'a2')">
+                            </form>
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- ======================END OF ROW 2============================= -->
+                    <!-- ======================END OF ROW 2============================= -->
+                    <div class="col-md-auto" id="index-third-row">
+                        <!-- 3 of 3 rows -->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">You have 15 minutes to take you quiz</h5>
+                                        <p class="card-text">Please press "Submit Quiz" when finished</p>
+                                        <a id="manage-quiz-button" href="/take_quiz" class="btn btn-success">Submit
+                                            Quiz</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ======================END OF ROW 3============================= -->
+                    <!-- ======================END OF ROW 3============================= -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var validate = function (valore, rightanswer, form, span) {
+
+            var formname = document.getElementById(form)
+            var spanname = document.getElementById(span)
+
+            spanname.innerHTML = rightanswer;
+
+            if (valore == rightanswer) {
+                formname.innerHTML = "<div style='background-color:lightgreen'><h6>GREAT! YOU'RE RIGHT: The answer, in fact, was: " + rightanswer + "</h6></div>";
+            }
+            else {
+
+                formname.innerHTML = "<div style='background-color:pink'><h6>Sorry, you where wrong: The answer was: " + rightanswer + "</h6></div>";
+            }
+        };
+    </script>
+
+
+</body>
+
+<%- include('includes/_footer') %>

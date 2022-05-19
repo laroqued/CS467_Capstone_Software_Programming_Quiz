@@ -24,7 +24,8 @@
                     Quizzes</a>
             </div>
         </div>
-        <div class="main">
+        <div class="main"
+        id="question-form">
             <form action="/create_quiz" method="POST">
                 <input type="text" name="name" placeholder="Quiz Name" required />
                 <input type="hidden" name="owner" value=<%=email %> />
