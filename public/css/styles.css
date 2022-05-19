@@ -13,7 +13,15 @@ body {
   display: grid;
   place-items: center;
   overflow: scroll;
-  font-family: "Encode Sans SC", sans-serif;
+
+    text-align:center;
+  background:linear-gradient(141deg, #ccc 25%, #eee 40%, #ddd 55%);
+  color:#555;
+  font-family:'Roboto';
+  height:20vh;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -webkit-transform: translate3d(0,0,0);
 }
 
 .main {
@@ -289,22 +297,52 @@ label:after {
     width: 160px;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
 
-/* Source: https://bootsnipp.com/snippets/j68mq */
-#splash-title-animation{
-     color: black; 
-  font-family: "arial";
-  font-size: 3em;
-  margin: 10px 0 0 10px;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 100%;
-  animation: animtext 4s steps(80, end); 
-   transition: all cubic-bezier(0.1, 0.7, 1.0, 0.1);
+
+#animation  {
+  
+  display:inline-block;
+  overflow:hidden;
+  white-space:nowrap;
 }
-@keyframes animtext { 
-  from {
-      width: 0;
-     transition: all 2s ease-in-out;
-  } 
+
+#animation :first-of-type {    /* For increasing performance 
+                       ID/Class should've been used. 
+                       For a small demo 
+                       it's okaish for now */
+  animation: showup 7s infinite;
 }
+
+#animation :last-of-type {
+  width:0px;
+  animation: reveal 7s infinite;
+}
+
+#animation :last-of-type span {
+  margin-left:-355px;
+  animation: slidein 10s infinite;
+}
+
+@keyframes showup {
+    0% {opacity:0;}
+    20% {opacity:1;}
+    80% {opacity:1;}
+    100% {opacity:0;}
+}
+
+@keyframes slidein {
+    0% { margin-left:-800px; }
+    20% { margin-left:-800px; }
+    35% { margin-left:0px; }
+    100% { margin-left:0px; }
+}
+
+@keyframes reveal {
+    0% {opacity:0;width:0px;}
+    20% {opacity:1;width:0px;}
+    30% {width:355px;}
+    80% {opacity:1;}
+    100% {opacity:0;width:355px;}
+}
+
