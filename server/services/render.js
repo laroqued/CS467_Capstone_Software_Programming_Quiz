@@ -102,15 +102,15 @@ exports.post_contact =
 <li>Name: Donnyves Laroque, Dominique Lazaros, Aaron Harris </li>
 <li>Company: SoftWare Programming Quiz</li>
 <li>Email: softwareprogrammingquiz@gmail.com</li>
-<li>Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_complete</li>
-<li>Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_quiz?id=${req.body.quiz}</li>
-
 <li>Phone: 555-555-5555</li>
 <h3>Message </h3>
 <p>Hello ${req.body.email_name}, </p>
 <p></p>
 <p>${req.body.message}</p>
-<li>Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_quiz</li>
+<p>Click the link below to start your quiz.</p>
+<p></p>
+<li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_quiz?id=${req.body.quiz}</li>
+<li>Production Quiz: https://software-programming-quiz.herokuapp.com?id=${req.body.quiz}</li>
 </ul>
 `;
     // create reusable transporter object using the default SMTP transport
