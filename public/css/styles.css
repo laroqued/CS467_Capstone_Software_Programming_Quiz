@@ -18,7 +18,7 @@ body {
   background:linear-gradient(141deg, #ccc 25%, #eee 40%, #ddd 55%);
   color:#555;
   font-family:'Roboto';
-  height:20vh;
+  height:60vh;
   -webkit-backface-visibility: hidden;
   -webkit-perspective: 1000;
   -webkit-transform: translate3d(0,0,0);
@@ -311,7 +311,7 @@ label:after {
                        ID/Class should've been used. 
                        For a small demo 
                        it's okaish for now */
-  animation: showup 7s infinite;
+  animation: showup 10s infinite;
 }
 
 #animation :last-of-type {
@@ -321,7 +321,7 @@ label:after {
 
 #animation :last-of-type span {
   margin-left:-355px;
-  animation: slidein 10s infinite;
+  animation: slidein 7s infinite;
 }
 
 @keyframes showup {
