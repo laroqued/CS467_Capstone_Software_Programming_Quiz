@@ -101,7 +101,7 @@ exports.post_contact =
 <p>Hello ${req.body.email_name}, </p>
 <p></p>
 <p>${req.body.message}</p>
-
+<li>Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_quiz</li>
 </ul>
 `;
     // create reusable transporter object using the default SMTP transport
