@@ -1,13 +1,92 @@
-<%- include('includes/_header') %>
 <head>
     <%- include('layouts/head') %>
+
+
+        <%- include('includes/_header') %>
+
 </head>
 
 <body>
-    <div class="main2">
-        <h1>This is the Quiz Results Page</h1>
+
+    <div class="index-page">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto" id="index-first-row">
+                    <!-- 1 of 3 rows -->
+
+                    <div class="container-fluid setup-bg d-flex flex-column">
+                        <div class='row justify-content-center'>
+                            <div class="container my-auto">
+                                <div class="container ">
+                                    <div id="welcome">
+                                        <div class="row ">
+                                            <div class="col ">
+                                                <%- include('layouts/welcome') %>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        <div id="quiz-greeting">
+                        <div id="back-button">
+                            <div class="filter">
+                                <a class="text-black" href="/"><i class="fas fa-angle-double-left text-black"></i>
+                                    Home</a>
+                            </div>
+                        </div>
+</div>
+
+
+
+                    </div>
+                    <div class="col-md-auto" id="index-second-row">
+                        <!-- 2 of 3 rows -->
+                        <div id="">
+                            <h1 class="title-page">Quiz</h1>
+                        </div>
+                        <hr>
+                        <div id="">
+                            <span>
+                                <h1 class="title-page">Results</h1>
+                            </span>
+                        </div>
+                        <div class="row" id="results-row">
+
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Candidate Results</h5>
+                                        <p class="card-text">Get the quiz stats from your indivual candidates.</p>
+
+                                        <div class="dropdown">
+                                            <button class="btn btn-primary dropdown-toggle" type="button"
+                                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Employers
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <li><a class="dropdown-item" href="#">Donnyves</a></li>
+                                                <li><a class="dropdown-item" href="#">Dominique</a></li>
+                                                <li><a class="dropdown-item" href="#">Aaron</a></li>
+                                            </ul>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-auto" id="index-third-row">
+                        <!-- 3 of 3 rows -->
+
+                        <h5 class="text-wrap">Results</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-
 </body>
+
 <%- include('includes/_footer') %>
