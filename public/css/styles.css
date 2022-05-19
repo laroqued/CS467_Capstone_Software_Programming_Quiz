@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Encode+Sans+SC:wght@100;400;500;600;700&display=swap");
-@import url('https://fonts.googleapis.com/css?family=Roboto:300');
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-
+@import url("https://fonts.googleapis.com/css?family=Roboto:300");
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
 
 * {
   margin: 0;
@@ -17,19 +16,19 @@ body {
   place-items: center;
   overflow: scroll;
 
-    text-align:center;
-  background:linear-gradient(141deg, #ccc 25%, #eee 40%, #ddd 55%);
-  color:#555;
-  font-family:'Roboto';
-  height:100vh;
+  text-align: center;
+  background: linear-gradient(141deg, #ccc 25%, #eee 40%, #ddd 55%);
+  color: #555;
+  font-family: "Roboto";
+  height: 100vh;
   -webkit-backface-visibility: hidden;
   -webkit-perspective: 1000;
-  -webkit-transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0, 0, 0);
 }
-.title-page{
-  font-family: 'Anton', sans-serif;
+.title-page {
+  font-family: "Anton", sans-serif;
 }
-#middle-row-cards{
+#middle-row-cards {
   margin-top: 2rem;
 }
 .main {
@@ -45,13 +44,10 @@ body {
 #back-button-home {
   text-align: right;
   margin-right: 20em;
-
 }
 #back-button {
   text-align: right;
   margin-right: 20em;
-
-
 }
 
 .index-page {
@@ -59,7 +55,6 @@ body {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-
 }
 
 .create-quiz-page1 {
@@ -79,7 +74,6 @@ body {
 #email-form-greeting {
   padding-top: 2em;
   padding-bottom: 1rem;
-  
 }
 #quiz-form-greeting {
   padding-top: 2em;
@@ -112,7 +106,6 @@ padding-top: 8rem;
   text-align: center;
   align-items: center;
   box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
-
 }
 
 .email-form {
@@ -254,7 +247,6 @@ header {
 
 #index-second-row {
   padding: 2em;
-
 }
 
 #index-third-row {
@@ -289,7 +281,6 @@ label:after {
 
 #quiz-cards {
   width: 30rem;
-  
 }
 #quiz-card-background {
   text-align: left;
@@ -297,86 +288,108 @@ label:after {
   background-color: white;
   border-radius: 10px;
   box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
-
 }
 #quiz-card-button {
   margin-top: 0.25em;
   text-align: center;
   box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
-
 }
 
-.card{
+.card {
   box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
-
 }
-#question-form{
+#question-form {
   box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
-
 }
 #sidebar-nav {
-    width: 160px;
+  width: 160px;
 }
 
-
-
-#animation  {
-  
-  display:inline-block;
-  overflow:hidden;
-  white-space:nowrap;
+#animation {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-#animation :first-of-type {   
+#animation :first-of-type {
   animation: showup 20s infinite;
 }
 
 #animation :last-of-type {
-  width:0px;
+  width: 0px;
   animation: reveal 15s infinite;
 }
 
 #animation :last-of-type span {
-  margin-left:-355px;
+  margin-left: -355px;
   animation: slidein 20s infinite;
 }
 
 @keyframes showup {
-    0% {opacity:0;}
-    20% {opacity:1;}
-    80% {opacity:1;}
-    100% {opacity:0;}
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 @keyframes slidein {
-    0% { margin-left:-800px; }
-    20% { margin-left:-800px; }
-    35% { margin-left:0px; }
-    100% { margin-left:0px; }
+  0% {
+    margin-left: -800px;
+  }
+  20% {
+    margin-left: -800px;
+  }
+  35% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: 0px;
+  }
 }
 
 @keyframes reveal {
-    0% {opacity:0;width:0px;}
-    20% {opacity:1;width:0px;}
-    30% {width:355px;}
-    80% {opacity:1;}
-    100% {opacity:0;width:355px;}
+  0% {
+    opacity: 0;
+    width: 0px;
+  }
+  20% {
+    opacity: 1;
+    width: 0px;
+  }
+  30% {
+    width: 355px;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    width: 355px;
+  }
 }
 
-#quiz-button-cards{
+#quiz-button-cards {
   margin-top: 3rem;
 }
 
-#your-quizzes-text{
+#your-quizzes-text {
   margin: 1em;
 }
-#results-row{
+#results-row {
   margin-top: 2em;
 }
-.footer-name{
+.footer-name {
   color: lightgrey;
 }
 
-.manage-quiz-title{
+.manage-quiz-title {
   margin: 2em;
 }

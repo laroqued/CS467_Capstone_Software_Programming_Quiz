@@ -6,46 +6,46 @@
 
 
     <body>
-                <div id="back-button">
-                    <div class="filter">
-                        <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to
-                            Quizzes</a>
-                    </div>
-                </div>
+        <div id="back-button">
+            <div class="filter">
+                <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to
+                    Quizzes</a>
+            </div>
+        </div>
         <div id="email-form-greeting">
             <%- include('layouts/welcome') %>
         </div>
 
 
-    <div class="container" id="quiz-button-cards">
-        <div class="row">
-            <div class="col-3">
-                <div class="card">
-        <a href="/quizzes" class="btn btn-success">Manage Quizzes</a>
-                    
+        <div class="container" id="quiz-button-cards">
+            <div class="row">
+                <div class="col-3">
+                    <div class="card">
+                        <a href="/quizzes" class="btn btn-success">Manage Quizzes</a>
+
+                    </div>
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-        <a href=<%="/create_question?id=" + id %> class="btn btn-success">Create Question</a>
-                    
+                <div class="col-3">
+                    <div class="card">
+                        <a href=<%="/create_question?id=" + id %> class="btn btn-success">Create Question</a>
+
+                    </div>
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-        <a href=<%="/candidate_quiz?id=" + id %> class="btn btn-success">Candidate Quiz</a>
-                    
+                <div class="col-3">
+                    <div class="card">
+                        <a href=<%="/candidate_quiz?id=" + id %> class="btn btn-success">Candidate Quiz</a>
+
+                    </div>
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="card">
-        <a class="btn btn-danger" href=<%="/delete_quiz?id=" + id%> >Delete Quiz</a>
-                    
+                <div class="col-3">
+                    <div class="card">
+                        <a class="btn btn-danger" href=<%="/delete_quiz?id=" + id%> >Delete Quiz</a>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-        
+
 
 
 
@@ -59,17 +59,19 @@
                         <div class="card-body">
                             <h5 class="card-title">
                                 <%= question.prompt %>
-                                    <a class="btn btn-primary" id="question-form" href=<%="/question?id=" + question._id%> >Edit</a>
-                                    <a class="btn btn-danger" id="question-form" href=<%="/delete_question?id=" + question._id%>
+                                    <a class="btn btn-primary" id="question-form" href=<%="/question?id=" +
+                                        question._id%> >Edit</a>
+                                    <a class="btn btn-danger" id="question-form" href=<%="/delete_question?id=" +
+                                        question._id%>
                                         >Delete</a>
                             </h5>
                         </div>
 
                     </li>
-            <hr>
+                    <hr>
 
                     <% }) %>
-                    
+
             </ul>
         </div>
     </body>
