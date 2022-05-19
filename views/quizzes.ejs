@@ -6,16 +6,29 @@
 
 
     <body>
+                <div id="back-button-home">
+                    <div class="filter">
+                        <a class="text-black" href="/"><i class="fas fa-angle-double-left text-black"></i> Home</a>
+                    </div>
+                </div>
         <div id="quiz-greeting">
             <%- include('layouts/welcome') %>
         </div>
-        <div id="back-button-home">
-            <div class="filter">
-                <a class="text-black" href="/"><i class="fas fa-angle-double-left text-black"></i> Home</a>
-            </div>
-        </div>
+
         <div class="create-quiz-page">
-            <h2 id="your-quizzes-text">Your Quizzes:</h2>
+            <div class="manage-quiz-title">
+
+                        <div id="">
+                            <h3 class="title-page">Employer</h3>
+                        </div>
+                        <hr>
+                        <div id="">
+                            <span>
+                                <h3 class="title-page">Quiz Categories</h3>
+                            </span>
+                        </div>
+            </div>
+                     
             <ul class="list-group" id="question-form">
                 <% quizzes.forEach(quiz=> { %>
                     <li class="list-group-item">

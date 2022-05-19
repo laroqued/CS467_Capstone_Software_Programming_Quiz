@@ -43,12 +43,15 @@ body {
   margin-right: auto;
 }
 #back-button-home {
-  text-align: center;
+  text-align: right;
+  margin-right: 20em;
 
 }
 #back-button {
-  text-align: center;
-  margin-top: 1em;
+  text-align: right;
+  margin-right: 20em;
+
+
 }
 
 .index-page {
@@ -233,7 +236,7 @@ nav {
   font-family: "playfair display", sans-serif;
 }
 .navbar-text.navbar-brand:hover {
-  color: black;
+  color: gray;
   cursor: default;
 }
 .navbar-collapse {
@@ -369,4 +372,11 @@ label:after {
 }
 #results-row{
   margin-top: 2em;
+}
+.footer-name{
+  color: lightgrey;
+}
+
+.manage-quiz-title{
+  margin: 2em;
 }
