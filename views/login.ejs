@@ -6,7 +6,7 @@
 
     <body>
 
-        <div class="main">
+        <div class="main" id="question-form">
             
             <h1>
                 <%=login_form_greeting %>
@@ -21,7 +21,7 @@
                     <form action="/login" method="POST">
                         <input type="email" name="email" placeholder="name@gmail.com" required />
                         <input type="password" name="password" placeholder="* * * * * *" required />
-                        <button>SIGN IN</button>
+                        <button id="question-form">SIGN IN</button>
 
                         <!-- 2 column grid layout for inline styling -->
                         <div class="row mb-4">

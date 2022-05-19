@@ -19,7 +19,7 @@
             <ul class="list-group" id="question-form">
                 <% quizzes.forEach(quiz=> { %>
                     <li class="list-group-item">
-                        <a class="btn btn-primary" href=<%="/quiz?id=" + quiz._id %>>
+                        <a id="question-form" class="btn btn-primary" href=<%="/quiz?id=" + quiz._id %>>
                           
                                 <%= quiz.name %>
                             
@@ -35,7 +35,7 @@
             <div class="card-body">
                 <h5 class="card-title">Add a new quiz for new candidates</h5>
                 <p class="card-text"></p>
-                <a href="/create_quiz" class="btn btn-success">Create New Quiz</a>
+                <a href="/create_quiz" id="question-form" class="btn btn-success">Create New Quiz</a>
 
             </div>
         </div>

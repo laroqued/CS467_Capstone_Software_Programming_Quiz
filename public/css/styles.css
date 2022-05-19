@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Encode+Sans+SC:wght@100;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 
 * {
   margin: 0;
@@ -23,7 +26,12 @@ body {
   -webkit-perspective: 1000;
   -webkit-transform: translate3d(0,0,0);
 }
-
+.title-page{
+  font-family: 'Anton', sans-serif;
+}
+#middle-row-cards{
+  margin-top: 3rem;
+}
 .main {
   text-align: center;
   background-color: white;
@@ -85,7 +93,7 @@ padding-top: 8rem;
   margin-bottom: 0.5rem;
 }
 #new-quiz-card {
-  margin-bottom: 15em;
+  margin-bottom: 5em;
 }
 .manage-quiz-button {
   background-color: white;
@@ -239,6 +247,7 @@ header {
 
 #index-second-row {
   padding: 2em;
+
 }
 
 #index-third-row {
@@ -302,7 +311,6 @@ label:after {
     width: 160px;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Roboto:300');
 
 
 #animation  {
@@ -312,21 +320,18 @@ label:after {
   white-space:nowrap;
 }
 
-#animation :first-of-type {    /* For increasing performance 
-                       ID/Class should've been used. 
-                       For a small demo 
-                       it's okaish for now */
-  animation: showup 1s infinite;
+#animation :first-of-type {   
+  animation: showup 20s infinite;
 }
 
 #animation :last-of-type {
   width:0px;
-  animation: reveal 20s infinite;
+  animation: reveal 10s infinite;
 }
 
 #animation :last-of-type span {
   margin-left:-355px;
-  animation: slidein 10s infinite;
+  animation: slidein 20s infinite;
 }
 
 @keyframes showup {
