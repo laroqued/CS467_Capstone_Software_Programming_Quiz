@@ -110,7 +110,7 @@ exports.post_contact =
 <p>Click the link below to start your quiz.</p>
 <p></p>
 <li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_quiz?id=${req.body.quiz}</li>
-<li>Production Quiz: https://software-programming-quiz.herokuapp.com?id=${req.body.quiz}</li>
+<li>Production Quiz: https://software-programming-quiz.herokuapp.com/candidate_quiz?id=${req.body.quiz}</li>
 </ul>
 `;
     // create reusable transporter object using the default SMTP transport
