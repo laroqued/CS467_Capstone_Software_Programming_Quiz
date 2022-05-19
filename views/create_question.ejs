@@ -17,13 +17,13 @@
                     Quizzes</a>
             </div>
         </div>
-        <div class="main">
+        <div class="main" id="question-form">
             <form action="/create_question" method="POST">
                 <h5>Choose a question type:</h5>
-                <a type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId + "&type=multiple_choice" %> >Multiple Choice</a>
-                <a type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId + "&type=true_or_false" %> >True/False</a>
-                <a type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId + "&type=check_all" %> >Check All That Apply</a>
-                <a type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId + "&type=fill" %> >Fill in the Blank</a>
+                <a id="question-form" type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId + "&type=multiple_choice" %> >Multiple Choice</a>
+                <a id="question-form" type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId + "&type=true_or_false" %> >True/False</a>
+                <a id="question-form" type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId + "&type=check_all" %> >Check All That Apply</a>
+                <a id="question-form" type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId + "&type=fill" %> >Fill in the Blank</a>
                 <h5 style="margin-top: 20px">Question Prompt</h5>
                 <input type="text" name="prompt" placeholder="Question Prompt" >
                 <% if (type == "multiple_choice") { %>
@@ -68,7 +68,7 @@
                 <% } %>
                 <input type="hidden" name="type" value=<%=type %> >
                 <input type="hidden" name="quiz" value=<%=quizId %> >
-                <button>Create</button>
+                <button id="question-form">Create</button>
             </form>
         </div>
     </body>

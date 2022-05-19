@@ -15,14 +15,14 @@
             </div>
         </div>
         <div class="create-quiz-page">
-            <h2>Your Quizzes:</h2>
+            <h2 id="your-quizzes-text">Your Quizzes:</h2>
             <ul class="list-group" id="question-form">
                 <% quizzes.forEach(quiz=> { %>
                     <li class="list-group-item">
                         <a class="btn btn-primary" href=<%="/quiz?id=" + quiz._id %>>
-                            <h5>
+                          
                                 <%= quiz.name %>
-                            </h5>
+                            
                         </a>
                     </li>
                     <% }) %>

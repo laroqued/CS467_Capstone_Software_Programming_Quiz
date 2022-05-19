@@ -18,7 +18,7 @@ body {
   background:linear-gradient(141deg, #ccc 25%, #eee 40%, #ddd 55%);
   color:#555;
   font-family:'Roboto';
-  height:60vh;
+  height:100vh;
   -webkit-backface-visibility: hidden;
   -webkit-perspective: 1000;
   -webkit-transform: translate3d(0,0,0);
@@ -29,7 +29,7 @@ body {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  margin-bottom: 15rem;
+  margin-bottom: 5rem;
   margin-top: 5em;
   margin-left: auto;
   margin-right: auto;
@@ -44,7 +44,7 @@ body {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 10rem;
+
 }
 
 .create-quiz-page1 {
@@ -96,6 +96,8 @@ padding-top: 8rem;
 #manage-quiz-button {
   text-align: center;
   align-items: center;
+  box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+
 }
 
 .email-form {
@@ -271,6 +273,7 @@ label:after {
 
 #quiz-cards {
   width: 30rem;
+  
 }
 #quiz-card-background {
   text-align: left;
@@ -283,6 +286,8 @@ label:after {
 #quiz-card-button {
   margin-top: 0.25em;
   text-align: center;
+  box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+
 }
 
 .card{
@@ -346,3 +351,10 @@ label:after {
     100% {opacity:0;width:355px;}
 }
 
+#quiz-button-cards{
+  margin-top: 3rem;
+}
+
+#your-quizzes-text{
+  margin: 1em;
+}

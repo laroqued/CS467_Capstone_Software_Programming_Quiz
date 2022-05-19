@@ -15,10 +15,41 @@
                     Quizzes</a>
             </div>
         </div>
+
+    <div class="container" id="quiz-button-cards">
+        <div class="row">
+            <div class="col-3">
+                <div class="card">
         <a href="/quizzes" class="btn btn-success">Manage Quizzes</a>
+                    
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card">
         <a href=<%="/create_question?id=" + id %> class="btn btn-success">Create Question</a>
+                    
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card">
         <a href=<%="/candidate_quiz?id=" + id %> class="btn btn-success">Candidate Quiz</a>
+                    
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card">
         <a class="btn btn-danger" href=<%="/delete_quiz?id=" + id%> >Delete Quiz</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+        
+
+
+
+
+
         <div class="main">
             <h2>Questions</h2>
             <ul class="list-group">
@@ -27,8 +58,8 @@
                         <div class="card-body">
                             <h5 class="card-title">
                                 <%= question.prompt %>
-                                    <a class="btn btn-primary" href=<%="/question?id=" + question._id%> >Edit</a>
-                                    <a class="btn btn-danger" href=<%="/delete_question?id=" + question._id%>
+                                    <a class="btn btn-primary" id="question-form" href=<%="/question?id=" + question._id%> >Edit</a>
+                                    <a class="btn btn-danger" id="question-form" href=<%="/delete_question?id=" + question._id%>
                                         >Delete</a>
                             </h5>
                         </div>

@@ -65,8 +65,9 @@ exports.register =
     res.render("register", { register_form_greeting: "Register" });
   });
 
-  exports.get_take_quiz =
-  (checkNotAuthenticated, (req, res) => {
+exports.get_take_quiz =
+  (checkNotAuthenticated,
+  (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     res.render("take_quiz", {
       name: req.user.name,
@@ -78,7 +79,7 @@ exports.register =
 // ==============================================================
 exports.get_contact =
   (checkAuthenticated,
-  async(req, res) => {
+  async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     res.render("contact", { login_name: req.user.login_name, msg: "" });
   });
@@ -196,7 +197,6 @@ exports.post_delete =
     res.redirect("/login");
   });
 
-
 // ========================================================
 
 // ========================================================
@@ -211,7 +211,6 @@ exports.quizzes =
       login_name: req.user.login_name,
       email: req.user.email,
       quizzes: quizzes,
-      
     });
   });
 
@@ -308,18 +307,17 @@ exports.create_question =
     let quizId = req.query.id;
 
     let type = null;
-    if (!req.query.type){
+    if (!req.query.type) {
       type = "multiple_choice";
-    } else{
+    } else {
       type = req.query.type;
     }
 
     res.render("create_question", {
       quizId: quizId,
-      login_name: req.user.login_name, 
-      type: type
+      login_name: req.user.login_name,
+      type: type,
     });
-
   });
 
 // Aaron
@@ -359,9 +357,9 @@ exports.post_create_question =
         quiz: req.body.quiz,
         answer: answer,
         answer_multiple: answers,
-        choices: choices
+        choices: choices,
       });
-      
+
       await question.save();
       await res.redirect("/quiz?id=" + req.body.quiz);
       res.status(201);
@@ -416,14 +414,12 @@ exports.update_question =
         answers = req.body.answer.split(",");
       }
 
-      Question.findByIdAndUpdate(req.body.id, 
-        {
-          prompt: req.body.prompt,
-          answer: answer,
-          answer_multiple: answers,
-          choices: choices
-        }
-      ).then(() => {
+      Question.findByIdAndUpdate(req.body.id, {
+        prompt: req.body.prompt,
+        answer: answer,
+        answer_multiple: answers,
+        choices: choices,
+      }).then(() => {
         res.redirect("/quiz?id=" + req.body.quiz);
       });
     } catch (error) {
@@ -462,22 +458,20 @@ exports.delete_question =
     }
   });
 
-
 //Dominique
 exports.canidate_quiz =
   (checkAuthenticated,
-  async(req, res) => {
+  async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-        let i=1
-        let id = req.query.id;
-        
-        const quizzes = await Quiz.find({
-          name: req.user.name,
+    let i = 1;
+    let id = req.query.id;
 
-          owner: req.user.email,
-        });
+    const quizzes = await Quiz.find({
+      name: req.user.name,
+      owner: req.user.email,
+    });
 
-            const questions = await Question.find({ quiz: id });
+    const questions = await Question.find({ quiz: id });
     const question = await Question.findById(id);
 
     res.render("candidate_quiz", {
@@ -488,8 +482,7 @@ exports.canidate_quiz =
       name: req.user.name,
       questions: questions,
       owner: req.user.email,
-      quizzes:quizzes,
-
+      quizzes: quizzes,
     });
   });
 //Dominique
@@ -515,17 +508,14 @@ exports.canidate_complete =
     });
   });
 
-  
+exports.add_survey = (req, res) => {
+  res.render("add_survey");
+};
 
-exports.add_survey = (req, res) =>{
-    res.render('add_survey');
-}
-
-
-  exports.update_user = 
+exports.update_user =
   (checkAuthenticated,
-    (req, res) => {
-      res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-  
-      res.render("update_user", { user : userdata.data})
-    });
+  (req, res) => {
+    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+
+    res.render("update_user", { user: userdata.data });
+  });
