@@ -9,11 +9,18 @@
 
 th {
     font-family: "Roboto";
-    font-size: large;
+    font-size: x-large;
+    font-family: "Roboto";
+
 }
 
 td {
     font-family: "Roboto";
+    font-size: x-large;
+    font-family: "Roboto";
+
+
+
 }
 
 .app-container {

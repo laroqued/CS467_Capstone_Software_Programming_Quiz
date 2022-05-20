@@ -1,97 +1,123 @@
 <%- include('includes/_header') %>
 
-    <head>
-        <%- include('layouts/head') %>
-    </head>
+<head>
+    <%- include('layouts/head') %>
+</head>
 
 
-    <body>
-        <div id="back-button">
-            <div class="filter">
-                <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to
-                    Quizzes</a>
-            </div>
-        </div>
-        <div id="email-form-greeting">
-            <%- include('layouts/welcome') %>
-        </div>
-        <div class="container ">
-            <div class="table-responsive ">
-                <table class=" table ">
-                    <thead>
-                        <tr>
-
-                            <th scope="col ">Title</th>
-                            <th scope="col">Explanation</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-
-                            <td>Manage Quiz</td>
-                            <td>View the collection of the quizzes</td>
-                            <td> <a href="/quizzes " class="btn btn-success " id="question-form ">Manage Quizzes</a>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            <td>Create Questions</td>
-                            <td>Add new questions to a quiz</td>
-                            <td>
-                                <a href=<%="/create_question?id=" + id %> class=" btn btn-success "
-                                    id="question-form ">Create
-                                    Question</a></td>
-                        </tr>
-                        <tr>
-
-                            <td>View Quiz</td>
-                            <td>Check the format on content of quiz before sending</td>
-                            <td> <a href=<%="/candidate_quiz?id=" + id %> id=" question-form "
-                                    class="btn btn-success ">Candidate
-                                    Quiz</a></td>
-                        </tr>
-                        <tr>
-
-                            <td>Delete Quiz</td>
-                            <td>Permanently remove your quiz from the database</td>
-                            <td>
-                                <a class="btn btn-danger " id="question-form " href=<%="/delete_quiz?id=" + id%>>Delete
-                                    Quiz</a></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+<body>
+    <div id="back-button">
+        <div class="filter">
+            <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to
+                Quizzes</a>
         </div>
 
+    </div>
+    <div id="email-form-greeting">
+        <%- include('layouts/welcome') %>
+    </div>
+    <div class="container ">
+        <div class="table-responsive ">
+            <table class=" table ">
+                <thead>
+                    <tr>
+
+                        <th scope="col ">Title</th>
+                        <th scope="col">Explanation</th>
+                        <th scope="col-2 ">Actions</th>
+                    </tr>
+                </thead>
+                <tbody >
+                    <tr>
+
+                        <td>Manage Quiz</td>
+                        <td>View the collection of the quizzes</td>
+                        <td> 
+                            <a class="" style="color: black" href="/quizzes ">
+                          
+                                <i class="fab fa-solid fa-list-check "></i>
+                            </a>
+                   
+
+
+
+
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>Create Questions</td>
+                        <td>Add new questions to a quiz</td>
+                        <td>
+
+                      <a class="" style="color: black" href=<%="/create_question?id=" + id %>>
+                          <i class="fab fa-solid fa-plus "> </i>
+                      </a>
+
+
+                          
 
 
 
 
 
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>View Quiz</td>
+                        <td>Check the format on content of quiz before sending</td>
+                        <td>
+                            <a class="" style="color: black" href=<%="/candidate_quiz?id=" + id %>>
+                                <i class="fab fa-solid fa-eye "> </i>
+                            </a>
 
 
-        <div class=" main ">
-            <h2>Questions</h2>
-            <ul class="list-group ">
-                <% questions.forEach(question=> { %>
-                    <li class="list-group-item card ">
-                        <div class="card-body ">
-                            <h5 class="card-title ">
-                                <%= question.prompt %>
-                                    <a class="btn btn-primary " id="question-form " href=<%="/question?id=" + question._id%> >Edit</a>
-                                    <a class=" btn btn-danger " id="question-form " href=<%="/delete_question?id=" + question._id%>
-                                        >Delete</a>
-                            </h5>
-                        </div>
+                        </td>
+                    </tr>
+                    <tr>
 
-                    </li>
-                    <hr>
-
-                    <% }) %>
-
-            </ul>
+                        <td>Delete Quiz</td>
+                        <td>Permanently remove your quiz from the database</td>
+                        <td>
+                            <a class="" style="color: red" href=<%="/delete_quiz?id=" + id%>>
+                                <i class="fab fa-solid fa-trash-can "> </i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </body>
+    </div>
 
-    <%- include('includes/_footer') %>
+
+
+
+
+
+
+    <div class=" main ">
+        <h2>Questions</h2>
+        <ul class="list-group ">
+            <% questions.forEach(question=> { %>
+            <li class="list-group-item card ">
+                <div class="card-body ">
+                    <h5 class="card-title ">
+                        <%= question.prompt %>
+                        <a class="btn btn-primary " id="question-form "
+                            href=<%="/question?id=" + question._id%>>Edit</a>
+                        <a class=" btn btn-danger " id="question-form "
+                            href=<%="/delete_question?id=" + question._id%>>Delete</a>
+                    </h5>
+                </div>
+
+            </li>
+            <hr>
+
+            <% }) %>
+
+        </ul>
+    </div>
+</body>
+
+<%- include('includes/_footer') %>
