@@ -16,6 +16,18 @@
     <div id="email-form-greeting">
         <%- include('layouts/welcome') %>
     </div>
+                <div class="manage-quiz-title">
+
+                    <div id="">
+                        <h3 class="title-page">Add Question,   View Quiz </h3>
+                    </div>
+                    <hr>
+                    <div id="">
+                        <span>
+                            <h3 class="title-page"> Delete Quiz</h3>
+                        </span>
+                    </div>
+                </div>
     <div class="container ">
         <div class="table-responsive ">
             <table class=" table ">
@@ -37,11 +49,6 @@
                           
                                 <i class="fab fa-solid fa-list-check "></i>
                             </a>
-                   
-
-
-
-
                         </td>
                     </tr>
                     <tr>
@@ -53,14 +60,6 @@
                       <a class="" style="color: black" href=<%="/create_question?id=" + id %>>
                           <i class="fab fa-solid fa-plus "> </i>
                       </a>
-
-
-                          
-
-
-
-
-
                         </td>
                     </tr>
                     <tr>
@@ -104,9 +103,9 @@
                 <div class="card-body ">
                     <h5 class="card-title ">
                         <%= question.prompt %>
-                        <a class="btn btn-primary " id="question-form "
+                        <a class="btn btn-primary " id="question-form"
                             href=<%="/question?id=" + question._id%>>Edit</a>
-                        <a class=" btn btn-danger " id="question-form "
+                        <a class=" btn btn-danger"  id="question-form"
                             href=<%="/delete_question?id=" + question._id%>>Delete</a>
                     </h5>
                 </div>
