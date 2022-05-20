@@ -1,395 +1,430 @@
 @import url("https://fonts.googleapis.com/css2?family=Encode+Sans+SC:wght@100;400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Roboto:300");
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
-
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-.app-container {
-  margin-top: 6em;
-}
-body {
-  background-color: darkgrey;
-  display: grid;
-  place-items: center;
-  overflow: scroll;
 
-  text-align: center;
-  background: linear-gradient(141deg, #ccc 25%, #eee 40%, #ddd 55%);
-  color: #555;
-  font-family: "Roboto";
-  height: 100vh;
-  -webkit-backface-visibility: hidden;
-  -webkit-perspective: 1000;
-  -webkit-transform: translate3d(0, 0, 0);
+th {
+    font-family: "Roboto";
+    font-size: large;
 }
+
+td {
+    font-family: "Roboto";
+}
+
+.app-container {
+    margin-top: 6em;
+}
+
+body {
+    background-color: darkgrey;
+    display: grid;
+    place-items: center;
+    overflow: scroll;
+    text-align: center;
+    background: linear-gradient(141deg, #ccc 25%, #eee 40%, #ddd 55%);
+    color: #555;
+    font-family: "Roboto";
+    height: 100vh;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    -webkit-transform: translate3d(0, 0, 0);
+}
+
 .title-page {
-  font-family: "Anton", sans-serif;
+    font-family: "Anton", sans-serif;
 }
+
 #middle-row-cards {
-  margin-top: 2rem;
+    margin-top: 2rem;
 }
+
 .main {
-  text-align: center;
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 5rem;
-  margin-top: 5em;
-  margin-left: auto;
-  margin-right: auto;
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 5rem;
+    margin-top: 5em;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 #back-button-home {
-  text-align: right;
-  margin-right: 20em;
+    text-align: right;
+    margin-right: 20em;
 }
+
 #back-button {
-  text-align: right;
-  margin-right: 20em;
+    text-align: right;
+    margin-right: 20em;
 }
 
 .index-page {
-  max-width: 90%;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+    max-width: 90%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .create-quiz-page1 {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0.5rem;
-  margin-top: 2rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.5rem;
+    margin-top: 2rem;
 }
 
 .create-quiz-page {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0.5rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.5rem;
 }
+
 #email-form-greeting {
-  padding-top: 2em;
-  padding-bottom: 1rem;
+    padding-top: 2em;
+    padding-bottom: 1rem;
 }
+
 #quiz-form-greeting {
-  padding-top: 2em;
-  padding-bottom: 1rem;
+    padding-top: 2em;
+    padding-bottom: 1rem;
 }
+
+
 /* #welcome-button{
 padding-top: 8rem;
 
 } */
+
 #quiz-greeting {
-  padding: 2rem;
+    padding: 2rem;
 }
 
 .create-quiz-page-card {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 0.5rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0.5rem;
 }
+
 #new-quiz-card {
-  margin-bottom: 5em;
+    margin-bottom: 5em;
 }
+
 .manage-quiz-button {
-  background-color: white;
-  padding: 1em;
-  border-radius: 8px;
+    background-color: white;
+    padding: 1em;
+    border-radius: 8px;
 }
 
 #manage-quiz-button {
-  text-align: center;
-  align-items: center;
-  box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    align-items: center;
+    box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 }
 
 .email-form {
-  text-align: center;
-  background-color: white;
-
-  border-radius: 10px;
-  margin-bottom: 1rem;
-  margin-left: auto;
-  margin-right: auto;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .contact-form-text {
-  width: 100%;
-  padding: 15px;
-  background-color: #ccc;
-  color: gray;
-  border: 0;
-
-  border-radius: 8px;
+    width: 100%;
+    padding: 15px;
+    background-color: #ccc;
+    color: gray;
+    border: 0;
+    border-radius: 8px;
 }
+
 .contact-form-message {
-  width: 100%;
-  padding: 15px;
-  background-color: #ccc;
-  color: gray;
-  border: 0;
-
-  border-radius: 8px;
+    width: 100%;
+    padding: 15px;
+    background-color: #ccc;
+    color: gray;
+    border: 0;
+    border-radius: 8px;
 }
+
 .contact-form-btn {
-  padding: 15px;
-  background-color: #6a5acd;
-  color: white;
-  border: none;
-  width: 50%;
-  margin: 10px 5px;
-  margin-top: 20px;
-  border-radius: 8px;
-  cursor: pointer;
+    padding: 15px;
+    background-color: #6a5acd;
+    color: white;
+    border: none;
+    width: 50%;
+    margin: 10px 5px;
+    margin-top: 20px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-.main > h1 {
-  font-size: 30px;
-  color: rgb(26, 25, 25);
-  margin: 0 0 30px 0;
+.main>h1 {
+    font-size: 30px;
+    color: rgb(26, 25, 25);
+    margin: 0 0 30px 0;
 }
 
-.main > form > input {
-  width: 95%;
-  padding: 15px;
-  background-color: #ccc;
-  color: gray;
-  border: 0;
-  margin: 10px 5px;
-  border-radius: 8px;
+.main>form>input {
+    width: 95%;
+    padding: 15px;
+    background-color: #ccc;
+    color: gray;
+    border: 0;
+    margin: 10px 5px;
+    border-radius: 8px;
 }
 
-.main > form > button {
-  padding: 15px;
-  background-color: #6a5acd;
-  color: white;
-  border: none;
-  width: 95%;
-  margin: 10px 5px;
-  margin-top: 20px;
-  border-radius: 8px;
-  cursor: pointer;
+.main>form>button {
+    padding: 15px;
+    background-color: #6a5acd;
+    color: white;
+    border: none;
+    width: 95%;
+    margin: 10px 5px;
+    margin-top: 20px;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
-.main > form > input:focus,
-.main > form > button:focus {
-  outline: none;
+.main>form>input:focus,
+.main>form>button:focus {
+    outline: none;
 }
 
 nav {
-  background-color: #000;
-  box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+    background-color: #000;
+    box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 }
 
 #div-greeting {
-  padding: 0.5em;
-  font-weight: bold;
-  font-family: "Encode Sans SC", sans-serif;
+    padding: 0.5em;
+    font-weight: bold;
+    font-family: "Encode Sans SC", sans-serif;
 }
+
 #welcome {
-  margin-left: auto;
-  margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 #welcome-create-quiz {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 #footer-links {
-  /* position: fixed; */
-  bottom: 0;
-
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  margin: 0 auto;
-  text-align: center;
-
-  background-color: #f5f5f5;
-  box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+    /* position: fixed; */
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    margin: 0 auto;
+    text-align: center;
+    background-color: #f5f5f5;
+    box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 }
 
 .navbarstyle {
-  background-color: #f2f4f4;
-  font-family: "playfair display", sans-serif;
-  display: block;
+    background-color: #f2f4f4;
+    font-family: "playfair display", sans-serif;
+    display: block;
 }
+
 .navbar-brand {
-  font-size: 1.5em;
+    font-size: 1.5em;
 }
+
 .navbar-text.navbar-brand {
-  color: black;
+    color: black;
 }
+
 .nav.navbar-nav.navbar-right li a {
-  color: black;
-  font-family: "playfair display", sans-serif;
+    color: black;
+    font-family: "playfair display", sans-serif;
 }
+
 .navbar-text.navbar-brand:hover {
-  color: gray;
-  cursor: default;
+    color: gray;
+    cursor: default;
 }
+
 .navbar-collapse {
-  overflow: hidden;
+    overflow: hidden;
 }
+
 header {
-  position: absolute;
-  z-index: 2;
-  width: 100%;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
 }
 
 #index-first-row {
-  padding: 2em;
+    padding: 2em;
 }
 
 #index-second-row {
-  padding: 2em;
+    padding: 2em;
 }
 
 #index-third-row {
-  padding: 2em;
+    padding: 2em;
 }
 
 #icon-spacing {
-  margin-right: 0.5em;
+    margin-right: 0.5em;
 }
+
+
 /* #label-spacing {
   margin-left: 1.5em;
 } */
 
 #email-success {
-  color: green;
-
-  font-weight: bold;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: green;
+    font-weight: bold;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 label {
-  color: #071463;
-  font-weight: bold;
-  display: flow-root;
-  width: inherit;
-  float: center;
+    color: #071463;
+    font-weight: bold;
+    display: flow-root;
+    width: inherit;
+    float: center;
 }
 
 label:after {
-  content: ": ";
+    content: ": ";
 }
 
 #quiz-cards {
-  width: 30rem;
+    width: 30rem;
 }
+
 #quiz-card-background {
-  text-align: left;
-  padding: 1em;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+    text-align: left;
+    padding: 1em;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 }
+
 #quiz-card-button {
-  margin-top: 0.25em;
-  text-align: center;
-  box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+    margin-top: 0.25em;
+    text-align: center;
+    box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 }
 
 .card {
-  box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 }
+
 #question-form {
-  box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 }
+
 #sidebar-nav {
-  width: 160px;
+    width: 160px;
 }
 
 #animation {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 #animation :first-of-type {
-  animation: showup 20s infinite;
+    animation: showup 20s infinite;
 }
 
 #animation :last-of-type {
-  width: 0px;
-  animation: reveal 15s infinite;
+    width: 0px;
+    animation: reveal 15s infinite;
 }
 
 #animation :last-of-type span {
-  margin-left: -355px;
-  animation: slidein 20s infinite;
+    margin-left: -355px;
+    animation: slidein 20s infinite;
 }
 
 @keyframes showup {
-  0% {
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 0;
+    }
+    20% {
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 @keyframes slidein {
-  0% {
-    margin-left: -800px;
-  }
-  20% {
-    margin-left: -800px;
-  }
-  35% {
-    margin-left: 0px;
-  }
-  100% {
-    margin-left: 0px;
-  }
+    0% {
+        margin-left: -800px;
+    }
+    20% {
+        margin-left: -800px;
+    }
+    35% {
+        margin-left: 0px;
+    }
+    100% {
+        margin-left: 0px;
+    }
 }
 
 @keyframes reveal {
-  0% {
-    opacity: 0;
-    width: 0px;
-  }
-  20% {
-    opacity: 1;
-    width: 0px;
-  }
-  30% {
-    width: 355px;
-  }
-  80% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    width: 355px;
-  }
+    0% {
+        opacity: 0;
+        width: 0px;
+    }
+    20% {
+        opacity: 1;
+        width: 0px;
+    }
+    30% {
+        width: 355px;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        width: 355px;
+    }
 }
 
 #quiz-button-cards {
-  margin-top: 3rem;
+    margin-top: 3rem;
+    text-align: center;
 }
 
 #your-quizzes-text {
-  margin: 1em;
+    margin: 1em;
 }
+
 #results-row {
-  margin-top: 2em;
+    margin-top: 2em;
 }
+
 .footer-name {
-  color: lightgrey;
+    color: lightgrey;
 }
 
 .manage-quiz-title {
-  margin: 2em;
+    margin: 2em;
 }

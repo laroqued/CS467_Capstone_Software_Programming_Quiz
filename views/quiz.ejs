@@ -15,34 +15,52 @@
         <div id="email-form-greeting">
             <%- include('layouts/welcome') %>
         </div>
+        <div class="container ">
+            <div class="table-responsive ">
+                <table class=" table ">
+                    <thead>
+                        <tr>
 
+                            <th scope="col ">Title</th>
+                            <th scope="col">Explanation</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
 
-        <div class="container" id="quiz-button-cards">
-            <div class="row">
-                <div class="col-3">
-                    <div class="card">
-                        <a href="/quizzes" class="btn btn-success">Manage Quizzes</a>
+                            <td>Manage Quiz</td>
+                            <td>View the collection of the quizzes</td>
+                            <td> <a href="/quizzes " class="btn btn-success " id="question-form ">Manage Quizzes</a>
+                            </td>
+                        </tr>
+                        <tr>
 
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="card">
-                        <a href=<%="/create_question?id=" + id %> class="btn btn-success">Create Question</a>
+                            <td>Create Questions</td>
+                            <td>Add new questions to a quiz</td>
+                            <td>
+                                <a href=<%="/create_question?id=" + id %> class=" btn btn-success "
+                                    id="question-form ">Create
+                                    Question</a></td>
+                        </tr>
+                        <tr>
 
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="card">
-                        <a href=<%="/candidate_quiz?id=" + id %> class="btn btn-success">Candidate Quiz</a>
+                            <td>View Quiz</td>
+                            <td>Check the format on content of quiz before sending</td>
+                            <td> <a href=<%="/candidate_quiz?id=" + id %> id=" question-form "
+                                    class="btn btn-success ">Candidate
+                                    Quiz</a></td>
+                        </tr>
+                        <tr>
 
-                    </div>
-                </div>
-                <div class="col-3">
-                    <div class="card">
-                        <a class="btn btn-danger" href=<%="/delete_quiz?id=" + id%> >Delete Quiz</a>
-
-                    </div>
-                </div>
+                            <td>Delete Quiz</td>
+                            <td>Permanently remove your quiz from the database</td>
+                            <td>
+                                <a class="btn btn-danger " id="question-form " href=<%="/delete_quiz?id=" + id%>>Delete
+                                    Quiz</a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
@@ -51,18 +69,18 @@
 
 
 
-        <div class="main">
+
+
+        <div class=" main ">
             <h2>Questions</h2>
-            <ul class="list-group">
+            <ul class="list-group ">
                 <% questions.forEach(question=> { %>
-                    <li class="list-group-item card">
-                        <div class="card-body">
-                            <h5 class="card-title">
+                    <li class="list-group-item card ">
+                        <div class="card-body ">
+                            <h5 class="card-title ">
                                 <%= question.prompt %>
-                                    <a class="btn btn-primary" id="question-form" href=<%="/question?id=" +
-                                        question._id%> >Edit</a>
-                                    <a class="btn btn-danger" id="question-form" href=<%="/delete_question?id=" +
-                                        question._id%>
+                                    <a class="btn btn-primary " id="question-form " href=<%="/question?id=" + question._id%> >Edit</a>
+                                    <a class=" btn btn-danger " id="question-form " href=<%="/delete_question?id=" + question._id%>
                                         >Delete</a>
                             </h5>
                         </div>
