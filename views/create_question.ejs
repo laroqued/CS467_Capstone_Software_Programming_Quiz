@@ -8,86 +8,111 @@
 
 
     <body>
-                <div id="back-button">
-                    <div class="filter">
-                        <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to
-                            Quizzes</a>
-                    </div>
-                </div>
+        <div id="back-button">
+            <div class="filter">
+                <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to
+                    Quizzes</a>
+            </div>
+        </div>
         <div id="email-form-greeting">
             <%- include('layouts/welcome') %>
         </div>
-                     <div class="manage-quiz-title">
+        <div class="manage-quiz-title">
 
-                         <div id="">
-                             <h3 class="title-page">Create</h3>
-                         </div>
-                         <hr>
-                         <div id="">
-                             <span>
-                                 <h3 class="title-page">Question</h3>
-                             </span>
-                         </div>
-                     </div>
+            <div id="">
+                <h3 class="title-page">Create</h3>
+            </div>
+                <hr/>
+            <div id="">
+                <span>
+                    <h3 class="title-page">Question</h3>
+                </span>
+            </div>
+        </div>
+
         <div class="main" id="question-form">
+        
             <form action="/create_question" method="POST">
                 <h5>Choose a question type:</h5>
-                <a id="question-form" type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId + "&type=multiple_choice" %> >Multiple Choice</a>
-                <a id="question-form" type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId + "&type=true_or_false" %> >True/False</a>
-                <a id="question-form" type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId + "&type=check_all" %> >Check All That Apply</a>
-                <a id="question-form" type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId + "&type=fill" %> >Fill in the Blank</a>
-                <h5 style="margin-top: 20px">Question Prompt</h5>
-                <input type="text" name="prompt" placeholder="Question Prompt" >
-                <% if (type == "multiple_choice") { %>
+                <div class="btn-group">
+                    <a id="question-form" type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId
+                        + "&type=multiple_choice" %> >Multiple Choice</a>
+
+                    <a id="question-form" type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId
+                        + "&type=true_or_false" %> >True/False</a>
+
+                    <a id="question-form" type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId
+                        + "&type=check_all" %> >Check All That Apply</a>
+
+                    <a id="question-form" type="button" class="btn btn-primary" href=<%="/create_question?id=" + quizId
+                        + "&type=fill" %>
+                        >Fill in the Blank</a>
+                </div>
+                <h5  style="margin-top: 20px"> <u >Question Prompt</u> </h5>
+
+                <input type="text" name="prompt" placeholder="Question Prompt">
+                <div id="class-1">
+                        <hr class="class-1" />
+                        </div>
+                <% if (type=="multiple_choice" ) { %>
                     <h5>Correct Answer</h5>
-                    <input type="text" name="answer" placeholder="Correct Answer" >
+                    <input type="text" name="answer" placeholder="Correct Answer">
 
                     <h5>Incorrect Answer 1</h5>
-                    <input type="text" name="choice2" placeholder="Incorrect Answer" >
+                    <input type="text" name="choice2" placeholder="Incorrect Answer">
 
                     <h5>Incorrect Answer 2</h5>
-                    <input type="text" name="choice3" placeholder="Incorrect Answer" >
+                    <input type="text" name="choice3" placeholder="Incorrect Answer">
 
                     <h5>Incorrect Answer 3</h5>
-                    <input type="text" name="choice4" placeholder="Incorrect Answer" >
-                <% } else if (type == "true_or_false") { %>
-                    <label for="true">True</label>
-                    <input type="radio" id="true" name="answer" value="true" >
-                    
-                    <label for="false">False</label>
-                    <input type="radio" id="false" name="answer" value="false" >
-                <% } else if (type == "check_all") { %>
-                    
-                    <h5 style="margin-top: 20px">Option 1</h5>
-                    <input type="text" id="input1" name="answer1" placeholder="Option 1" >
-                    <div type="button" id="a1" class="btn btn-success col-3">Correct</div>
+                    <input type="text" name="choice4" placeholder="Incorrect Answer">
+                    <% } else if (type=="true_or_false" ) { %>
+
+                        <div class="form-check form-check-inline">
+                            <label for="true">True</label>
+                            <input type="radio" id="true" name="answer" value="true">
+                        </div>
+
+                        
+                        <div class="form-check form-check-inline">
+                            <label for="false">False</label>
+                            <input type="radio" id="false" name="answer" value="false">
+                        </div>
+
+                        <% } else if (type=="check_all" ) { %>
+
+                            <h5 style="margin-top: 20px">Option 1</h5>
+                            <input type="text" id="input1" name="answer1" placeholder="Option 1">
+                            <div type="button" id="a1" class="btn btn-success col-3">Correct</div>
 
 
-                    <h5 style="margin-top: 20px">Option 2</h5>
-                    <input type="text" id="input2" name="answer2" placeholder="Option 2" >
-                    <div type="button" id="a2" class="btn btn-success col-3">Correct</div>
+                            <h5 style="margin-top: 20px">Option 2</h5>
+                            <input type="text" id="input2" name="answer2" placeholder="Option 2">
+                            <div type="button" id="a2" class="btn btn-success col-3">Correct</div>
 
-                    <h5 style="margin-top: 20px">Option 3</h5>
-                    <input type="text" id="input3" name="answer3" placeholder="Option 3" >
-                    <div type="button" id="a3" class="btn btn-success col-3">Correct</div>
+                            <h5 style="margin-top: 20px">Option 3</h5>
+                            <input type="text" id="input3" name="answer3" placeholder="Option 3">
+                            <div type="button" id="a3" class="btn btn-success col-3">Correct</div>
 
-                    <h5 style="margin-top: 20px">Option 4</h5>
-                    <input type="text" id="input4" name="answer4" placeholder="Option 4" >
-                    <div type="button" id="a4" class="btn btn-success col-3">Correct</div>
-                <% } else if (type == "fill") { %>
-                    <h5>Enter all correct answers separated by commas</h5>
-                    <textarea name="answer"></textarea>
-                <% } %>
-                <input type="hidden" name="type" value=<%=type %> >
-                <input type="hidden" name="quiz" value=<%=quizId %> >
-                <button id="question-form">Create</button>
+                            <h5 style="margin-top: 20px">Option 4</h5>
+                            <input type="text" id="input4" name="answer4" placeholder="Option 4">
+                            <div type="button" id="a4" class="btn btn-success col-3">Correct</div>
+                            <% } else if (type=="fill" ) { %>
+                                <h5>Enter all correct answers separated by commas</h5>
+                                <textarea class="contact-form-message" name="answer" rows="5"
+                                    placeholder="ex. answer1, answer2"></textarea>
+                                <% } %>
+                                    <input type="hidden" name="type" value=<%=type %> >
+                                    <input type="hidden" name="quiz" value=<%=quizId %> >
+                                    <button id="question-form">Create</button>
             </form>
         </div>
+
     </body>
 
 
     <script src="js/create_question.js"></script>
 
-    
+
 
     <%- include('includes/_footer') %>

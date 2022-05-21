@@ -16,7 +16,7 @@ th {
 
 td {
     font-family: "Roboto";
-    font-size: x-large;
+    font-size: large;
     font-family: "Roboto";
 
 
@@ -182,7 +182,7 @@ padding-top: 8rem;
 }
 
 .main>form>input {
-    width: 95%;
+    width: 100%;
     padding: 15px;
     background-color: #ccc;
     color: gray;
@@ -339,6 +339,10 @@ label:after {
 #question-form {
     box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 }
+#question-form-edit {
+    box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+    width: 95vmin;
+}
 
 #sidebar-nav {
     width: 160px;
@@ -435,3 +439,8 @@ label:after {
 .manage-quiz-title {
     margin: 2em;
 }
+
+ hr.class-1 {
+        border-top: .5em double black;
+   
+    }

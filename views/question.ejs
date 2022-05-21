@@ -31,10 +31,12 @@
                             </span>
                         </div>
                     </div>
-        <div class="main" id="question-form">
+        <div class="main" id="question-form-edit" >
             <form action="/question" method="POST" >
-                <h5>Question Prompt</h5>
+                <h5> <u>Question Prompt</u> </h5>
+                
                 <input type="text" name="prompt" value="<%= question.prompt %>" >
+                    <hr class="class-1" />
                 <% if (question.type == "multiple_choice") { %>
                     <h5>Correct Answer</h5>
                     <input type="text" name="answer" value="<%= question.answer %>" >
