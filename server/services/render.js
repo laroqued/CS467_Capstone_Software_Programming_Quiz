@@ -481,28 +481,18 @@ exports.canidate_quiz =
   (checkAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    let i = 1;
     let id = req.query.id;
 
-    const quizzes = await Quiz.find({
-      owner: req.user.email,
-    });
-     const name = await Quiz.find({
-       owner: req.user.name,
-     });
-    const questions = await Question.find({ quiz: id });
-    const question = await Question.findById(id);
+    const quiz = await Quiz.findById(id);
 
+    const questions = await Question.find({ quiz: id });
 
     res.render("candidate_quiz", {
-      i: i,
       id: id,
-      quiz: id,
       login_name: req.user.login_name,
-      name: name,
       questions: questions,
       owner: req.user.email,
-      quizzes: quizzes,
+      quiz: quiz,
     });
   });
 //Dominique
