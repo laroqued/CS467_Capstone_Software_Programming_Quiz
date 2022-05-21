@@ -121,8 +121,8 @@
 
             <!-- Submission Button -->
             <div class="manage-quiz-button">
-                    <input type="hidden" name="quiz" >
-                    <input type="hidden" name="name" >
+                    <input type="hidden" name="quiz" value=<%= id %>>
+                    <input type="hidden" name="name" value=<%= quiz.name %>>
                 <a id="manage-quiz-button" href=<%="/contact?id=" + id %> class="btn btn-success">Send Quiz</a>
 
             </div>
