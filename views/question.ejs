@@ -8,20 +8,35 @@
 
 
     <body>
+
                 <div id="back-button">
                     <div class="filter">
                         <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to
                             Quizzes</a>
                     </div>
                 </div>
+                
         <div id="email-form-greeting">
             <%- include('layouts/welcome') %>
         </div>
+                    <div class="manage-quiz-title">
 
-        <div class="main" id="question-form">
+                        <div id="">
+                            <h3 class="title-page">Edit</h3>
+                        </div>
+                        <hr>
+                        <div id="">
+                            <span>
+                                <h3 class="title-page">Question</h3>
+                            </span>
+                        </div>
+                    </div>
+        <div class="main" id="question-form-edit" >
             <form action="/question" method="POST" >
-                <h5>Question Prompt</h5>
+                <h5> <u>Question Prompt</u> </h5>
+                
                 <input type="text" name="prompt" value="<%= question.prompt %>" >
+                    <hr class="class-1" />
                 <% if (question.type == "multiple_choice") { %>
                     <h5>Correct Answer</h5>
                     <input type="text" name="answer" value="<%= question.answer %>" >
