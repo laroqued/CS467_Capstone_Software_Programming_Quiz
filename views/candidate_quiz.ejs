@@ -24,62 +24,105 @@
             Employer Name: <%=login_name %>
         </p>
         <p>
-            Quiz Name: <%= name %> 
+            Quiz Name: <%= quiz.name %> 
         </p>
         <p>
           ID: <%= id %>
         </p>
         <p>
-           QuizID:  <%= quiz %>
+           QuizID:  <%= id %>
         </p>
 
         <p>
             Owner: <%= owner %>
         </p>
 
-
+        <% 
+            let multiple = 0;
+            let true_false = 0;
+            let check_all = 0;
+            let fill = 0;
+        %>
         <card class="card-body" id="quiz-cards">
 
-            <!-- OUTER LOOP -->
-            <% questions.forEach((question,i)=> { %>
+            <ul class="list-group">
+                <% questions.forEach(question=> { %>
+                    <li class="list-group-item card">
+                        <div class="card-header">
+                            <%= question.prompt %>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                            <!-- MULTIPLE CHOICE -->
+                            <% if (question.type == "multiple_choice") { %>
+                                <% 
+                                    question.choices.push(question.answer); 
+                                    let shuffled = [].concat(question.choices);
+                                    shuffled.sort(() => {
+                                        return 0.5 - Math.random();
+                                    });
+                                %>
 
-                <div id="quiz-card-background">
-                    <form id="d1">
-                        <h5>
-                            <%= i + 1 %>)
-                                <%= question.prompt %>
-                        </h5>
-                        <hr>
-                        <p>
-                            <input type="radio" name="choice" value="Programming">
+                                <% for (let i = 0; i < 4; i++) { %>
+                                    <% 
+                                        let current_radio = "mc_" + String(multiple) + String(i);
+                                        let current_value = shuffled[i];
+                                     %>
+                                    <label for=<%=current_radio%>><%=current_value%></label>
+                                    <input type="radio" name=<%= "mc_" + multiple %> id=<%= current_radio %> value=<%= current_value %> >
 
-                            <%= question.answer %>
-                        </p>
+                                <% } %>
+                                <% multiple += 1; %>
+
+                            <!-- TRUE/FALSE -->
+                            <% } else if (question.type == "true_or_false") { %>
+                                <label for=<%= "true" + true_false %>>True</label>
+                                <input type="radio" name=<%= "tf_" + true_false %> id=<%= "true" + true_false %> value="true">
+                                <label for=<%= "false" + true_false %>>False</label>
+                                <input type="radio" name=<%= "tf_" + true_false %> id=<%= "false" + true_false %> value="false">
+                                <% true_false += 1; %>
+                            <!-- CHECK ALL THAT APPLY -->
+                            <% } else if (question.type == "check_all") { %>
+                                <% 
+                                    question.answer_multiple.forEach(answer => {
+                                        question.choices.push(answer);
+                                    });
+                                    let shuffled = [].concat(question.choices);
+                                    shuffled.sort(() => {
+                                        return 0.5 - Math.random();
+                                    });
+                                %>
+
+                                <% for (let i = 0; i < 4; i++) { %>
+                                    <% 
+                                        let current_check = "check_" + String(check_all) + String(i);
+                                        let current_value = shuffled[i];
+                                    %>
+                                    <label for=<%=current_check%>><%=current_value%></label>
+                                    <input type="checkbox" name=<%= "check_" + check_all %> id=<%= current_check %> value=<%= current_value %> >
+
+                                <% } %>
+                                <% check_all += 1; %>
 
 
+                            <!-- FILL IN THE BLANK -->
+                            <% } else if (question.type == "fill") { %>
+                                <input type="text" name=<%= "fill_" + fill %> placeholder="Type answer here" required>
 
-                        <!-- INNER LOOP -->
-                        <% question.choices.forEach(choice=> { %>
-                            <p> <input type="radio" name="choice" value="Programming">
-                                <%=choice%>
-                            </p>
-                            <% }) %>
-                                <hr>
-                                <input type="submit" value="submit" class="btn btn-success" id="quiz-card-button" )>
-                                <br>
-                    </form>
+                            <% } %>
+                            </form>
+                        </div>
+                    </li>
+                    <hr>
+                <% }) %>
+            </ul>
+
         </card>
-
-        </div>
-        <br>
-        <% }) %>
-            </card>
-
 
             <!-- Submission Button -->
             <div class="manage-quiz-button">
-                    <input type="hidden" name="quiz" value=<%=id %> >
-                    <input type="hidden" name="name" value=<%=name %> >
+                    <input type="hidden" name="quiz" value=<%= id %>>
+                    <input type="hidden" name="name" value=<%= quiz.name %>>
                 <a id="manage-quiz-button" href=<%="/contact?id=" + id %> class="btn btn-success">Send Quiz</a>
 
             </div>
