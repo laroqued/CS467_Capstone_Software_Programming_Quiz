@@ -17,7 +17,7 @@
         </div>
 
         <br>
-        <h2>Candidate Quiz</h2>
+        <h2>Candidate Quiz View</h2>
 
 
         <p>
@@ -43,13 +43,15 @@
             let check_all = 0;
             let fill = 0;
         %>
-        <card class="card-body" id="quiz-cards">
+        <div class="bg-secondary"></div>
+        <div class="bg-lighten-xl"></div>
 
+        <card class="card-body" id="quiz-cards">
             <ul class="list-group">
                 <% questions.forEach(question=> { %>
-                    <li class="list-group-item card">
+                    <li class="list-group-item card"id="quiz-card-background" >
                         <div class="card-header">
-                            <%= question.prompt %>
+                           <h5><%= question.prompt %></h5> 
                         </div>
                         <div class="card-body">
                             <form>
@@ -68,19 +70,29 @@
                                         let current_radio = "mc_" + String(multiple) + String(i);
                                         let current_value = shuffled[i];
                                      %>
-                                    <label for=<%=current_radio%>><%=current_value%></label>
-                                    <input type="radio" name=<%= "mc_" + multiple %> id=<%= current_radio %> value=<%= current_value %> >
+                                
+
+
+
+                                    <label for=<%=current_radio%>>
+                                    <input type="radio" name=<%= "mc_" + multiple %> id=<%= current_radio %> value=<%= current_value %> > <%=current_value%> </label>
+
 
                                 <% } %>
                                 <% multiple += 1; %>
 
                             <!-- TRUE/FALSE -->
                             <% } else if (question.type == "true_or_false") { %>
-                                <label for=<%= "true" + true_false %>>True</label>
-                                <input type="radio" name=<%= "tf_" + true_false %> id=<%= "true" + true_false %> value="true">
-                                <label for=<%= "false" + true_false %>>False</label>
-                                <input type="radio" name=<%= "tf_" + true_false %> id=<%= "false" + true_false %> value="false">
+
+                                <!-- TRUE -->
+                                <label for=<%= "true" + true_false %>>      <input type="radio" name=<%= "tf_" + true_false %> id=<%= "true" + true_false %> value="true"> True</label>
+                          
+                                <!-- FALSE -->
+                                <label for=<%= "false" + true_false %>>    <input type="radio" name=<%= "tf_" + true_false %> id=<%= "false" + true_false %> value="false">  False</label>
+                            
+                                <!-- INCREMENT -->
                                 <% true_false += 1; %>
+
                             <!-- CHECK ALL THAT APPLY -->
                             <% } else if (question.type == "check_all") { %>
                                 <% 
@@ -98,8 +110,8 @@
                                         let current_check = "check_" + String(check_all) + String(i);
                                         let current_value = shuffled[i];
                                     %>
-                                    <label for=<%=current_check%>><%=current_value%></label>
-                                    <input type="checkbox" name=<%= "check_" + check_all %> id=<%= current_check %> value=<%= current_value %> >
+                                    <label for=<%=current_check%>>       <input type="checkbox" name=<%= "check_" + check_all %> id=<%= current_check %> value=<%= current_value %> > <%=current_value%></label>
+                             
 
                                 <% } %>
                                 <% check_all += 1; %>
@@ -107,9 +119,10 @@
 
                             <!-- FILL IN THE BLANK -->
                             <% } else if (question.type == "fill") { %>
-                                <input type="text" name=<%= "fill_" + fill %> placeholder="Type answer here" required>
+                                <input class="contact-form-text" type="text" name=<%= "fill_" + fill %> placeholder="Type answer here" required>
 
                             <% } %>
+
                             </form>
                         </div>
                     </li>

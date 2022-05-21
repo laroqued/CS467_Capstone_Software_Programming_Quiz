@@ -17,9 +17,6 @@ th {
 td {
     font-family: "Roboto";
     font-size: large;
-    font-family: "Roboto";
-
-
 
 }
 
@@ -303,19 +300,25 @@ header {
 }
 
 label {
-    color: #071463;
-    font-weight: bold;
+    /* color: #071463; */
+    font-family: "Roboto";
+
+    /* font-weight: bold; */
     display: flow-root;
-    width: inherit;
-    float: center;
+    /* width: inherit;
+    float: center; */
 }
 
-label:after {
+/* label:after {
     content: ": ";
-}
+} */
 
 #quiz-cards {
     width: 30rem;
+}
+
+.card-header{
+background-color: lightgrey;
 }
 
 #quiz-card-background {
