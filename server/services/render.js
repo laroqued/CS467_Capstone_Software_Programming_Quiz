@@ -45,6 +45,17 @@ app.use(methodOverride("_method"));
 // ========================================================
 // GET
 // ========================================================
+
+
+// ========================================================
+// TESTING
+exports.snuck_in =
+  (checkAuthenticated,
+  (req, res) => {
+    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+    res.render("snuck_in");
+  });
+// ========================================================
 // Donnyves
 exports.homeRoutes =
   (checkAuthenticated,
@@ -113,7 +124,7 @@ exports.post_contact =
 <p>Click the link below to start your quiz.</p>
 <p></p>
 
-
+<li>Local Host Quiz: http://localhost:3001/snuck_in</li>
 <li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_quiz?id=${req.body.quiz}</li>
 
 <li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/take_quiz?id=${req.body.quiz}</li>
