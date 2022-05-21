@@ -37,7 +37,12 @@
             Owner: <%= owner %>
         </p>
 
-        <% let multiple = 0; %>
+        <% 
+            let multiple = 0;
+            let true_false = 0;
+            let check_all = 0;
+            let fill = 0;
+        %>
         <card class="card-body" id="quiz-cards">
 
             <ul class="list-group">
@@ -48,6 +53,7 @@
                         </div>
                         <div class="card-body">
                             <form>
+                            <!-- MULTIPLE CHOICE -->
                             <% if (question.type == "multiple_choice") { %>
                                 <% 
                                     question.choices.push(question.answer); 
@@ -55,25 +61,53 @@
                                     shuffled.sort(() => {
                                         return 0.5 - Math.random();
                                     });
-                                    let current = 0;
                                 %>
 
                                 <% for (let i = 0; i < 4; i++) { %>
                                     <% 
-                                        let current_radio = String(multiple) + String(i);
+                                        let current_radio = "mc_" + String(multiple) + String(i);
                                         let current_value = shuffled[i];
                                      %>
                                     <label for=<%=current_radio%>><%=current_value%></label>
                                     <input type="radio" name=<%= "mc_" + multiple %> id=<%= current_radio %> value=<%= current_value %> >
 
-                                    <% current += 1; %>
                                 <% } %>
                                 <% multiple += 1; %>
+
+                            <!-- TRUE/FALSE -->
                             <% } else if (question.type == "true_or_false") { %>
-
+                                <label for=<%= "true" + true_false %>>True</label>
+                                <input type="radio" name=<%= "tf_" + true_false %> id=<%= "true" + true_false %> value="true">
+                                <label for=<%= "false" + true_false %>>False</label>
+                                <input type="radio" name=<%= "tf_" + true_false %> id=<%= "false" + true_false %> value="false">
+                                <% true_false += 1; %>
+                            <!-- CHECK ALL THAT APPLY -->
                             <% } else if (question.type == "check_all") { %>
+                                <% 
+                                    question.answer_multiple.forEach(answer => {
+                                        question.choices.push(answer);
+                                    });
+                                    let shuffled = [].concat(question.choices);
+                                    shuffled.sort(() => {
+                                        return 0.5 - Math.random();
+                                    });
+                                %>
 
+                                <% for (let i = 0; i < 4; i++) { %>
+                                    <% 
+                                        let current_check = "check_" + String(check_all) + String(i);
+                                        let current_value = shuffled[i];
+                                    %>
+                                    <label for=<%=current_check%>><%=current_value%></label>
+                                    <input type="checkbox" name=<%= "check_" + check_all %> id=<%= current_check %> value=<%= current_value %> >
+
+                                <% } %>
+                                <% check_all += 1; %>
+
+
+                            <!-- FILL IN THE BLANK -->
                             <% } else if (question.type == "fill") { %>
+                                <input type="text" name=<%= "fill_" + fill %> placeholder="Type answer here" required>
 
                             <% } %>
                             </form>
