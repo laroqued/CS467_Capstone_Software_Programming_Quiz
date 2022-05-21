@@ -17,25 +17,28 @@
         </div>
 
         <br>
-        <h2>Candidate Quiz View</h2>
+            <h2 style="margin-bottom: 1rem;">
+                <%= quiz.name %> Quiz Preview
+            </h2>
 
-
-        <p>
+<div id="meta-data-quiz">       <p>
             Employer Name: <%=login_name %>
         </p>
-        <p>
-            Quiz Name: <%= quiz.name %> 
-        </p>
+
         <p>
           ID: <%= id %>
         </p>
         <p>
-           QuizID:  <%= id %>
+           Quiz ID:  <%= quiz.id %>
         </p>
 
         <p>
-            Owner: <%= owner %>
+           Quiz Owner: <%= quiz.owner %>
         </p>
+    </div>
+ 
+
+
 
         <% 
             let multiple = 0;

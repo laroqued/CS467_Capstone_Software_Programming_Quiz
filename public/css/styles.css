@@ -447,3 +447,10 @@ background-color: lightgrey;
         border-top: .5em double black;
    
     }
+
+    #meta-data-quiz{
+        background-color:whitesmoke;
+           border-radius: 8px;
+           padding: .5rem;
+           margin-bottom: 1rem;
+    }
