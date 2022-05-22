@@ -10,6 +10,8 @@ const Question = require("../model/question");
 const bcrypt = require("bcryptjs");
 const app = express();
 const methodOverride = require("method-override");
+const cookieParser = require("cookie-parser");
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const initializePassport = require("../../passport-config");
@@ -33,7 +35,7 @@ app.use(
     saveUninitialized: false,
   })
 );
-
+app.use(cookieParser());
 const { mainMail } = require("../../utils/email");
 
 const {

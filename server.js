@@ -6,7 +6,7 @@ const flash = require("express-flash");
 const session = require("express-session");
 const passport = require("passport");
 const methodOverride = require("method-override");
-
+const cookieParser = require("cookie-parser");
 
 // Create a .env file to use process.env
 let port = process.env.PORT; 
@@ -22,7 +22,7 @@ app.use(express.static("public"));
 // JSON Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use(cookieParser());
 // ===========================================================================================
 /*
 The express-flash module exposes getter and setter methods for a flash message of the form, { flash: { type: 'type', message: 'message' }} and depends on the express-session module. The method req. flash(type, message) sets the value of a new flash message and adds it to an array of messages of the same type 
