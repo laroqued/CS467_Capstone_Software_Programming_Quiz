@@ -7,6 +7,8 @@ const nodemailer = require("nodemailer");
 const User = require("../model/User");
 const Quiz = require("../model/quiz");
 const Question = require("../model/question");
+const Candidate = require("../model/candidate.model"); // NEW
+require('../middlewares/google')
 const bcrypt = require("bcryptjs");
 const app = express();
 const methodOverride = require("method-override");
@@ -26,6 +28,9 @@ initializePassport(
     return userFound;
   }
 );
+require('../middlewares/google')
+app.use(passport.initialize());  // NEW
+app.use(passport.session()); // NEW
 
 app.use(flash());
 app.use(
@@ -47,7 +52,22 @@ app.use(methodOverride("_method"));
 // ========================================================
 // GET
 // ========================================================
+// ============================================================================================
+// GOOGLE AUTH ROUTE
+exports.google_auth =
+  ("/auth/google",
+  passport.authenticate("google", {
+    scope: [ "profile", "email"],
+  }));
 
+  exports.google_auth_callback =
+    ("/auth/google/callback",
+    passport.authenticate("google", {
+      failureRedirect: "/",
+      successRedirect: "/profile",
+      failureFlash: true,
+      successFlash: "Successfully logged in!",
+    }));
 
 // ========================================================
 // TESTING

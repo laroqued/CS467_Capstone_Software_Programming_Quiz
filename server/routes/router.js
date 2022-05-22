@@ -27,6 +27,15 @@ route.get("/take_quiz", checkAuthenticated, services.get_take_quiz);
 route.delete("/logout"), checkNotAuthenticated, services.post_delete;
 // ============================================================================================
 route.get("/snuck_in", services.snuck_in)
+
+// ============================================================================================
+// GOOGLE AUTH ROUTE
+
+route.get("/auth/google", services.google_auth); // NEW
+route.get("/auth/google/callback", services.google_auth_callback); // NEW
+
+
+
 // Aaron
 route.get("/quizzes", checkAuthenticated, services.quizzes);
 route.get("/quiz", checkAuthenticated, services.quiz);
