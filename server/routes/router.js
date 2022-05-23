@@ -22,7 +22,7 @@ route.get("/contact", checkAuthenticated, services.get_contact);
 route.post("/send", checkAuthenticated, services.post_contact);
 
 route.get("/take_quiz", checkAuthenticated, services.get_take_quiz);
-// route.post("/take_quiz", checkAuthenticated, services.post_submit_quiz);
+route.post("/take_quiz", checkAuthenticated, services.post_submit_quiz);
 
 route.delete("/logout"), checkNotAuthenticated, services.post_delete;
 // ============================================================================================

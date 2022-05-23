@@ -7,6 +7,7 @@ const nodemailer = require("nodemailer");
 const User = require("../model/User");
 const Quiz = require("../model/quiz");
 const Question = require("../model/question");
+const quiz_instance = require("../model/quiz_instance");
 const bcrypt = require("bcryptjs");
 const app = express();
 const methodOverride = require("method-override");
@@ -40,6 +41,7 @@ const {
   checkAuthenticated,
   checkNotAuthenticated,
 } = require("../middlewares/auth");
+const quiz_instance = require("../model/quiz_instance");
 app.use(methodOverride("_method"));
 
 // ========================================================
@@ -83,9 +85,9 @@ exports.get_take_quiz =
 
     let id = req.query.id;
 
-    const quiz = await Quiz.findById(id);
-
-    const questions = await Question.find({ quiz: id });
+    const quiz_instance = await quiz_instance.findById(id);
+    const quiz = await Quiz.findById(quiz_instance.quiz);
+    const questions = await Question.find({ quiz: quiz_instance.id });
 
     res.render("take_quiz", {
       id: id,
@@ -93,9 +95,26 @@ exports.get_take_quiz =
       questions: questions,
       owner: req.user.email,
       quiz: quiz,
+      quiz_instance: quiz_instance
     });
 
   });
+
+exports.post_submit_quiz =
+("/take_quiz",
+checkNotAuthenticated,
+async (req, res) => {
+  try {
+    
+    
+    await res.redirect("/candidate_complete");
+    res.status(201);
+  } catch (error) {
+    console.log(error);
+    res.redirect("/take_quiz");
+  }
+});
+
 // ==============================================================
 // CONTACT/EMAIL
 // ==============================================================
