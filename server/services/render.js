@@ -78,12 +78,23 @@ exports.register =
 
 exports.get_take_quiz =
   (checkNotAuthenticated,
-  (req, res) => {
+  async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+
+    let id = req.query.id;
+
+    const quiz = await Quiz.findById(id);
+
+    const questions = await Question.find({ quiz: id });
+
     res.render("take_quiz", {
-      name: req.user.name,
+      id: id,
       login_name: req.user.login_name,
+      questions: questions,
+      owner: req.user.email,
+      quiz: quiz,
     });
+
   });
 // ==============================================================
 // CONTACT/EMAIL
