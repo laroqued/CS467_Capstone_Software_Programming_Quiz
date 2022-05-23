@@ -7,7 +7,7 @@ const nodemailer = require("nodemailer");
 const User = require("../model/User");
 const Quiz = require("../model/quiz");
 const Question = require("../model/question");
-const quiz_instance = require("../model/quiz_instance");
+const Quiz_Instance = require("../model/quiz_instance");
 const bcrypt = require("bcryptjs");
 const app = express();
 const methodOverride = require("method-override");
@@ -41,7 +41,6 @@ const {
   checkAuthenticated,
   checkNotAuthenticated,
 } = require("../middlewares/auth");
-const quiz_instance = require("../model/quiz_instance");
 app.use(methodOverride("_method"));
 
 // ========================================================
@@ -85,9 +84,9 @@ exports.get_take_quiz =
 
     let id = req.query.id;
 
-    const quiz_instance = await quiz_instance.findById(id);
+    const quiz_instance = await Quiz_Instance.findById(id);
     const quiz = await Quiz.findById(quiz_instance.quiz);
-    const questions = await Question.find({ quiz: quiz_instance.id });
+    const questions = await Question.find({ quiz: quiz._id });
 
     res.render("take_quiz", {
       id: id,
@@ -101,18 +100,103 @@ exports.get_take_quiz =
   });
 
 exports.post_submit_quiz =
-("/take_quiz",
-checkNotAuthenticated,
-async (req, res) => {
-  try {
-    
-    
-    await res.redirect("/candidate_complete");
-    res.status(201);
-  } catch (error) {
-    console.log(error);
-    res.redirect("/take_quiz");
-  }
+  ("/take_quiz",
+  checkNotAuthenticated,
+  async (req, res) => {
+    try {
+      
+      let total = Object.keys(req.body).length;
+      let correct = 0;
+
+      const keys = Object.keys(req.body);
+
+      for (let i = 0; i < total; i++) {
+
+        let key = keys[i]
+        if (key != "id") {
+
+          let answer = req.body[key];
+          let question = await Question.findById(key);
+          console.log(question.type);
+          if (question.type == "true_or_false") {
+            if (answer == String(question.answer)) {
+              correct += 1;
+            }
+          } else if (question.type == "multiple_choice") {
+            if (answer == String(question.answer)) {
+              correct += 1;
+            }
+          } else if (question.type == "check_all") {
+            console.log(answer);
+            let correct_answer = true;
+
+            if (answer.length != question.answer_multiple.length) {
+              correct_answer = false;
+            }
+
+            question.answer_multiple.map(String);
+            
+            answer.forEach(current_answer => {
+              if (!question.answer_multiple.includes(current_answer)) {
+                correct_answer = false;
+                return;
+              }
+            });
+            question.answer_multiple.forEach(current_answer => {
+              if (!answer.includes(current_answer)) {
+                correct_answer = false;
+                return;
+              }
+            });
+            
+
+            if (correct_answer) {
+              correct += 1;
+            }
+          } else if (question.type == "fill") {
+            question.answer_multiple.map(String);
+            if (question.answer_multiple.includes(answer)) {
+              correct += 1;
+            }
+          }
+        
+        }
+
+      }
+
+      let grade = correct / (total-1);
+      await Quiz_Instance.findByIdAndUpdate(req.body.id, {
+        grade: grade,
+        completed: true
+      });
+
+      await res.redirect("/candidate_complete");
+      res.status(201);
+    } catch (error) {
+      console.log(error);
+      res.redirect("/take_quiz");
+    }
+});
+
+exports.create_quiz_instance =
+  ("/create_quiz_instance",
+  checkAuthenticated,
+  async (req, res) => {
+    try {
+      const quiz_instance = new Quiz_Instance({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        quiz: req.body.quiz,
+        completed: false
+      });
+      await quiz_instance.save();
+      await res.redirect("/quizzes");
+      res.status(201);
+    } catch (error) {
+      console.log(error);
+      res.redirect("/create_quiz");
+    }
 });
 
 // ==============================================================
