@@ -18,7 +18,7 @@ const quiz_instanceSchema = new mongoose.Schema({
         required: true
     },
     grade: {
-        type: Integer
+        type: Number
     },
     completed: {
         type: Boolean,
