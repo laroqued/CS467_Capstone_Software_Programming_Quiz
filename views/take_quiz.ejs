@@ -19,7 +19,7 @@
     %>
     <div class="bg-secondary"></div>
     <div class="bg-lighten-xl"></div>
-<form>
+<form action="take_quiz" method="POST">
     <card class="card-body" id="quiz-cards">
         <ul class="list-group">
             
@@ -50,7 +50,7 @@
 
 
                                 <label for=<%=current_radio%>>
-                                <input type="radio" name=<%= "mc_" + multiple %> id=<%= current_radio %> value=<%= current_value %> > <%=current_value%> </label>
+                                <input type="radio" name=<%= question._id %> id=<%= current_radio %> value=<%= current_value %> > <%=current_value%> </label>
 
 
                             <% } %>
@@ -60,10 +60,10 @@
                         <% } else if (question.type == "true_or_false") { %>
 
                             <!-- TRUE -->
-                            <label for=<%= "true" + true_false %>>      <input type="radio" name=<%= "tf_" + true_false %> id=<%= "true" + true_false %> value="true"> True</label>
+                            <label for=<%= "true" + true_false %>>      <input type="radio" name=<%= question._id %> id=<%= "true" + true_false %> value="true"> True</label>
                         
                             <!-- FALSE -->
-                            <label for=<%= "false" + true_false %>>    <input type="radio" name=<%= "tf_" + true_false %> id=<%= "false" + true_false %> value="false">  False</label>
+                            <label for=<%= "false" + true_false %>>    <input type="radio" name=<%= question._id %> id=<%= "false" + true_false %> value="false">  False</label>
                         
                             <!-- INCREMENT -->
                             <% true_false += 1; %>
@@ -85,7 +85,7 @@
                                     let current_check = "check_" + String(check_all) + String(i);
                                     let current_value = shuffled[i];
                                 %>
-                                <label for=<%=current_check%>>       <input type="checkbox" name=<%= "check_" + check_all %> id=<%= current_check %> value=<%= current_value %> > <%=current_value%></label>
+                                <label for=<%=current_check%>>       <input type="checkbox" name=<%= question._id %> id=<%= current_check %> value=<%= current_value %> > <%=current_value%></label>
                             
 
                             <% } %>
@@ -94,7 +94,7 @@
 
                         <!-- FILL IN THE BLANK -->
                         <% } else if (question.type == "fill") { %>
-                            <input class="contact-form-text" type="text" name=<%= "fill_" + fill %> placeholder="Type answer here" required>
+                            <input class="contact-form-text" type="text" name=<%= question._id %> placeholder="Type answer here" required>
                             <% fill += 1; %>
                         <% } %>
 
@@ -107,8 +107,9 @@
         </ul>
 
     </card>
+    <input type="hidden" name="id" value=<%=id%>>
+    <button class="btn btn-primary">Submit Quiz</button>
 </form>
-
 
 </body>
 
