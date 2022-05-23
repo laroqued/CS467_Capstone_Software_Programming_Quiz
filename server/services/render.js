@@ -7,8 +7,8 @@ const nodemailer = require("nodemailer");
 const User = require("../model/User");
 const Quiz = require("../model/quiz");
 const Question = require("../model/question");
-const Candidate = require("../model/candidate.model"); // NEW
-require('../middlewares/google')
+const Candidate= require("../model/candidate.model"); // NEW
+const CandidateService= require("../controller/candidate.service"); // NEW
 const bcrypt = require("bcryptjs");
 const app = express();
 const methodOverride = require("method-override");
@@ -52,6 +52,7 @@ app.use(methodOverride("_method"));
 // ========================================================
 // GET
 // ========================================================
+
 // ============================================================================================
 // GOOGLE AUTH ROUTE
 exports.google_auth =
@@ -63,7 +64,7 @@ exports.google_auth =
   exports.google_auth_callback =
     ("/auth/google/callback",
     passport.authenticate("google", {
-      failureRedirect: "/",
+      failureRedirect: "/login_candidate",
       successRedirect: "/profile",
       failureFlash: true,
       successFlash: "Successfully logged in!",
