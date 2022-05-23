@@ -48,6 +48,8 @@ route.post("/question", checkAuthenticated, services.update_question);
 route.get("/delete_question", checkAuthenticated, services.del_question);
 route.post("/delete_question", checkAuthenticated, services.delete_question);
 
+route.post("/create_quiz_instance", checkAuthenticated, services.create_quiz_instance);
+
 //-----------------------------
 //Dominique
 route.get("/candidate_quiz", checkAuthenticated, services.canidate_quiz);
