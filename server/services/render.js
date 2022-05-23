@@ -117,7 +117,7 @@ exports.post_submit_quiz =
 
           let answer = req.body[key];
           let question = await Question.findById(key);
-          console.log(question.type);
+
           if (question.type == "true_or_false") {
             if (answer == String(question.answer)) {
               correct += 1;
@@ -127,7 +127,7 @@ exports.post_submit_quiz =
               correct += 1;
             }
           } else if (question.type == "check_all") {
-            console.log(answer);
+
             let correct_answer = true;
 
             if (answer.length != question.answer_multiple.length) {
