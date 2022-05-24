@@ -13,13 +13,15 @@ const uuid = require("uuid");
 
 // ========================================
 // Uncomment to allow Google Auth
+// http://localhost:3001/home
 // ========================================
-const UserService = require("./src/user");
-require("./src/config/passport");
-require("./src/config/local");
-require("./src/config/google");
+// const UserService = require("./src/user");
+// require("./src/config/passport");
+// require("./src/config/local");
+// require("./src/config/google");
 // ========================================
 // comment to allow Regular Login
+// http://localhost:3001/login
 // ========================================
 
 
@@ -143,7 +145,7 @@ const {
 } = require("./server/middlewares/auth");
 app.use(methodOverride("_method"));
 
-app.get("/", checkAuthenticated, (req, res) => {
+app.get("/index", (req, res) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
   res.render("index", { name: req.user.name });
 });
@@ -186,15 +188,17 @@ app.get("/profile", isLoggedIn, (req, res) => {
   res.render("profile.ejs", { user: req.user });
 });
 
+
+
 app.get(
-  "/auth/google",
+  "/auth/google/",
   passport.authenticate("google", {
     scope: ["profile", "email"],
   })
 );
 
 app.get(
-  "/auth/google/callback",
+  "/auth/google/callback/",
   passport.authenticate("google", {
     failureRedirect: "/g",
     successRedirect: "/take_quiz",

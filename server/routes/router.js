@@ -10,7 +10,7 @@ const controller = require("../controller/controller");
 
 // Routes
 // Donnyves
-route.get("/", checkAuthenticated, services.homeRoutes);
+route.get("/index", checkAuthenticated, services.homeRoutes);
 
 route.get("/login", checkNotAuthenticated, services.login);
 route.post("/login", checkNotAuthenticated, services.post_login);
@@ -91,7 +91,7 @@ route.get(
  *  @description Root Route
  *  @method GET /
  */
-route.get("/", services.homeRoutes);
+route.get("/index", services.homeRoutes);
 
 /**
  *  @description add users

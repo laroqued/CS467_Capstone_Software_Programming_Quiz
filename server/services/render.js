@@ -288,7 +288,7 @@ exports.post_contact =
 // ========================================================
 // Donnyves
 exports.post_login = passport.authenticate("local", {
-  successRedirect: "/",
+  successRedirect: "/index",
   failureRedirect: "/login",
   failureFlash: true, // shows messages from passort.config
 });
