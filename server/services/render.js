@@ -7,6 +7,8 @@ const nodemailer = require("nodemailer");
 const User = require("../model/User");
 const Quiz = require("../model/quiz");
 const Question = require("../model/question");
+const Candidate= require("../model/candidate.model"); // NEW
+const CandidateService= require("../controller/candidate.service"); // NEW
 const bcrypt = require("bcryptjs");
 const app = express();
 const methodOverride = require("method-override");
@@ -24,6 +26,9 @@ initializePassport(
     return userFound;
   }
 );
+require('../middlewares/google')
+app.use(passport.initialize());  // NEW
+app.use(passport.session()); // NEW
 
 app.use(flash());
 app.use(
@@ -46,7 +51,113 @@ app.use(methodOverride("_method"));
 // GET
 // ========================================================
 
+<<<<<<< HEAD
 // ========================================================
+=======
+// ============================================================================================
+// ============================================================================================
+// GOOGLE AUTH ROUTE
+
+const isLoggedIn = (req, res, next) => {
+  req.user ? next() : res.sendStatus(401);
+};
+
+exports.get_g =
+  ("/g",
+  (req, res) => {
+    res.render("google.ejs");
+  });
+exports.get_home =
+  ("/home",
+  (req, res) => {
+    res.render("home.ejs");
+  });
+exports.local_sign_up =
+  ("/layouts/signup",
+  (req, res) => {
+    res.render("layouts/signup.ejs");
+  });
+exports.get_signin =
+  ("/layouts/signin",
+  (req, res) => {
+    res.render("layouts/signin.ejs");
+  });
+exports.get_profile =
+  ("/profile",
+  isLoggedIn,
+  (req, res) => {
+    res.render("profile.ejs", { user: req.user });
+  });
+
+exports.google_auth =
+  ("/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  }));
+
+exports.google_auth_callback =
+  ("/auth/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/g",
+    successRedirect: "/profile",
+    failureFlash: true,
+    successFlash: "Successfully logged in!",
+  }));
+
+exports.get_auth_logout =
+  ("/auth/logout",
+  (req, res) => {
+    req.flash("success", "Successfully logged out");
+    req.session.destroy(function () {
+      res.clearCookie("connect.sid");
+      res.redirect("/home");
+    });
+  });
+
+exports.post_auth_signup =
+  ("/auth/layouts/signup",
+  async (req, res) => {
+    const { first_name, last_name, email, password } = req.body;
+
+    if (password.length < 8) {
+      req.flash(
+        "error",
+        "Account not created. Password must be 7+ characters long"
+      );
+      return res.redirect("/layouts/signup");
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    try {
+      await UserService.addLocalUser({
+        id: uuid.v4(),
+        email,
+        firstName: first_name,
+        lastName: last_name,
+        password: hashedPassword,
+      });
+    } catch (e) {
+      req.flash(
+        "error",
+        "Error creating a new account. Try a different login method."
+      );
+      res.redirect("/layouts/signup");
+    }
+
+    res.redirect("/layouts/signin");
+  });
+exports.post_signin =
+  ("/auth/layouts/signin",
+  passport.authenticate("local", {
+    successRedirect: "/profile",
+    failureRedirect: "/layouts/signin",
+    failureFlash: true,
+  }));
+// ============================================================================================
+// GOOGLE AUTH ROUTE END
+// ============================================================================================
+>>>>>>> 1faead5f43c0c4be8fd437c66227521e33ee2a93
 // TESTING
 exports.snuck_in =
   (checkAuthenticated,
