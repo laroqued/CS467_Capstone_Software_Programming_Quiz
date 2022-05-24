@@ -10,10 +10,10 @@ const methodOverride = require("method-override");
 const bcrypt = require("bcrypt");
 const uuid = require("uuid");
 
-// const UserService = require("./src/user");
-// require("./src/config/passport");
-// require("./src/config/local");
-// require("./src/config/google");
+const UserService = require("./src/user");
+require("./src/config/passport");
+require("./src/config/local");
+require("./src/config/google");
 
 // Create a .env file to use process.env
 let port = process.env.PORT;
