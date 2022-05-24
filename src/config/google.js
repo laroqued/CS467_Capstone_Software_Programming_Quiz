@@ -11,23 +11,23 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       const id = profile.id;
-      const email = profile.emails[0].value;
+      const google_email = profile.emails[0].value;
       const firstName = profile.name.givenName;
       const lastName = profile.name.familyName;
       const profilePhoto = profile.photos[0].value;
       const source = "google";
 
 
-      const currentUser = await UserService.getUserByEmail({ email })
+      const currentUser = await UserService.getUserByEmail({ google_email });
 
       if (!currentUser) {
         const newUser = await UserService.addGoogleUser({
           id,
-          email,
+          google_email,
           firstName,
           lastName,
-          profilePhoto
-        })
+          profilePhoto,
+        });
         return done(null, newUser);
       }
 

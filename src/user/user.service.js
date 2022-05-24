@@ -1,10 +1,10 @@
 const addGoogleUser =
   (User) =>
-  ({ id, email, firstName, lastName, profilePhoto }) => {
-    console.log(id, email, firstName, lastName, profilePhoto);
+  ({ id, google_email, firstName, lastName, profilePhoto }) => {
+    console.log(id, google_email, firstName, lastName, profilePhoto);
     const user = new User({
       id,
-      email,
+      google_email,
       firstName,
       lastName,
       profilePhoto,
@@ -15,10 +15,10 @@ const addGoogleUser =
 
 const addLocalUser =
   (User) =>
-  ({ id, email, firstName, lastName, password }) => {
+  ({ id, google_email, firstName, lastName, password }) => {
     const user = new User({
       id,
-      email,
+      google_email,
       firstName,
       lastName,
       password,
@@ -33,8 +33,8 @@ const getUsers = (User) => () => {
 
 const getUserByEmail =
   (User) =>
-  async ({ email }) => {
-    return await User.findOne({ email });
+  async ({ google_email }) => {
+    return await User.findOne({ google_email });
   };
 
 module.exports = (User) => {

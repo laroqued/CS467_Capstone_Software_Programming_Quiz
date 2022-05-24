@@ -4,11 +4,13 @@ const UserService = require('../user')
 const bcrypt = require('bcrypt');
 
 passport.use(new LocalStrategy(
-  async function (email, password, done) {
-    const currentUser = await UserService.getUserByEmail({ email })
+  async function (google_email, password, done) {
+    const currentUser = await UserService.getUserByEmail({ google_email });
 
     if (!currentUser) {
-      return done(null, false, { message: `User with email ${email} does not exist` });
+      return done(null, false, {
+        message: `User with email ${google_email} does not exist`,
+      });
     }
 
     if (currentUser.source != "local") {

@@ -216,7 +216,7 @@ app.get("/auth/logout", (req, res) => {
 });
 
 app.post("/auth/local/signup", async (req, res) => {
-  const { first_name, last_name, email, password } = req.body;
+  const { first_name, last_name, google_email, password } = req.body;
 
   if (password.length < 8) {
     req.flash(
@@ -231,7 +231,7 @@ app.post("/auth/local/signup", async (req, res) => {
   try {
     await UserService.addLocalUser({
       id: uuid.v4(),
-      email,
+      google_email,
       firstName: first_name,
       lastName: last_name,
       password: hashedPassword,

@@ -6,7 +6,7 @@ const userSchema = new Schema({
     type: String,
     default: null,
   },
-  email: {
+  google_email: {
     type: String,
     required: [true, "email required"],
     unique: [true, "email already registered"],
@@ -16,7 +16,7 @@ const userSchema = new Schema({
   profilePhoto: String,
   password: String,
   source: { type: String, required: [true, "source not specified"] },
-  lastVisited: { type: Date, default: new Date() }
+  lastVisited: { type: Date, default: new Date() },
 });
 
 var userModel = mongoose.model("candidate", userSchema);
