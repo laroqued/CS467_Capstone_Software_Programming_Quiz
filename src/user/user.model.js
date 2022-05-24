@@ -19,6 +19,6 @@ const userSchema = new Schema({
   lastVisited: { type: Date, default: new Date() }
 });
 
-var userModel = mongoose.model("candidate", userSchema, "candidate");
+var userModel = mongoose.model("candidate", userSchema);
 
 module.exports = userModel;

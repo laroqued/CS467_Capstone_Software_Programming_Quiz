@@ -6,14 +6,15 @@ const flash = require("express-flash");
 const session = require("express-session");
 const passport = require("passport");
 const methodOverride = require("method-override");
-
 const uuid = require("uuid");
 const bcrypt = require("bcrypt");
-const UserService = require("./src/user");
 
-//require('./src/config/passport');
-require("./src/config/local");
-require("./src/config/google");
+
+
+//const UserService = require("./src/user");
+// require('./src/config/passport');
+// require("./src/config/local");
+// require("./src/config/google");
 
 
 
