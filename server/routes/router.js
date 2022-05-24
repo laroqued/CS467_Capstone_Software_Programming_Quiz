@@ -26,9 +26,9 @@ route.get("/take_quiz", checkAuthenticated, services.get_take_quiz);
 
 route.delete("/logout"), checkNotAuthenticated, services.post_delete;
 // ============================================================================================
-<<<<<<< HEAD
+
 route.get("/snuck_in", services.snuck_in);
-=======
+
 route.get("/snuck_in", services.snuck_in)
 
 // ============================================================================================
@@ -52,7 +52,6 @@ route.post("/auth/layouts/signin", services.post_signin);
 
 
 
->>>>>>> 1faead5f43c0c4be8fd437c66227521e33ee2a93
 // Aaron
 route.get("/quizzes", checkAuthenticated, services.quizzes);
 route.get("/quiz", checkAuthenticated, services.quiz);
