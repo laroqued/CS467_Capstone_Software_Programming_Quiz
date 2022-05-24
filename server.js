@@ -6,6 +6,17 @@ const flash = require("express-flash");
 const session = require("express-session");
 const passport = require("passport");
 const methodOverride = require("method-override");
+const uuid = require("uuid");
+const bcrypt = require("bcrypt");
+
+
+
+//const UserService = require("./src/user");
+// require('./src/config/passport');
+// require("./src/config/local");
+// require("./src/config/google");
+
+
 
 // const uuid = require("uuid");
 // const bcrypt = require("bcrypt");
@@ -105,7 +116,6 @@ app.use(morgan("tiny"));
 
 // Route setup
 const path = require("path");
-app.use(require("./server/routes/router"));
 
 // //======================================================================
 // // Possible JWT routes to implement later?
@@ -117,6 +127,14 @@ app.use(require("./server/routes/router"));
 // // Route Middleware (/api/user is prefixed for the auth.js routes)
 // app.use('/api/user', authRoute)
 // app.use('/api/posts', postRoute)
+
+
+// //======================================================================
+// //======================================================================
+
+app.use(require("./server/routes/router"));
+
+// //======================================================================
 // //======================================================================
 
 const {

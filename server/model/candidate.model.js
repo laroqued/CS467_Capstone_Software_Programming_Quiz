@@ -1,7 +1,7 @@
 let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const candidateSchema = new Schema({
   id: {
     type: String,
     default: null,
@@ -16,9 +16,9 @@ const userSchema = new Schema({
   profilePhoto: String,
   password: String,
   source: { type: String, required: [true, "source not specified"] },
-  lastVisited: { type: Date, default: new Date() }
+  lastVisited: { type: Date, default: new Date() },
 });
 
-var userModel = mongoose.model("candidate", userSchema);
+var candidateModel = mongoose.model("candidate", candidateSchema, "candidate");
 
-module.exports = userModel;
+module.exports = candidateModel;
