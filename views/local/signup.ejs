@@ -16,11 +16,13 @@
 <body>
   <p class="links">
     <a href="/local/signup">Sign up using Email →</a>
+      <a href="/home">Home →</a>
+
   </p>
   <div class="content">
     <form class="auth-container text-left" action="/auth/local/signin" method="POST">
       <div class="text-center">
-        <a href="/"><img class="mb-4" src="../images/saasbase.png" alt="" width="72" height="72" /></a>
+        <a href="/home"><img class="mb-4" src="https://cdn.ilovefreesoftware.com/wp-content/uploads/2010/01/Best-Free-Email-Clients.png" alt="" width="150" height="150" /></a>
         <h1 class="h3 mb-3 font-weight-normal">Sign in with Email</h1>
         <p class="mb-3 text-muted">
           Implement a local signin strategy using Passport.js and MongoDB
@@ -30,13 +32,13 @@
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
             <input type="email" name="username" class="form-control" id="exampleInputEmail1"
-              aria-describedby="emailHelp" placeholder="elon.musk@gmail.com" required />
+              aria-describedby="emailHelp" placeholder="example@gmail.com" required />
             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
           </div>
           <div class="form-group">
             <label for="exampleInputPassword1">Password</label>
             <input type="password" name="password" class="form-control" id="exampleInputPassword1" ax
-              placeholder="elonmusk79!" required />
+              placeholder="*********************" required />
           </div>
         </div>
 
@@ -55,9 +57,7 @@
           <% } %>
 
             <div class="mt-5 mb-3 text-center">
-              <a class="text-muted" href="https://saasbase.dev">
-                Built by SaaSBase
-              </a>
+    
             </div>
       </div>
     </form>

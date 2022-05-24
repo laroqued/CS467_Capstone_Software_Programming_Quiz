@@ -10,10 +10,21 @@ const methodOverride = require("method-override");
 const bcrypt = require("bcrypt");
 const uuid = require("uuid");
 
+
+// ========================================
+// Uncomment to allow Google Auth
+// ========================================
 const UserService = require("./src/user");
 require("./src/config/passport");
 require("./src/config/local");
 require("./src/config/google");
+// ========================================
+// comment to allow Regular Login
+// ========================================
+
+
+
+
 
 // Create a .env file to use process.env
 let port = process.env.PORT;
@@ -186,7 +197,7 @@ app.get(
   "/auth/google/callback",
   passport.authenticate("google", {
     failureRedirect: "/g",
-    successRedirect: "/profile",
+    successRedirect: "/take_quiz",
     failureFlash: true,
     successFlash: "Successfully logged in!",
   })
