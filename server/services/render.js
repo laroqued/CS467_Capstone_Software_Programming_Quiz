@@ -10,8 +10,6 @@ const Question = require("../model/question");
 const bcrypt = require("bcryptjs");
 const app = express();
 const methodOverride = require("method-override");
-const cookieParser = require("cookie-parser");
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const initializePassport = require("../../passport-config");
@@ -35,7 +33,7 @@ app.use(
     saveUninitialized: false,
   })
 );
-app.use(cookieParser());
+
 const { mainMail } = require("../../utils/email");
 
 const {
@@ -47,7 +45,6 @@ app.use(methodOverride("_method"));
 // ========================================================
 // GET
 // ========================================================
-
 
 // ========================================================
 // TESTING
@@ -95,9 +92,9 @@ exports.get_contact =
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     let quizId = req.query.id;
-     const name = await Quiz.find({
-       name: req.user.name,
-     });
+    const name = await Quiz.find({
+      name: req.user.name,
+    });
     res.render("contact", {
       login_name: req.user.login_name,
       msg: "",
@@ -125,12 +122,9 @@ exports.post_contact =
 <p>${req.body.message}</p>
 <p>Click the link below to start your quiz.</p>
 <p></p>
-
 <li>Local Host Quiz: http://localhost:3001/snuck_in</li>
 <li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_quiz?id=${req.body.quiz}</li>
-
 <li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/take_quiz?id=${req.body.quiz}</li>
-
 <li>Production Quiz: https://software-programming-quiz.herokuapp.com/candidate_quiz?id=${req.body.quiz}</li>
 </ul>
 `;
@@ -171,7 +165,7 @@ exports.post_contact =
       }
     });
   });
-  
+
 // ==============================================================
 // EMAIL END
 // ==============================================================
