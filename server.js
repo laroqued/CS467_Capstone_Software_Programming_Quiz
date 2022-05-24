@@ -11,7 +11,7 @@ const bcrypt = require("bcrypt");
 
 
 
-//const UserService = require("./src/user");
+// const UserService = require("./src/user");
 // require('./src/config/passport');
 // require("./src/config/local");
 // require("./src/config/google");
@@ -159,6 +159,9 @@ app.delete("/logout", checkAuthenticated, async (req, res) => {
 // GOOGLE
 // ================================================================================
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 const isLoggedIn = (req, res, next) => {
   req.user ? next() : res.sendStatus(401);
 };
@@ -248,6 +251,7 @@ app.post(
     failureFlash: true,
   })
 );
+
 
 // ================================================================================
 // GOOGLE END
