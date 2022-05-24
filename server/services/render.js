@@ -7,11 +7,13 @@ const nodemailer = require("nodemailer");
 const User = require("../model/User");
 const Quiz = require("../model/quiz");
 const Question = require("../model/question");
-const Candidate= require("../model/candidate.model"); // NEW
-const CandidateService= require("../controller/candidate.service"); // NEW
+
 const bcrypt = require("bcryptjs");
 const app = express();
 const methodOverride = require("method-override");
+
+
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const initializePassport = require("../../passport-config");
@@ -26,9 +28,7 @@ initializePassport(
     return userFound;
   }
 );
-require('../middlewares/google')
-app.use(passport.initialize());  // NEW
-app.use(passport.session()); // NEW
+
 
 app.use(flash());
 app.use(
