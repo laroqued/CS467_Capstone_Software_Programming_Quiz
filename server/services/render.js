@@ -146,7 +146,7 @@ exports.post_submit_quiz =
                 return;
               }
             });
-            
+
             if (correct_answer) {
               correct += 1;
             }
@@ -185,6 +185,7 @@ exports.create_quiz_instance =
         lastName: req.body.lastName,
         email: req.body.email,
         quiz: req.body.quiz,
+        employer: req.body.employer,
         completed: false
       });
       await quiz_instance.save();
