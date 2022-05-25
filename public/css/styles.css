@@ -314,7 +314,7 @@ label {
 } */
 
 #quiz-cards {
-    width: 30rem;
+flex-basis: auto;
 }
 
 .card-header{
