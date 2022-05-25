@@ -21,8 +21,8 @@ route.post("/register",checkNotAuthenticated, services.post_register);
 route.get("/contact", checkAuthenticated, services.get_contact);
 route.post("/send", checkAuthenticated, services.post_contact);
 
-route.get("/take_quiz", checkAuthenticated, services.get_take_quiz);
-// route.post("/take_quiz", checkAuthenticated, services.post_submit_quiz);
+route.get("/take_quiz", checkNotAuthenticated, services.get_take_quiz);
+route.post("/take_quiz", checkNotAuthenticated, services.post_submit_quiz);
 
 route.delete("/logout"), checkNotAuthenticated, services.post_delete;
 // ============================================================================================
@@ -48,13 +48,15 @@ route.post("/question", checkAuthenticated, services.update_question);
 route.get("/delete_question", checkAuthenticated, services.del_question);
 route.post("/delete_question", checkAuthenticated, services.delete_question);
 
+route.post("/create_quiz_instance", checkAuthenticated, services.create_quiz_instance);
+
 //-----------------------------
 //Dominique
 route.get("/candidate_quiz", checkAuthenticated, services.canidate_quiz);
 route.get("/candidate_survey", checkAuthenticated, services.canidate_survey);
 route.get(
   "/candidate_complete",
-  checkAuthenticated,
+  checkNotAuthenticated,
   services.canidate_complete
 );
 //-----------------------------

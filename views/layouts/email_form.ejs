@@ -11,15 +11,24 @@
           <div class="form-group">
             <p>
 
-              <input type="text" name="email_name" class="contact-form-text" placeholder="Your name" required>
+              <input type="text" name="first_name" class="contact-form-text" placeholder="Candidate First Name" required>
             </p>
           </div>
         </div>
+        <div class="col-12">
+          <div class="form-group">
+            <p>
+
+              <input type="text" name="last_name" class="contact-form-text" placeholder="Candidate Last Name" required>
+            </p>
+          </div>
+        </div>
+        
         <!-- Company Field -->
         <div class="col-6">
           <div class="form-group">
             <p>
-               
+    <input type="hidden" name="email_name" value=<%=login_name%>>
     <input type="hidden" name="quiz" value=<%=quizId %> >
 
             </p>
@@ -33,7 +42,7 @@
         <div class="col-12">
           <div class="form-group">
             <p>
-              <input type="email" name="email" class="contact-form-text" placeholder="Your email" />
+              <input type="email" name="email" class="contact-form-text" placeholder="Candidate email" />
             </p>
           </div>
         </div>
@@ -49,7 +58,7 @@
         <div class="col-12">
           <div class="form-group">
             <p>
-              <input type="text" name="subject" class="contact-form-text" placeholder="Subject">
+              <input type="hidden" name="subject" class="contact-form-text" placeholder="Subject" value="Software Programming Quiz Invitation">
             </p>
           </div>
         </div>

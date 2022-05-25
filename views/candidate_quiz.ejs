@@ -124,7 +124,7 @@
                             <!-- FILL IN THE BLANK -->
                             <% } else if (question.type == "fill") { %>
                                 <input class="contact-form-text" type="text" name=<%= "fill_" + fill %> placeholder="Type answer here" required>
-
+                                <% fill += 1; %>
                             <% } %>
 
                             </form>
