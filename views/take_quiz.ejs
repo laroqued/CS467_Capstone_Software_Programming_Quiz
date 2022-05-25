@@ -79,7 +79,7 @@
                                     return 0.5 - Math.random();
                                 });
                             %>
-
+                            <input type="hidden" name=<%= question._id %> value=''>
                             <% for (let i = 0; i < 4; i++) { %>
                                 <% 
                                     let current_check = "check_" + String(check_all) + String(i);
