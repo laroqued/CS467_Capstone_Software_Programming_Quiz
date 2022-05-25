@@ -105,7 +105,6 @@ exports.post_submit_quiz =
       
       let total = Object.keys(req.body).length;
       let correct = 0;
-
       const keys = Object.keys(req.body);
 
       for (let i = 0; i < total; i++) {
@@ -116,14 +115,19 @@ exports.post_submit_quiz =
           let answer = req.body[key];
           let question = await Question.findById(key);
 
+          // grading
+
+          // true/false
           if (question.type == "true_or_false") {
             if (answer == String(question.answer)) {
               correct += 1;
             }
+          // multiple choice
           } else if (question.type == "multiple_choice") {
             if (answer == String(question.answer)) {
               correct += 1;
             }
+          // check all that apply
           } else if (question.type == "check_all") {
 
             let correct_answer = true;
@@ -150,6 +154,7 @@ exports.post_submit_quiz =
             if (correct_answer) {
               correct += 1;
             }
+          // fill in the blank
           } else if (question.type == "fill") {
             question.answer_multiple.map(String);
             if (question.answer_multiple.includes(answer)) {
@@ -175,6 +180,7 @@ exports.post_submit_quiz =
     }
 });
 
+// for manually creating quiz_instance with postman
 exports.create_quiz_instance =
   ("/create_quiz_instance",
   checkAuthenticated,
@@ -220,6 +226,17 @@ exports.post_contact =
   ("/send",
   checkAuthenticated,
   async (req, res) => {
+    // create quiz_instance
+    const quiz_instance = new Quiz_Instance({
+      firstName: req.body.first_name,
+      lastName: req.body.last_name,
+      email: req.body.email,
+      quiz: req.body.quiz,
+      employer: req.user._id,
+      completed: false
+    });
+    await quiz_instance.save();
+    let id = quiz_instance._id;
     let quizId = req.query.id;
 
     const output = `
@@ -230,18 +247,18 @@ exports.post_contact =
 <li>Email: softwareprogrammingquiz@gmail.com</li>
 <li>Phone: 555-555-5555</li>
 <h3>Message </h3>
-<p>Hello ${req.body.email_name}, </p>
+<p>Hello ${req.body.first_name} ${req.body.last_name}, </p>
 <p></p>
 <p>${req.body.message}</p>
 <p>Click the link below to start your quiz.</p>
 <p></p>
 
 <li>Local Host Quiz: http://localhost:3001/snuck_in</li>
-<li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_quiz?id=${req.body.quiz}</li>
+<li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_quiz?id=${id}</li>
 
-<li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/take_quiz?id=${req.body.quiz}</li>
+<li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/take_quiz?id=${id}</li>
 
-<li>Production Quiz: https://software-programming-quiz.herokuapp.com/candidate_quiz?id=${req.body.quiz}</li>
+<li>Production Quiz: https://software-programming-quiz.herokuapp.com/candidate_quiz?id=${id}</li>
 </ul>
 `;
     // create reusable transporter object using the default SMTP transport
@@ -260,7 +277,7 @@ exports.post_contact =
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
-      from: '"Donnyves Laroque" <softwareprogrammingquiz@gmail.com>', // sender address
+      from: process.env.GMAIL_USER,//'"Donnyves Laroque" <softwareprogrammingquiz@gmail.com>', // sender address
       to: req.body.email, // list of receivers
       subject: req.body.subject, // Subject line
       text: "Hello world?", // plain text body
