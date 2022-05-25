@@ -16,7 +16,7 @@ const uuid = require("uuid");
 // http://localhost:3001/home
 // ========================================
 const UserService = require("./src/user");
-//require("./src/config/passport");
+require("./src/config/passport");
 require("./src/config/local");
 require("./src/config/google");
 //========================================
