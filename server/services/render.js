@@ -90,9 +90,7 @@ exports.get_take_quiz =
 
     res.render("take_quiz", {
       id: id,
-      login_name: req.user.login_name,
       questions: questions,
-      owner: req.user.email,
       quiz: quiz,
       quiz_instance: quiz_instance
     });
@@ -129,19 +127,19 @@ exports.post_submit_quiz =
           } else if (question.type == "check_all") {
 
             let correct_answer = true;
-
-            if (answer.length != question.answer_multiple.length) {
-              correct_answer = false;
-            }
-
             question.answer_multiple.map(String);
             
+            if (typeof(answer) == 'string') {
+              answer = [];
+            }
+
             answer.forEach(current_answer => {
-              if (!question.answer_multiple.includes(current_answer)) {
+              if (!question.answer_multiple.includes(current_answer) & current_answer != '') {
                 correct_answer = false;
                 return;
               }
             });
+
             question.answer_multiple.forEach(current_answer => {
               if (!answer.includes(current_answer)) {
                 correct_answer = false;
@@ -149,7 +147,6 @@ exports.post_submit_quiz =
               }
             });
             
-
             if (correct_answer) {
               correct += 1;
             }
@@ -174,7 +171,7 @@ exports.post_submit_quiz =
       res.status(201);
     } catch (error) {
       console.log(error);
-      res.redirect("/take_quiz");
+      res.redirect("/");
     }
 });
 
@@ -634,14 +631,11 @@ exports.canidate_survey =
   });
 //Dominique
 exports.canidate_complete =
-  (checkAuthenticated,
+  (checkNotAuthenticated,
   (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
-    res.render("candidate_complete", {
-      login_name: req.user.login_name,
-      name: req.user.name,
-    });
+    res.render("candidate_complete");
   });
 
 exports.add_survey = (req, res) => {
