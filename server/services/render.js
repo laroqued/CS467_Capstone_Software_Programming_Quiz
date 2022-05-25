@@ -277,7 +277,7 @@ exports.post_contact =
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
-      from: process.env.GMAIL_USER,//'"Donnyves Laroque" <softwareprogrammingquiz@gmail.com>', // sender address
+      from: '"Donnyves Laroque" <softwareprogrammingquiz@gmail.com>', // sender address
       to: req.body.email, // list of receivers
       subject: req.body.subject, // Subject line
       text: "Hello world?", // plain text body
