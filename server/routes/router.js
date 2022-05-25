@@ -35,17 +35,17 @@ route.get("/snuck_in", services.snuck_in)
 // ============================================================================================
 // GOOGLE AUTH ROUTE
 // ============================================================================================
-route.get('/g', services.get_g) // NEW
-route.get('/home', services.get_home) // NEW
-route.get("/layouts/signup", services.local_sign_up); // NEW
-route.get("/layouts/signin", services.get_signin); // NEW
-route.get("/profile", services.get_profile); // NEW
-route.get("/auth/google", services.google_auth); // NEW
-//route.get("/auth/google/callback", services.google_auth_callback); // NEW (BUG HERE!!!)
-route.get('/auth/logout', services.get_auth_logout)
+// route.get('/g', services.get_g) // NEW
+// route.get('/home', services.get_home) // NEW
+// route.get("/layouts/signup", services.local_sign_up); // NEW
+// route.get("/layouts/signin", services.get_signin); // NEW
+// route.get("/profile", services.get_profile); // NEW
+// route.get("/auth/google", services.google_auth); // NEW
+// //route.get("/auth/google/callback", services.google_auth_callback); // NEW (BUG HERE!!!)
+// route.get('/auth/logout', services.get_auth_logout)
 
-route.post("/auth/layouts/signup", services.post_auth_signup);
-route.post("/auth/layouts/signin", services.post_signin);
+// route.post("/auth/layouts/signup", services.post_auth_signup);
+// route.post("/auth/layouts/signin", services.post_signin);
 // ============================================================================================
 // GOOGLE AUTH ROUTE END
 // ============================================================================================

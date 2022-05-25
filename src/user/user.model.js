@@ -2,10 +2,10 @@ let mongoose = require("mongoose");
 let Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  id: {
-    type: String,
-    default: null,
-  },
+  // id: {
+  //   type: String,
+  //   default: null,
+  // },
   google_email: {
     type: String,
     required: [true, "email required"],

@@ -15,11 +15,11 @@ const uuid = require("uuid");
 // Uncomment to allow Google Auth
 // http://localhost:3001/home
 // ========================================
-// const UserService = require("./src/user");
-// require("./src/config/passport");
-// require("./src/config/local");
-// require("./src/config/google");
-// ========================================
+const UserService = require("./src/user");
+//require("./src/config/passport");
+require("./src/config/local");
+require("./src/config/google");
+//========================================
 // comment to allow Regular Login
 // http://localhost:3001/login
 // ========================================
@@ -145,10 +145,10 @@ const {
 } = require("./server/middlewares/auth");
 app.use(methodOverride("_method"));
 
-app.get("/index", (req, res) => {
-  res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-  res.render("index", { name: req.user.name });
-});
+// app.get("/index", (req, res) => {
+//   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+//   res.render("index", { name: req.user.name });
+// });
 
 app.delete("/logout", checkAuthenticated, async (req, res) => {
   await req.logOut();
@@ -187,8 +187,6 @@ app.get("/local/signin", (req, res) => {
 app.get("/profile", isLoggedIn, (req, res) => {
   res.render("profile.ejs", { user: req.user });
 });
-
-
 
 app.get(
   "/auth/google/",
@@ -260,8 +258,6 @@ app.post(
 // ================================================================================
 // GOOGLE END
 // ================================================================================
-
-
 // connect to database
 const connectDB = require("./server/database/connection");
 // mongoDB conncection
