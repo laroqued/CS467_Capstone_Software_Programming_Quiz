@@ -252,13 +252,8 @@ exports.post_contact =
 <p>${req.body.message}</p>
 <p>Click the link below to start your quiz.</p>
 <p></p>
-
-<li>Local Host Quiz: http://localhost:3001/snuck_in</li>
-<li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_quiz?id=${id}</li>
-
 <li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/take_quiz?id=${id}</li>
-
-<li>Production Quiz: https://software-programming-quiz.herokuapp.com/candidate_quiz?id=${id}</li>
+<li>Production Quiz: https://software-programming-quiz.herokuapp.com/take_quiz?id=${id}</li>
 </ul>
 `;
     // create reusable transporter object using the default SMTP transport
