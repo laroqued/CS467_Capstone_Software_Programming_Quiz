@@ -17,6 +17,10 @@ const quiz_instanceSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    employer: {
+        type: String,
+        required: true
+    },
     grade: {
         type: Number
     },
