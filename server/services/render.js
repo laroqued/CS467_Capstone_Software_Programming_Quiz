@@ -4,10 +4,12 @@ const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
 const nodemailer = require("nodemailer");
+//====MODELS===========================
 const User = require("../model/User");
 const Quiz = require("../model/quiz");
 const Question = require("../model/question");
 const Quiz_Instance = require("../model/quiz_instance");
+//=====================================
 const bcrypt = require("bcryptjs");
 const app = express();
 const methodOverride = require("method-override");
@@ -83,11 +85,13 @@ exports.get_take_quiz =
     const quiz = await Quiz.findById(quiz_instance.quiz);
     const questions = await Question.find({ quiz: quiz._id });
 
+
+
     res.render("take_quiz", {
       id: id,
       questions: questions,
       quiz: quiz,
-      quiz_instance: quiz_instance
+      quiz_instance: quiz_instance,
     });
 
   });
@@ -209,6 +213,9 @@ exports.get_contact =
      const name = await Quiz.find({
        name: req.user.name,
      });
+
+
+
     res.render("contact", {
       login_name: req.user.login_name,
       msg: "",

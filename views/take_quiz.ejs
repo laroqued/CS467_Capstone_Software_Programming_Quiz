@@ -8,7 +8,14 @@
 
 <body>
     
-    
+    <p>Quiz Instance Id: <%= id%></p>
+    <p>Quiz Name: <%= quiz.name%> </p>
+    <p>Employer Email: <%= quiz.owner %> </p>
+    <p>Employer ID: <%= quiz._id %> </p>
+    <p>Candidate First Name: <%= quiz_instance.firstName %> </p>
+    <p>Candidate Last Name: <%= quiz_instance.lastName %></p>
+    <p>Candidate Email: <%=quiz_instance.email  %></p>
+    <p><%= %></p>
 
 
     <% 
@@ -112,9 +119,5 @@
 </form>
 
 </body>
-    <script type="text/javascript">
-        function disableBack() { window.history.forward(); }
-        setTimeout("disableBack()", 0);
-        window.onunload = function () { null };
-    </script>
+
 <%- include('includes/_footer') %>
