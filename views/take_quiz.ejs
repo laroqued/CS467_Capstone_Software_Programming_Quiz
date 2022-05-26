@@ -8,14 +8,21 @@
 
 <body>
     
-    <p>Quiz Instance Id: <%= id%></p><!--  name=""  -->
-    <p>Quiz Name: <%= quiz.name%> </p><!--  name=""  -->
-    <p>Employer Name: <%=users.login_name %></p><!--  name=""  -->
-    <p>Employer Email: <%= quiz.owner %> </p><!--  name=""  -->
-    <p>Employer ID: <%= quiz._id %> </p><!--  name=""  -->
-    <p>Candidate First Name: <%= quiz_instance.firstName %> </p><!--  name=""  -->
-    <p>Candidate Last Name: <%= quiz_instance.lastName %></p><!--  name=""  -->
-    <p>Candidate Email: <%=quiz_instance.email  %></p><!--  name=""  -->
+    <p>Quiz Instance Id: <%= id%></p><!--  name="quiz_instance"  -->
+
+    <p>Quiz Name: <%= quiz.name%> </p><!--  name="quiz_name"  -->
+
+    <p>Employer Name: <%=users.login_name %></p><!--  name="login_name"  -->
+
+    <p>Employer Email: <%= quiz.owner %> </p><!--  name="owner"  -->
+
+    <p>Employer ID: <%= quiz._id %> </p><!--  name="quiz"  -->
+
+    <p>Candidate First Name: <%= quiz_instance.firstName %> </p><!--  name="first_name"  -->
+
+    <p>Candidate Last Name: <%= quiz_instance.lastName %></p><!--  name="last_name"  -->
+
+    <p>Candidate Email: <%=quiz_instance.email  %></p><!--  name="email"  -->
 
 
 
@@ -116,6 +123,13 @@
 
     </card>
     <input type="hidden" name="id" value=<%=id%>>
+    <input type="hidden" name="quiz_name" value=<%=quiz.name%>>
+    <input type="hidden" name="login_name" value=<%=users.login_name%>>
+    <input type="hidden" name="owner" value=<%=quiz.owner%>>
+    <input type="hidden" name="quiz" value=<%=quiz._id%>>
+    <input type="hidden" name="first_name" value=<%=quiz_instance.firstName%>>
+    <input type="hidden" name="last_name" value=<%=quiz_instance.lastName%>>
+    <input type="hidden" name="email" value=<%=quiz_instance.email%>>
     <button class="btn btn-primary">Submit Quiz</button>
 </form>
 
