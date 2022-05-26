@@ -219,7 +219,6 @@ exports.get_contact =
      });
 
 
-
     res.render("contact", {
       login_name: req.user.login_name,
       msg: "",
@@ -653,9 +652,30 @@ exports.canidate_complete =
   (checkNotAuthenticated,
   (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+   let id = req.query.id;
+    let _id = req.query._id
+    const quiz_instance = await Quiz_Instance.findById(id);
+    const quiz = await Quiz.findById(quiz_instance.quiz);
+    const questions = await Question.find({ quiz: quiz._id });
 
-    res.render("candidate_complete");
+    const users = await User.findById(quiz_instance.employer);
+    const login_name = await User.find({ login_name: users.login_name });
+
+    res.render("candidate_complete", {
+      id: id,
+      questions: questions,
+      quiz: quiz,
+      quiz_instance: quiz_instance,
+      users: users,
+    });
   });
+
+
+
+
+
+
+
 
 exports.add_survey = (req, res) => {
   res.render("add_survey");
