@@ -81,17 +81,19 @@ exports.get_take_quiz =
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
-    let id = req.query.id;
-
-    const quiz_instance = await Quiz_Instance.findById(id);
-    const quiz = await Quiz.findById(quiz_instance.quiz);
-    const questions = await Question.find({ quiz: quiz._id });
+let id = req.query.id;
+let _id = req.query._id;
+const quiz_instance = await Quiz_Instance.findById(id);
+const quiz = await Quiz.findById(quiz_instance.quiz);
+const questions = await Question.find({ quiz: quiz._id });
+const users = await User.findById(quiz_instance.employer)
 
     res.render("take_quiz", {
       id: id,
       questions: questions,
       quiz: quiz,
       quiz_instance: quiz_instance,
+      users:users
     });
   });
 

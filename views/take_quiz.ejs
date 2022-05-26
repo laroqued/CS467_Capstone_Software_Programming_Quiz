@@ -10,7 +10,30 @@
     
     <p>Quiz Instance Id: <%= id%></p>
     <p>Quiz Name: <%= quiz.name%> </p>
- 
+    <p>Quiz Instance Id: <%= id%>
+    </p><!--  name="quiz_instance"  -->
+    
+    <p>Quiz Name: <%= quiz.name%>
+    </p><!--  name="quiz_name"  -->
+    
+    <p>Employer Name: <%=users.login_name %>
+    </p><!--  name="login_name"  -->
+    
+    <p>Employer Email: <%= quiz.owner %>
+    </p><!--  name="owner"  -->
+    
+    <p>Employer ID: <%= quiz._id %>
+    </p><!--  name="quiz"  -->
+    
+    <p>Candidate First Name: <%= quiz_instance.firstName %>
+    </p><!--  name="first_name"  -->
+    
+    <p>Candidate Last Name: <%= quiz_instance.lastName %>
+    </p><!--  name="last_name"  -->
+    
+    <p>Candidate Email: <%=quiz_instance.email %>
+    </p><!--  name="email"  -->
+
 
 
     <% 
