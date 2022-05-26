@@ -88,11 +88,14 @@ const quiz = await Quiz.findById(quiz_instance.quiz);
 const questions = await Question.find({ quiz: quiz._id });
 const users = await User.findById(quiz_instance.employer)
 
+
+
     res.render("take_quiz", {
       id: id,
       questions: questions,
       quiz: quiz,
       quiz_instance: quiz_instance,
+
       users:users
     });
   });
@@ -102,6 +105,7 @@ exports.post_submit_quiz =
   checkNotAuthenticated,
   async (req, res) => {
     try {
+      main().catch(console.error);
       let total = Object.keys(req.body).length;
       let correct = 0;
       const keys = Object.keys(req.body);
@@ -182,6 +186,7 @@ exports.create_quiz_instance =
   ("/create_quiz_instance",
   checkAuthenticated,
   async (req, res) => {
+
     try {
       const quiz_instance = new Quiz_Instance({
         firstName: req.body.firstName,
@@ -644,10 +649,24 @@ exports.canidate_survey =
 //Dominique
 exports.canidate_complete =
   (checkNotAuthenticated,
-  (req, res) => {
+  async(req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+   let id = req.query.id;
+    let _id = req.query._id
+    const quiz_instance = await Quiz_Instance.findById(id);
+    const quiz = await Quiz.findById(quiz_instance.quiz);
+    const questions = await Question.find({ quiz: quiz._id });
 
-    res.render("candidate_complete");
+    const users = await User.findById(quiz_instance.employer);
+    const login_name = await User.find({ login_name: users.login_name });
+
+    res.render("candidate_complete", {
+      id: id,
+      questions: questions,
+      quiz: quiz,
+      quiz_instance: quiz_instance,
+      users: users,
+    });
   });
 
 exports.add_survey = (req, res) => {
@@ -661,3 +680,37 @@ exports.update_user =
 
     res.render("update_user", { user: userdata.data });
   });
+// async..await is not allowed in global scope, must use a wrapper
+async function main() {
+  // Generate test SMTP service account from ethereal.email
+  // Only needed if you don't have a real mail account for testing
+  let testAccount = await nodemailer.createTestAccount();
+
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: testAccount.user, // generated ethereal user
+      pass: testAccount.pass, // generated ethereal password
+    },
+  });
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: '"Fred Foo 👻" <foo@example.com>', // sender address
+    to: "bar@example.com, baz@example.com", // list of receivers
+    subject: "Hello ✔", // Subject line
+    text: "Hello world?", // plain text body
+    html: "<b>Hello world?</b>", // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+  // Preview only available when sending through an Ethereal account
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+}
+

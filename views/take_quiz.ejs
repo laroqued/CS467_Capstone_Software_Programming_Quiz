@@ -2,7 +2,7 @@
     <%- include('layouts/head') %>
 
 
-        <%- include('includes/_header') %>
+     
 
 </head>
 
@@ -132,10 +132,21 @@
         </ul>
 
     </card>
-    <input type="hidden" name="id" value=<%=id%>>
-    <button class="btn btn-primary">Submit Quiz</button>
+            <div>
+                <input type="hidden" name="id" value=<%=id %>>
+                <input type="hidden" name="quiz_name" value=<%=quiz.name %>>
+                <input type="hidden" name="login_name" value=<%=users.login_name %>>
+                <input type="hidden" name="owner" value=<%=quiz.owner %>>
+                <input type="hidden" name="quiz" value=<%=quiz._id %>>
+                <input type="hidden" name="first_name" value=<%=quiz_instance.firstName %>>
+                <input type="hidden" name="last_name" value=<%=quiz_instance.lastName %>>
+                <input type="hidden" name="email" value=<%=quiz_instance.email %>>
+
+                
+                <a style="margin-bottom: 10rem;" href=<%="/candidate_complete?id=" + id %> class="btn btn-primary">Submit Quiz</a>
+            </div>
 </form>
 
 </body>
 
-<%- include('includes/_footer') %>
+
