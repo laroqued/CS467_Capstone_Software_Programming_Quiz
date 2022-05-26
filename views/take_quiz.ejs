@@ -47,6 +47,10 @@
 <form action="take_quiz" method="POST">
     <card class="card-body" id="quiz-cards">
         <ul class="list-group">
+
+
+
+            
             
             <% questions.forEach(question=> { %>
                 <li class="list-group-item card"id="quiz-card-background" >
@@ -132,21 +136,24 @@
         </ul>
 
     </card>
-            <div>
-                <input type="hidden" name="id" value=<%=id %>>
-                <input type="hidden" name="quiz_name" value=<%=quiz.name %>>
-                <input type="hidden" name="login_name" value=<%=users.login_name %>>
-                <input type="hidden" name="owner" value=<%=quiz.owner %>>
-                <input type="hidden" name="quiz" value=<%=quiz._id %>>
-                <input type="hidden" name="first_name" value=<%=quiz_instance.firstName %>>
-                <input type="hidden" name="last_name" value=<%=quiz_instance.lastName %>>
-                <input type="hidden" name="email" value=<%=quiz_instance.email %>>
-
-                
-                <a style="margin-bottom: 10rem;" href=<%="/candidate_complete?id=" + id %> class="btn btn-primary">Submit Quiz</a>
+            <div class="form-group">
+        <input type="text" name="id" value=<%=id %> required> <br>
+        <input type="text" name="quiz_name" value=<%=quiz.name %> required><br>
+        <input type="text" name="login_name" value=<%=users.login_name %> required><br>
+        <input type="email" name="owner" value=<%=quiz.owner %> required><br>
+        <input type="text" name="quiz" value=<%=quiz._id %> required><br>
+        <input type="text" name="first_name" value=<%=quiz_instance.firstName %> required><br>
+        <input type="text" name="last_name" value=<%=quiz_instance.lastName %> required><br>
+        <input type="email" name="email" value=<%=quiz_instance.email %> required><br>
+      
+    <a style="margin-bottom: 10rem;" href=<%="/candidate_complete?id=" + id %> class="btn btn-primary">Submit Quiz</a>
             </div>
+                   
 </form>
-
+<script src="">
+    let result = person.hasOwnProperty('firstName');
+        console.log(result); // true
+</script>
 </body>
 
 
