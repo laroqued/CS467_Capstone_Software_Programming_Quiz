@@ -80,10 +80,13 @@ exports.get_take_quiz =
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
     let id = req.query.id;
-
+    let _id = req.query._id
     const quiz_instance = await Quiz_Instance.findById(id);
     const quiz = await Quiz.findById(quiz_instance.quiz);
     const questions = await Question.find({ quiz: quiz._id });
+
+    const users = await User.findById(quiz_instance.employer);
+    const login_name = await User.find({ login_name: users.login_name });
 
 
 
@@ -92,6 +95,7 @@ exports.get_take_quiz =
       questions: questions,
       quiz: quiz,
       quiz_instance: quiz_instance,
+      users: users,
     });
 
   });

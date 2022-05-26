@@ -8,14 +8,15 @@
 
 <body>
     
-    <p>Quiz Instance Id: <%= id%></p>
-    <p>Quiz Name: <%= quiz.name%> </p>
-    <p>Employer Email: <%= quiz.owner %> </p>
-    <p>Employer ID: <%= quiz._id %> </p>
-    <p>Candidate First Name: <%= quiz_instance.firstName %> </p>
-    <p>Candidate Last Name: <%= quiz_instance.lastName %></p>
-    <p>Candidate Email: <%=quiz_instance.email  %></p>
-    <p><%= %></p>
+    <p>Quiz Instance Id: <%= id%></p><!--  name=""  -->
+    <p>Quiz Name: <%= quiz.name%> </p><!--  name=""  -->
+    <p>Employer Name: <%=users.login_name %></p><!--  name=""  -->
+    <p>Employer Email: <%= quiz.owner %> </p><!--  name=""  -->
+    <p>Employer ID: <%= quiz._id %> </p><!--  name=""  -->
+    <p>Candidate First Name: <%= quiz_instance.firstName %> </p><!--  name=""  -->
+    <p>Candidate Last Name: <%= quiz_instance.lastName %></p><!--  name=""  -->
+    <p>Candidate Email: <%=quiz_instance.email  %></p><!--  name=""  -->
+
 
 
     <% 
