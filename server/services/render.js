@@ -4,18 +4,15 @@ const passport = require("passport");
 const flash = require("express-flash");
 const session = require("express-session");
 const nodemailer = require("nodemailer");
-//====MODELS===========================
 const User = require("../model/User");
 const Quiz = require("../model/quiz");
 const Question = require("../model/question");
 const Quiz_Instance = require("../model/quiz_instance");
-//=====================================
 const bcrypt = require("bcryptjs");
 const app = express();
 const methodOverride = require("method-override");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 const initializePassport = require("../../passport-config");
 initializePassport(
   passport,
@@ -50,9 +47,14 @@ app.use(methodOverride("_method"));
 // GET
 // ========================================================
 
-
 // ========================================================
-
+// TESTING
+exports.snuck_in =
+  (checkAuthenticated,
+  (req, res) => {
+    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+    res.render("snuck_in");
+  });
 // ========================================================
 // Donnyves
 exports.homeRoutes =
@@ -80,24 +82,17 @@ exports.get_take_quiz =
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
     let id = req.query.id;
-    let _id = req.query._id
+
     const quiz_instance = await Quiz_Instance.findById(id);
     const quiz = await Quiz.findById(quiz_instance.quiz);
     const questions = await Question.find({ quiz: quiz._id });
-
-    const users = await User.findById(quiz_instance.employer);
-    const login_name = await User.find({ login_name: users.login_name });
-
-
 
     res.render("take_quiz", {
       id: id,
       questions: questions,
       quiz: quiz,
       quiz_instance: quiz_instance,
-      users: users,
     });
-
   });
 
 exports.post_submit_quiz =
@@ -105,16 +100,13 @@ exports.post_submit_quiz =
   checkNotAuthenticated,
   async (req, res) => {
     try {
-      
       let total = Object.keys(req.body).length;
       let correct = 0;
       const keys = Object.keys(req.body);
 
       for (let i = 0; i < total; i++) {
-
-        let key = keys[i]
+        let key = keys[i];
         if (key != "id") {
-
           let answer = req.body[key];
           let question = await Question.findById(key);
 
@@ -125,29 +117,31 @@ exports.post_submit_quiz =
             if (answer == String(question.answer)) {
               correct += 1;
             }
-          // multiple choice
+            // multiple choice
           } else if (question.type == "multiple_choice") {
             if (answer == String(question.answer)) {
               correct += 1;
             }
-          // check all that apply
+            // check all that apply
           } else if (question.type == "check_all") {
-
             let correct_answer = true;
             question.answer_multiple.map(String);
-            
-            if (typeof(answer) == 'string') {
+
+            if (typeof answer == "string") {
               answer = [];
             }
 
-            answer.forEach(current_answer => {
-              if (!question.answer_multiple.includes(current_answer) & current_answer != '') {
+            answer.forEach((current_answer) => {
+              if (
+                !question.answer_multiple.includes(current_answer) &
+                (current_answer != "")
+              ) {
                 correct_answer = false;
                 return;
               }
             });
 
-            question.answer_multiple.forEach(current_answer => {
+            question.answer_multiple.forEach((current_answer) => {
               if (!answer.includes(current_answer)) {
                 correct_answer = false;
                 return;
@@ -157,22 +151,20 @@ exports.post_submit_quiz =
             if (correct_answer) {
               correct += 1;
             }
-          // fill in the blank
+            // fill in the blank
           } else if (question.type == "fill") {
             question.answer_multiple.map(String);
             if (question.answer_multiple.includes(answer)) {
               correct += 1;
             }
           }
-        
         }
-
       }
 
-      let grade = correct / (total-1);
+      let grade = correct / (total - 1);
       await Quiz_Instance.findByIdAndUpdate(req.body.id, {
         grade: grade,
-        completed: true
+        completed: true,
       });
 
       await res.redirect("/candidate_complete");
@@ -181,7 +173,7 @@ exports.post_submit_quiz =
       console.log(error);
       res.redirect("/");
     }
-});
+  });
 
 // for manually creating quiz_instance with postman
 exports.create_quiz_instance =
@@ -195,7 +187,7 @@ exports.create_quiz_instance =
         email: req.body.email,
         quiz: req.body.quiz,
         employer: req.body.employer,
-        completed: false
+        completed: false,
       });
       await quiz_instance.save();
       await res.redirect("/quizzes");
@@ -204,7 +196,7 @@ exports.create_quiz_instance =
       console.log(error);
       res.redirect("/create_quiz");
     }
-});
+  });
 
 // ==============================================================
 // CONTACT/EMAIL
@@ -214,11 +206,9 @@ exports.get_contact =
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     let quizId = req.query.id;
-     const name = await Quiz.find({
-       name: req.user.name,
-     });
-
-
+    const name = await Quiz.find({
+      name: req.user.name,
+    });
     res.render("contact", {
       login_name: req.user.login_name,
       msg: "",
@@ -238,7 +228,7 @@ exports.post_contact =
       email: req.body.email,
       quiz: req.body.quiz,
       employer: req.user._id,
-      completed: false
+      completed: false,
     });
     await quiz_instance.save();
     let id = quiz_instance._id;
@@ -257,8 +247,10 @@ exports.post_contact =
 <p>${req.body.message}</p>
 <p>Click the link below to start your quiz.</p>
 <p></p>
+<li>Local Host Quiz: http://localhost:3001/snuck_in</li>
+<li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_quiz?id=${id}</li>
 <li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/take_quiz?id=${id}</li>
-<li>Production Quiz: https://software-programming-quiz.herokuapp.com/take_quiz?id=${id}</li>
+<li>Production Quiz: https://software-programming-quiz.herokuapp.com/candidate_quiz?id=${id}</li>
 </ul>
 `;
     // create reusable transporter object using the default SMTP transport
@@ -298,7 +290,7 @@ exports.post_contact =
       }
     });
   });
-  
+
 // ==============================================================
 // EMAIL END
 // ==============================================================
@@ -652,30 +644,9 @@ exports.canidate_complete =
   (checkNotAuthenticated,
   (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-   let id = req.query.id;
-    let _id = req.query._id
-    const quiz_instance = await Quiz_Instance.findById(id);
-    const quiz = await Quiz.findById(quiz_instance.quiz);
-    const questions = await Question.find({ quiz: quiz._id });
 
-    const users = await User.findById(quiz_instance.employer);
-    const login_name = await User.find({ login_name: users.login_name });
-
-    res.render("candidate_complete", {
-      id: id,
-      questions: questions,
-      quiz: quiz,
-      quiz_instance: quiz_instance,
-      users: users,
-    });
+    res.render("candidate_complete");
   });
-
-
-
-
-
-
-
 
 exports.add_survey = (req, res) => {
   res.render("add_survey");
