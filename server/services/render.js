@@ -13,6 +13,7 @@ const app = express();
 const methodOverride = require("method-override");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 const initializePassport = require("../../passport-config");
 initializePassport(
   passport,
@@ -49,13 +50,7 @@ app.use(methodOverride("_method"));
 
 
 // ========================================================
-// TESTING
-exports.snuck_in =
-  (checkAuthenticated,
-  (req, res) => {
-    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    res.render("snuck_in");
-  });
+
 // ========================================================
 // Donnyves
 exports.homeRoutes =
