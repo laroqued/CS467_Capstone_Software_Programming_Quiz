@@ -1,16 +1,8 @@
 <head>
     <%- include('layouts/head') %>
-
-
-        <%- include('includes/_header') %>
-
 </head>
 
 <body>
-    
-    
-
-
     <% 
         let multiple = 0;
         let true_false = 0;
@@ -19,6 +11,13 @@
     %>
     <div class="bg-secondary"></div>
     <div class="bg-lighten-xl"></div>
+    <h2><%= quiz.name %></h5>
+
+    <h3>Time Left:</h3>
+    <span id="timer"></span>
+    <span id="hours"></span>
+    <span id="minutes"></span>
+    <span id="seconds"></span>
 <form action="take_quiz" method="POST">
     <card class="card-body" id="quiz-cards">
         <ul class="list-group">
@@ -47,13 +46,9 @@
                                     let current_radio = "mc_" + String(multiple) + String(i);
                                     let current_value = shuffled[i];
                                 %>
-                            
-                                
-
-
+    
                                 <label for=<%=current_radio%>>
                                 <input type="radio" name=<%= question._id %> id=<%= current_radio %> value=<%= current_value %> > <%=current_value%> </label>
-
 
                             <% } %>
                             <% multiple += 1; %>
@@ -95,7 +90,6 @@
                             <% } %>
                             <% check_all += 1; %>
 
-
                         <!-- FILL IN THE BLANK -->
                         <% } else if (question.type == "fill") { %>
                             <input type="hidden" name=<%= question._id %> value=''>
@@ -113,9 +107,9 @@
 
     </card>
     <input type="hidden" name="id" value=<%=id%>>
-    <button class="btn btn-primary">Submit Quiz</button>
+    <button class="btn btn-primary" id="submitQuiz">Submit Quiz</button>
 </form>
 
 </body>
 
-<%- include('includes/_footer') %>
+<script src="js/take_quiz.js"></script>
