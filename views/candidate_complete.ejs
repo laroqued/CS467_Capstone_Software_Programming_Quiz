@@ -15,6 +15,18 @@
         <div class="col-md-auto" id="index-first-row">
           <!-- 1 of 3 rows -->
 
+    <form method="POST" action="sendMail" class="contact-form">
+
+        id <input type="text" name="id" value=<%=id %> ><br>
+        quiz_name(subject) <input type="text" name="quiz_name" value=<%=quiz.name %>><br>
+        login_name (to) <input type="text" name="login_name" value=<%=users.login_name %>><br>
+        owner email (to)<input type="email" name="owner" value=<%=quiz.owner %> required><br>
+        quiz id <input type="text" name="quiz" value=<%=quiz._id %> ><br>
+        first_name (from) <input type="text" name="first_name" value=<%=quiz_instance.firstName %> ><br>
+        last_name (from) <input type="text" name="last_name" value=<%=quiz_instance.lastName %> ><br>
+        email (from)<input type="email" name="email" value=<%=quiz_instance.email %> required><br>
+            <button type="submit" id="question-form" id="form-submit" class="contact-form-btn">Send Email To Employer</button>
+        </form>
           <div class="container-fluid setup-bg d-flex flex-column">
             <div class='row justify-content-center'>
               <div class="container my-auto">

@@ -6,12 +6,11 @@ const flash = require("express-flash");
 const session = require("express-session");
 const passport = require("passport");
 const methodOverride = require("method-override");
-
+const nodemailer = require("nodemailer");
 
 // Create a .env file to use process.env
-let port = process.env.PORT; 
+let port = process.env.PORT;
 let host = process.env.HOST;
-
 
 // EJS initialization
 app.set("view engine", "ejs");
@@ -29,7 +28,6 @@ The express-flash module exposes getter and setter methods for a flash message o
  */
 // ===========================================================================================
 app.use(flash());
-
 
 // ===========================================================================================
 /* 
@@ -59,7 +57,6 @@ Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't
 */
 // ===========================================================================================
 app.use(methodOverride("_method"));
-
 
 // // Cross Origin Whitelist
 // const cors = require("cors");
@@ -91,20 +88,17 @@ app.use(methodOverride("_method"));
 // Global base directory for file downloads
 global.__basedir = __dirname;
 
-
-
 // app.use(express.urlencoded({ extended: false }));
 // app.use(express.json());
 
 /* 
 morgan is a Node. js and Express middleware to log HTTP requests and errors, and simplifies the process. In Node. js and Express, middleware is a function that has access to the request and response lifecycle methods, and the next() method to continue logic in your Express server.
 */
-app.use(morgan('tiny'))
-
+app.use(morgan("tiny"));
 
 // Route setup
 const path = require("path");
-app.use( require("./server/routes/router"));
+app.use(require("./server/routes/router"));
 
 // //======================================================================
 // // Possible JWT routes to implement later?
@@ -118,6 +112,67 @@ app.use( require("./server/routes/router"));
 // app.use('/api/posts', postRoute)
 // //======================================================================
 
+// ========================================================================
+// EMAIL THE BACK TO EMPLOYER
+// ========================================================================
+app.post("/sendMail", async (req, res) => {
+  
+  const output = `
+<p>Result from Quiz Instance: ${req.body.id} </p>
+<ul>
+<li>Name: Donnyves Laroque, Dominique Lazaros, Aaron Harris </li>
+
+<li>Email: ${req.body.email}</li>
+<li>Phone: 555-555-5555</li>
+<h3>Message </h3>
+<p>Hello ${req.body.login_name} </p>
+<p></p>
+
+<p>The quiz from ${req.body.first_name} ${req.body.last_name} is complete. </p>
+<p></p>
+</ul>
+`;
+  // create reusable transporter object using the default SMTP transport
+  let transporter = await nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.PASSWORD,
+    },
+    // tls:{
+    //     rejectUnauthorized:false
+    // }
+  });
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: `"Donnyves Laroque" <${req.body.email}>`, // sender address
+    to: req.body.owner, // list of receivers (emails)
+    subject: `${req.body.quiz_name}  Quiz Instance ID ${req.body.id}`, // Subject line
+    text: "Hello world?", // plain text body
+    html: output, // html body
+  });
+ 
+  transporter.verify(function (error, success) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Mail server is running...");
+      res.render("candidate_survey", {
+        login_name: req.body.login_name,
+      });
+      console.log(`Message sent: ${info.messageId}`);
+      console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
+    }
+
+  });
+});
+// ========================================================================
+// EMAIL BACK TO THE EMPLOYER END
+// ========================================================================
+
 const {
   checkAuthenticated,
   checkNotAuthenticated,
@@ -125,13 +180,9 @@ const {
 app.use(methodOverride("_method"));
 
 app.get("/", checkAuthenticated, (req, res) => {
-     res.header(
-       "Cache-Control",
-       "private, no-cache, no-store, must-revalidate"
-     );
+  res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
   res.render("index", { name: req.user.name });
 });
-
 
 app.delete("/logout", checkAuthenticated, async (req, res) => {
   await req.logOut();
@@ -140,34 +191,32 @@ app.delete("/logout", checkAuthenticated, async (req, res) => {
   res.redirect("/login");
 });
 
-
 // connect to database
 const connectDB = require("./server/database/connection");
 // mongoDB conncection
 connectDB();
 
 // Error page
-app.use(function(req, res) {
-    res.status(404);
-    res.render("404");
+app.use(function (req, res) {
+  res.status(404);
+  res.render("404");
 });
 
 // Error page
-app.use(function(err, req, res, next) {
-    console.error(err.stack);
-    res.type("plain/text");
-    res.status(500);
-    res.render("500");
+app.use(function (err, req, res, next) {
+  console.error(err.stack);
+  res.type("plain/text");
+  res.status(500);
+  res.render("500");
 });
-
 
 app.listen(port, host, () => {
-    console.log(
-        `Express started \on http//:${host}:${port} press Ctrl-C to terminate.`
-    );
+  console.log(
+    `Express started \on http//:${host}:${port} press Ctrl-C to terminate.`
+  );
 });
 // Handling Error
-process.on("unhandledRejection", err => {
-  console.log(`An error occurred: ${err.message}`)
-  server.close(() => process.exit(1))
-})
+process.on("unhandledRejection", (err) => {
+  console.log(`An error occurred: ${err.message}`);
+  server.close(() => process.exit(1));
+});

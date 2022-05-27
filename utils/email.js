@@ -1,29 +1,34 @@
 require("dotenv").config();
 const express = require("express");
 const nodemailer = require("nodemailer");
-
 const path = require("path");
-
 const app = express();
 
 // app.use(express.urlencoded({ extended: true }));
 // app.use(express.static(path.join(__dirname, "public")));
 
-async function mainMail(name, company, email, phone, message) {
+async function mainMail() {
+  
+  // ========================================================================
+  // EMAIL THE BACK TO EMPLOYER
+  // ========================================================================
   const output = `
-<p>You have a new contact request</p>
+<p>Result from Quiz Instance ${req.body.id} </p>
 <ul>
-<li>Name: ${req.body.name}</li>
-<li>Company: ${req.body.company}</li>
-<li>Email: ${req.body.email}</li>
-<li>Phone: ${req.body.phone}</li>
-<h3>Message </h3>
-<p>${req.body.message}</p>
+<li>Name: Donnyves Laroque, Dominique Lazaros, Aaron Harris </li>
 
+<li>Email: ${req.body.email}</li>
+<li>Phone: 555-555-5555</li>
+<h3>Message </h3>
+<p>Hello ${req.body.login_name} </p>
+<p></p>
+<p>${req.body.message}</p>
+<p>Click the link below to start your quiz.</p>
+<p></p>
 </ul>
 `;
   // create reusable transporter object using the default SMTP transport
-  let transporter = nodemailer.createTransport({
+  let transporter = await nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true,
@@ -37,23 +42,29 @@ async function mainMail(name, company, email, phone, message) {
   });
 
   // send mail with defined transport object
-  let info = transporter.sendMail({
-    from: '"Donnyves Laroque" <softwareprogrammingquiz@gmail.com>', // sender address
-    to: "donnyves.laroque@outlook.com", // list of receivers
-    subject: "Hello ✔", // Subject line
+  let info = await transporter.sendMail({
+    from: `"Donnyves Laroque" <${req.body.email}>`, // sender address
+    to: req.body.owner, // list of receivers (emails)
+    subject: `${req.body.quiz_name}  Quiz Instance ID ${req.body.id}`, // Subject line
     text: "Hello world?", // plain text body
     html: output, // html body
   });
-
-  console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-  // Preview only available when sending through an Ethereal account
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-
-  // Rerender if there is an error
-  res.render("contact", { msg: "Email has been sent" });
-
+  transporter.verify(function (error, success) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Mail server is running...");
+      res.render("candidate_survey", {
+        login_name: req.user.login_name,
+      });
+      console.log(`Message sent: ${info.messageId}`);
+      console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
+    }
+    console.log(body);
+  });
+  // ========================================================================
+  // EMAIL BACK TO THE EMPLOYER END
+  // ========================================================================
 }
 
 
