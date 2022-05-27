@@ -11,8 +11,7 @@ const Quiz_Instance = require("../model/quiz_instance");
 const bcrypt = require("bcryptjs");
 const app = express();
 const methodOverride = require("method-override");
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+
 const initializePassport = require("../../passport-config");
 initializePassport(
   passport,
@@ -47,7 +46,9 @@ app.use(methodOverride("_method"));
 // GET
 // ========================================================
 
-
+// JSON Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 // ========================================================
 // TESTING
 exports.snuck_in =
@@ -83,19 +84,24 @@ exports.get_take_quiz =
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
     let id = req.query.id;
+    let _id = req.query._id;
 
     const quiz_instance = await Quiz_Instance.findById(id);
     const quiz = await Quiz.findById(quiz_instance.quiz);
     const questions = await Question.find({ quiz: quiz._id });
-         const users = await User.findById(quiz_instance.employer);
-         const login_name = await User.find({ login_name: users.login_name });
+    const users = await User.findById(quiz_instance.employer);
+
+
 
     res.render("take_quiz", {
       id: id,
       questions: questions,
       quiz: quiz,
       quiz_instance: quiz_instance,
-      users: users,
+      users:users
+
+   
+   
     });
 
   });
@@ -651,10 +657,20 @@ exports.canidate_survey =
 //Dominique
 exports.canidate_complete =
   (checkNotAuthenticated,
-  (req, res) => {
+  async(req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+    let id = req.query.id;
+    let _id = req.query._id;
+    const quiz_instance = await Quiz_Instance.findById(id);
+    const users = await User.findById(id);
 
-    res.render("candidate_complete");
+    
+    res.render("candidate_complete", {
+      id: id,
+  
+      quiz_instance: quiz_instance,
+      users: users,
+    });
   });
 
 exports.add_survey = (req, res) => {
