@@ -127,8 +127,9 @@
         </ul>
 
     </card>
-    <input type="hidden" name="id" value=<%=id%>>
-    <button class="btn btn-primary">Submit Quiz</button>
+        id <input type="hidden" name="id" value=<%=id %> ><br>
+<!-- TODO: CastError: Cast to ObjectId failed for value "quiz_name" (type string) at path "_id" for model "Question"-->
+    <button href="/sendMail" class="btn btn-primary">Submit Quiz</button>
 </form>
 
 </body>
