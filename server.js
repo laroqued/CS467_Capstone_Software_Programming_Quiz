@@ -117,6 +117,65 @@ app.use( require("./server/routes/router"));
 // app.use('/api/user', authRoute)
 // app.use('/api/posts', postRoute)
 // //======================================================================
+// // ========================================================================
+// // EMAIL THE BACK TO EMPLOYER
+// // ========================================================================
+app.post("/sendMail", async (req, res) => {
+  
+  const output = `
+<p>Result from Quiz Instance: ${req.body.id} </p>
+<ul>
+<li>Name: Donnyves Laroque, Dominique Lazaros, Aaron Harris </li>
+<li>Email: ${req.body.email}</li>
+<li>Phone: 555-555-5555</li>
+<h3>Message </h3>
+<p>Hello ${req.body.login_name} </p>
+<p></p>
+<p>The quiz from ${req.body.first_name} ${req.body.last_name} is complete. </p>
+<p></p>
+</ul>
+`;
+  // create reusable transporter object using the default SMTP transport
+  let transporter = await nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.PASSWORD,
+    },
+    debug: true, // show debug output
+    logger: true, // log information in console
+  });
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: `"Donnyves Laroque" <${req.body.email}>`, // sender address
+    to: req.body.owner, // list of receivers (emails)
+    subject: `${req.body.quiz_name}  Quiz Instance ID ${req.body.id}`, // Subject line
+    text: "Hello world?", // plain text body
+    html: output, // html body
+  });
+ 
+  transporter.verify(function (error, success) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Mail server is running...");
+      res.render("candidate_survey", {
+        login_name: req.body.login_name,
+      });
+      console.log(`Message sent: ${info.messageId}`);
+      console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
+    }
+
+  });
+});
+// // ========================================================================
+// // EMAIL BACK TO THE EMPLOYER END
+// // ========================================================================
+
+
 
 const {
   checkAuthenticated,

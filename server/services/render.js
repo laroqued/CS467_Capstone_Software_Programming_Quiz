@@ -87,12 +87,15 @@ exports.get_take_quiz =
     const quiz_instance = await Quiz_Instance.findById(id);
     const quiz = await Quiz.findById(quiz_instance.quiz);
     const questions = await Question.find({ quiz: quiz._id });
+         const users = await User.findById(quiz_instance.employer);
+         const login_name = await User.find({ login_name: users.login_name });
 
     res.render("take_quiz", {
       id: id,
       questions: questions,
       quiz: quiz,
-      quiz_instance: quiz_instance
+      quiz_instance: quiz_instance,
+      users: users,
     });
 
   });
@@ -171,7 +174,10 @@ exports.post_submit_quiz =
         grade: grade,
         completed: true
       });
+// EMAIL FUNCTIONALITY HERE
 
+
+// EMAIL END
       await res.redirect("/candidate_complete");
       res.status(201);
     } catch (error) {
