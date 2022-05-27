@@ -141,9 +141,8 @@ app.post("/sendMail", async (req, res) => {
       user: process.env.GMAIL_USER,
       pass: process.env.PASSWORD,
     },
-    // tls:{
-    //     rejectUnauthorized:false
-    // }
+    debug: true, // show debug output
+    logger: true, // log information in console
   });
 
   // send mail with defined transport object

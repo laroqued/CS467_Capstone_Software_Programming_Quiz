@@ -105,11 +105,8 @@ exports.get_take_quiz =
 exports.post_submit_quiz =
   ("/take_quiz",
   checkNotAuthenticated,
-
   async (req, res) => {
     try {
-   
-  
       let total = Object.keys(req.body).length;
       let correct = 0;
       const keys = Object.keys(req.body);
@@ -160,7 +157,7 @@ exports.post_submit_quiz =
 
             if (correct_answer) {
               correct += 1;
-            }
+            }question
             // fill in the blank
           } else if (question.type == "fill") {
             question.answer_multiple.map(String);
@@ -170,10 +167,39 @@ exports.post_submit_quiz =
           }
         }
       }
+
       let grade = correct / (total - 1);
       await Quiz_Instance.findByIdAndUpdate(req.body.id, {
         grade: grade,
         completed: true,
+      });
+
+      // send email to employer
+      let quiz_instance = await Quiz_Instance.findById(req.body.id);
+      let quiz = await Quiz.findById(quiz_instance.quiz);
+
+      const output = `
+<p>Quiz "${quiz.name}" Completed By ${quiz_instance.firstName} ${quiz_instance.lastName}</p>
+`;
+
+      // create reusable transporter object using the default SMTP transport
+      let transporter = await nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        auth: {
+          user: process.env.GMAIL_USER,
+          pass: process.env.PASSWORD,
+        },
+      });
+
+      // send mail with defined transport object
+      let info = await transporter.sendMail({
+        from: '"Software Programming Quiz" <softwareprogrammingquiz@gmail.com>', // sender address
+        to: quiz.owner, // list of receivers
+        subject: `${quiz.name} - Submission Received`, // Subject line
+        text: "Hello world?", // plain text body
+        html: output, // html body
       });
 
       await res.redirect("/candidate_complete");
@@ -182,8 +208,8 @@ exports.post_submit_quiz =
       console.log(error);
       res.redirect("/");
     }
-
   });
+
 
 // for manually creating quiz_instance with postman
 exports.create_quiz_instance =
