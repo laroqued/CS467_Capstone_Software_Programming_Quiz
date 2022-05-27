@@ -80,24 +80,25 @@ exports.register =
     res.render("register", { register_form_greeting: "Register" });
   });
 
+  
 exports.get_take_quiz =
   (checkNotAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
-    let id = req.query.id;
-    let _id = req.query._id;
-    const quiz_instance = await Quiz_Instance.findById(id);
-    const quiz = await Quiz.findById(quiz_instance.quiz);
-    const questions = await Question.find({ quiz: quiz._id });
-    const users = await User.findById(quiz_instance.employer);
+     let id = req.query.id;
+     let _id = req.query._id;
+     const quiz_instance = await Quiz_Instance.findById(id);
+     const quiz = await Quiz.findById(quiz_instance.quiz);
+     const questions = await Question.find({ quiz: quiz_instance.quiz });
+     const users = await User.findById(quiz_instance.employer);
+     const login_name = await User.find({ login_name: users.login_name });
 
     res.render("take_quiz", {
       id: id,
       questions: questions,
       quiz: quiz,
       quiz_instance: quiz_instance,
-
       users: users,
     });
   });
@@ -157,7 +158,7 @@ exports.post_submit_quiz =
 
             if (correct_answer) {
               correct += 1;
-            }question
+            }
             // fill in the blank
           } else if (question.type == "fill") {
             question.answer_multiple.map(String);
@@ -210,7 +211,6 @@ exports.post_submit_quiz =
     }
   });
 
-
 // for manually creating quiz_instance with postman
 exports.create_quiz_instance =
   ("/create_quiz_instance",
@@ -233,7 +233,6 @@ exports.create_quiz_instance =
       res.redirect("/create_quiz");
     }
   });
-
 // ==============================================================
 // CONTACT/EMAIL
 // ==============================================================
@@ -685,7 +684,6 @@ exports.canidate_complete =
     const quiz = await Quiz.findById(quiz_instance.quiz);
     const questions = await Question.find({ quiz: quiz._id });
 
-    
     const users = await User.findById(quiz_instance.employer);
     const login_name = await User.find({ login_name: users.login_name });
 
