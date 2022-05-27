@@ -175,9 +175,15 @@ exports.post_submit_quiz =
       // send email to employer
       let quiz_instance = await Quiz_Instance.findById(req.body.id);
       let quiz = await Quiz.findById(quiz_instance.quiz);
+      let users = await User.findById(quiz_instance.employer);
 
       const output = `
-<p>Quiz "${quiz.name}" Completed By ${quiz_instance.firstName} ${quiz_instance.lastName}</p>
+      <p>Hello ${users.login_name}, </p>
+      <p><p/>
+      <p>The "${quiz.name}" has been completed by ${quiz_instance.firstName}
+      ${quiz_instance.lastName}.<p/>
+      <p><p/>
+
 `;
 
       // create reusable transporter object using the default SMTP transport
@@ -193,12 +199,25 @@ exports.post_submit_quiz =
 
       // send mail with defined transport object
       let info = await transporter.sendMail({
-        from: '"Software Programming Quiz" <softwareprogrammingquiz@gmail.com>', // sender address
+        from: `"${quiz_instance.firstName}
+      ${quiz_instance.lastName}" <${quiz_instance.email}>`, // sender address
         to: quiz.owner, // list of receivers
-        subject: `${quiz.name} - Submission Received`, // Subject line
+        subject: `"${quiz.name}" Quiz Instance ${quiz_instance._id} - Submission Received`, // Subject line
         text: "Hello world?", // plain text body
         html: output, // html body
       });
+
+  transporter.verify(function (error, success) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Mail server is running...");
+      console.log(`Message sent: ${info.messageId}`);
+      console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
+    }
+  });
+
+
 
       //=====================================
       // EMAIL END
