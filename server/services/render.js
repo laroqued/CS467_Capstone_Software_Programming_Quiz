@@ -180,7 +180,7 @@ exports.post_submit_quiz =
       const output = `
       <p>Hello ${users.login_name}, </p>
       <p><p/>
-      <p>The "${quiz.name}" has been completed by ${quiz_instance.firstName}
+      <p>The "${quiz.name}" quiz has been completed by ${quiz_instance.firstName}
       ${quiz_instance.lastName}.<p/>
       <p><p/>
 
