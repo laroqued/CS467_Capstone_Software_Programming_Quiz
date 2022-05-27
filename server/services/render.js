@@ -650,16 +650,25 @@ exports.canidate_complete =
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     let id = req.query.id;
     let _id = req.query._id;
-
     const quiz_instance = await Quiz_Instance.findById(id);
     const quiz = await Quiz.findById(id);// BUG
     const users = await User.findById(id);
+
+    // User.find().then((result) => {
+    //   res.render("candidate_complete", {
+    //     id: id,
+    //     quiz_instance: quiz_instance,
+    //     quiz: quiz, // BUG
+    //     users: users,
+    //   });
+    // });
 
     res.render("candidate_complete", {
       id: id,
       quiz_instance: quiz_instance,
       quiz: quiz, // BUG
       users: users,
+      
     });
   });
 
