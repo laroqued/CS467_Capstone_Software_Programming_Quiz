@@ -132,14 +132,8 @@
 
 <!-- TODO: CastError: Cast to ObjectId failed for value "quiz_name" (type string) at path "_id" for model "Question"-->
         id <input type="hidden" name="id" value=<%=id %> ><br>
-        
-        quiz_name(subject) <input type="hidden" name="quiz_name" value=<%=quiz.name %>><br>
-        login_name (to) <input type="hidden" name="login_name" value=<%=users.login_name %>><br>
-        owner email (to)<input type="hidden" name="owner" value=<%=quiz.owner %> required><br>
-        quiz id <input type="hidden" name="quiz" value=<%=quiz._id %> ><br>
-        first_name (from) <input type="hidden" name="first_name" value=<%=quiz_instance.firstName %> ><br>
-        last_name (from) <input type="hidden" name="last_name" value=<%=quiz_instance.lastName %> ><br>
-        email (from)<input type="hidden" name="email" value=<%=quiz_instance.email %> required><br>
+     
+
     <button href="/sendMail" class="btn btn-primary">Submit Quiz</button>
 </form>
 
