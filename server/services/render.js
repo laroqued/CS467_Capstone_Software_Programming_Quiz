@@ -107,7 +107,9 @@ exports.post_submit_quiz =
   ("/take_quiz",
   checkNotAuthenticated,
   async (req, res) => {
+
     try {
+      
       let total = Object.keys(req.body).length;
       let correct = 0;
       const keys = Object.keys(req.body);
@@ -174,10 +176,16 @@ exports.post_submit_quiz =
         grade: grade,
         completed: true,
       });
-
+//=======================================================
       // send email to employer
-      let quiz_instance = await Quiz_Instance.findById(req.body.id);
-      let quiz = await Quiz.findById(quiz_instance.quiz);
+         let id = req.query.id;
+         let _id = req.query._id;
+         const quiz_instance = await Quiz_Instance.findById(id);
+         const quiz = await Quiz.findById(quiz_instance.quiz);
+        const questions = await Question.find({ quiz: quiz._id });
+         //const questions = await Question.find({ quiz: quiz_instance.quiz });
+         const users = await User.findById(quiz_instance.employer);
+         const login_name = await User.find({ login_name: users.login_name });
 
       const output = `
 <p>Quiz "${quiz.name}" Completed By ${quiz_instance.firstName} ${quiz_instance.lastName}</p>
