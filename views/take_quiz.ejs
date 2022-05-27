@@ -40,13 +40,15 @@
                                 });
                             %>
 
+                            <input type="hidden" name=<%= question._id %> value=''>
+
                             <% for (let i = 0; i < 4; i++) { %>
                                 <% 
                                     let current_radio = "mc_" + String(multiple) + String(i);
                                     let current_value = shuffled[i];
                                 %>
                             
-
+                                
 
 
                                 <label for=<%=current_radio%>>
@@ -58,6 +60,8 @@
 
                         <!-- TRUE/FALSE -->
                         <% } else if (question.type == "true_or_false") { %>
+
+                            <input type="hidden" name=<%= question._id %> value=''>
 
                             <!-- TRUE -->
                             <label for=<%= "true" + true_false %>>      <input type="radio" name=<%= question._id %> id=<%= "true" + true_false %> value="true"> True</label>
@@ -94,7 +98,8 @@
 
                         <!-- FILL IN THE BLANK -->
                         <% } else if (question.type == "fill") { %>
-                            <input class="contact-form-text" type="text" name=<%= question._id %> placeholder="Type answer here" required>
+                            <input type="hidden" name=<%= question._id %> value=''>
+                            <input class="contact-form-text" type="text" name=<%= question._id %> placeholder="Type answer here">
                             <% fill += 1; %>
                         <% } %>
 

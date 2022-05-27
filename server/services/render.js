@@ -116,13 +116,17 @@ exports.post_submit_quiz =
 
           // true/false
           if (question.type == "true_or_false") {
-            if (answer == String(question.answer)) {
-              correct += 1;
+            if (typeof(answer) != 'string') {
+              if (answer[1] == String(question.answer)) {
+                correct += 1;
+              }
             }
           // multiple choice
           } else if (question.type == "multiple_choice") {
-            if (answer == String(question.answer)) {
-              correct += 1;
+            if (typeof(answer) != 'string') {
+              if (answer[1] == String(question.answer)) {
+                correct += 1;
+              }
             }
           // check all that apply
           } else if (question.type == "check_all") {
@@ -154,9 +158,12 @@ exports.post_submit_quiz =
           // fill in the blank
           } else if (question.type == "fill") {
             question.answer_multiple.map(String);
-            if (question.answer_multiple.includes(answer)) {
-              correct += 1;
+            if (typeof(answer) != 'string') {
+              if (question.answer_multiple.includes(answer[1])) {
+                correct += 1;
+              }
             }
+            
           }
         
         }
