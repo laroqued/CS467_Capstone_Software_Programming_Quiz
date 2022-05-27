@@ -78,7 +78,6 @@ exports.register =
   });
 
 exports.get_take_quiz =
-  (checkNotAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
@@ -95,11 +94,9 @@ exports.get_take_quiz =
       quiz_instance: quiz_instance
     });
 
-  });
+  };
 
 exports.post_submit_quiz =
-  ("/take_quiz",
-  checkNotAuthenticated,
   async (req, res) => {
     try {
       
@@ -178,7 +175,7 @@ exports.post_submit_quiz =
       console.log(error);
       res.redirect("/");
     }
-});
+};
 
 // for manually creating quiz_instance with postman
 exports.create_quiz_instance =
