@@ -8,6 +8,9 @@ const quizSchema = new mongoose.Schema({
     },
     owner: {
         type: String,
+    },
+    timer: {
+        type: Number
     }
 });
 

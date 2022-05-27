@@ -28,6 +28,8 @@ route.delete("/logout"), checkNotAuthenticated, services.post_delete;
 // ============================================================================================
 route.get("/snuck_in", services.snuck_in)
 // Aaron
+route.get("/start_quiz", services.start_quiz);
+
 route.get("/quizzes", checkAuthenticated, services.quizzes);
 route.get("/quiz", checkAuthenticated, services.quiz);
 

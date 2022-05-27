@@ -77,6 +77,22 @@ exports.register =
     res.render("register", { register_form_greeting: "Register" });
   });
 
+exports.start_quiz =
+  async (req, res) => {
+    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+    
+    let id = req.query.id;
+
+    const quiz_instance = await Quiz_Instance.findById(id);
+    const quiz = await Quiz.findById(quiz_instance.quiz);
+
+    res.render("start_quiz", {
+      id: id,
+      quiz_instance: quiz_instance,
+      quiz: quiz
+    });
+  };
+
 exports.get_take_quiz =
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
@@ -87,11 +103,18 @@ exports.get_take_quiz =
     const quiz = await Quiz.findById(quiz_instance.quiz);
     const questions = await Question.find({ quiz: quiz._id });
 
+    let complete = quiz_instance.completed
+
+    if (!complete) {
+      await Quiz_Instance.findByIdAndUpdate(id, {completed: true});
+    }
+
     res.render("take_quiz", {
       id: id,
       questions: questions,
       quiz: quiz,
-      quiz_instance: quiz_instance
+      quiz_instance: quiz_instance,
+      complete: complete
     });
 
   };
@@ -237,7 +260,8 @@ exports.post_contact =
       email: req.body.email,
       quiz: req.body.quiz,
       employer: req.user._id,
-      completed: false
+      completed: false,
+      grade: 0
     });
     await quiz_instance.save();
     let id = quiz_instance._id;
@@ -260,7 +284,7 @@ exports.post_contact =
 <li>Local Host Quiz: http://localhost:3001/snuck_in</li>
 <li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_quiz?id=${id}</li>
 
-<li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/take_quiz?id=${id}</li>
+<li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/start_quiz?id=${id}</li>
 
 <li>Production Quiz: https://software-programming-quiz.herokuapp.com/candidate_quiz?id=${id}</li>
 </ul>
@@ -413,6 +437,7 @@ exports.post_create_quiz =
         name: req.body.name,
         owner: req.body.owner,
         login_name: req.user.login_name,
+        timer: req.body.timer
       });
       await quiz.save();
       await res.redirect("/quizzes");

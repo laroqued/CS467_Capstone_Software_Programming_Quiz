@@ -20,4 +20,5 @@ countdownTimer = (totalTime=10) => {
 
 }
 
-countdownTimer();
+let time = document.getElementById('time').value;
+countdownTimer(time*60);
