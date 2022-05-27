@@ -172,6 +172,34 @@ exports.post_submit_quiz =
         completed: true
       });
 
+      // send email to employer
+      let quiz_instance = await Quiz_Instance.findById(req.body.id);
+      let quiz = await Quiz.findById(quiz_instance.quiz);
+
+      const output = `
+<p>Quiz "${quiz.name}" Completed By ${quiz_instance.firstName} ${quiz_instance.lastName}</p>
+`;
+
+    // create reusable transporter object using the default SMTP transport
+    let transporter = await nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.PASSWORD,
+      },
+    });
+
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+      from: '"Software Programming Quiz" <softwareprogrammingquiz@gmail.com>', // sender address
+      to: quiz.owner, // list of receivers
+      subject: `${quiz.name} - Submission Received`, // Subject line
+      text: "Hello world?", // plain text body
+      html: output, // html body
+    });
+    
       await res.redirect("/candidate_complete");
       res.status(201);
     } catch (error) {
