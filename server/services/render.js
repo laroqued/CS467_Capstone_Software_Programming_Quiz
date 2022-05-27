@@ -170,18 +170,21 @@ exports.post_submit_quiz =
         grade: grade,
         completed: true,
       });
-      // EMAIL FUNCTIONALITY HERE
+
       //=====================================
+      // EMAIL FUNCTIONALITY HERE
       // send email to employer
+      //=====================================
       let quiz_instance = await Quiz_Instance.findById(req.body.id);
       let quiz = await Quiz.findById(quiz_instance.quiz);
       let users = await User.findById(quiz_instance.employer);
 
       const output = `
-      <p>Hello ${users.login_name}, </p>
+ 
+      <p>Hello  <strong>${users.login_name}</strong>, </p>
       <p><p/>
-      <p>The "${quiz.name}" quiz has been completed by ${quiz_instance.firstName}
-      ${quiz_instance.lastName}.<p/>
+      <p>The "<strong>${quiz.name}</strong>" quiz has been completed by <strong>${quiz_instance.firstName}</strong><strong>
+      ${quiz_instance.lastName}</strong>.<p/>
       <p><p/>
 
 `;
@@ -199,25 +202,24 @@ exports.post_submit_quiz =
 
       // send mail with defined transport object
       let info = await transporter.sendMail({
-        from: `"${quiz_instance.firstName}
-      ${quiz_instance.lastName}" <${quiz_instance.email}>`, // sender address
+        from:`"${quiz_instance.firstName} ${quiz_instance.lastName}" 
+        <${quiz_instance.email}>`, // sender address
+
         to: quiz.owner, // list of receivers
-        subject: `"${quiz.name}" Quiz Instance ${quiz_instance._id} - Submission Received`, // Subject line
+        subject: `"${quiz.name}" Quiz Instance (${quiz_instance._id}) - Submission Received`, // Subject line
         text: "Hello world?", // plain text body
         html: output, // html body
       });
 
-  transporter.verify(function (error, success) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Mail server is running...");
-      console.log(`Message sent: ${info.messageId}`);
-      console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
-    }
-  });
-
-
+      transporter.verify(function (error, success) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Mail server is running...");
+          console.log(`Message sent: ${info.messageId}`);
+          console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
+        }
+      });
 
       //=====================================
       // EMAIL END
