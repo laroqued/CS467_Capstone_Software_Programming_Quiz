@@ -11,6 +11,8 @@ const Quiz_Instance = require("../model/quiz_instance");
 const bcrypt = require("bcryptjs");
 const app = express();
 const methodOverride = require("method-override");
+const multiparty = require("multiparty");
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 const initializePassport = require("../../passport-config");
@@ -25,6 +27,8 @@ initializePassport(
     return userFound;
   }
 );
+const cors = require("cors");
+app.use(cors({ origin: "*" }));
 
 app.use(flash());
 app.use(
@@ -81,14 +85,12 @@ exports.get_take_quiz =
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
-let id = req.query.id;
-let _id = req.query._id;
-const quiz_instance = await Quiz_Instance.findById(id);
-const quiz = await Quiz.findById(quiz_instance.quiz);
-const questions = await Question.find({ quiz: quiz._id });
-const users = await User.findById(quiz_instance.employer)
-
-
+    let id = req.query.id;
+    let _id = req.query._id;
+    const quiz_instance = await Quiz_Instance.findById(id);
+    const quiz = await Quiz.findById(quiz_instance.quiz);
+    const questions = await Question.find({ quiz: quiz._id });
+    const users = await User.findById(quiz_instance.employer);
 
     res.render("take_quiz", {
       id: id,
@@ -96,16 +98,72 @@ const users = await User.findById(quiz_instance.employer)
       quiz: quiz,
       quiz_instance: quiz_instance,
 
-      users:users
+      users: users,
     });
   });
 
 exports.post_submit_quiz =
   ("/take_quiz",
   checkNotAuthenticated,
+
   async (req, res) => {
     try {
-      main().catch(console.error);
+      // ========================================================================
+      // EMAIL THE BACK TO EMPLOYER
+      // ========================================================================
+      const output = `
+<p>Result from Quiz Instance ${req.body.id} </p>
+<ul>
+<li>Name: Donnyves Laroque, Dominique Lazaros, Aaron Harris </li>
+
+<li>Email: ${req.body.email}</li>
+<li>Phone: 555-555-5555</li>
+<h3>Message </h3>
+<p>Hello ${req.body.login_name} </p>
+<p></p>
+<p>${req.body.message}</p>
+<p>Click the link below to start your quiz.</p>
+<p></p>
+</ul>
+`;
+      // create reusable transporter object using the default SMTP transport
+      let transporter = await nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        auth: {
+          user: process.env.GMAIL_USER,
+          pass: process.env.PASSWORD,
+        },
+        // tls:{
+        //     rejectUnauthorized:false
+        // }
+      });
+
+      // send mail with defined transport object
+      let info = await transporter.sendMail({
+        from: `"Donnyves Laroque" <${req.body.email}>`, // sender address
+        to: req.body.owner, // list of receivers (emails)
+        subject: `${req.body.quiz_name}  Quiz Instance ID ${req.body.id}`, // Subject line
+        text: "Hello world?", // plain text body
+        html: output, // html body
+      });
+      transporter.verify(function (error, success) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Mail server is running...");
+          res.render("candidate_survey", {
+            login_name: req.user.login_name,
+          });
+          console.log(`Message sent: ${info.messageId}`);
+          console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
+        }
+        console.log(body);
+      });
+  // ========================================================================
+  // EMAIL BACK TO THE EMPLOYER END
+  // ========================================================================
       let total = Object.keys(req.body).length;
       let correct = 0;
       const keys = Object.keys(req.body);
@@ -166,7 +224,6 @@ exports.post_submit_quiz =
           }
         }
       }
-
       let grade = correct / (total - 1);
       await Quiz_Instance.findByIdAndUpdate(req.body.id, {
         grade: grade,
@@ -179,6 +236,7 @@ exports.post_submit_quiz =
       console.log(error);
       res.redirect("/");
     }
+
   });
 
 // for manually creating quiz_instance with postman
@@ -186,7 +244,6 @@ exports.create_quiz_instance =
   ("/create_quiz_instance",
   checkAuthenticated,
   async (req, res) => {
-
     try {
       const quiz_instance = new Quiz_Instance({
         firstName: req.body.firstName,
@@ -242,22 +299,22 @@ exports.post_contact =
     let quizId = req.query.id;
 
     const output = `
-<p>You have a new contact request</p>
-<ul>
-<li>Name: Donnyves Laroque, Dominique Lazaros, Aaron Harris </li>
-<li>Company: SoftWare Programming Quiz</li>
-<li>Email: softwareprogrammingquiz@gmail.com</li>
-<li>Phone: 555-555-5555</li>
-<h3>Message </h3>
-<p>Hello ${req.body.first_name} ${req.body.last_name}, </p>
-<p></p>
-<p>${req.body.message}</p>
-<p>Click the link below to start your quiz.</p>
-<p></p>
+    <p>You have a new contact request</p>
+    <ul>
+    <li>Name: Donnyves Laroque, Dominique Lazaros, Aaron Harris </li>
+    <li>Company: SoftWare Programming Quiz</li>
+    <li>Email: softwareprogrammingquiz@gmail.com</li>
+    <li>Phone: 555-555-5555</li>
+    <h3>Message </h3>
+    <p>Hello ${req.body.first_name} ${req.body.last_name}, </p>
+    <p></p>
+    <p>${req.body.message}</p>
+    <p>Click the link below to start your quiz.</p>
+    <p></p>
 
-<li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/take_quiz?id=${id}</li>
-<li>Production Quiz: https://software-programming-quiz.herokuapp.com/candidate_quiz?id=${id}</li>
-</ul>
+    <li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/take_quiz?id=${id}</li>
+    <li>Production Quiz: https://software-programming-quiz.herokuapp.com/candidate_quiz?id=${id}li>
+    </ul>
 `;
     // create reusable transporter object using the default SMTP transport
     let transporter = await nodemailer.createTransport({
@@ -648,10 +705,10 @@ exports.canidate_survey =
 //Dominique
 exports.canidate_complete =
   (checkNotAuthenticated,
-  async(req, res) => {
+  async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-   let id = req.query.id;
-    let _id = req.query._id
+    let id = req.query.id;
+    let _id = req.query._id;
     const quiz_instance = await Quiz_Instance.findById(id);
     const quiz = await Quiz.findById(quiz_instance.quiz);
     const questions = await Question.find({ quiz: quiz._id });
@@ -679,6 +736,10 @@ exports.update_user =
 
     res.render("update_user", { user: userdata.data });
   });
+
+//=======================================================================
+//=======================================================================
+//=======================================================================
 // async..await is not allowed in global scope, must use a wrapper
 async function main() {
   // Generate test SMTP service account from ethereal.email
@@ -712,4 +773,3 @@ async function main() {
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
-

@@ -31,6 +31,7 @@
     "method-override": "^3.0.0",
     "mongoose": "^6.3.0",
     "morgan": "^1.10.0",
+    "multiparty": "^4.2.3",
     "nodemailer": "^6.7.5",
     "nodemon": "^2.0.15",
     "passport": "^0.5.2",
