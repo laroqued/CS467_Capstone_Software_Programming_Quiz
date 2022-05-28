@@ -55,8 +55,8 @@ route.post("/create_quiz_instance", checkAuthenticated, services.create_quiz_ins
 //-----------------------------
 //Dominique
 route.get("/candidate_quiz", checkAuthenticated, services.canidate_quiz);
-route.get("/candidate_survey", checkAuthenticated, services.canidate_survey);
-route.get("/candidate_complete",checkNotAuthenticated,services.get_candidate_complete
+route.get("/candidate_survey", services.canidate_survey);
+route.get("/candidate_complete", services.get_candidate_complete
 );
 //-----------------------------
 /**

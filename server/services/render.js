@@ -714,31 +714,22 @@ exports.canidate_quiz =
   });
 //Dominique
 exports.canidate_survey =
-  (checkAuthenticated,
   (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
-    res.render("candidate_survey", {
-      name: req.user.name,
-      login_name: req.user.login_name,
-    });
-  });
+    res.render("candidate_survey");
+  };
 //Dominique
 exports.get_candidate_complete =
-  (checkNotAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
       let id = req.query.id;
 
-
       res.render("candidate_complete", {
         id: id,
-  
       });
-
-
-  });
+  };
 
 exports.add_survey = (req, res) => {
   res.render("add_survey");
