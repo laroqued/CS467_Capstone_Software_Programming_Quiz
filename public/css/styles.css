@@ -457,3 +457,12 @@ background-color: lightgrey;
     #survey{
 max-width: 75%;
     }
+
+    #survey-hr{
+            position: relative;
+      
+                border: none;
+                height: 6px;
+                background: black;
+          
+    }
