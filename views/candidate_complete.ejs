@@ -5,14 +5,14 @@
 
 <body>
 <!--  name="id"  -->
-<p>Quiz Instance Id: <%= %>
+<p>Quiz Instance Id: <%=id %>
 </p>
 
 
 
 
   
-<h1>Thank you <%=  %> </h1>
+<h1>Thank you <%= id %> </h1>
   <div class="index-page">
     <div class="container">
       <div class="row justify-content-md-center">
@@ -76,14 +76,12 @@
               <!-- 3 of 3 rows -->
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Logout</h5>
-                  <p class="card-text">Thank you for taking the quiz!!</p>
+                  <h5 class="card-title">Close Browser Tab</h5>
+                  <p class="card-text">Thank you for taking the quiz!! Feel free to close the browser.</p>
 
 
-                  <form action="/logout?_method=DELETE" method="POST">
-                    <button type="submit" class="btn btn-elegant">
-                      <i class="far fa-user pr-2" aria-hidden="true"></i>Logout
-                    </button>
+           
+            
                   </form>
                 </div>
               </div>
