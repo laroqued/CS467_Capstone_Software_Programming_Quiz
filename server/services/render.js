@@ -78,8 +78,23 @@ exports.register =
     res.render("register", { register_form_greeting: "Register" });
   });
 
+exports.start_quiz =
+  async (req, res) => {
+    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+    
+    let id = req.query.id;
+
+    const quiz_instance = await Quiz_Instance.findById(id);
+    const quiz = await Quiz.findById(quiz_instance.quiz);
+
+    res.render("start_quiz", {
+      id: id,
+      quiz_instance: quiz_instance,
+      quiz: quiz
+    });
+  };
+
 exports.get_take_quiz =
-  (checkNotAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
@@ -90,18 +105,24 @@ exports.get_take_quiz =
     const questions = await Question.find({ quiz: quiz._id });
     const users = await User.findById(quiz_instance.employer);
 
+    let complete = quiz_instance.completed
+
+    if (!complete) {
+      await Quiz_Instance.findByIdAndUpdate(id, {completed: true});
+    }
+
     res.render("take_quiz", {
       id: id,
       questions: questions,
       quiz: quiz,
       quiz_instance: quiz_instance,
-      users: users,
+      complete: complete,
+      users: users
     });
-  });
+
+  };
 
 exports.post_submit_quiz =
-  ("/take_quiz",
-  checkNotAuthenticated,
   async (req, res) => {
     try {
       let total = Object.keys(req.body).length;
@@ -118,13 +139,17 @@ exports.post_submit_quiz =
 
           // true/false
           if (question.type == "true_or_false") {
-            if (answer == String(question.answer)) {
-              correct += 1;
+            if (typeof(answer) != 'string') {
+              if (answer[1] == String(question.answer)) {
+                correct += 1;
+              }
             }
             // multiple choice
           } else if (question.type == "multiple_choice") {
-            if (answer == String(question.answer)) {
-              correct += 1;
+            if (typeof(answer) != 'string') {
+              if (answer[1] == String(question.answer)) {
+                correct += 1;
+              }
             }
             // check all that apply
           } else if (question.type == "check_all") {
@@ -158,9 +183,12 @@ exports.post_submit_quiz =
             // fill in the blank
           } else if (question.type == "fill") {
             question.answer_multiple.map(String);
-            if (question.answer_multiple.includes(answer)) {
-              correct += 1;
+            if (typeof(answer) != 'string') {
+              if (question.answer_multiple.includes(answer[1])) {
+                correct += 1;
+              }
             }
+            
           }
         }
       }
@@ -229,7 +257,7 @@ exports.post_submit_quiz =
       console.log(error);
       res.redirect("/");
     }
-  });
+};
 
 // for manually creating quiz_instance with postman
 exports.create_quiz_instance =
@@ -285,6 +313,7 @@ exports.post_contact =
       quiz: req.body.quiz,
       employer: req.user._id,
       completed: false,
+      grade: 0
     });
     await quiz_instance.save();
     let id = quiz_instance._id;
@@ -303,8 +332,8 @@ exports.post_contact =
 <p>${req.body.message}</p>
 <p>Click the link below to start your quiz.</p>
 <p></p>
-<li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/take_quiz?id=${id}</li>
-<li>Production Quiz: https://software-programming-quiz.herokuapp.com/take_quiz?id=${id}</li>
+<li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/start_quiz?id=${id}</li>
+<li>Production Quiz: https://software-programming-quiz.herokuapp.com/start_quiz?id=${id}</li>
 </ul>
 `;
     // create reusable transporter object using the default SMTP transport
@@ -455,6 +484,7 @@ exports.post_create_quiz =
         name: req.body.name,
         owner: req.body.owner,
         login_name: req.user.login_name,
+        timer: req.body.timer
       });
       await quiz.save();
       await res.redirect("/quizzes");

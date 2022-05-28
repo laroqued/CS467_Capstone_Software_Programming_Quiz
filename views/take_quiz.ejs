@@ -1,9 +1,5 @@
 <head>
     <%- include('layouts/head') %>
-
-
-    
-
 </head>
 
 <body>
@@ -33,6 +29,7 @@
 
 </p><!--  name="email"  -->
 <p>Candidate Email: <%=quiz_instance.email %>
+
     <% 
         let multiple = 0;
         let true_false = 0;
@@ -41,100 +38,112 @@
     %>
     <div class="bg-secondary"></div>
     <div class="bg-lighten-xl"></div>
-<form action="/take_quiz" method="POST">
-    <card class="card-body" id="quiz-cards">
-        <ul class="list-group">
-            
-            <% questions.forEach(question=> { %>
-                <li class="list-group-item card"id="quiz-card-background" >
-                    <div class="card-header">
-                        <h5><%= question.prompt %></h5> 
-                    </div>
-                    <div class="card-body">
-                        
-                        <!-- MULTIPLE CHOICE -->
-                        <% if (question.type == "multiple_choice") { %>
-                            <% 
-                                question.choices.push(question.answer); 
-                                let shuffled = [].concat(question.choices);
-                                shuffled.sort(() => {
-                                    return 0.5 - Math.random();
-                                });
-                            %>
 
-                            <% for (let i = 0; i < 4; i++) { %>
-                                <% 
-                                    let current_radio = "mc_" + String(multiple) + String(i);
-                                    let current_value = shuffled[i];
-                                %>
+    <h2><%= quiz.name %></h5>
+
+    <% if (complete) { %>
+        <h1>Quiz attempt has already been used</h1>
+    <% } else { %>
+    <input type="hidden" id="time" value=<%= quiz.timer %>>
+    <h3>Time Left: <span id="timer"></span></h3>
+    
+
+    <form action="take_quiz" method="POST">
+        <card class="card-body" id="quiz-cards">
+            <ul class="list-group">
+                
+                <% questions.forEach(question=> { %>
+                    <li class="list-group-item card"id="quiz-card-background" >
+                        <div class="card-header">
+                            <h5><%= question.prompt %></h5> 
+                        </div>
+                        <div class="card-body">
                             
-
-
-
-                                <label for=<%=current_radio%>>
-                                <input type="radio" name=<%= question._id %> id=<%= current_radio %> value=<%= current_value %> > <%=current_value%> </label>
-
-
-                            <% } %>
-                            <% multiple += 1; %>
-
-                        <!-- TRUE/FALSE -->
-                        <% } else if (question.type == "true_or_false") { %>
-
-                            <!-- TRUE -->
-                            <label for=<%= "true" + true_false %>>      <input type="radio" name=<%= question._id %> id=<%= "true" + true_false %> value="true"> True</label>
-                        
-                            <!-- FALSE -->
-                            <label for=<%= "false" + true_false %>>    <input type="radio" name=<%= question._id %> id=<%= "false" + true_false %> value="false">  False</label>
-                        
-                            <!-- INCREMENT -->
-                            <% true_false += 1; %>
-
-                        <!-- CHECK ALL THAT APPLY -->
-                        <% } else if (question.type == "check_all") { %>
-                            <% 
-                                question.answer_multiple.forEach(answer => {
-                                    question.choices.push(answer);
-                                });
-                                let shuffled = [].concat(question.choices);
-                                shuffled.sort(() => {
-                                    return 0.5 - Math.random();
-                                });
-                            %>
-                            <input type="hidden" name=<%= question._id %> value=''>
-                            <% for (let i = 0; i < 4; i++) { %>
+                            <!-- MULTIPLE CHOICE -->
+                            <% if (question.type == "multiple_choice") { %>
                                 <% 
-                                    let current_check = "check_" + String(check_all) + String(i);
-                                    let current_value = shuffled[i];
+                                    question.choices.push(question.answer); 
+                                    let shuffled = [].concat(question.choices);
+                                    shuffled.sort(() => {
+                                        return 0.5 - Math.random();
+                                    });
                                 %>
-                                <label for=<%=current_check%>>       <input type="checkbox" name=<%= question._id %> id=<%= current_check %> value=<%= current_value %> > <%=current_value%></label>
-                            
 
-                            <% } %>
-                            <% check_all += 1; %>
+                                <input type="hidden" name=<%= question._id %> value=''>
 
-
-                        <!-- FILL IN THE BLANK -->
-                        <% } else if (question.type == "fill") { %>
-                            <input class="contact-form-text" type="text" name=<%= question._id %> placeholder="Type answer here" required>
-                            <% fill += 1; %>
-                        <% } %>
-
-                        
-                    </div>
-                </li>
-                <hr>
-            <% }) %>
+                                <% for (let i = 0; i < 4; i++) { %>
+                                    <% 
+                                        let current_radio = "mc_" + String(multiple) + String(i);
+                                        let current_value = shuffled[i];
+                                    %>
         
-        </ul>
+                                    <label for=<%=current_radio%>>
+                                    <input type="radio" name=<%= question._id %> id=<%= current_radio %> value=<%= current_value %> > <%=current_value%> </label>
+
+                                <% } %>
+                                <% multiple += 1; %>
+
+                            <!-- TRUE/FALSE -->
+                            <% } else if (question.type == "true_or_false") { %>
+
+                                <input type="hidden" name=<%= question._id %> value=''>
+
+                                <!-- TRUE -->
+                                <label for=<%= "true" + true_false %>>      <input type="radio" name=<%= question._id %> id=<%= "true" + true_false %> value="true"> True</label>
+                            
+                                <!-- FALSE -->
+                                <label for=<%= "false" + true_false %>>    <input type="radio" name=<%= question._id %> id=<%= "false" + true_false %> value="false">  False</label>
+                            
+                                <!-- INCREMENT -->
+                                <% true_false += 1; %>
+
+                            <!-- CHECK ALL THAT APPLY -->
+                            <% } else if (question.type == "check_all") { %>
+                                <% 
+                                    question.answer_multiple.forEach(answer => {
+                                        question.choices.push(answer);
+                                    });
+                                    let shuffled = [].concat(question.choices);
+                                    shuffled.sort(() => {
+                                        return 0.5 - Math.random();
+                                    });
+                                %>
+                                <input type="hidden" name=<%= question._id %> value=''>
+                                <% for (let i = 0; i < 4; i++) { %>
+                                    <% 
+                                        let current_check = "check_" + String(check_all) + String(i);
+                                        let current_value = shuffled[i];
+                                    %>
+                                    <label for=<%=current_check%>>       <input type="checkbox" name=<%= question._id %> id=<%= current_check %> value=<%= current_value %> > <%=current_value%></label>
+                                
+
+                                <% } %>
+                                <% check_all += 1; %>
+
+                            <!-- FILL IN THE BLANK -->
+                            <% } else if (question.type == "fill") { %>
+                                <input type="hidden" name=<%= question._id %> value=''>
+                                <input class="contact-form-text" type="text" name=<%= question._id %> placeholder="Type answer here">
+                                <% fill += 1; %>
+                            <% } %>
+
+                            
+                        </div>
+                    </li>
+                    <hr>
+                <% }) %>
+            
+            </ul>
 
     </card>
 
 <!-- TODO: CastError: Cast to ObjectId failed for value "quiz_name" (type string) at path "_id" for model "Question"-->
-        <input type="hidden" name="id" value=<%=id %> ><br>
-    <button   class="btn btn-primary">Submit Quiz</button>
+        <input type="hidden" name="id" value=<%= id %> ><br>
+    <button class="btn btn-primary" id="submitQuiz">Submit Quiz</button>
 </form>
+<% } %>
 
 </body>
 
+<script src="js/take_quiz.js"></script>
 

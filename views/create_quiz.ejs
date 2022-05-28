@@ -41,6 +41,7 @@
         id="question-form">
             <form action="/create_quiz" method="POST">
                 <input type="text" name="name" placeholder="Quiz Name" required />
+                <input type="number" name="timer" placeholder="Time limit in minutes" min="1" required>
                 <input type="hidden" name="owner" value=<%=email %> />
                 <button>Create</button>
             </form>
