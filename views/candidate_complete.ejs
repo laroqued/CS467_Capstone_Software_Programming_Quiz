@@ -4,24 +4,16 @@
 </head>
 
 <body>
-<!--  name="id"  -->
-<p>Quiz Instance Id: <%=id %>
-</p>
 
-
-
-
-  
-<h1>Thank you <%= id %> </h1>
   <div class="index-page">
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-md-auto" id="index-first-row">
           <!-- 1 of 3 rows -->
 
-          <form method="POST" action="sendMail" class="contact-form">
-
-       <!-- EMAIL INPUTS -->
+<h1>Thank You <%=quiz_instance.firstName %> <%= quiz_instance.lastName %>
+  <h2>For Completing the <%=quiz.name %> Quiz!!!</h2>
+</h1>
 
 
      

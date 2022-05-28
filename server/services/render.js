@@ -246,13 +246,14 @@ exports.post_submit_quiz = async (req, res) => {
 
     //=====================================
     // EMAIL END
-    await res.redirect("/candidate_complete");
+    await res.redirect(`/candidate_complete?id=${req.body.id}`);
     res.status(201);
   } catch (error) {
     console.log(error);
     res.redirect("/");
   }
 };
+
 
 // for manually creating quiz_instance with postman
 exports.create_quiz_instance =
@@ -693,12 +694,11 @@ exports.canidate_quiz =
   (checkAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+
+
     let id = req.query.id;
-
     const quiz = await Quiz.findById(id);
-
     const questions = await Question.find({ quiz: id });
-
     res.render("candidate_quiz", {
       id: id,
       login_name: req.user.login_name,
@@ -706,6 +706,8 @@ exports.canidate_quiz =
       owner: req.user.email,
       quiz: quiz,
     });
+
+
   });
 //Dominique
 exports.canidate_survey = (req, res) => {
@@ -717,17 +719,23 @@ exports.canidate_survey = (req, res) => {
 exports.get_candidate_complete = async (req, res) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
-  let id = req.query.id;
-  const quiz_instance = await Quiz_Instance.findById(id);
-  const quiz = await Quiz.findById(id);
-  const users = await User.findById(id);
 
-  res.render("candidate_complete", {
-    id: id,
-    quiz: quiz,
-    quiz_instance: quiz_instance,
-    users: users,
-  });
+
+     let id = req.query.id;
+     const quiz_instance = await Quiz_Instance.findById(id);
+     const quiz = await Quiz.findById(quiz_instance.quiz);
+     const users = await User.findById(quiz_instance.employer);
+
+
+     res.render("candidate_complete", {
+       id: id,
+       quiz: quiz,
+       quiz_instance: quiz_instance,
+       users: users,
+     });
+	
+
+
 };
 
 exports.add_survey = (req, res) => {
