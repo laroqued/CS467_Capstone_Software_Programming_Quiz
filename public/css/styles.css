@@ -471,3 +471,11 @@ max-width: 75%;
                 background: black;
           
     }
+        #survey-hr2 {
+            position: relative;
+    
+    border-top: 5px double #6a5acd;
+            height: 6px;
+            background: black;
+    
+        }
