@@ -1,18 +1,96 @@
-<%- include('includes/_header') %>
-
 <head>
-    <%- include('layouts/head') %>
+  <%- include('layouts/head') %>
+
 </head>
 
-
 <body>
-    <div id="email-form-greeting">
-        
-    </div>
-      <h1>Candidate Complete</h1>
-    <div class="main">
-        
+<!--  name="id"  -->
+<p>Quiz Instance Id: <%= %>
+</p>
+
+
+
+
+  
+<h1>Thank you <%=  %> </h1>
+  <div class="index-page">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-md-auto" id="index-first-row">
+          <!-- 1 of 3 rows -->
+
+          <form method="POST" action="sendMail" class="contact-form">
+
+       <!-- EMAIL INPUTS -->
+
+
+     
+          <div class="container-fluid setup-bg d-flex flex-column">
+            <div class='row justify-content-center'>
+              <div class="container my-auto">
+                <div class="container ">
+                  <div id="welcome">
+                    <div class="row ">
+                      <div class="col ">
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-auto" id="">
+            <!-- 2 of 3 rows -->
+            <div class="manage-quiz-title">
+
+              <div id="">
+                <h1 class="title-page">Quiz</h1>
+              </div>
+              <hr>
+              <div id="">
+                <span>
+                  <h1 class="title-page">Finished!!!</h1>
+                </span>
+              </div>
+            </div>
+
+            <div class="row" id="results-row">
+
+              <div class="col-sm-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Take a Survey</h5>
+                    <p class="card-text">Take a quick survey and tell us about your experience?</p>
+
+
+                    <a  href=<%="/candidate_survey?id=" + id %> class="btn btn-success">Take Survey</a>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-auto" id="index-third-row">
+              <!-- 3 of 3 rows -->
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Logout</h5>
+                  <p class="card-text">Thank you for taking the quiz!!</p>
+
+
+                  <form action="/logout?_method=DELETE" method="POST">
+                    <button type="submit" class="btn btn-elegant">
+                      <i class="far fa-user pr-2" aria-hidden="true"></i>Logout
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <h5 class="text-wrap"></h5>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 </body>
-
-<%- include('includes/_footer') %>

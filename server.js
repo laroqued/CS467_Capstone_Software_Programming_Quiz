@@ -12,7 +12,6 @@ const methodOverride = require("method-override");
 let port = process.env.PORT; 
 let host = process.env.HOST;
 
-
 // EJS initialization
 app.set("view engine", "ejs");
 
@@ -49,7 +48,6 @@ app.use(
 Passport is authentication middleware for Node. js. As it's extremely flexible and modular, Passport can be unobtrusively dropped into any Express-based web application. A comprehensive set of strategies supports authentication using a username and password, Facebook, Twitter, and more.
 */
 // ===========================================================================================
-
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -60,42 +58,6 @@ Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't
 // ===========================================================================================
 app.use(methodOverride("_method"));
 
-
-// // Cross Origin Whitelist
-// const cors = require("cors");
-// const allowedOrigins = [
-//   `http//:${host}:${port}`,
-//   "https://cloud.mongodb.com",
-// ];
-// app.use(
-//     cors({
-//         origin: function(origin, callback) {
-//             if (!origin) return callback(null, true);
-//             if (allowedOrigins.indexOf(origin) === -1) {
-//                 var msg =
-//                     "The CORS policy for this site does not " +
-//                     "allow access from the specified Origin.";
-//                 return callback(new Error(msg), false);
-//             }
-//             return callback(null, true);
-//         },
-//     })
-// );
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   next();
-// });
-//==============================================================
-//==============================================================
-
-// Global base directory for file downloads
-global.__basedir = __dirname;
-
-
-
-// app.use(express.urlencoded({ extended: false }));
-// app.use(express.json());
-
 /* 
 morgan is a Node. js and Express middleware to log HTTP requests and errors, and simplifies the process. In Node. js and Express, middleware is a function that has access to the request and response lifecycle methods, and the next() method to continue logic in your Express server.
 */
@@ -103,27 +65,16 @@ app.use(morgan('tiny'))
 
 
 // Route setup
-const path = require("path");
 app.use( require("./server/routes/router"));
 
-// //======================================================================
-// // Possible JWT routes to implement later?
-// //======================================================================
-// // Import routes
-// const authRoute = require('./server/middlewares/auth')
-// const postRoute = require('./server/routes/posts')
-
-// // Route Middleware (/api/user is prefixed for the auth.js routes)
-// app.use('/api/user', authRoute)
-// app.use('/api/posts', postRoute)
-// //======================================================================
-
+// Authenication Middleware
 const {
   checkAuthenticated,
   checkNotAuthenticated,
 } = require("./server/middlewares/auth");
 app.use(methodOverride("_method"));
 
+// Splash page redundancy
 app.get("/", checkAuthenticated, (req, res) => {
      res.header(
        "Cache-Control",
@@ -132,7 +83,7 @@ app.get("/", checkAuthenticated, (req, res) => {
   res.render("index", { name: req.user.name });
 });
 
-
+// Logout redundancy
 app.delete("/logout", checkAuthenticated, async (req, res) => {
   await req.logOut();
   if (!req.user)
@@ -160,7 +111,7 @@ app.use(function(err, req, res, next) {
     res.render("500");
 });
 
-
+// This app starts a server and listens on port (XXXX) for connections.
 app.listen(port, host, () => {
     console.log(
         `Express started \on http//:${host}:${port} press Ctrl-C to terminate.`

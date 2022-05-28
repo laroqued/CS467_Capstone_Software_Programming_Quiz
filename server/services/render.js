@@ -11,8 +11,7 @@ const Quiz_Instance = require("../model/quiz_instance");
 const bcrypt = require("bcryptjs");
 const app = express();
 const methodOverride = require("method-override");
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+
 const initializePassport = require("../../passport-config");
 initializePassport(
   passport,
@@ -47,7 +46,9 @@ app.use(methodOverride("_method"));
 // GET
 // ========================================================
 
-
+// JSON Middleware
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 // ========================================================
 // TESTING
 exports.snuck_in =
@@ -98,10 +99,11 @@ exports.get_take_quiz =
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
     let id = req.query.id;
-
+    let _id = req.query._id;
     const quiz_instance = await Quiz_Instance.findById(id);
     const quiz = await Quiz.findById(quiz_instance.quiz);
     const questions = await Question.find({ quiz: quiz._id });
+    const users = await User.findById(quiz_instance.employer);
 
     let complete = quiz_instance.completed
 
@@ -114,7 +116,8 @@ exports.get_take_quiz =
       questions: questions,
       quiz: quiz,
       quiz_instance: quiz_instance,
-      complete: complete
+      complete: complete,
+      users: users
     });
 
   };
@@ -122,16 +125,13 @@ exports.get_take_quiz =
 exports.post_submit_quiz =
   async (req, res) => {
     try {
-      
       let total = Object.keys(req.body).length;
       let correct = 0;
       const keys = Object.keys(req.body);
 
       for (let i = 0; i < total; i++) {
-
-        let key = keys[i]
+        let key = keys[i];
         if (key != "id") {
-
           let answer = req.body[key];
           let question = await Question.findById(key);
 
@@ -144,31 +144,33 @@ exports.post_submit_quiz =
                 correct += 1;
               }
             }
-          // multiple choice
+            // multiple choice
           } else if (question.type == "multiple_choice") {
             if (typeof(answer) != 'string') {
               if (answer[1] == String(question.answer)) {
                 correct += 1;
               }
             }
-          // check all that apply
+            // check all that apply
           } else if (question.type == "check_all") {
-
             let correct_answer = true;
             question.answer_multiple.map(String);
-            
-            if (typeof(answer) == 'string') {
+
+            if (typeof answer == "string") {
               answer = [];
             }
 
-            answer.forEach(current_answer => {
-              if (!question.answer_multiple.includes(current_answer) & current_answer != '') {
+            answer.forEach((current_answer) => {
+              if (
+                !question.answer_multiple.includes(current_answer) &
+                (current_answer != "")
+              ) {
                 correct_answer = false;
                 return;
               }
             });
 
-            question.answer_multiple.forEach(current_answer => {
+            question.answer_multiple.forEach((current_answer) => {
               if (!answer.includes(current_answer)) {
                 correct_answer = false;
                 return;
@@ -178,7 +180,7 @@ exports.post_submit_quiz =
             if (correct_answer) {
               correct += 1;
             }
-          // fill in the blank
+            // fill in the blank
           } else if (question.type == "fill") {
             question.answer_multiple.map(String);
             if (typeof(answer) != 'string') {
@@ -188,17 +190,67 @@ exports.post_submit_quiz =
             }
             
           }
-        
         }
-
       }
 
-      let grade = correct / (total-1);
+      let grade = correct / (total - 1);
       await Quiz_Instance.findByIdAndUpdate(req.body.id, {
         grade: grade,
-        completed: true
+        completed: true,
       });
 
+      //=====================================
+      // EMAIL FUNCTIONALITY HERE
+      // send email to employer
+      //=====================================
+      let quiz_instance = await Quiz_Instance.findById(req.body.id);
+      let quiz = await Quiz.findById(quiz_instance.quiz);
+      let users = await User.findById(quiz_instance.employer);
+
+      const output = `
+ 
+      <p>Hello  <strong>${users.login_name}</strong>, </p>
+      <p><p/>
+      <p>The "<strong>${quiz.name}</strong>" quiz has been completed by <strong>${quiz_instance.firstName}</strong><strong>
+      ${quiz_instance.lastName}</strong>.<p/>
+      <p><p/>
+
+`;
+
+      // create reusable transporter object using the default SMTP transport
+      let transporter = await nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        auth: {
+          user: process.env.GMAIL_USER,
+          pass: process.env.PASSWORD,
+        },
+      });
+
+      // send mail with defined transport object
+      let info = await transporter.sendMail({
+        from:`"${quiz_instance.firstName} ${quiz_instance.lastName}" 
+        <${quiz_instance.email}>`, // sender address
+
+        to: quiz.owner, // list of receivers
+        subject: `"${quiz.name}" Quiz Instance (${quiz_instance._id}) - Submission Received`, // Subject line
+        text: "Hello world?", // plain text body
+        html: output, // html body
+      });
+
+      transporter.verify(function (error, success) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Mail server is running...");
+          console.log(`Message sent: ${info.messageId}`);
+          console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
+        }
+      });
+
+      //=====================================
+      // EMAIL END
       await res.redirect("/candidate_complete");
       res.status(201);
     } catch (error) {
@@ -219,7 +271,7 @@ exports.create_quiz_instance =
         email: req.body.email,
         quiz: req.body.quiz,
         employer: req.body.employer,
-        completed: false
+        completed: false,
       });
       await quiz_instance.save();
       await res.redirect("/quizzes");
@@ -228,7 +280,7 @@ exports.create_quiz_instance =
       console.log(error);
       res.redirect("/create_quiz");
     }
-});
+  });
 
 // ==============================================================
 // CONTACT/EMAIL
@@ -238,9 +290,9 @@ exports.get_contact =
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     let quizId = req.query.id;
-     const name = await Quiz.find({
-       name: req.user.name,
-     });
+    const name = await Quiz.find({
+      name: req.user.name,
+    });
     res.render("contact", {
       login_name: req.user.login_name,
       msg: "",
@@ -280,13 +332,8 @@ exports.post_contact =
 <p>${req.body.message}</p>
 <p>Click the link below to start your quiz.</p>
 <p></p>
-
-<li>Local Host Quiz: http://localhost:3001/snuck_in</li>
-<li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/candidate_quiz?id=${id}</li>
-
 <li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/start_quiz?id=${id}</li>
-
-<li>Production Quiz: https://software-programming-quiz.herokuapp.com/candidate_quiz?id=${id}</li>
+<li>Production Quiz: https://software-programming-quiz.herokuapp.com/start_quiz?id=${id}</li>
 </ul>
 `;
     // create reusable transporter object using the default SMTP transport
@@ -326,7 +373,7 @@ exports.post_contact =
       }
     });
   });
-  
+
 // ==============================================================
 // EMAIL END
 // ==============================================================
@@ -677,12 +724,20 @@ exports.canidate_survey =
     });
   });
 //Dominique
-exports.canidate_complete =
+exports.get_candidate_complete =
   (checkNotAuthenticated,
-  (req, res) => {
+  async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
-    res.render("candidate_complete");
+      let id = req.query.id;
+
+
+      res.render("candidate_complete", {
+        id: id,
+  
+      });
+
+
   });
 
 exports.add_survey = (req, res) => {
