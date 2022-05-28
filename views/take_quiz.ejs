@@ -41,7 +41,7 @@
     %>
     <div class="bg-secondary"></div>
     <div class="bg-lighten-xl"></div>
-<form action="take_quiz" method="POST">
+<form action="/take_quiz" method="POST">
     <card class="card-body" id="quiz-cards">
         <ul class="list-group">
             
@@ -132,9 +132,7 @@
 
 <!-- TODO: CastError: Cast to ObjectId failed for value "quiz_name" (type string) at path "_id" for model "Question"-->
         <input type="hidden" name="id" value=<%=id %> ><br>
-     
-
-    <button  class="btn btn-primary">Submit Quiz</button>
+    <button   class="btn btn-primary">Submit Quiz</button>
 </form>
 
 </body>

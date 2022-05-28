@@ -694,32 +694,20 @@ exports.canidate_survey =
     });
   });
 //Dominique
-exports.canidate_complete =
+exports.get_candidate_complete =
   (checkNotAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    let id = req.query.id;
-    let _id = req.query._id;
-    const quiz_instance = await Quiz_Instance.findById(id);
-    const quiz = await Quiz.findById(id);// BUG
-    const users = await User.findById(id);
 
-    // User.find().then((result) => {
-    //   res.render("candidate_complete", {
-    //     id: id,
-    //     quiz_instance: quiz_instance,
-    //     quiz: quiz, // BUG
-    //     users: users,
-    //   });
-    // });
+      let id = req.query.id;
 
-    res.render("candidate_complete", {
-      id: id,
-      quiz_instance: quiz_instance,
-      quiz: quiz, // BUG
-      users: users,
-      
-    });
+
+      res.render("candidate_complete", {
+        id: id,
+  
+      });
+
+
   });
 
 exports.add_survey = (req, res) => {
