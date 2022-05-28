@@ -41,69 +41,67 @@
         <!--==========================================================================-->
         <hr>
         <div class="row">
-            <div class="col-3">
+            <div class="col-6">
                 <div class="form-group">
-                    <p>
-                        <!-- ========= -->
-                    <div class="form-check form-check-inline">
-                        <label for="gender">
-                            <h4>Gender</h4>
-                        </label>
-                        <hr id="survey-hr">
-                        <div class="radio inline">
-                            <input class="form-check-input" name="" type="radio" id="radio-2" name="gender"
-                                value="Male">
-                            <label class="form-check-label" for="radio-2" class="radio-label">Male</label>
-                        </div>
-                        <div class="radio inline">
-                            <input class="form-check-input" name="" type="radio" id="radio-3" name="gender"
-                                value="Female">
-                            <label class="form-check-label" for="radio-3" class="radio-label">Female</label>
-                        </div>
-                    </div>
-                    <!-- ========= -->
+                    <label for="gender">
+                        <h4>Gender</h4>
+                    </label>
+                    <hr id="survey-hr">
 
-                    </p>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="radio-2" name="gender" value="Male">
+                        <label class="form-check-label" for="radio-2" class="radio-label">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" id="radio-3" name="gender" value="Female">
+                        <label class="form-check-label" for="radio-3" class="radio-label">Female</label>
+                    </div>
                 </div>
             </div>
         </div>
 
 
         <!-- =========================================================================== -->
+        <!-- =========================================================================== -->
         <hr>
         <div class="row">
-            <div class="col-3">
+            <div class="col-6">
                 <div class="form-group">
-                    <p>
-                        <!-- ========= -->
+                    <label for="age"></label>
+                    <h4>Age Range</h4>
+                    <hr id="survey-hr">
+                    <!-- <div class="radio inline"> -->
                     <div class="form-check form-check-inline">
-                        <label class="form-check-label" for="gender">
-                            <h4> Age Range</h4>
-                        </label>
-                        <hr id="survey-hr">
-                        <!-- <div class="radio inline"> -->
-                        <input class="form-check-input" name="" type="radio" id="radio-4" name="age" value="18-27">
+                        <input class="form-check-input" type="radio" id="radio-4" name="age" value="18-27">
                         <label class="form-check-label" for="radio-4" class="radio-label">18-27</label>
-                        <!-- </div>
-                                            <div class="radio inline"> -->
-                        <input class="form-check-input" name="" type="radio" id="radio-5" name="age" value="28-39">
-                        <label class="form-check-label" for="radio-5" class="radio-label">28-39</label>
-                        <!-- </div>
-                                            <div class="radio inline"> -->
-                        <input class="form-check-input" name="" type="radio" id="radio-6" name="age" value="40-50">
-                        <label class="form-check-label" for="radio-6" class="radio-label">40-50</label>
-                        <!-- </div>
-                                            <div class="radio inline"> -->
-                        <input class="form-check-input" name="" type="radio" id="radio-6" name="age" value="51+">
-                        <label class="form-check-label" name="" for="radio-6" class="radio-label">51+</label>
                     </div>
-                    <!-- ========= -->
+                    <!-- </div>
+                    <div class="radio inline"> -->
+                    <div class="form-check form-check-inline">
 
-                    </p>
+                        <input class="form-check-input" type="radio" id="radio-5" name="age" value="28-39">
+                        <label class="form-check-label" for="radio-5" class="radio-label">28-39</label>
+                    </div>
+                    <!-- </div>
+                    <div class="radio inline"> -->
+                    <div class="form-check form-check-inline">
+
+                        <input class="form-check-input" type="radio" id="radio-6" name="age" value="40-50">
+                        <label class="form-check-label" for="radio-6" class="radio-label">40-50</label>
+                    </div>
+                    <!-- </div>
+                    <div class="radio inline"> -->
+                    <div class="form-check form-check-inline">
+
+                        <input class="form-check-input" type="radio" id="radio-7" name="age" value="51+">
+                        <label class="form-check-label" for="radio-7" class="radio-label">51+</label>
+                    </div>
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
 
+        <!-- =========================================================================== -->
         <!-- =========================================================================== -->
         <hr>
         <!-- Email Field  ROW 2-->
@@ -115,8 +113,8 @@
 
                     <div class="form-group">
 
-                        <input type="text" class="contact-form-text" class="form-control col-lg-9" id="question1"
-                            name="question1" placeholder="How did you feel overall about the quiz?">
+                        <textarea type="text" class="contact-form-text" class="form-control col-lg-9" id="question1"
+                            name="question1" placeholder="How did you feel overall about the quiz?"></textarea>
                     </div>
 
 
@@ -132,8 +130,8 @@
 
                     <div class="form-group">
 
-                        <input type="text" class="contact-form-text" class="form-control col-lg-9" id="question2"
-                            name="question2" placeholder="How can we make the quiz better?">
+                        <textarea type="text" class="contact-form-text" class="form-control col-lg-9" id="question2"
+                            name="question2" placeholder="How can we make the quiz better?"></textarea>
                     </div>
 
 
@@ -144,7 +142,7 @@
             <p class="full">
 
             <div class="form-group">
-                <button type="submit"  id="form-submit" class="contact-form-btn">Submit</button>
+                <button type="submit" id="form-submit" class="contact-form-btn">Submit</button>
             </div>
 
             </p>
