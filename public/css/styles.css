@@ -454,3 +454,6 @@ background-color: lightgrey;
            padding: .5rem;
            margin-bottom: 1rem;
     }
+    #survey{
+max-width: 75%;
+    }

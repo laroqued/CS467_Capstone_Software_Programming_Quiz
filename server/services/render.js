@@ -710,15 +710,8 @@ exports.canidate_quiz =
 
   });
 //Dominique
-exports.canidate_survey = (req, res) => {
+exports.canidate_survey =async (req, res) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-
-  res.render("candidate_survey");
-};
-//Dominique
-exports.get_candidate_complete = async (req, res) => {
-  res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-
 
 
      let id = req.query.id;
@@ -727,6 +720,29 @@ exports.get_candidate_complete = async (req, res) => {
      const users = await User.findById(quiz_instance.employer);
 
 
+     res.render("candidate_survey", {
+       id: id,
+       quiz: quiz,
+       quiz_instance: quiz_instance,
+       users: users,
+     });
+};
+
+
+
+
+//Dominique
+exports.get_candidate_complete = async (req, res) => {
+  res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+
+
+     let id = req.query.id;
+     const quiz_instance = await Quiz_Instance.findById(id);
+     const quiz = await Quiz.findById(quiz_instance.quiz);
+     const users = await User.findById(quiz_instance.employer);
+
+
+     
      res.render("candidate_complete", {
        id: id,
        quiz: quiz,

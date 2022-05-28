@@ -1,26 +1,30 @@
-<head>
-    <%- include('layouts/head') %>
-</head>
 
 
-<body>
-    <h1>Candidate Survey </h1>
+    <head>
+        <%- include('layouts/head') %>
+    </head>
+    <h1 style="margin-bottom: 1rem;">Candidate Survey </h1>
 
-</body>
+    <body>
 
-<div class="main" id="question-form" >
-    <div class="container">
-        <div class="box-nav d-flex justify-between">
-
-        </div>
-        <div class="form-title text-left">
-            <!-- <h2 class="text-dark">New User</h2> -->
-            <span class="text-dark">We highly value your feedback. Use the below form to share your thoughts on our candidate evaluation</span>
-            
-        </div>
-        <br>
-        <!-- add user form -->
+        <main class="email-form" id="question-form">
+            <div class="container-fluid setup-bg d-flex flex-column">
+                <div class="row justify-content-center">
+                    <div class="container">
+                        <div id="welcome">
+                            <div class="row">
+                                <div class="col">
+                                    <!-- include('includes/_form') HERE -->
+                           
+                            
         <%- include('includes/_form') %>
-       
-    </div>
-</div>
+                               
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </body>
+
