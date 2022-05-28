@@ -7,10 +7,10 @@
     <h1>This quiz has already been taken</h1>
 
 <% } else { %>
-
-    <h5>You are about to begin the quiz: <%= quiz.name %></h5>
-    <h5>The quiz has a time limit of <%= quiz.timer %> minutes</h5>
+<h1>Hello <%= quiz_instance.firstName %> </h1>
+    <h1>You are about to begin the quiz: <%= quiz.name %></h1>
+    <h3>The quiz has a time limit of <%= quiz.timer %> minute(s)</h3>
     <h5>Press the button below to begin the quiz</h5>
-    <a class="btn btn-primary" href=<%= "/take_quiz?id=" + quiz_instance._id %>>Begin Quiz</a>
+    <a class="btn btn-primary" id="question-form" href=<%= "/take_quiz?id=" + quiz_instance._id %>>Begin Quiz</a>
 
 <% } %>

@@ -16,10 +16,35 @@
     <div class="bg-secondary"></div>
     <div class="bg-lighten-xl"></div>
 
-    <h2><%= quiz.name %> Quiz</h5>
+    <div class="manage-quiz-title">
+    
+        <div id="">
+            <h1 class="title-page"> <%= quiz.name %></h1>
+        </div>
+        <hr>
+        <div id="">
+            <span>
+                <h1 class="title-page">Quiz</h1>
+            </span>
+        </div>
+    </div>
+    
+
 
     <% if (complete) { %>
-        <h1>Quiz attempt has already been used</h1>
+            <div class="manage-quiz-title">
+            
+                <div id="">
+                    <h1 class="title-page">Your Quiz Attempt</h1>
+                </div>
+                <hr>
+                <div id="">
+                    <span>
+                        <h1 class="title-page">Has Already Been Used!</h1>
+                    </span>
+                </div>
+            </div>
+      
     <% } else { %>
     <h3>Welcome to your quiz <%= quiz_instance.firstName %>
         <%= quiz_instance.lastName %>
