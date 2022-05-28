@@ -526,6 +526,40 @@ exports.delete_quiz =
   });
 
 // Aaron
+exports.get_edit_quiz =
+  (checkAuthenticated,
+  async (req, res) => {
+    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+
+    let id = req.query.id;
+    let quiz = await Quiz.findById(id);
+    res.render("edit_quiz", {
+      id: id,
+      login_name: req.user.login_name,
+      quiz: quiz
+    });
+  });
+
+// Aaron
+exports.post_edit_quiz =
+  ("/edit_quiz",
+  checkAuthenticated,
+  async (req, res) => {
+    try {
+      console.log(req.body.name);
+      Quiz.findByIdAndUpdate(req.body.quiz, {
+        name: req.body.name,
+        timer: req.body.timer
+      }).then(() => {
+        res.redirect("/quiz?id=" + req.body.quiz);
+      });
+    } catch (error) {
+      console.log(error);
+      res.redirect("/");
+    }
+  });
+
+// Aaron
 exports.quiz_results =
   (checkAuthenticated,
   (req, res) => {
