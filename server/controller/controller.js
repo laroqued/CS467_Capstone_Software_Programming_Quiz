@@ -22,8 +22,8 @@ exports.create = (req,res)=>{
     user
         .save(user)
         .then(data => {
-            res.send(data)
- 
+            // res.send(data)
+            res.redirect('/candidate_survey_complete')
         })
         .catch(err =>{
             res.status(500).send({
@@ -86,7 +86,7 @@ exports.find = async (req, res)=>{
     
 }
 
-// Update a new idetified user by user id
+// Update a new identified user by user id
 exports.update = (req, res)=>{
     if(!req.body){
         return res
