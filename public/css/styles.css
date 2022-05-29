@@ -118,7 +118,58 @@ body {
     position: relative;
     background-size: 75%;
 }
+#body7 {
+    background-image: url('../img/mountain1.jpg');
+    background-color: #cccccc;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-size: 75%;
+}
 
+#body8 {
+    background-image: url('../img/mountain7.jpg');
+    background-color: #cccccc;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-size: 75%;
+}
+#body9 {
+    background-image: url('../img/mountain8.jpg');
+    background-color: #cccccc;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-size: 75%;
+}
+
+#body10 {
+    background-image: url('../img/mountain9.jpg');
+    background-color: #cccccc;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-size: 75%;
+}
+#body11 {
+    background-image: url('../img/mountain10.jpg');
+    background-color: #cccccc;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-size: 75%;
+}
 .title-page {
     font-family: "Anton", sans-serif;
 }

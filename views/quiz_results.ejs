@@ -7,14 +7,16 @@
 </head>
 
 <body>
-            <div class="container-fluid">    <div id="quiz-greeting">
-        <div id="back-button">
-            <div class="filter">
-                <a class="text-black" href="/"><i class="fas fa-angle-double-left text-black"></i>
-                    Home</a>
+    <div class="container-fluid">
+        <div id="quiz-greeting">
+            <div id="back-button">
+                <div class="filter">
+                    <a class="text-black" href="/"><i class="fas fa-angle-double-left text-black"></i>
+                        Home</a>
+                </div>
             </div>
         </div>
-    </div></div>
+    </div>
 
     <div class="index-page">
         <div class="container">
@@ -29,7 +31,7 @@
                                     <div id="welcome">
                                         <div class="row ">
                                             <div class="col ">
-                                                <%- include('layouts/welcome') %>
+                                                <%- include('layouts/welcome_light') %>
 
                                             </div>
                                         </div>
@@ -43,13 +45,13 @@
                         <div class="manage-quiz-title">
 
                             <div id="">
-                                <h3 class="title-page">Quiz</h3>
+                                <h3 class="title-page1">Quiz</h3>
                             </div>
-                            <hr>
+                        <hr id="index-title-hr">
                             <div id="">
                                 <span>
-                        <h3 class="title-page">Results</h3>
-                    </span>
+                                    <h3 class="title-page1">Results</h3>
+                                </span>
                             </div>
                         </div>
 
@@ -62,7 +64,8 @@
                                         <p class="card-text">Get the quiz stats from your individual candidates.</p>
 
                                         <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <button class="btn btn-primary dropdown-toggle" type="button"
+                                                id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Employers
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -81,7 +84,7 @@
                     <div class="col-md-auto" id="index-third-row">
                         <!-- 3 of 3 rows -->
 
-                        <h5 class="text-wrap">Results</h5>
+                      <!--   <h5 class="text-wrap">Results</h5> -->
                     </div>
                 </div>
             </div>

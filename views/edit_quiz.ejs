@@ -4,17 +4,25 @@
     <%- include('layouts/head') %>
 </head>
 
-<body>
+<body id="body8">
+            <div class="container-fluid">
+                <div id="back-button">
+                    <div class="filter">
+                        <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to
+                            Quizzes</a>
+                    </div>
+                </div>
+            </div>
     <div id="email-form-greeting">
-        <%- include('layouts/welcome') %>
+            <%- include('layouts/welcome_light') %>
     </div>
     <div class="manage-quiz-title">
         <div>
-            <h3 class="title-page">Edit</h3>
+            <h3 class="title-page1">Edit</h3>
         </div>
-        <hr>
+        <hr id="index-title-hr">
         <div>
-            <h3 class="title-page">Quiz</h3>
+            <h3 class="title-page1">Quiz</h3>
         </div>
     </div>
     <div class="main">

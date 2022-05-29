@@ -1,16 +1,19 @@
 <head>
     <%- include('layouts/head') %>
 </head>
+<body id="body9">
+    
 
 <% if (quiz_instance.completed) { %>
 
     <h1>This quiz has already been taken</h1>
 
 <% } else { %>
-<h1>Hello <%= quiz_instance.firstName %> !!! </h1>
-    <h1>You are about to begin the quiz: <%= quiz.name %></h1>
-    <h3>The quiz has a time limit of <%= quiz.timer %> minute(s)</h3>
-    <h5>Press the button below to begin the quiz</h5>
+<h1 class="text-white">Hello <%= quiz_instance.firstName %> !!! </h1>
+    <h1  class="text-white">You are about to begin the quiz: <%= quiz.name %></h1>
+    <h3  class="text-white">The quiz has a time limit of <%= quiz.timer %> minute(s)</h3>
+    <h5  class="text-white">Press the button below to begin the quiz</h5>
     <a class="btn btn-primary" id="question-form" href=<%= "/take_quiz?id=" + quiz_instance._id %>>Begin Quiz</a>
 
 <% } %>
+</body>
