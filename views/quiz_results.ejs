@@ -82,14 +82,38 @@
                         </div>
                     </div>
                     <div class="col-md-auto" id="index-third-row">
-                        <!-- 3 of 3 rows -->
-
-                      <!--   <h5 class="text-wrap">Results</h5> -->
+                        <ul class="list-group">
+                            <% quiz_instance.forEach(quiz=> { %>
+            
+            
+                                <div class="card" id="new-results-card">
+                                    <div class="card-header">
+                                        <h5>
+                                            <%= quiz_instance.firstName %> Results
+                                        </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-title">Candidate</p>
+                                        <p class="card-text"></p>
+                                        <a id="question-form" class="btn btn-primary" href=<%="/quiz?id=" + quiz_instance._id %>><%=
+                                            quiz_instance._id %></a>
+            
+                                    </div>
+                                </div>
+            
+            
+                                <% }) %>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
+
+
+    
     </div>
+
+
 </body>
 
 <%- include('includes/_footer') %>
