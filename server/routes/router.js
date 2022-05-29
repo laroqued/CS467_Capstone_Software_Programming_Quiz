@@ -63,7 +63,7 @@ route.get("/candidate_complete", services.get_candidate_complete
  *  @description Root Route
  *  @method GET /
  */
- route.get('/', services.homeRoutes);
+ route.get('/candidate_index', services.homeRoutes1);
 
  /**
   *  @description add users

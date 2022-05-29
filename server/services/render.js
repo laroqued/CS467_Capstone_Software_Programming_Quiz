@@ -9,6 +9,8 @@ const Quiz = require("../model/quiz");
 const Question = require("../model/question");
 const Quiz_Instance = require("../model/quiz_instance");
 const bcrypt = require("bcryptjs");
+// make an API request from the cloud API MondgoDB database
+const axios = require('axios')
 const app = express();
 const methodOverride = require("method-override");
 
@@ -749,9 +751,18 @@ exports.get_candidate_complete = async (req, res) => {
        quiz_instance: quiz_instance,
        users: users,
      });
-	
+}; 
 
-
+exports.homeRoutes1 = (req, res) => {
+    axios
+      .get("http://localhost:3005/api/users")
+      .then(function (response) {
+        // MAYBE RENDER quiz_results or survey_results?
+        res.render("candidate_index", { users: response.data });
+      })
+      .catch((err) => {
+        res.send(err);
+      });
 };
 
 exports.add_survey = (req, res) => {
