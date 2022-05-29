@@ -12,7 +12,6 @@
       <div class="row justify-content-md-center">
         <div class="col-md-auto" id="index-first-row">
           <!-- 1 of 3 rows -->
-
           <div class="container-fluid setup-bg d-flex flex-column">
             <div class='row justify-content-center'>
               <div class="container my-auto">
@@ -20,20 +19,15 @@
                   <div id="welcome">
                     <div class="row ">
                       <div class="col ">
-                        <%- include('layouts/welcome_light') %>
 
+
+                        <%- include('layouts/welcome_light') %>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
-
-
-
-
-
           </div>
           <div class="col-md-auto" id="index-second-row">
             <!-- 2 of 3 rows -->
@@ -46,23 +40,26 @@
                 <h1 class="title-page1">Programming Quiz</h1>
               </span>
             </div>
+            <!-- CARDS -->
             <div class="row" id="middle-row-cards">
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-body">
+              <div class="col-md-auto">
+                <div class="card h-100">
+                  <div class="card-body d-flex flex-column">
                     <h5 class="card-title">Manage Quizzes for Candidates</h5>
-                    <p class="card-text">Navigate here to create quizzes for candidates.</p>
-                    <a id="manage-quiz-button" href="/quizzes" class="btn btn-success">Manage Quizzes</a>
+                    <p class="card-text">Navigate here to create and edit quizzes for candidates. </p>
+                    <div ><a  id="manage-quiz-button1" href="/quizzes" class="btn btn-success align-self-end">Manage Quizzes</a></div>
+             
 
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Candidate Results</h5>
-                    <p class="card-text">Get the quiz stats from your indivual candidates.</p>
-                    <a href="/quiz_results" id="question-form" class="btn btn-primary">Get Results</a>
+              <div class="col-md-auto">
+                <div class="card h-100 ">
+                  <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Candidate Test Results Rankings</h5>
+                    <p class="card-text">Get the quiz stats from your indivual candidates</p>
+                    <div>  <a id="manage-quiz-button1" href="/quiz_results" id="question-form" class="btn btn-primary align-self-end ">Get Results</a></div>
+                  
                   </div>
                 </div>
               </div>
@@ -71,7 +68,7 @@
           <div class="col-md-auto" id="index-third-row">
             <!-- 3 of 3 rows -->
             <!-- Additional Content Here? -->
-       <!--      <h5 class="text-wrap">Another row to add content for the Splash Page</h5> -->
+            <!--      <h5 class="text-wrap">Another row to add content for the Splash Page</h5> -->
 
           </div>
         </div>

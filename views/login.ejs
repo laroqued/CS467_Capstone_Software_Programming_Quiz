@@ -5,9 +5,12 @@
     </head>
 
     <body id="body1">
+<div class="app-container container-fluid">
 
+
+</div>
         <div class="main" id="question-form">
-            
+
             <h1>
                 <%=login_form_greeting %>
             </h1>
@@ -21,27 +24,63 @@
                     <form action="/login" method="POST">
                         <input type="email" name="email" placeholder="name@gmail.com" required />
                         <input type="password" name="password" placeholder="* * * * * *" required />
-                        <button id="question-form">SIGN IN</button>
+                        <button onclick="lsRememberMe()" id="question-form">SIGN IN</button>
 
                         <!-- 2 column grid layout for inline styling -->
                         <div class="row mb-4">
                             <div class="col d-flex justify-content-center">
                                 <!-- Checkbox -->
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="form2Example31"
+
+
+
+
+                                    <input class="form-check-input" type="checkbox" value="lsRememberMe" id="rememberMe"
                                         checked />
-                                    <label class="form-check-label" for="form2Example31"> Remember me </label>
+                                    <label class="form-check-label" for="rememberMe"> Remember me </label>
+
+
                                 </div>
                             </div>
 
                             <div class="col">
-                                <!-- Simple link -->
-                                <a href="#!">Forgot password?</a>
+                                <!-- Forgot Password -->
+                                <!-- <a href="#!">Forgot password?</a> -->
+
+                                <!-- Create Account -->
+                                <a href="/register">Register for a New Account</a>
                             </div>
                         </div>
-                        <a href="/register">Create Account</a>
+
                     </form>
 
         </div>
+        <script>
+            // Source: https://codepen.io/AllThingsSmitty/pen/pOoeyz
+            const rmCheck = document.getElementById("rememberMe"),
+                emailInput = document.getElementById("email");
+
+            if (localStorage.checkbox && localStorage.checkbox !== "") {
+                rmCheck.setAttribute("checked", "checked");
+                emailInput.value = localStorage.username;
+            } else {
+                rmCheck.removeAttribute("checked");
+                emailInput.value = "";
+            }
+
+            function lsRememberMe() {
+                if (rmCheck.checked && emailInput.value !== "") {
+                    localStorage.username = emailInput.value;
+                    localStorage.checkbox = rmCheck.value;
+                    console.log(`Checked: ${rmCheck.checked}`)
+                    console.log(`Checked: ${emailInput.value}`)
+                } else {
+                    localStorage.username = "";
+                    localStorage.checkbox = "";
+                    console.log(`Unchecked: ${rmCheck.checked}`)
+                    console.log(`Unchecked: ${emailInput.value}`)
+                }
+            }
+        </script>
     </body>
     <%- include('includes/_footer') %>
