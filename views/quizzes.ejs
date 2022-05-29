@@ -1,11 +1,12 @@
-<%- include('includes/_header') %>
+<body>
+    <%- include('includes/_header') %>
 
-    <head>
-        <%- include('layouts/head') %>
-    </head>
+        <head>
+            <%- include('layouts/head') %>
+        </head>
 
 
-    <body id="body2">
+
         <div class="container-fluid">
             <div id="back-button-home">
                 <div class="filter">
@@ -32,27 +33,30 @@
                 </div>
             </div>
 
-            <ul class="list-group" >
+            <ul class="list-group">
                 <% quizzes.forEach(quiz=> { %>
-                
 
-                <div class="card" id="new-quiz-card">
-                    <div class="card-header">
-                        <h5><%= quiz.name %> Quiz</h5>
+
+                    <div class="card" id="new-quiz-card">
+                        <div class="card-header">
+                            <h5>
+                                <%= quiz.name %> Quiz
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-title">View, Edit, Delete Quiz</p>
+                            <p class="card-text"></p>
+                            <a id="question-form" class="btn btn-primary" href=<%="/quiz?id=" + quiz._id %>><%=
+                                    quiz.name %></a>
+
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-title">View, Edit, Delete Quiz</p>
-                        <p class="card-text"></p>
-                        <a id="question-form" class="btn btn-primary" href=<%="/quiz?id=" + quiz._id %>><%= quiz.name %></a>
-                
-                    </div>
-                </div>
-                  
+
 
                     <% }) %>
             </ul>
         </div>
-        
+
         <div class="card" id="new-quiz-card">
             <div class="card-header">
                 <h5>Add Quiz</h5>
@@ -64,6 +68,6 @@
 
             </div>
         </div>
-    </body>
+</body>
 
-    <%- include('includes/_footer') %>
+<%- include('includes/_footer') %>

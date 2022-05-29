@@ -39,7 +39,17 @@ body {
     -webkit-perspective: 1000;
     -webkit-transform: translate3d(0, 0, 0);
 
+    background-image: url('../img/mountain4.jpg');
+    background-color: #cccccc;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-size: 75%;
 }
+
+
 
 #body1 {
     background-image: url('../img/mountain.jpg');
@@ -54,6 +64,17 @@ body {
 
 #body2 {
     background-image: url('../img/mountain2.jpg');
+    background-color: #cccccc;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-size: 75%;
+}
+
+#body3 {
+    background-image: url('../img/mountain4.jpg');
     background-color: #cccccc;
     background-attachment: fixed;
     background-position: center;
