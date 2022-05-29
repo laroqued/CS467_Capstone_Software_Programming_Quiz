@@ -1,0 +1,32 @@
+<%- include('includes/_header') %>
+
+<head>
+    <%- include('layouts/head') %>
+</head>
+
+<body>
+    <div id="email-form-greeting">
+        <%- include('layouts/welcome') %>
+    </div>
+    <div class="manage-quiz-title">
+        <div>
+            <h3 class="title-page">Edit</h3>
+        </div>
+        <hr>
+        <div>
+            <h3 class="title-page">Quiz</h3>
+        </div>
+    </div>
+    <div class="main">
+        <form action="/edit_quiz" method="POST">
+            <h5><u>Quiz name</u></h5>
+            <input type="text" name="name" value="<%= quiz.name %>" required>
+            <h5><u>Time Limit</u></h5>
+            <input type="number" name="timer" value="<%= quiz.timer %>" required>
+            <input type="hidden" name="quiz" value=<%= id %> >
+            <button>Save</button>
+        </form>
+    </div>
+</body>
+
+<%- include('includes/_footer') %>
