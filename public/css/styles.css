@@ -97,6 +97,28 @@ body {
     position: relative;
     background-size: 75%;
 }
+#body5 {
+    background-image: url('../img/mountain5.jpg');
+    background-color: #cccccc;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-size: 75%;
+}
+
+#body6 {
+    background-image: url('../img/mountain6.jpg');
+    background-color: #cccccc;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-size: 75%;
+}
+
 .title-page {
     font-family: "Anton", sans-serif;
 }
@@ -127,7 +149,7 @@ body {
 
 #back-button-home {
     text-align: left;
-    margin-left: 5rem;
+    margin-left: 15rem;
 }
 
 #back-button {

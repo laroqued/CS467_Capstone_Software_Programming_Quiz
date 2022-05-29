@@ -8,82 +8,127 @@
 
 
     <body>
-        <div class="container-fluid">          <div id="back-button">
-                    <div class="filter">
-                        <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to
-                            Quizzes</a>
-                    </div>
-                </div></div>
-      
-                
+        <div class="container-fluid">
+            <div id="back-button">
+                <div class="filter">
+                    <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to
+                        Quizzes</a>
+                </div>
+            </div>
+        </div>
+
+
         <div id="email-form-greeting">
             <%- include('layouts/welcome') %>
         </div>
-                    <div class="manage-quiz-title">
+        <div class="manage-quiz-title">
 
-                        <div id="">
-                            <h3 class="title-page">Edit</h3>
-                        </div>
-                        <hr>
-                        <div id="">
-                            <span>
-                                <h3 class="title-page">Question</h3>
-                            </span>
-                        </div>
-                    </div>
-        <div class="main" id="question-form-edit" >
-            <form action="/question" method="POST" >
+            <div id="">
+                <h3 class="title-page">Edit</h3>
+            </div>
+            <hr>
+            <div id="">
+                <span>
+                    <h3 class="title-page">Question</h3>
+                </span>
+            </div>
+        </div>
+        <div class="main" id="question-form-edit">
+            <form action="/question" method="POST">
                 <h5> <u>Question Prompt</u> </h5>
-                
-                <input type="text" name="prompt" value="<%= question.prompt %>" >
-                    <hr class="class-1" />
-                <% if (question.type == "multiple_choice") { %>
+
+                <input type="text" name="prompt" value="<%= question.prompt %>">
+                <hr class="class-1" />
+                <% if (question.type=="multiple_choice" ) { %>
                     <h5>Correct Answer</h5>
-                    <input type="text" name="answer" value="<%= question.answer %>" >
+                    <input type="text" name="answer" value="<%= question.answer %>">
                     <h5>Incorrect Answer 1</h5>
-                    <input type="text" name="choice2" value="<%= question.choices[0] %>" >
+                    <input type="text" name="choice2" value="<%= question.choices[0] %>">
                     <h5>Incorrect Answer 2</h5>
-                    <input type="text" name="choice3" value="<%= question.choices[1] %>" >
+                    <input type="text" name="choice3" value="<%= question.choices[1] %>">
                     <h5>Incorrect Answer 3</h5>
-                    <input type="text" name="choice4" value="<%= question.choices[2] %>" >
-                <% } else if (question.type == "true_or_false") { %>
-                    <label for="true">True</label>
-                    <% if (question.answer == "true") { %>
-                        <input type="radio" id="true" name="answer" value="true" checked>
-                        <label for="false">False</label>
-                        <input type="radio" id="false" name="answer" value="false" >
-                    <% } else { %>
-                        <input type="radio" id="true" name="answer" value="true" >
-                        <label for="false">False</label>
-                        <input type="radio" id="false" name="answer" value="false" checked>
-                    <% } %>
-                <% } else if (question.type == "check_all") { %>
-                    <% let current = "1"; %>
-                    <% question.answer_multiple.forEach(answer => { %>
-                        <h5 style="margin-top: 20px"><%="Option "+current%></h5>
-                        <input type="text" id=<%="input"+current%> name=<%="answer"+current%> value=<%=answer%>>
-                        <div type="button" id=<%="a"+current%> class="btn btn-success col-3">Correct</div>
-                        <% current = parseInt(current); %>
-                        <% current += 1; %>
-                        <% current = current.toString(); %>
-                    <% }) %>
-                    <% question.choices.forEach(answer => { %>
-                        <h5 style="margin-top: 20px"><%="Option "+current%></h5>
-                        <input type="text" id=<%="input"+current%> name=<%="option"+current%> value=<%=answer%>>
-                        <div type="button" id=<%="a"+current%> class="btn btn-danger col-3">Incorrect</div>
-                        <% current = parseInt(current); %>
-                        <% current += 1; %>
-                        <% current = current.toString(); %>
-                    <% }) %>
-                <% } else if (question.type == "fill") { %>
-                    <% let answers = question.answer_multiple.join(); %>
-                    <h5>Enter all correct answers separated by commas</h5>
-                    <textarea name="answer"><%=answers%></textarea>
-                <% } %>
-                <input type="hidden" name="id" value=<%=question.id %>>
-                <input type="hidden" name="type" value=<%=question.type %> >
-                <input type="hidden" name="quiz" value=<%=question.quiz %>>
-                <button id="question-form">Save</button>
+                    <input type="text" name="choice4" value="<%= question.choices[2] %>">
+                    <% } else if (question.type=="true_or_false" ) { %>
+                        <label for="true">True</label>
+                        <% if (question.answer=="true" ) { %>
+                            <input type="radio" id="true" name="answer" value="true" checked>
+                            <label for="false">False</label>
+                            <input type="radio" id="false" name="answer" value="false">
+                            <% } else { %>
+                                <input type="radio" id="true" name="answer" value="true">
+                                <label for="false">False</label>
+                                <input type="radio" id="false" name="answer" value="false" checked>
+                                <% } %>
+                                    <% } else if (question.type=="check_all" ) { %>
+                                        <% let current="1" ; %>
+                                            <% question.answer_multiple.forEach(answer=> { %>
+                                                <h5 style="margin-top: 20px">
+                                                    <%="Option "+current%></h5>
+                        <input type=" text" id=<%="input" +current%> name=<%="answer"+current%> value=<%=answer%>>
+                                                                <div type="button" id=<%="a" +current%> class="btn
+                                                                    btn-success col-3">Correct</div>
+                                                                <% current=parseInt(current); %>
+                                                                    <% current +=1; %>
+                                                                        <% current=current.toString(); %>
+                                                                            <% }) %>
+                                                                                <% question.choices.forEach(answer=> {
+                                                                                    %>
+                                                                                    <h5 style="margin-top: 20px">
+                                                                                        <%="Option "+current%></h5>
+                        <input type=" text" id=<%="input" +current%> name=<%="option"+current%> value=<%=answer%>>
+                                                                                                    <div type="button"
+                                                                                                        id=<%="a"
+                                                                                                        +current%>
+                                                                                                        class="btn
+                                                                                                        btn-danger
+                                                                                                        col-3">Incorrect
+                                                                                                    </div>
+                                                                                                    <% current=parseInt(current);
+                                                                                                        %>
+                                                                                                        <% current +=1;
+                                                                                                            %>
+                                                                                                            <% current=current.toString();
+                                                                                                                %>
+                                                                                                                <% }) %>
+                                                                                                                    <% } else
+                                                                                                                        if
+                                                                                                                        (question.type=="fill"
+                                                                                                                        )
+                                                                                                                        {
+                                                                                                                        %>
+                                                                                                                        <% let
+                                                                                                                            answers=question.answer_multiple.join();
+                                                                                                                            %>
+                                                                                                                            <h5>Enter
+                                                                                                                                all
+                                                                                                                                correct
+                                                                                                                                answers
+                                                                                                                                separated
+                                                                                                                                by
+                                                                                                                                commas
+                                                                                                                            </h5>
+                                                                                                                            <textarea
+                                                                                                                                name="answer"><%=answers%></textarea>
+                                                                                                                            <% }
+                                                                                                                                %>
+                                                                                                                                <input
+                                                                                                                                    type="hidden"
+                                                                                                                                    name="id"
+                                                                                                                                    value=<%=question.id
+                                                                                                                                    %>>
+                                                                                                                                <input
+                                                                                                                                    type="hidden"
+                                                                                                                                    name="type"
+                                                                                                                                    value=<%=question.type
+                                                                                                                                    %>
+                                                                                                                                >
+                                                                                                                                <input
+                                                                                                                                    type="hidden"
+                                                                                                                                    name="quiz"
+                                                                                                                                    value=<%=question.quiz
+                                                                                                                                    %>>
+                                                                                                                                <button
+                                                                                                                                    id="question-form">Save</button>
             </form>
         </div>
     </body>

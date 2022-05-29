@@ -5,7 +5,7 @@
     </head>
 
 
-    <body>
+    <body id="body5">
                 <div class="container-fluid">    <div id="back-button">
                     <div class="filter">
                         <a class="text-black" href="/quizzes"><i class="fas fa-angle-double-left text-black"></i> Back to
@@ -14,14 +14,23 @@
                 </div></div>
             
         <div id="email-form-greeting">
-            <%- include('layouts/welcome') %>
+            <%- include('layouts/welcome_light') %>
         </div>
 
         <br>
-            <h2 style="margin-bottom: 1rem;">
-                <%= quiz.name %> Quiz Preview
-            </h2>
-
+       
+        <div class="manage-quiz-title">
+        
+            <div id="">
+                <h3 class="title-page1"><%= quiz.name %> Quiz</h3>
+            </div>
+            <hr id="index-title-hr">
+            <div id="">
+                <span>
+                    <h3 class="title-page1">Preview</h3>
+                </span>
+            </div>
+        </div>
 <div id="meta-data-quiz">       <p>
             Employer Name: <%=login_name %>
         </p>
@@ -37,10 +46,6 @@
            Quiz Owner: <%= quiz.owner %>
         </p>
     </div>
- 
-
-
-
         <% 
             let multiple = 0;
             let true_false = 0;
