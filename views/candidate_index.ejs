@@ -1,0 +1,32 @@
+
+<%- include('../views/layouts/head.ejs') %>
+    <main id="site-main">
+        <div class="container">
+            <div class="box-nav d-flex justify-between">
+                <a href="/candidate_index" class="border-shadow">
+                    <span class="text-gradient">New User <i class="fas fa-user"></i></span>
+                </a>
+            </div>
+            <form action="/candidate_index" method="POST">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>@Email</th>
+                            <th>Gender</th>
+                            <th>Age</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Use EJS to display <tr> and <td> data from _show.ejs -->
+                    
+
+                    </tbody>
+                </table>
+            </form>
+
+    </main>
+
+

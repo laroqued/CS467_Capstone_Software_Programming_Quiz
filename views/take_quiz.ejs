@@ -3,32 +3,9 @@
 </head>
 
 <body>
-<!--  name="id"  -->
-<p>Quiz Instance Id: <%= id%>
-</p>
-<!--  name="quiz_name"  -->
-<p>Quiz Name: <%= quiz.name%>
-</p>
-<!--  name="quiz_instance"  -->
-<p>Quiz Instance Id: <%= id%>
 
-</p><!--  name="login_name"  -->
-<p>Employer Name: <%= users.login_name %> 
 
-</p><!--  name="owner"  -->
-<p>Employer Email: <%= quiz.owner %>
 
-</p><!--  name="quiz"  -->
-<p>Employer ID: <%= quiz._id %>
-
-</p><!--  name="first_name"  -->
-<p>Candidate First Name: <%= quiz_instance.firstName %>
-
-</p><!--  name="last_name"  -->
-<p>Candidate Last Name: <%= quiz_instance.lastName %>
-
-</p><!--  name="email"  -->
-<p>Candidate Email: <%=quiz_instance.email %>
 
     <% 
         let multiple = 0;
@@ -39,11 +16,40 @@
     <div class="bg-secondary"></div>
     <div class="bg-lighten-xl"></div>
 
-    <h2><%= quiz.name %></h5>
+    <div class="manage-quiz-title">
+    
+        <div id="">
+            <h1 class="title-page"> <%= quiz.name %></h1>
+        </div>
+        <hr>
+        <div id="">
+            <span>
+                <h1 class="title-page">Quiz</h1>
+            </span>
+        </div>
+    </div>
+    
+
 
     <% if (complete) { %>
-        <h1>Quiz attempt has already been used</h1>
+            <div class="manage-quiz-title">
+            
+                <div id="">
+                    <h1 class="title-page">Your Quiz Attempt</h1>
+                </div>
+                <hr>
+                <div id="">
+                    <span>
+                        <h1 class="title-page">Has Already Been Used!</h1>
+                    </span>
+                </div>
+            </div>
+      
     <% } else { %>
+    <h3>Welcome to your quiz <%= quiz_instance.firstName %>
+        <%= quiz_instance.lastName %>
+            </h3>
+
     <input type="hidden" id="time" value=<%= quiz.timer %>>
     <h3>Time Left: <span id="timer"></span></h3>
     
@@ -125,9 +131,7 @@
                                 <input type="hidden" name=<%= question._id %> value=''>
                                 <input class="contact-form-text" type="text" name=<%= question._id %> placeholder="Type answer here">
                                 <% fill += 1; %>
-                            <% } %>
-
-                            
+                            <% } %>                           
                         </div>
                     </li>
                     <hr>
@@ -137,7 +141,7 @@
 
     </card>
 
-<!-- TODO: CastError: Cast to ObjectId failed for value "quiz_name" (type string) at path "_id" for model "Question"-->
+
         <input type="hidden" name="id" value=<%= id %> ><br>
     <button class="btn btn-primary" id="submitQuiz">Submit Quiz</button>
 </form>

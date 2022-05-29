@@ -1,64 +1,158 @@
-<!-- form handling -->
-<form action="/api/users" method="POST" id="add_survey">
+<div class="email-form">
+    <div class="new_user"></div>
 
-    <div class="new_user">
-        <div class="form-group" >
-            <label for="name" >Name</label>
-            <input type="hidden" name="id" value="">
-            <input type="text" name="name" value="" placeholder="Mark Stoenis">
-        </div>
+    <form action="/api/users" method="POST" id="add_survey">
+        <!-- Name Field ROW 1 -->
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <p>
 
-        <div class="form-group">
-            <label for="Email">Email</label>
-            <input type="text" name="email" value="" placeholder="example@gmail.com">
-        </div>
-<br>
-        <div class="form-group">
-            <label for="gender" >Gender</label>
+                    <div class="form-group">
+                        <br>
+                        <input type="hidden" name="id" value="<%= id %> ">
+                        <input type="hidden" name="quiz_name" value=<%=quiz.name %>>
+                        <input type="hidden" name="login_name" value=<%=users.login_name %>>
+                        <input type="hidden" name="owner" value=<%=quiz.owner %> >
+                        <input type="hidden" name="quiz" value=<%=quiz._id %> >
+                        <input type="hidden" name="first_name" value=<%=quiz_instance.firstName %> >
+                        <input type="hidden" name="last_name" value=<%=quiz_instance.lastName %> >
 
-            <div class="radio inline">
-                <input type="radio" id="radio-2" name="gender" value="Male" >
-                <label for="radio-2" class="radio-label">Male</label>
+                        <input type="text" name="my_name" value="" placeholder="Your Name" class="contact-form-text">
+                    </div>
+                    </p>
+                </div>
             </div>
-            <div class="radio inline">
-                <input type="radio" id="radio-3" name="gender" value="Female" >
-                <label for="radio-3" class="radio-label">Female</label>
+        </div>
+        <!--==========================================================================-->
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <p>
+
+                    <div class="form-group">
+                        <input type="text" name="email" value="" placeholder="example@gmail.com"
+                            class="contact-form-text">
+                    </div>
+                    </p>
+                </div>
             </div>
         </div>
-<br>
-        <div class="form-group">
-            <label for="gender">Age Range</label>
-            <!-- <div class="radio inline"> -->
-                <input type="radio" id="radio-4" name="age" value="18-27" >
-                <label for="radio-4" class="radio-label">18-27</label>
-            <!-- </div>
-            <div class="radio inline"> -->
-                <input type="radio" id="radio-5" name="age" value="28-39" >
-                <label for="radio-5" class="radio-label">28-39</label>
-            <!-- </div>
-            <div class="radio inline"> -->
-                <input type="radio" id="radio-6" name="age" value="40-50" >
-                <label for="radio-6" class="radio-label">40-50</label>
-            <!-- </div>
-            <div class="radio inline"> -->
-                <input type="radio" id="radio-6" name="age" value="51+" >
-                <label for="radio-6" class="radio-label">51+</label>
-            <!-- </div> -->
-        </div>
-<br>
-        <div class="form-group">
-            <label for="question1">How did you feel overall about the quiz?</label>
-            <input type="text" class="form-control col-lg-9" id="question1" name="question1" placeholder="Enter deep thoughts">
-          </div>        
-<br>
-          <div class="form-group">
-            <label for="question2">How can we make the quiz better?</label>
-            <input type="text" class="form-control col-lg-9" id="question2" name="question2" placeholder="Be honest">
-          </div> 
-<br>
-        <div class="form-group">
-            <button id="question-form" type="submit" class="btn btn-primary">Submit</button>
+        <!--==========================================================================-->
+      
+                    <hr id="survey-hr">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="gender">
+                        <h5>Gender</h5>
+                    </label>
+                    <hr>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="radio-2" name="gender" value="Male">
+                        <label class="form-check-label" for="radio-2" class="radio-label">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input type="radio" class="form-check-input" id="radio-3" name="gender" value="Female">
+                        <label class="form-check-label" for="radio-3" class="radio-label">Female</label>
+                    </div>
+                </div>
+            </div>
         </div>
 
-    </div>
-</form>
+
+        <!-- =========================================================================== -->
+        <!-- =========================================================================== -->
+                        <hr id="survey-hr2">
+
+        <div class="row">
+            <div class="col-12" >
+                <div class="form-group">
+                    <label for="age">
+                        <h5>Age Range</h5>
+                    </label>
+                    <hr>
+                    <!-- <div class="radio inline"> -->
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="radio-4" name="age" value="18-27">
+                        <label class="form-check-label" for="radio-4" class="radio-label">18-27</label>
+                    </div>
+                    <!-- </div>
+                    <div class="radio inline"> -->
+                    <div class="form-check form-check-inline">
+
+                        <input class="form-check-input" type="radio" id="radio-5" name="age" value="28-39">
+                        <label class="form-check-label" for="radio-5" class="radio-label">28-39</label>
+                    </div>
+                    <!-- </div>
+                    <div class="radio inline"> -->
+                    <div class="form-check form-check-inline">
+
+                        <input class="form-check-input" type="radio" id="radio-6" name="age" value="40-50">
+                        <label class="form-check-label" for="radio-6" class="radio-label">40-50</label>
+                    </div>
+                    <!-- </div>
+                    <div class="radio inline"> -->
+                    <div class="form-check form-check-inline">
+
+                        <input class="form-check-input" type="radio" id="radio-7" name="age" value="51+">
+                        <label class="form-check-label" for="radio-7" class="radio-label">51+</label>
+                    </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+
+        <!-- =========================================================================== -->
+        <!-- =========================================================================== -->
+                                <hr id="survey-hr">
+
+
+
+        <!-- Email Field  ROW 2-->
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <p>
+
+
+                    <div class="form-group">
+
+                        <textarea type="text" class="contact-form-text" class="form-control col-lg-9" id="question1"
+                            name="question1" placeholder="How did you feel overall about the quiz?"></textarea>
+                    </div>
+
+
+
+
+                    </p>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <p>
+
+
+                    <div class="form-group">
+
+                        <textarea type="text" class="contact-form-text" class="form-control col-lg-9" id="question2"
+                            name="question2" placeholder="How can we make the quiz better?"></textarea>
+                    </div>
+
+
+
+                    </p>
+                </div>
+            </div>
+            <p class="full">
+
+            <div class="form-group">
+                <button type="submit" id="form-submit" class="contact-form-btn">Submit</button>
+            </div>
+
+            </p>
+        </div>
+    </form>
+</div>

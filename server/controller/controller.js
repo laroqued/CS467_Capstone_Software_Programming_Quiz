@@ -10,20 +10,20 @@ exports.create = (req,res)=>{
 
     // new user
     const user = new Userdb({
-        name : req.body.name,
-        email : req.body.email,
-        gender: req.body.gender,
-        age : req.body.status,
-        question1: req.body.question1,
-        question2: req.body.question2
-    })
+      name: req.body.name,
+      email: req.body.email,
+      gender: req.body.gender,
+      age: req.body.age,
+      question1: req.body.question1,
+      question2: req.body.question2,
+    });
 
     // save user in the database
     user
         .save(user)
         .then(data => {
-            //res.send(data)
-            res.redirect('/candidate_complete');
+            res.send(data)
+ 
         })
         .catch(err =>{
             res.status(500).send({
@@ -34,8 +34,11 @@ exports.create = (req,res)=>{
 }
 
 // retrieve and return all users/ retrive and return a single user
-exports.find = (req, res)=>{
-
+exports.find = async (req, res)=>{
+   const id = req.query.id;
+   const quiz_instance = await Quiz_Instance.findById(id);
+   const quiz = await Quiz.findById(quiz_instance.quiz);
+   const users = await User.findById(quiz_instance.employer);
     if(req.query.id){
         const id = req.query.id;
 
@@ -44,7 +47,16 @@ exports.find = (req, res)=>{
                 if(!data){
                     res.status(404).send({ message : "Not found user with id "+ id})
                 }else{
-                    res.send(data)
+                    // res.send(data)
+                        console.log(user);
+                        res.render("candidate_complete", {
+                          id: id,
+                          quiz: quiz,
+                          quiz_instance: quiz_instance,
+                          users: users,
+                        });
+                    res.redirect(`/candidate_complete?id=${req.body.id}`);
+
                 }
             })
             .catch(err =>{
@@ -54,7 +66,17 @@ exports.find = (req, res)=>{
     }else{
         Userdb.find()
             .then(user => {
-                res.send(user)
+                // res.send(user)
+                    console.log(user);
+                    res.render("candidate_complete", {
+                      id: id,
+                      quiz: quiz,
+                      quiz_instance: quiz_instance,
+                      users: users,
+                    });
+                res.redirect(`/candidate_complete?id=${req.body.id}`);
+
+
             })
             .catch(err => {
                 res.status(500).send({ message : err.message || "Error Occurred while retriving user information" })

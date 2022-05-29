@@ -4,24 +4,16 @@
 </head>
 
 <body>
-<!--  name="id"  -->
-<p>Quiz Instance Id: <%= %>
-</p>
 
-
-
-
-  
-<h1>Thank you <%=  %> </h1>
   <div class="index-page">
     <div class="container">
       <div class="row justify-content-md-center">
         <div class="col-md-auto" id="index-first-row">
           <!-- 1 of 3 rows -->
 
-          <form method="POST" action="sendMail" class="contact-form">
-
-       <!-- EMAIL INPUTS -->
+<h1>Thank You <%=quiz_instance.firstName %> <%= quiz_instance.lastName %>
+  <h2>For Completing the <%=quiz.name %> Quiz!!!</h2>
+</h1>
 
 
      
@@ -46,7 +38,7 @@
             <div class="manage-quiz-title">
 
               <div id="">
-                <h1 class="title-page">Quiz</h1>
+                <h1 class="title-page"><%=quiz.name %> Quiz</h1>
               </div>
               <hr>
               <div id="">
@@ -76,14 +68,12 @@
               <!-- 3 of 3 rows -->
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Logout</h5>
-                  <p class="card-text">Thank you for taking the quiz!!</p>
+                  <h5 class="card-title">Close Browser Tab</h5>
+                  <p class="card-text">Thank you for taking the quiz!! Feel free to close the browser.</p>
 
 
-                  <form action="/logout?_method=DELETE" method="POST">
-                    <button type="submit" class="btn btn-elegant">
-                      <i class="far fa-user pr-2" aria-hidden="true"></i>Logout
-                    </button>
+           
+            
                   </form>
                 </div>
               </div>

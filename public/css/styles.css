@@ -314,7 +314,7 @@ label {
 } */
 
 #quiz-cards {
-    width: 30rem;
+ 
 }
 
 .card-header{
@@ -345,6 +345,11 @@ background-color: lightgrey;
 #question-form-edit {
     box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
     width: 95vmin;
+}
+
+#question-form-survey {
+ 
+    margin-bottom: 5rem;
 }
 
 #sidebar-nav {
@@ -454,3 +459,23 @@ background-color: lightgrey;
            padding: .5rem;
            margin-bottom: 1rem;
     }
+    #survey{
+max-width: 75%;
+    }
+
+    #survey-hr{
+            position: relative;
+      
+                border: none;
+                height: 6px;
+                background: black;
+          
+    }
+        #survey-hr2 {
+            position: relative;
+    
+    border-top: 5px double #6a5acd;
+            height: 6px;
+            background: black;
+    
+        }

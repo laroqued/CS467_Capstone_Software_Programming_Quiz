@@ -9,6 +9,8 @@ const Quiz = require("../model/quiz");
 const Question = require("../model/question");
 const Quiz_Instance = require("../model/quiz_instance");
 const bcrypt = require("bcryptjs");
+// make an API request from the cloud API MondgoDB database
+const axios = require('axios')
 const app = express();
 const methodOverride = require("method-override");
 
@@ -78,136 +80,131 @@ exports.register =
     res.render("register", { register_form_greeting: "Register" });
   });
 
-exports.start_quiz =
-  async (req, res) => {
-    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    
-    let id = req.query.id;
+exports.start_quiz = async (req, res) => {
+  res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
-    const quiz_instance = await Quiz_Instance.findById(id);
-    const quiz = await Quiz.findById(quiz_instance.quiz);
+  let id = req.query.id;
 
-    res.render("start_quiz", {
-      id: id,
-      quiz_instance: quiz_instance,
-      quiz: quiz
-    });
-  };
+  const quiz_instance = await Quiz_Instance.findById(id);
+  const quiz = await Quiz.findById(quiz_instance.quiz);
 
-exports.get_take_quiz =
-  async (req, res) => {
-    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+  res.render("start_quiz", {
+    id: id,
+    quiz_instance: quiz_instance,
+    quiz: quiz,
+  });
+};
 
-    let id = req.query.id;
-    let _id = req.query._id;
-    const quiz_instance = await Quiz_Instance.findById(id);
-    const quiz = await Quiz.findById(quiz_instance.quiz);
-    const questions = await Question.find({ quiz: quiz._id });
-    const users = await User.findById(quiz_instance.employer);
+exports.get_take_quiz = async (req, res) => {
+  res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
-    let complete = quiz_instance.completed
+  let id = req.query.id;
+  let _id = req.query._id;
+  const quiz_instance = await Quiz_Instance.findById(id);
+  const quiz = await Quiz.findById(quiz_instance.quiz);
+  const questions = await Question.find({ quiz: quiz._id });
+  const users = await User.findById(quiz_instance.employer);
 
-    if (!complete) {
-      await Quiz_Instance.findByIdAndUpdate(id, {completed: true});
-    }
+  let complete = quiz_instance.completed;
 
-    res.render("take_quiz", {
-      id: id,
-      questions: questions,
-      quiz: quiz,
-      quiz_instance: quiz_instance,
-      complete: complete,
-      users: users
-    });
+  if (!complete) {
+    await Quiz_Instance.findByIdAndUpdate(id, { completed: true });
+  }
 
-  };
+  res.render("take_quiz", {
+    id: id,
+    questions: questions,
+    quiz: quiz,
+    quiz_instance: quiz_instance,
+    complete: complete,
+    users: users,
+  });
+};
 
-exports.post_submit_quiz =
-  async (req, res) => {
-    try {
-      let total = Object.keys(req.body).length;
-      let correct = 0;
-      const keys = Object.keys(req.body);
+exports.post_submit_quiz = async (req, res) => {
+  try {
+    let total = Object.keys(req.body).length;
+    let correct = 0;
+    const keys = Object.keys(req.body);
 
-      for (let i = 0; i < total; i++) {
-        let key = keys[i];
-        if (key != "id") {
-          let answer = req.body[key];
-          let question = await Question.findById(key);
+    for (let i = 0; i < total; i++) {
+      let key = keys[i];
+      if (key != "id") {
+        let answer = req.body[key];
+        let question = await Question.findById(key);
 
-          // grading
+        // grading
 
-          // true/false
-          if (question.type == "true_or_false") {
-            if (typeof(answer) != 'string') {
-              if (answer[1] == String(question.answer)) {
-                correct += 1;
-              }
-            }
-            // multiple choice
-          } else if (question.type == "multiple_choice") {
-            if (typeof(answer) != 'string') {
-              if (answer[1] == String(question.answer)) {
-                correct += 1;
-              }
-            }
-            // check all that apply
-          } else if (question.type == "check_all") {
-            let correct_answer = true;
-            question.answer_multiple.map(String);
-
-            if (typeof answer == "string") {
-              answer = [];
-            }
-
-            answer.forEach((current_answer) => {
-              if (
-                !question.answer_multiple.includes(current_answer) &
-                (current_answer != "")
-              ) {
-                correct_answer = false;
-                return;
-              }
-            });
-
-            question.answer_multiple.forEach((current_answer) => {
-              if (!answer.includes(current_answer)) {
-                correct_answer = false;
-                return;
-              }
-            });
-
-            if (correct_answer) {
+        // true/false
+        if (question.type == "true_or_false") {
+          if (typeof answer != "string") {
+            if (answer[1] == String(question.answer)) {
               correct += 1;
             }
-            // fill in the blank
-          } else if (question.type == "fill") {
-            question.answer_multiple.map(String);
-            if (typeof(answer) != 'string') {
-              if (question.answer_multiple.includes(answer[1])) {
-                correct += 1;
-              }
+          }
+          // multiple choice
+        } else if (question.type == "multiple_choice") {
+          if (typeof answer != "string") {
+            if (answer[1] == String(question.answer)) {
+              correct += 1;
             }
-            
+          }
+          // check all that apply
+        } else if (question.type == "check_all") {
+          let correct_answer = true;
+          question.answer_multiple.map(String);
+
+          if (typeof answer == "string") {
+            answer = [];
+          }
+
+          answer.forEach((current_answer) => {
+            if (
+              !question.answer_multiple.includes(current_answer) &
+              (current_answer != "")
+            ) {
+              correct_answer = false;
+              return;
+            }
+          });
+
+          question.answer_multiple.forEach((current_answer) => {
+            if (!answer.includes(current_answer)) {
+              correct_answer = false;
+              return;
+            }
+          });
+
+          if (correct_answer) {
+            correct += 1;
+          }
+          // fill in the blank
+        } else if (question.type == "fill") {
+          question.answer_multiple.map(String);
+          if (typeof answer != "string") {
+            if (question.answer_multiple.includes(answer[1])) {
+              correct += 1;
+            }
           }
         }
       }
+    }
 
-      let grade = correct / (total - 1);
-      await Quiz_Instance.findByIdAndUpdate(req.body.id, {
-        grade: grade,
-        completed: true,
-      });
+    let grade = correct / (total - 1);
+    await Quiz_Instance.findByIdAndUpdate(req.body.id, {
+      grade: grade,
+      completed: true,
+    });
 
-      //=====================================
-      // EMAIL FUNCTIONALITY HERE
-      // send email to employer
-      //=====================================
-      let quiz_instance = await Quiz_Instance.findById(req.body.id);
-      let quiz = await Quiz.findById(quiz_instance.quiz);
-      let users = await User.findById(quiz_instance.employer);
+    //=====================================
+    // EMAIL FUNCTIONALITY HERE
+    // send email to employer
+    //=====================================
+    let quiz_instance = await Quiz_Instance.findById(req.body.id);
+    let quiz = await Quiz.findById(quiz_instance.quiz);
+    let users = await User.findById(quiz_instance.employer);
 
-      const output = `
+    const output = `
  
       <p>Hello  <strong>${users.login_name}</strong>, </p>
       <p><p/>
@@ -217,47 +214,48 @@ exports.post_submit_quiz =
 
 `;
 
-      // create reusable transporter object using the default SMTP transport
-      let transporter = await nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
-        auth: {
-          user: process.env.GMAIL_USER,
-          pass: process.env.PASSWORD,
-        },
-      });
+    // create reusable transporter object using the default SMTP transport
+    let transporter = await nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.PASSWORD,
+      },
+    });
 
-      // send mail with defined transport object
-      let info = await transporter.sendMail({
-        from:`"${quiz_instance.firstName} ${quiz_instance.lastName}" 
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+      from: `"${quiz_instance.firstName} ${quiz_instance.lastName}" 
         <${quiz_instance.email}>`, // sender address
 
-        to: quiz.owner, // list of receivers
-        subject: `"${quiz.name}" Quiz Instance (${quiz_instance._id}) - Submission Received`, // Subject line
-        text: "Hello world?", // plain text body
-        html: output, // html body
-      });
+      to: quiz.owner, // list of receivers
+      subject: `"${quiz.name}" Quiz Instance (${quiz_instance._id}) - Submission Received`, // Subject line
+      text: "Hello world?", // plain text body
+      html: output, // html body
+    });
 
-      transporter.verify(function (error, success) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("Mail server is running...");
-          console.log(`Message sent: ${info.messageId}`);
-          console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
-        }
-      });
+    transporter.verify(function (error, success) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Mail server is running...");
+        console.log(`Message sent: ${info.messageId}`);
+        console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
+      }
+    });
 
-      //=====================================
-      // EMAIL END
-      await res.redirect("/candidate_complete");
-      res.status(201);
-    } catch (error) {
-      console.log(error);
-      res.redirect("/");
-    }
+    //=====================================
+    // EMAIL END
+    await res.redirect(`/candidate_complete?id=${req.body.id}`);
+    res.status(201);
+  } catch (error) {
+    console.log(error);
+    res.redirect("/");
+  }
 };
+
 
 // for manually creating quiz_instance with postman
 exports.create_quiz_instance =
@@ -313,7 +311,7 @@ exports.post_contact =
       quiz: req.body.quiz,
       employer: req.user._id,
       completed: false,
-      grade: 0
+      grade: 0,
     });
     await quiz_instance.save();
     let id = quiz_instance._id;
@@ -484,7 +482,7 @@ exports.post_create_quiz =
         name: req.body.name,
         owner: req.body.owner,
         login_name: req.user.login_name,
-        timer: req.body.timer
+        timer: req.body.timer,
       });
       await quiz.save();
       await res.redirect("/quizzes");
@@ -732,12 +730,11 @@ exports.canidate_quiz =
   (checkAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+
+
     let id = req.query.id;
-
     const quiz = await Quiz.findById(id);
-
     const questions = await Question.find({ quiz: id });
-
     res.render("candidate_quiz", {
       id: id,
       login_name: req.user.login_name,
@@ -745,25 +742,62 @@ exports.canidate_quiz =
       owner: req.user.email,
       quiz: quiz,
     });
+
+
   });
 //Dominique
-exports.canidate_survey =
-  (req, res) => {
-    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+exports.canidate_survey =async (req, res) => {
+  res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
-    res.render("candidate_survey");
-  };
+
+     let id = req.query.id;
+     const quiz_instance = await Quiz_Instance.findById(id);
+     const quiz = await Quiz.findById(quiz_instance.quiz);
+     const users = await User.findById(quiz_instance.employer);
+
+
+     res.render("candidate_survey", {
+       id: id,
+       quiz: quiz,
+       quiz_instance: quiz_instance,
+       users: users,
+     });
+};
+
+
+
+
 //Dominique
-exports.get_candidate_complete =
-  async (req, res) => {
-    res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+exports.get_candidate_complete = async (req, res) => {
+  res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
-      let id = req.query.id;
 
-      res.render("candidate_complete", {
-        id: id,
+     let id = req.query.id;
+     const quiz_instance = await Quiz_Instance.findById(id);
+     const quiz = await Quiz.findById(quiz_instance.quiz);
+     const users = await User.findById(quiz_instance.employer);
+
+
+     
+     res.render("candidate_complete", {
+       id: id,
+       quiz: quiz,
+       quiz_instance: quiz_instance,
+       users: users,
+     });
+}; 
+
+exports.homeRoutes1 = (req, res) => {
+    axios
+      .get("http://localhost:3005/api/users")
+      .then(function (response) {
+        // MAYBE RENDER quiz_results or survey_results?
+        res.render("candidate_index", { users: response.data });
+      })
+      .catch((err) => {
+        res.send(err);
       });
-  };
+};
 
 exports.add_survey = (req, res) => {
   res.render("add_survey");
