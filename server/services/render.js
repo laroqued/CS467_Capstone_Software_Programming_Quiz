@@ -291,6 +291,7 @@ exports.get_contact =
     const name = await Quiz.find({
       name: req.user.name,
     });
+
     res.render("contact", {
       login_name: req.user.login_name,
       msg: "",
@@ -453,10 +454,12 @@ exports.quiz =
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     let id = req.query.id;
     const questions = await Question.find({ quiz: id });
+       const quiz = await Quiz.findById(id);
     res.render("quiz", {
       login_name: req.user.login_name,
       questions: questions,
       id: id,
+      quiz: quiz,
     });
   });
 

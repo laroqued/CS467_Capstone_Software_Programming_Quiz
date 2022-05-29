@@ -17,6 +17,10 @@
     <div id="email-form-greeting">
         <%- include('layouts/welcome') %>
     </div>
+
+    <div>
+        <h1 id="quiz-page-header"><%= quiz.name %> Quiz</h1>
+    </div>
                 <div class="manage-quiz-title">
                     <div id="">
                         <h3 class="title-page">Add Question,   View Quiz </h3>
@@ -42,7 +46,7 @@
                 <tbody >
                     <tr>
 
-                        <td>Manage Quiz</td>
+                        <td><strong>Manage Quiz</strong></td>
                         <td>View the collection of quizzes</td>
                         <td> 
                             <a class="" style="color: black" href="/quizzes ">
@@ -53,7 +57,7 @@
                     </tr>
                     <tr>
 
-                        <td>Edit Quiz</td>
+                        <td> <strong>Edit Quiz</strong> </td>
                         <td>Change name or time limit of quiz</td>
                         <td>
 
@@ -64,7 +68,7 @@
                     </tr>
                     <tr>
 
-                        <td>Add Questions</td>
+                        <td><strong>Add Questions</strong></td>
                         <td>Add new questions to a quiz</td>
                         <td>
 
@@ -75,8 +79,8 @@
                     </tr>
                     <tr>
 
-                        <td>View Quiz</td>
-                        <td>Check the quiz content before sending the quiz to the candidate.</td>
+                        <td><strong>View Quiz</strong></td>
+                        <td> <strong id="manage-quiz-td">*** Check the quiz content before sending the quiz to the candidate.***</strong> </td>
                         <td>
                             <a class="" style="color: black" href=<%="/candidate_quiz?id=" + id %>>
                                 <i class="fab fa-solid fa-eye "> </i>
@@ -87,7 +91,7 @@
                     </tr>
                     <tr>
 
-                        <td>Delete Quiz</td>
+                        <td><strong>Delete Quiz</strong></td>
                         <td>Permanently remove your quiz from the database</td>
                         <td>
                             <a class="" style="color: red" href=<%="/delete_quiz?id=" + id%>>

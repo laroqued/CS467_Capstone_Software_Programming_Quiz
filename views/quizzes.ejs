@@ -32,18 +32,27 @@
                 </div>
             </div>
 
-            <ul class="list-group" id="question-form">
+            <ul class="list-group" >
                 <% quizzes.forEach(quiz=> { %>
-                    <li class="list-group-item">
-                        <a id="question-form" class="btn btn-primary" href=<%="/quiz?id=" + quiz._id %>>
+                
 
-                            <%= quiz.name %>
+                <div class="card" id="new-quiz-card">
+                    <div class="card-header">
+                        <h5><%= quiz.name %> Quiz</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-title">View, Edit, Delete Quiz</p>
+                        <p class="card-text"></p>
+                        <a id="question-form" class="btn btn-primary" href=<%="/quiz?id=" + quiz._id %>><%= quiz.name %></a>
+                
+                    </div>
+                </div>
+                  
 
-                        </a>
-                    </li>
                     <% }) %>
             </ul>
         </div>
+        
         <div class="card" id="new-quiz-card">
             <div class="card-header">
                 <h5>Add Quiz</h5>
