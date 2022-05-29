@@ -59,6 +59,9 @@ background-color: #cccccc;
     font-family: "Anton", sans-serif;
     color:#f5f5f5;
 }
+#index-title-hr{
+    color: #f5f5f5;
+}
 
 #middle-row-cards {
     margin-top: 2rem;
