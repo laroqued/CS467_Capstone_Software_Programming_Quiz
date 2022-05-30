@@ -1,0 +1,112 @@
+<%- include('includes/_header') %>
+
+<head>
+    <%- include('layouts/head') %>
+</head>
+
+<body id="body">
+    <div class="container-fluid">
+        <div id="quiz-greeting">
+            <div id="back-button">
+                <div class="filter">
+                    <a class="text-white" href="/"><i class="fas fa-angle-double-left text-white"></i>
+                        Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="index-page">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col-md-auto" id="index-first-row">
+                    <!-- 1 of 3 rows -->
+
+                    <div class="container-fluid setup-bg d-flex flex-column">
+                        <div class='row justify-content-center'>
+                            <div class="container my-auto">
+                                <div class="container ">
+                                    <div id="welcome">
+                                        <div class="row ">
+                                            <div class="col ">
+                                                <%- include('layouts/welcome_light') %>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3 of 3 rows -->
+                    <div class="manage-quiz-title">
+
+                        <div id="">
+                            <h3 class="title-page1"><%= quiz.name %></h3>
+                        </div>
+                        <hr id="index-title-hr">
+                        <div id="">
+                            <span>
+                                <h3 class="title-page1">Candidate Rankings</h3>
+                            </span>
+                        </div>
+                    </div>
+
+
+
+                    <!-- ====================== TABLE ==============================-->
+                    <div class="container ">
+                        <div class="table-responsive ">
+                            <table class=" table ">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th id="th1">Rank</th>
+                                        <th id="th1">First</th>
+                                        <th id="th1">Last</th>
+                                        <th id="th1">@Email</th>
+                                        <th id="th1">Grade</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Use EJS to display <tr> and <td> data from _show.ejs -->
+
+
+                                    <!-- TABLE DATA -->
+                                    <% for(var i=0; i < candidate.length; i++) { %>
+                                        <tr>
+                                            <td id="td1">
+                                                <%= i + 1 %>
+                                            </td>
+                                            <td id="td1">
+                                                <%= candidate[i].firstName %>
+                                            </td>
+                                            <td id="td1">
+                                                <%= candidate[i].lastName %>
+                                            </td>
+                                            <td id="td1">
+                                                <%= candidate[i].email %>
+                                            </td>
+                                            <td id="td1"> <%= candidate[i].grade *100%>%
+                                            </td>
+                                            <td id="td1"><a class="btn btn-light" href=<%= "/candidate_stats?id=" + candidate[i]._id %>> View
+                                            </a></td>
+
+                                        </tr>
+                                        <% } %>
+                                            <!-- TABLE DATA END-->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- END TABLE -->
+                    <!--   <h5 class="text-wrap">Results</h5> -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<%- include('includes/_footer') %>
