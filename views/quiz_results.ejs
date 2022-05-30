@@ -124,6 +124,7 @@
                                 <th id="th1">FirstName</th>
                                 <th id="th1">LastName</th>
                                 <th id="th1">@Email</th>
+                                <th id="th1">Quiz</th>
                                 <th id="th1">Grade</th>
                             </tr>
                         </thead>
@@ -150,7 +151,7 @@
                                         <%= quiz_names[quiz_instance[i].quiz] %>
                                     </td>
 
-                                    <td id="td1"> <%= quiz_instance[i].grade *100%>%
+                                    <td id="td1"> <%= (quiz_instance[i].grade *100).toFixed(2)%>%
 
                                     </td>
 
