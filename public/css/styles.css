@@ -8,15 +8,20 @@
     box-sizing: border-box;
 }
 
+table {
+    table-layout:auto;
+}
+
 th {
     font-family: "Roboto";
-    font-size: x-large;
+    font-size:medium;
     font-family: "Roboto";
 }
 
 td {
     font-family: "Roboto";
-    font-size: large;
+    font-size:medium;
+    word-wrap: break-word
 }
 
 #th1 {
@@ -496,6 +501,18 @@ label {
     box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 }
 
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+.card-footer {
+    background: transparent;
+    border-top: 0px;
+}
+button.btn {
+    margin-top: auto;
+}
+
 #question-form {
     box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 }
@@ -662,4 +679,67 @@ hr.class-1 {
 #manage-quiz-td {
 
     font-style: oblique;
+}
+#titles{
+max-width: 25rem;
+}
+section{
+
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+#section-index {
+margin-top: 3rem;
+
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+
+
+.flex-wrap {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: inherit;
+    -ms-flex-align: inherit;
+    align-items: inherit;
+}
+
+.flex-container {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    background: #eee;
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+}
+
+
+.flex-item {
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+}
+
+
+.fill {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
 }

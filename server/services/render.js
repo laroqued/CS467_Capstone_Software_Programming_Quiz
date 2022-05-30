@@ -230,7 +230,6 @@ exports.post_submit_quiz = async (req, res) => {
       <p>The "<strong>${quiz.name}</strong>" quiz has been completed by <strong>${quiz_instance.firstName}</strong><strong>
       ${quiz_instance.lastName}</strong>.<p/>
       <p><p/>
-
 `;
 
     // create reusable transporter object using the default SMTP transport
@@ -587,17 +586,14 @@ exports.get_quiz_results =
     const quizzes = await Quiz.find({ owner: req.user.email });
     const quiz_instance = await Quiz_Instance.find(quizzes.employer).sort({
       grade: -1,
-    });;
-  const quiz = await Quiz.find(quiz_instance.quiz);
+    });
+    const quiz = await Quiz.find(quiz_instance.quiz);
     const users = await User.find(quiz_instance.employer);
     const candidates = await Quiz_Instance.find({
       employer: req.query.id,
-    })
+    });
 
-
-//==========================================
-
-
+    //==========================================
 
     res.render("quiz_results", {
       id: id,

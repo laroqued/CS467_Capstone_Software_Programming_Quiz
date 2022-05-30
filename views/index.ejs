@@ -36,72 +36,44 @@
               <h1 class="title-page1">Programming Quiz</h1>
             </span>
           </div>
-          <div class="col-md-auto" id="index-second-row">
-            <!-- 2 of 3 rows -->
-
-
-            <!-- CARDS -->
-            <div class="row" id="middle-row-cards">
 
 
 
 
-              <!-- CARD 1 -->
-              <div class="col-md-auto">
+          <section id="section-index">
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+              <div class="col flex-column">
                 <div class="card h-100">
-
-                  <div class="card-body d-flex flex-column">
+                  <div class="card-body">
                     <h5 class="card-title">Manage Quizzes for Candidates</h5>
                     <p class="card-text" id="card-width-text">Navigate here to create and edit quizzes for candidates.
                     </p>
-                    <div><a id="manage-quiz-button1" href="/quizzes" class="btn btn-success align-self-end">Manage
+
+                    <div class="card-footer"><a id="manage-quiz-button1" href="/quizzes" class="btn btn-success align-self-end">Manage
                         Quizzes</a></div>
                   </div>
-
                 </div>
               </div>
-              <!-- CARD 2 -->
-              <div class="col-md-auto">
-                <div class="card h-100">
 
+              <div class="col flex-column">
+                <div class="card h-100">
                   <div class="card-body d-flex flex-column">
                     <h5 class="card-title">Candidate Test Results Rankings</h5>
                     <p class="card-text" id="card-width-text">Get the quiz stats from your individual candidates. Veiw
                       tables on the results page.</p>
-                    <div> <a id="manage-quiz-button1" href=<%="/quiz_results?id=" + users.id %> id="question-form"
+                    <div class="card-footer"> <a id="manage-quiz-button1" href=<%="/quiz_results?id=" + users.id %> id="question-form"
                         class="btn btn-primary align-self-end ">Get Results</a></div>
                   </div>
-
                 </div>
               </div>
-
-
-
-
-
             </div>
-          </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+          </section>
+          <!-- ====================== BACK BUTTON ==============================-->
 
 
 
           <div class="col-md-auto" id="index-third-row">
             <!-- 3 of 3 rows -->
-            <!-- Additional Content Here? -->
-            <!--      <h5 class="text-wrap">Another row to add content for the Splash Page</h5> -->
-
           </div>
         </div>
       </div>
