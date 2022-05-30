@@ -77,9 +77,9 @@
                 <!-- ====================== CARD ==============================-->
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Candidate Results</h5>
-                        <p class="card-text">Get the quiz stats from your individual
-                            candidates.</p>
+                        <h4 class="card-title">Candidate Results</h4>
+                        <hr id="survey-hr2">
+                        <p class="card-text">The results of the quizzes are are ranked in descending order. The Candidates with the best quiz results are displayed in the table below</p>
                         <!-- <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -126,6 +126,7 @@
                                 <th id="th1">@Email</th>
                                 <th id="th1">Quiz</th>
                                 <th id="th1">Grade</th>
+                                <th id="th1">View</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -155,8 +156,13 @@
 
                                     </td>
 
-                                    <td id="td1"><a class="btn btn-light" href=<%= "/candidate_stats?id=" + quiz_instance[i]._id %>> View
-                                    </a></td>
+                                    <td id="td1">
+                                        
+                                    <a id="manage-quiz-button-icon" class="" style="color: ghostwhite" href=<%="/candidate_stats?id=" + quiz_instance[i]._id %>>
+                                        <i class="fab fa-solid fa-eye "> </i>
+                                    </a>
+                                
+                                </td>
 
                                 </tr>
                                 <% } %>
