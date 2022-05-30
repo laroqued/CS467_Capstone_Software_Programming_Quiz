@@ -61,7 +61,9 @@ td {
 }
 
 
-body {
+body {  
+
+    
     background-color: darkgrey;
     display: grid;
     place-items: center;
@@ -303,6 +305,14 @@ padding-top: 8rem;
     text-align: center;
     align-items: center;
     box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+}
+
+#manage-quiz-button-icon{
+        text-align: center;
+            align-items: center;
+            border-radius: 8px;
+            padding: 5px;
+            box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 }
 
 .email-form {
