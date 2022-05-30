@@ -307,11 +307,18 @@ padding-top: 8rem;
     box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 }
 
+#manage-quiz-button-take-quiz {
+    text-align: center;
+    align-items: center;
+    margin-bottom: 5rem;
+    box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+}
+
 #manage-quiz-button-icon{
         text-align: center;
             align-items: center;
             border-radius: 8px;
-            padding: 5px;
+            padding: 4px;
             box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 }
 
