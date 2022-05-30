@@ -42,7 +42,14 @@ route.post("/delete_quiz", checkAuthenticated, services.delete_quiz);
 route.get("/edit_quiz", checkAuthenticated, services.get_edit_quiz);
 route.post("/edit_quiz", checkAuthenticated, services.post_edit_quiz);
 
-route.get("/quiz_results", checkAuthenticated, services.quiz_results);
+// ================================================================
+// DONNVYES
+// ================================================================
+
+route.get("/quiz_results", checkAuthenticated, services.get_quiz_results);
+
+// ================================================================
+// ================================================================
 
 route.get("/create_question", checkAuthenticated, services.create_question);
 route.post("/create_question", checkAuthenticated, services.post_create_question);

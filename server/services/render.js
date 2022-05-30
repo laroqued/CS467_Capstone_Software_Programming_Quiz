@@ -10,7 +10,7 @@ const Question = require("../model/question");
 const Quiz_Instance = require("../model/quiz_instance");
 const bcrypt = require("bcryptjs");
 // make an API request from the cloud API MondgoDB database
-const axios = require('axios')
+const axios = require("axios");
 const app = express();
 const methodOverride = require("method-override");
 
@@ -63,22 +63,46 @@ exports.snuck_in =
 // Donnyves
 exports.homeRoutes =
   (checkAuthenticated,
-  (req, res) => {
+  async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    res.render("index", { login_name: req.user.login_name });
+ 
+    let id = req.user.id;
+    const users = await User.findById(id)
+
+    res.render("index", {
+      id: id,
+      login_name: req.user.login_name,
+      users:users
+    });
   });
+
+
 // Donnyves
 exports.login =
   (checkNotAuthenticated,
-  (req, res) => {
-    res.render("login", { login_form_greeting: "SIGN IN TO YOUR ACCOUNT" });
+  async(req, res) => {
+      let id = req.query.id;
+
+  const quiz_instance = await Quiz_Instance.findById(id);
+
+    res.render("login", {
+      login_form_greeting: "SIGN IN TO YOUR ACCOUNT",
+      id: id,
+      quiz_instance: quiz_instance,
+ 
+    });
   });
+
+
+
 // Donnyves
 exports.register =
   (checkNotAuthenticated,
   (req, res) => {
     res.render("register", { register_form_greeting: "Register" });
   });
+
+
 
 exports.start_quiz = async (req, res) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
@@ -256,7 +280,6 @@ exports.post_submit_quiz = async (req, res) => {
   }
 };
 
-
 // for manually creating quiz_instance with postman
 exports.create_quiz_instance =
   ("/create_quiz_instance",
@@ -384,6 +407,7 @@ exports.post_contact =
 // ========================================================
 // Donnyves
 exports.post_login = passport.authenticate("local", {
+
   successRedirect: "/",
   failureRedirect: "/login",
   failureFlash: true, // shows messages from passort.config
@@ -454,7 +478,7 @@ exports.quiz =
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     let id = req.query.id;
     const questions = await Question.find({ quiz: id });
-       const quiz = await Quiz.findById(id);
+    const quiz = await Quiz.findById(id);
     res.render("quiz", {
       login_name: req.user.login_name,
       questions: questions,
@@ -537,7 +561,7 @@ exports.get_edit_quiz =
     res.render("edit_quiz", {
       id: id,
       login_name: req.user.login_name,
-      quiz: quiz
+      quiz: quiz,
     });
   });
 
@@ -550,7 +574,7 @@ exports.post_edit_quiz =
       console.log(req.body.name);
       Quiz.findByIdAndUpdate(req.body.quiz, {
         name: req.body.name,
-        timer: req.body.timer
+        timer: req.body.timer,
       }).then(() => {
         res.redirect("/quiz?id=" + req.body.quiz);
       });
@@ -561,12 +585,26 @@ exports.post_edit_quiz =
   });
 
 // Aaron
-exports.quiz_results =
+exports.get_quiz_results =
   (checkAuthenticated,
-  (req, res) => {
+  async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    res.render("quiz_results", { login_name: req.user.login_name });
+   let id = req.user.id;
+   const users = await User.findById(id);
+
+ 
+    res.render("quiz_results", {
+      id: id,
+      login_name: req.user.login_name,
+      users: users,
+    });
   });
+
+
+
+
+
+
 
 // Aaron
 exports.create_question =
@@ -734,10 +772,10 @@ exports.canidate_quiz =
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
-
     let id = req.query.id;
     const quiz = await Quiz.findById(id);
     const questions = await Question.find({ quiz: id });
+
     res.render("candidate_quiz", {
       id: id,
       login_name: req.user.login_name,
@@ -747,59 +785,53 @@ exports.canidate_quiz =
     });
 
 
+
+
   });
 //Dominique
-exports.canidate_survey =async (req, res) => {
+exports.canidate_survey = async (req, res) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
+  let id = req.query.id;
+  const quiz_instance = await Quiz_Instance.findById(id);
+  const quiz = await Quiz.findById(quiz_instance.quiz);
+  const users = await User.findById(quiz_instance.employer);
 
-     let id = req.query.id;
-     const quiz_instance = await Quiz_Instance.findById(id);
-     const quiz = await Quiz.findById(quiz_instance.quiz);
-     const users = await User.findById(quiz_instance.employer);
-
-
-     res.render("candidate_survey", {
-       id: id,
-       quiz: quiz,
-       quiz_instance: quiz_instance,
-       users: users,
-     });
+  res.render("candidate_survey", {
+    id: id,
+    quiz: quiz,
+    quiz_instance: quiz_instance,
+    users: users,
+  });
 };
-
-
-
 
 //Dominique
 exports.get_candidate_complete = async (req, res) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
+  let id = req.query.id;
+  const quiz_instance = await Quiz_Instance.findById(id);
+  const quiz = await Quiz.findById(quiz_instance.quiz);
+  const users = await User.findById(quiz_instance.employer);
 
-     let id = req.query.id;
-     const quiz_instance = await Quiz_Instance.findById(id);
-     const quiz = await Quiz.findById(quiz_instance.quiz);
-     const users = await User.findById(quiz_instance.employer);
-
-
-     
-     res.render("candidate_complete", {
-       id: id,
-       quiz: quiz,
-       quiz_instance: quiz_instance,
-       users: users,
-     });
-}; 
+  res.render("candidate_complete", {
+    id: id,
+    quiz: quiz,
+    quiz_instance: quiz_instance,
+    users: users,
+  });
+};
 
 exports.homeRoutes1 = (req, res) => {
-    axios
-      .get("http://localhost:3005/api/users")
-      .then(function (response) {
-        // MAYBE RENDER quiz_results or survey_results?
-        res.render("candidate_index", { users: response.data });
-      })
-      .catch((err) => {
-        res.send(err);
-      });
+  axios
+    .get("http://localhost:3005/api/users")
+    .then(function (response) {
+      // MAYBE RENDER quiz_results or survey_results?
+      res.render("candidate_index", { users: response.data });
+    })
+    .catch((err) => {
+      res.send(err);
+    });
 };
 
 exports.add_survey = (req, res) => {

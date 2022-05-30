@@ -21,7 +21,7 @@
                 <% } %>
 
 
-                    <form action="/login" method="POST">
+                    <form action=<%="/login?id=" + id %> method="POST">
                         <input type="email" name="email" placeholder="name@gmail.com" required />
                         <input type="password" name="password" placeholder="* * * * * *" required />
                         <button onclick="lsRememberMe()" id="question-form">SIGN IN</button>
