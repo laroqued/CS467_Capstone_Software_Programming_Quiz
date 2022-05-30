@@ -9,18 +9,23 @@
 }
 
 table {
+
     table-layout: auto;
+
 }
 
 th {
     font-family: "Roboto";
+
     font-size: medium;
+
     font-family: "Roboto";
 }
 
 td {
     font-family: "Roboto";
     font-size: medium;
+    font-size:medium;
     word-wrap: break-word
 }
 
@@ -635,6 +640,7 @@ button.btn {
     margin-top: 4em;
     margin-bottom: 4em;
 
+   
 }
 
 hr.class-1 {
@@ -682,10 +688,11 @@ hr.class-1 {
 
     font-style: oblique;
 }
-
-#titles {
-    max-width: 25rem;
+#titles{
+max-width: 25rem;
 }
+
+
 
 section {
 
@@ -704,6 +711,8 @@ section {
     top: 0;
     bottom: 0;
 }
+
+ 
 
 
 
