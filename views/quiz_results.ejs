@@ -6,7 +6,7 @@
 
 </head>
 
-<body>
+<body id="body3">
     <div class="container-fluid">
         <div id="quiz-greeting">
             <div id="back-button">
@@ -47,7 +47,7 @@
                             <div id="">
                                 <h3 class="title-page1">Quiz</h3>
                             </div>
-                        <hr id="index-title-hr">
+                            <hr id="index-title-hr">
                             <div id="">
                                 <span>
                                     <h3 class="title-page1">Results</h3>
@@ -83,8 +83,58 @@
                     </div>
                     <div class="col-md-auto" id="index-third-row">
                         <!-- 3 of 3 rows -->
+                        <h1>Quiz Rankings:
+                        </h1>
+<p><strong>Donnyves.quizzes: (name) </strong>   <%= quiz[0].name%></p>
+<p><strong>Donnyves.quizzes (owner):</strong>  <%= quiz[0].owner%></p>
+<p><strong>Donnyves.users (login_name):</strong>  <%= users[0].login_name %></p>
 
-                      <!--   <h5 class="text-wrap">Results</h5> -->
+
+                        <main id="site-main">
+                            <div class="container">
+                                <form action="/" method="POST">
+                                    <table class="table">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>FirstName</th>
+                                                <th>LastName</th>
+                                                <th>@Email</th>
+                                                <th>Grade</th>
+                                                <th>Quiz Name</th>
+                                                <th>Employer Email (owner)</th>
+                                                <th>Employer Name</th>
+                                                
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Use EJS to display <tr> and <td> data from _show.ejs -->
+
+
+       <!-- TABLE DATA -->                                         
+<% for(var i = 0; i < quiz_instance.length; i++) { %>
+<tr>
+    <td><%= i + 1 %></td>
+    <td><%= quiz_instance[i].firstName %></td>
+    <td><%= quiz_instance[i].lastName %></td>
+    <td><%= quiz_instance[i].email %></td>
+    <td><%= quiz_instance[i].grade %></td>
+    <td></td>
+    <td>data</td>
+    <td>data</td>
+</tr>
+<% } %>
+<!-- TABLE DATA END-->
+
+                                        </tbody>
+                                    </table>
+                                </form>
+
+                        </main>
+
+
+                        <!--   <h5 class="text-wrap">Results</h5> -->
                     </div>
                 </div>
             </div>

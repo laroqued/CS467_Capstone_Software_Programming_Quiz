@@ -42,6 +42,7 @@ const {
   checkAuthenticated,
   checkNotAuthenticated,
 } = require("../middlewares/auth");
+const quiz_instance = require("../model/quiz_instance");
 app.use(methodOverride("_method"));
 
 // ========================================================
@@ -65,35 +66,31 @@ exports.homeRoutes =
   (checkAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
- 
+
     let id = req.user.id;
-    const users = await User.findById(id)
+    const users = await User.findById(id);
 
     res.render("index", {
       id: id,
       login_name: req.user.login_name,
-      users:users
+      users: users,
     });
   });
-
 
 // Donnyves
 exports.login =
   (checkNotAuthenticated,
-  async(req, res) => {
-      let id = req.query.id;
+  async (req, res) => {
+    let id = req.query.id;
 
-  const quiz_instance = await Quiz_Instance.findById(id);
+    const quiz_instance = await Quiz_Instance.findById(id);
 
     res.render("login", {
       login_form_greeting: "SIGN IN TO YOUR ACCOUNT",
       id: id,
       quiz_instance: quiz_instance,
- 
     });
   });
-
-
 
 // Donnyves
 exports.register =
@@ -101,8 +98,6 @@ exports.register =
   (req, res) => {
     res.render("register", { register_form_greeting: "Register" });
   });
-
-
 
 exports.start_quiz = async (req, res) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
@@ -407,7 +402,6 @@ exports.post_contact =
 // ========================================================
 // Donnyves
 exports.post_login = passport.authenticate("local", {
-
   successRedirect: "/",
   failureRedirect: "/login",
   failureFlash: true, // shows messages from passort.config
@@ -589,22 +583,27 @@ exports.get_quiz_results =
   (checkAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-   let id = req.user.id;
-   const users = await User.findById(id);
+    let id = req.user.id;
+    const quizzes = await Quiz.find({ owner: req.user.email });
+    const quiz_instance = await Quiz_Instance.find(quizzes.employer);
+  const quiz = await Quiz.find(quiz_instance.quiz);
+    const users = await User.find(quiz_instance.employer);
 
- 
+
+//==========================================
+
+
+
     res.render("quiz_results", {
       id: id,
+      quizzes: quizzes,
+// =============================
       login_name: req.user.login_name,
       users: users,
+      quiz: quiz,
+      quiz_instance: quiz_instance,
     });
   });
-
-
-
-
-
-
 
 // Aaron
 exports.create_question =
@@ -783,10 +782,6 @@ exports.canidate_quiz =
       owner: req.user.email,
       quiz: quiz,
     });
-
-
-
-
   });
 //Dominique
 exports.canidate_survey = async (req, res) => {
