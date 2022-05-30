@@ -22,7 +22,7 @@ td {
 }
 
 .app-container {
-    margin-top: 10rem;
+    margin-top: 10em;
 }
 
 body {
@@ -249,7 +249,6 @@ body {
 
 #welcome-button{
 padding-bottom: 3rem;
-
 }
 
 #quiz-greeting {
@@ -663,4 +662,34 @@ hr.class-1 {
  
     text-align: center;
     
+}
+#td{
+    text-align: center;
+        vertical-align: middle;
+}
+
+table,
+table td {
+    border: 2px solid black;
+}
+tr{
+    border: 2px solid black;
+}
+th{
+    border: 2px solid black;
+        text-align: center;
+            vertical-align: middle;
+        }
+
+td {
+
+    text-align: center;
+    vertical-align: middle;
+    border-width: .25em;
+}
+#site-main-rankings{
+    background-color: white;
+    border-radius: 8px;
+    padding: 2em;
+
 }
