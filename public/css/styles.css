@@ -12,18 +12,42 @@ th {
     font-family: "Roboto";
     font-size: x-large;
     font-family: "Roboto";
-
 }
 
 td {
     font-family: "Roboto";
     font-size: large;
-
 }
+
+#th1 {
+    font-family: "Roboto";
+    font-size: x-large;
+    font-family: "Roboto";
+    color: white;
+}
+
+#td1 {
+    font-family: "Roboto";
+    font-size: large;
+    color: white;
+}
+
+
+
+
+
+
 
 .app-container {
-    margin-top: 10em;
+    margin-top: 6em;
 }
+
+@media screen and (max-width: 51em) {
+    body {
+        background-image: none;
+    }
+}
+
 
 body {
     background-color: darkgrey;
@@ -53,7 +77,7 @@ body {
 #body1 {
     background-image: url('../img/mountain.jpg');
     background-color: #cccccc;
-
+    height: 50rem;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -166,13 +190,6 @@ body {
     position: relative;
 }
 
-@media screen and (max-width: 51em) {
-    body {
-        background-image: none;
-    }
-}
-
-
 .title-page {
     font-family: "Anton", sans-serif;
 }
@@ -180,7 +197,6 @@ body {
 .title-page1 {
     font-family: "Anton", sans-serif;
     color: #f5f5f5;
-
 }
 
 #index-title-hr {
@@ -190,9 +206,7 @@ body {
 #middle-row-cards {
     margin-top: 2rem;
 }
-#middle-row-cards-btn{
 
-}
 .main {
     text-align: center;
     background-color: white;
@@ -247,9 +261,9 @@ body {
 }
 
 
-#welcome-button{
-padding-bottom: 3rem;
-}
+/* #welcome-button{
+padding-top: 8rem;
+} */
 
 #quiz-greeting {
     padding: 2rem;
@@ -269,11 +283,6 @@ padding-bottom: 3rem;
 .manage-quiz-button {
     background-color: white;
     padding: 1em;
-    border-radius: 8px;
-}
-.manage-quiz-button1 {
-    background-color: white;
-
     border-radius: 8px;
 }
 
@@ -604,7 +613,9 @@ label {
 }
 
 .manage-quiz-title {
-    margin: 2em;
+    margin-top: 4em;
+    margin-bottom: 4em;
+   
 }
 
 hr.class-1 {
@@ -651,45 +662,4 @@ hr.class-1 {
 #manage-quiz-td {
 
     font-style: oblique;
-}
-
-#submitQuiz{
-    margin-bottom: 5rem;
-        box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
-}
-
-#card-width-text{
- 
-    text-align: center;
-    
-}
-#td{
-    text-align: center;
-        vertical-align: middle;
-}
-
-table,
-table td {
-    border: 2px solid black;
-}
-tr{
-    border: 2px solid black;
-}
-th{
-    border: 2px solid black;
-        text-align: center;
-            vertical-align: middle;
-        }
-
-td {
-
-    text-align: center;
-    vertical-align: middle;
-    border-width: .25em;
-}
-#site-main-rankings{
-    background-color: white;
-    border-radius: 8px;
-    padding: 2em;
-
 }
