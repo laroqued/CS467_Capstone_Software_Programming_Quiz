@@ -1,0 +1,40 @@
+<%- include('includes/_header') %>
+
+<head>
+    <%- include('layouts/head') %>
+</head>
+
+<body>
+    <div id="email-form-greeting">
+        <%- include('layouts/welcome') %>
+    </div>
+    <div class="manage-quiz-title">
+        <div id="">
+            <h3 class="title-page1">Candidate</h3>
+        </div>
+        <hr id="index-title-hr">
+        <div id="">
+            <span>
+                <h3 class="title-page1">Stats</h3>
+            </span>
+        </div>
+    </div>
+
+    <div class="main">
+        <h1>Candidate Info</h1>
+        <h4>First Name: <%= candidate.firstName %></h4>
+        <h4>Last Name: <%= candidate.lastName %></h4>
+        <h4>Email: <%= candidate.email %></h4>
+        <h4>Quiz: <%= quiz.name %></h4>
+        <h4>Employer: <%= employer.login_name %></h4>
+
+        <h1>Quiz Results</h1>
+        <% if (candidate.completed) { %>
+        <h4>Grade: <%= candidate.grade * 100 %>%</h4>
+        <% } else { %>
+        <h4>Grade: Waiting for candidate to take quiz</h4>    
+        <% } %>
+    </div>
+</body>
+
+<%- include('includes/_footer') %>

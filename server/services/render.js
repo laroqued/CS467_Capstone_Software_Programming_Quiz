@@ -728,6 +728,21 @@ exports.delete_question =
     }
   });
 
+// Aaron
+exports.candidate_stats =
+  (checkAuthenticated,
+  async (req, res) => {
+    let candidate = await Quiz_Instance.findById(req.query.id);
+    let quiz = await Quiz.findById(candidate.quiz);
+    let employer = await User.findById(candidate.employer);
+    res.render("candidate_stats", {
+      candidate: candidate,
+      quiz: quiz,
+      employer: employer,
+      login_name: req.user.login_name
+    });
+  });
+
 //Dominique
 exports.canidate_quiz =
   (checkAuthenticated,
