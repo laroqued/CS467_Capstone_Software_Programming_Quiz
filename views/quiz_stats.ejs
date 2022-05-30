@@ -66,6 +66,7 @@
                                         <th id="th1">Last</th>
                                         <th id="th1">@Email</th>
                                         <th id="th1">Grade</th>
+                                        <th id="th1">View</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -89,8 +90,16 @@
                                             </td>
                                             <td id="td1"> <%= (candidate[i].grade *100).toFixed(2)%>%
                                             </td>
-                                            <td id="td1"><a class="btn btn-light" href=<%= "/candidate_stats?id=" + candidate[i]._id %>> View
-                                            </a></td>
+
+
+
+                                            <td id="td1">
+                                                
+                                            <a class="" style="color: ghostwhite" href=<%="/candidate_stats?id=" + candidate[i]._id %>>
+                                                <i class="fab fa-solid fa-eye "> </i>
+                                            </a>
+                                        
+                                        </td>
 
                                         </tr>
                                         <% } %>

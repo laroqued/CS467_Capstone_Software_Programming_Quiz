@@ -20,13 +20,15 @@ th {
     font-size: medium;
 
     font-family: "Roboto";
+    text-align: center;
 }
 
 td {
     font-family: "Roboto";
     font-size: medium;
     font-size:medium;
-    word-wrap: break-word
+    word-wrap: break-word;
+    text-align: center;
 }
 
 #th1 {
