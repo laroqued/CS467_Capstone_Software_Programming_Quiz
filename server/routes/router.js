@@ -56,6 +56,7 @@ route.post("/delete_question", checkAuthenticated, services.delete_question);
 route.post("/create_quiz_instance", checkAuthenticated, services.create_quiz_instance);
 
 route.get("/candidate_stats", checkAuthenticated, services.candidate_stats);
+route.get("/quiz_stats", checkAuthenticated, services.quiz_stats);
 //-----------------------------
 //Dominique
 route.get("/candidate_quiz", checkAuthenticated, services.canidate_quiz);
