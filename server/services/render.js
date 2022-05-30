@@ -585,9 +585,14 @@ exports.get_quiz_results =
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     let id = req.user.id;
     const quizzes = await Quiz.find({ owner: req.user.email });
-    const quiz_instance = await Quiz_Instance.find(quizzes.employer);
+    const quiz_instance = await Quiz_Instance.find(quizzes.employer).sort({
+      grade: -1,
+    });;
   const quiz = await Quiz.find(quiz_instance.quiz);
     const users = await User.find(quiz_instance.employer);
+    const candidates = await Quiz_Instance.find({
+      employer: req.query.id,
+    })
 
 
 //==========================================
@@ -597,11 +602,12 @@ exports.get_quiz_results =
     res.render("quiz_results", {
       id: id,
       quizzes: quizzes,
-// =============================
+      // =============================
       login_name: req.user.login_name,
       users: users,
       quiz: quiz,
       quiz_instance: quiz_instance,
+      candidates: candidates,
     });
   });
 
