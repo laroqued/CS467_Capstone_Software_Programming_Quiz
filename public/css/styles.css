@@ -206,6 +206,7 @@ body {
 
 .title-page {
     font-family: "Anton", sans-serif;
+
 }
 
 .title-page1 {
@@ -244,7 +245,8 @@ body {
 }
 
 .index-page {
-    max-width: 90%;
+    flex-shrink: inherit;
+
     text-align: center;
     margin-left: auto;
     margin-right: auto;
@@ -724,9 +726,9 @@ section {
     bottom: 0;
 }
 
-#section-index {
+#section-index1 {
     margin-top: 3rem;
-
+max-width: 40rem;
     left: 0;
     right: 0;
     top: 0;
