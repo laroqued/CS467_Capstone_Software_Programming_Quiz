@@ -87,7 +87,7 @@
                                             <td id="td1">
                                                 <%= candidate[i].email %>
                                             </td>
-                                            <td id="td1"> <%= candidate[i].grade *100%>%
+                                            <td id="td1"> <%= (candidate[i].grade *100).toFixed(2)%>%
                                             </td>
                                             <td id="td1"><a class="btn btn-light" href=<%= "/candidate_stats?id=" + candidate[i]._id %>> View
                                             </a></td>
