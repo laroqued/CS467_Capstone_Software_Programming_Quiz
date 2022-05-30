@@ -8,22 +8,51 @@
     box-sizing: border-box;
 }
 
+table {
+    table-layout: auto;
+}
+
 th {
     font-family: "Roboto";
-    font-size: x-large;
+    font-size: medium;
     font-family: "Roboto";
-
 }
 
 td {
     font-family: "Roboto";
-    font-size: large;
-
+    font-size: medium;
+    word-wrap: break-word
 }
+
+#th1 {
+    font-family: "Roboto";
+    font-size: x-large;
+    font-family: "Roboto";
+    color: white;
+}
+
+#td1 {
+    font-family: "Roboto";
+    font-size: large;
+    color: white;
+}
+
+
+
+
+
+
 
 .app-container {
-    margin-top: 10rem;
+    margin-top: 6em;
 }
+
+@media screen and (max-width: 51em) {
+    body {
+        background-image: none;
+    }
+}
+
 
 body {
     background-color: darkgrey;
@@ -53,7 +82,7 @@ body {
 #body1 {
     background-image: url('../img/mountain.jpg');
     background-color: #cccccc;
-
+    height: 50rem;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -166,13 +195,6 @@ body {
     position: relative;
 }
 
-@media screen and (max-width: 51em) {
-    body {
-        background-image: none;
-    }
-}
-
-
 .title-page {
     font-family: "Anton", sans-serif;
 }
@@ -180,7 +202,6 @@ body {
 .title-page1 {
     font-family: "Anton", sans-serif;
     color: #f5f5f5;
-
 }
 
 #index-title-hr {
@@ -190,9 +211,7 @@ body {
 #middle-row-cards {
     margin-top: 2rem;
 }
-#middle-row-cards-btn{
 
-}
 .main {
     text-align: center;
     background-color: white;
@@ -247,10 +266,9 @@ body {
 }
 
 
-#welcome-button{
-padding-bottom: 3rem;
-
-}
+/* #welcome-button{
+padding-top: 8rem;
+} */
 
 #quiz-greeting {
     padding: 2rem;
@@ -270,11 +288,6 @@ padding-bottom: 3rem;
 .manage-quiz-button {
     background-color: white;
     padding: 1em;
-    border-radius: 8px;
-}
-.manage-quiz-button1 {
-    background-color: white;
-
     border-radius: 8px;
 }
 
@@ -488,6 +501,20 @@ label {
     box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 }
 
+.card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-footer {
+    background: transparent;
+    border-top: 0px;
+}
+
+button.btn {
+    margin-top: auto;
+}
+
 #question-form {
     box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 }
@@ -605,7 +632,9 @@ label {
 }
 
 .manage-quiz-title {
-    margin: 2em;
+    margin-top: 4em;
+    margin-bottom: 4em;
+
 }
 
 hr.class-1 {
@@ -654,13 +683,68 @@ hr.class-1 {
     font-style: oblique;
 }
 
-#submitQuiz{
-    margin-bottom: 5rem;
-        box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+#titles {
+    max-width: 25rem;
 }
 
-#card-width-text{
- 
-    text-align: center;
-    
+section {
+
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#section-index {
+    margin-top: 3rem;
+
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+
+
+.flex-wrap {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: inherit;
+    -ms-flex-align: inherit;
+    align-items: inherit;
+}
+
+.flex-container {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    background: #eee;
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+}
+
+
+.flex-item {
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+}
+
+
+.fill {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
 }

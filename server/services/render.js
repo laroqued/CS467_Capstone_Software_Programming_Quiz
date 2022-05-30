@@ -585,7 +585,9 @@ exports.get_quiz_results =
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
     let id = req.user.id;
     const quizzes = await Quiz.find({ owner: req.user.email });
-    const quiz_instance = await Quiz_Instance.find(quizzes.employer);
+    const quiz_instance = await Quiz_Instance.find(quizzes.employer).sort({
+      grade:-1
+    })
   const quiz = await Quiz.find(quiz_instance.quiz);
     const users = await User.find(quiz_instance.employer);
 
