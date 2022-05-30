@@ -22,7 +22,7 @@ td {
 }
 
 .app-container {
-    margin-top: 6em;
+    margin-top: 10rem;
 }
 
 body {
@@ -180,6 +180,7 @@ body {
 .title-page1 {
     font-family: "Anton", sans-serif;
     color: #f5f5f5;
+
 }
 
 #index-title-hr {
@@ -246,10 +247,10 @@ body {
 }
 
 
-/* #welcome-button{
-padding-top: 8rem;
+#welcome-button{
+padding-bottom: 3rem;
 
-} */
+}
 
 #quiz-greeting {
     padding: 2rem;
@@ -656,4 +657,10 @@ hr.class-1 {
 #submitQuiz{
     margin-bottom: 5rem;
         box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+}
+
+#card-width-text{
+ 
+    text-align: center;
+    
 }
