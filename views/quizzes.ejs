@@ -10,7 +10,7 @@
         <div class="container-fluid">
             <div id="back-button-home">
                 <div class="filter">
-                    <a class="text-black" href="/"><i class="fas fa-angle-double-left text-black"></i> Home</a>
+                    <a class="text-white" href="/"><i class="fas fa-angle-double-left text-white"></i> Home</a>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
                 <div id="">
                     <h3 class="title-page1">Employer</h3>
                 </div>
-                <hr>
+            <hr id="index-title-hr">
                 <div id="">
                     <span>
                         <h3 class="title-page1">Quiz List</h3>
@@ -44,9 +44,9 @@
                             </h5>
                         </div>
                         <div class="card-body">
-                            <p class="card-title">View, Edit, Delete Quiz</p>
+                            <p class="card-title">View, Edit, or Delete Quiz</p>
                             <p class="card-text"></p>
-                            <a id="question-form" class="btn btn-primary" href=<%="/quiz?id=" + quiz._id %>><%=
+    <a id="question-form" class="btn btn-primary" href=<%="/quiz?id=" + quiz._id %>><%=
                                     quiz.name %></a>
 
                         </div>
