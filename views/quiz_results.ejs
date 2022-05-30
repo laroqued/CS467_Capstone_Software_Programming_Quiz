@@ -146,10 +146,16 @@
                                     <td id="td1">
                                         <%= quiz_instance[i].email %>
                                     </td>
+                                    <td id="td1">
+                                        <%= quiz_names[quiz_instance[i].quiz] %>
+                                    </td>
 
                                     <td id="td1"> <%= quiz_instance[i].grade *100%>%
 
                                     </td>
+
+                                    <td id="td1"><a class="btn btn-light" href=<%= "/candidate_stats?id=" + quiz_instance[i]._id %>> View
+                                    </a></td>
 
                                 </tr>
                                 <% } %>

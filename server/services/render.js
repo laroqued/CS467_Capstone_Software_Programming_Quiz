@@ -594,6 +594,14 @@ exports.get_quiz_results =
       employer: req.query.id,
     });
 
+    let quiz_names = {};
+    for (let i = 0; i < quiz_instance.length; i++) {
+      let quiz_id = quiz_instance[i].quiz;
+      if (!(quiz_id in quiz_names)) {
+        let curr_quiz = await Quiz.findById(quiz_id);
+        quiz_names[quiz_id] = curr_quiz.name;
+      }
+    };
     //==========================================
 
     res.render("quiz_results", {
@@ -605,6 +613,7 @@ exports.get_quiz_results =
       quiz: quiz,
       quiz_instance: quiz_instance,
       candidates: candidates,
+      quiz_names: quiz_names
     });
   });
 
