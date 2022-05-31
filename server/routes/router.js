@@ -77,6 +77,7 @@ route.get("/quiz_stats", checkAuthenticated, services.quiz_stats);
 route.get("/candidate_quiz", checkAuthenticated, services.canidate_quiz);
 route.get("/candidate_survey", services.canidate_survey);
 route.get("/candidate_complete", services.get_candidate_complete);
+route.get("/candidate_survey_complete", services.candidate_survey_complete);
 //-----------------------------
 /**
  *  @description Root Route

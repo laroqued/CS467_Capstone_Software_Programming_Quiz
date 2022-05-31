@@ -1,4 +1,5 @@
 var Userdb = require('../model/model');
+const { candidate_survey_complete } = require('../services/render');
 
 // create and save new user
 exports.create = (req,res)=>{
@@ -22,7 +23,7 @@ exports.create = (req,res)=>{
     user
         .save(user)
         .then(data => {
-            res.send(data)
+            res.redirect('/candidate_survey_complete') 
  
         })
         .catch(err =>{
