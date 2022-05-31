@@ -870,3 +870,12 @@ exports.update_user =
 
     res.render("update_user", { user: userdata.data });
   });
+
+//Dominique
+exports.candidate_survey_complete =
+(checkAuthenticated,
+(req, res) => {
+  res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+
+  res.render("candidate_survey_complete", {  });
+});
