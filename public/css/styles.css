@@ -29,7 +29,6 @@ td {
     font-size: medium;
     word-wrap: break-word;
     text-align: center;
-    width: 100px;
 }
 
 #th1 {
@@ -241,12 +240,11 @@ body {
 }
 
 #back-button {
-    text-align: right;
-    margin-right: 60rem;
+    text-align: left;
+    margin-left: 5rem;
 }
 
 .index-page {
-    
     flex-shrink: inherit;
 
     text-align: center;
