@@ -241,11 +241,12 @@ body {
 }
 
 #back-button {
-    text-align: left;
-    margin-left: 5rem;
+    text-align: right;
+    margin-right: 60rem;
 }
 
 .index-page {
+    
     flex-shrink: inherit;
 
     text-align: center;
