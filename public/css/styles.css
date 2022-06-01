@@ -11,8 +11,12 @@
 table {
 
     table-layout: auto;
-        box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 
+}
+
+input {
+    color: black !important;
 }
 
 th {
@@ -20,7 +24,7 @@ th {
 
     font-size: larger;
 
-    font-family: "Roboto";
+
     text-align: center;
 }
 
@@ -332,6 +336,8 @@ padding-top: 8rem;
     margin-bottom: 1rem;
     margin-left: auto;
     margin-right: auto;
+
+
 }
 
 .contact-form-text {
@@ -374,7 +380,7 @@ padding-top: 8rem;
     width: 100%;
     padding: 15px;
     background-color: #ccc;
-    color: gray;
+    color: black;
     border: 0;
     margin: 10px 5px;
     border-radius: 8px;
@@ -783,6 +789,19 @@ section {
     flex: 1;
 }
 
-#survey-complete{
-   margin-bottom: 15rem;
+#survey-complete {
+    margin-bottom: 15rem;
+}
+
+#index-page-explanation {
+    margin-top: 2rem;
+    max-width: 50%;
+}
+#index-page-text {
+
+    font-family: "Roboto";
+    font-size: large;
+  
+    color: white;
+    
 }
