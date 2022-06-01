@@ -18,6 +18,9 @@ table {
 input {
     color: black !important;
 }
+textarea {
+    color: black !important;
+}
 
 th {
     font-family: "Roboto";
