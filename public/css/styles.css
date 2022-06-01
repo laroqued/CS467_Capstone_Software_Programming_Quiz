@@ -68,8 +68,11 @@ td {
         position: fixed;
     }
     #nav-makestick{
-        margin-right: 50%;
+        margin-right: 55%;
     }
+.navbar-brand {
+    font-size: 1rem;
+}
 }
 
 @media screen and (max-width: 51em) {
