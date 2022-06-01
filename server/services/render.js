@@ -98,7 +98,7 @@ exports.register =
   (req, res) => {
     res.render("register", { register_form_greeting: "Register" });
   });
-
+// Aaron
 exports.start_quiz = async (req, res) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
   try {
@@ -117,7 +117,7 @@ exports.start_quiz = async (req, res) => {
     res.redirect("404");
   }
 };
-
+// Aaron
 exports.get_take_quiz = async (req, res) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
@@ -147,7 +147,7 @@ exports.get_take_quiz = async (req, res) => {
     res.redirect("404");
   }
 };
-
+// Aaron
 exports.post_submit_quiz = async (req, res) => {
   try {
     let total = Object.keys(req.body).length;
@@ -208,7 +208,9 @@ exports.post_submit_quiz = async (req, res) => {
           // fill in the blank
         } else if (question.type == "fill") {
           question.answer_multiple.map(String);
-          let lower = question.answer_multiple.map(element => element.toLowerCase());
+          let lower = question.answer_multiple.map((element) =>
+            element.toLowerCase()
+          );
           if (typeof answer != "string") {
             if (lower.includes(answer[1].toLowerCase())) {
               correct += 1;
@@ -227,6 +229,7 @@ exports.post_submit_quiz = async (req, res) => {
     //=====================================
     // EMAIL FUNCTIONALITY HERE
     // send email to employer
+    // // Donnyves
     //=====================================
     let quiz_instance = await Quiz_Instance.findById(req.body.id);
     let quiz = await Quiz.findById(quiz_instance.quiz);
@@ -309,6 +312,7 @@ exports.create_quiz_instance =
 // ==============================================================
 // CONTACT/EMAIL
 // ==============================================================
+// Donnyves
 exports.get_contact =
   (checkAuthenticated,
   async (req, res) => {
@@ -330,7 +334,7 @@ exports.get_contact =
       res.redirect("404");
     }
   });
-
+// Donnyves
 exports.post_contact =
   ("/send",
   checkAuthenticated,
@@ -605,7 +609,7 @@ exports.post_edit_quiz =
     }
   });
 
-// Aaron
+// Aaron/Donnyves
 exports.get_quiz_results =
   (checkAuthenticated,
   async (req, res) => {
@@ -849,7 +853,7 @@ exports.candidate_stats =
     }
   });
 
-//Dominique
+//Dominique/Aaron/Donnyves
 exports.canidate_quiz =
   (checkAuthenticated,
   async (req, res) => {
@@ -871,7 +875,7 @@ exports.canidate_quiz =
       res.redirect("404");
     }
   });
-//Dominique
+//Dominique/Donnyves
 exports.canidate_survey = async (req, res) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
   try {
@@ -892,7 +896,7 @@ exports.canidate_survey = async (req, res) => {
   }
 };
 
-//Dominique
+//Donnyves
 exports.get_candidate_complete = async (req, res) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
   try {
@@ -912,7 +916,7 @@ exports.get_candidate_complete = async (req, res) => {
     res.redirect("404");
   }
 };
-
+//Dominique/Donnyves
 exports.homeRoutes1 = (req, res) => {
   axios
     .get("http://localhost:3005/api/users")
@@ -937,7 +941,7 @@ exports.update_user =
     res.render("update_user", { user: userdata.data });
   });
 
-//Dominique
+//Dominique/Aaron
 exports.candidate_survey_complete =
 (checkAuthenticated,
 (req, res) => {
