@@ -101,43 +101,51 @@ exports.register =
 
 exports.start_quiz = async (req, res) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+  try {
+    let id = req.query.id;
 
-  let id = req.query.id;
+    const quiz_instance = await Quiz_Instance.findById(id);
+    const quiz = await Quiz.findById(quiz_instance.quiz);
 
-  const quiz_instance = await Quiz_Instance.findById(id);
-  const quiz = await Quiz.findById(quiz_instance.quiz);
-
-  res.render("start_quiz", {
-    id: id,
-    quiz_instance: quiz_instance,
-    quiz: quiz,
-  });
+    res.render("start_quiz", {
+      id: id,
+      quiz_instance: quiz_instance,
+      quiz: quiz,
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect("404");
+  }
 };
 
 exports.get_take_quiz = async (req, res) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
 
-  let id = req.query.id;
-  let _id = req.query._id;
-  const quiz_instance = await Quiz_Instance.findById(id);
-  const quiz = await Quiz.findById(quiz_instance.quiz);
-  const questions = await Question.find({ quiz: quiz._id });
-  const users = await User.findById(quiz_instance.employer);
+  try {
+    let id = req.query.id;
+    const quiz_instance = await Quiz_Instance.findById(id);
+    const quiz = await Quiz.findById(quiz_instance.quiz);
+    const questions = await Question.find({ quiz: quiz._id });
+    const users = await User.findById(quiz_instance.employer);
 
-  let complete = quiz_instance.completed;
+    let complete = quiz_instance.completed;
 
-  if (!complete) {
-    await Quiz_Instance.findByIdAndUpdate(id, { completed: true });
+    if (!complete) {
+      await Quiz_Instance.findByIdAndUpdate(id, { completed: true });
+    }
+
+    res.render("take_quiz", {
+      id: id,
+      questions: questions,
+      quiz: quiz,
+      quiz_instance: quiz_instance,
+      complete: complete,
+      users: users,
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect("404");
   }
-
-  res.render("take_quiz", {
-    id: id,
-    questions: questions,
-    quiz: quiz,
-    quiz_instance: quiz_instance,
-    complete: complete,
-    users: users,
-  });
 };
 
 exports.post_submit_quiz = async (req, res) => {
@@ -305,17 +313,22 @@ exports.get_contact =
   (checkAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    let quizId = req.query.id;
-    const name = await Quiz.find({
-      name: req.user.name,
-    });
+    try {
+      let quizId = req.query.id;
+      const name = await Quiz.find({
+        name: req.user.name,
+      });
 
-    res.render("contact", {
-      login_name: req.user.login_name,
-      msg: "",
-      quizId: quizId,
-      name: name,
-    });
+      res.render("contact", {
+        login_name: req.user.login_name,
+        msg: "",
+        quizId: quizId,
+        name: name,
+      });
+    } catch (error) {
+      console.log(error);
+      res.redirect("404");
+    }
   });
 
 exports.post_contact =
@@ -470,15 +483,20 @@ exports.quiz =
   (checkAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    let id = req.query.id;
-    const questions = await Question.find({ quiz: id });
-    const quiz = await Quiz.findById(id);
-    res.render("quiz", {
-      login_name: req.user.login_name,
-      questions: questions,
-      id: id,
-      quiz: quiz,
-    });
+    try {
+      let id = req.query.id;
+      const questions = await Question.find({ quiz: id });
+      const quiz = await Quiz.findById(id);
+      res.render("quiz", {
+        login_name: req.user.login_name,
+        questions: questions,
+        id: id,
+        quiz: quiz,
+      });
+    } catch (error) {
+      console.log(error);
+      res.redirect("404");
+    }
   });
 
 // Aaron
@@ -519,14 +537,19 @@ exports.del_quiz =
   (checkAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-
-    let id = req.query.id;
-    const quiz = await Quiz.findById(id);
-    res.render("delete_quiz", {
-      id: id,
-      login_name: req.user.login_name,
-      quiz: quiz,
-    });
+    try {
+      let id = req.query.id;
+      const quiz = await Quiz.findById(id);
+      if (quiz ==  null) throw "does not exist";
+      res.render("delete_quiz", {
+        id: id,
+        login_name: req.user.login_name,
+        quiz: quiz,
+      });
+    } catch (error) {
+      console.log(error);
+      res.redirect("404");
+    }
   });
 
 // Aaron
@@ -541,7 +564,7 @@ exports.delete_quiz =
       res.redirect("quizzes");
     } catch (error) {
       console.log(error);
-      res.redirect("create_quiz");
+      res.redirect("404");
     }
   });
 
@@ -550,14 +573,18 @@ exports.get_edit_quiz =
   (checkAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-
-    let id = req.query.id;
-    let quiz = await Quiz.findById(id);
-    res.render("edit_quiz", {
-      id: id,
-      login_name: req.user.login_name,
-      quiz: quiz,
-    });
+    try {
+      let id = req.query.id;
+      let quiz = await Quiz.findById(id);
+      res.render("edit_quiz", {
+        id: id,
+        login_name: req.user.login_name,
+        quiz: quiz,
+      });
+    } catch (error) {
+      console.log(error);
+      res.redirect("404");
+    }
   });
 
 // Aaron
@@ -583,28 +610,33 @@ exports.get_quiz_results =
   (checkAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-    let id = req.user.id;
-    const quiz_instance = await Quiz_Instance.find({employer: req.user.id}).sort({
-      grade:-1
-    })
+    try {
+      let id = req.user.id;
+      const quiz_instance = await Quiz_Instance.find({employer: req.user.id}).sort({
+        grade:-1
+      })
 
-    let quiz_names = {};
-    for (let i = 0; i < quiz_instance.length; i++) {
-      let quiz_id = quiz_instance[i].quiz;
-      if (!(quiz_id in quiz_names)) {
-        let curr_quiz = await Quiz.findById(quiz_id);
-        quiz_names[quiz_id] = curr_quiz.name;
-      }
-    };
-    //==========================================
+      let quiz_names = {};
+      for (let i = 0; i < quiz_instance.length; i++) {
+        let quiz_id = quiz_instance[i].quiz;
+        if (!(quiz_id in quiz_names)) {
+          let curr_quiz = await Quiz.findById(quiz_id);
+          quiz_names[quiz_id] = curr_quiz.name;
+        }
+      };
+      //==========================================
 
-    res.render("quiz_results", {
-      id: id,
-      // =============================
-      login_name: req.user.login_name,
-      quiz_instance: quiz_instance,
-      quiz_names: quiz_names
-    });
+      res.render("quiz_results", {
+        id: id,
+        // =============================
+        login_name: req.user.login_name,
+        quiz_instance: quiz_instance,
+        quiz_names: quiz_names
+      });
+    } catch (error) {
+      console.log(error);
+      res.redirect("404");
+    }
   });
 
 // Aaron
@@ -612,21 +644,25 @@ exports.create_question =
   (checkAuthenticated,
   (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+    try {
+      let quizId = req.query.id;
 
-    let quizId = req.query.id;
+      let type = null;
+      if (!req.query.type) {
+        type = "multiple_choice";
+      } else {
+        type = req.query.type;
+      }
 
-    let type = null;
-    if (!req.query.type) {
-      type = "multiple_choice";
-    } else {
-      type = req.query.type;
+      res.render("create_question", {
+        quizId: quizId,
+        login_name: req.user.login_name,
+        type: type,
+      });
+    } catch (error) {
+      console.log(error);
+      res.redirect("404");
     }
-
-    res.render("create_question", {
-      quizId: quizId,
-      login_name: req.user.login_name,
-      type: type,
-    });
   });
 
 // Aaron
@@ -682,14 +718,18 @@ exports.question =
   (checkAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-
-    let id = req.query.id;
-    const question = await Question.findById(id);
-    res.render("question", {
-      id: id,
-      login_name: req.user.login_name,
-      question: question,
-    });
+    try {
+      let id = req.query.id;
+      const question = await Question.findById(id);
+      res.render("question", {
+        id: id,
+        login_name: req.user.login_name,
+        question: question,
+      });
+    } catch (error) {
+      console.log(error);
+      res.redirect("404");
+    }
   });
 
 // Aaron
@@ -741,14 +781,19 @@ exports.del_question =
   (checkAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
-
-    let id = req.query.id;
-    const question = await Question.findById(id);
-    res.render("delete_question", {
-      id: id,
-      login_name: req.user.login_name,
-      question: question,
-    });
+    try {
+      let id = req.query.id;
+      const question = await Question.findById(id);
+      if (question == null) throw "does not exist";
+      res.render("delete_question", {
+        id: id,
+        login_name: req.user.login_name,
+        question: question,
+      });
+    } catch (error) {
+      console.log(error);
+      res.redirect("404");
+    }
   });
 
 // Aaron
@@ -770,28 +815,38 @@ exports.delete_question =
 exports.quiz_stats =
   (checkAuthenticated,
   async (req, res) => {
-    let candidate = await Quiz_Instance.find({quiz: req.query.id}).sort({grade: -1});
-    let quiz = await Quiz.findById(req.query.id);
-    res.render("quiz_stats", {
-      candidate: candidate,
-      quiz: quiz,
-      login_name: req.user.login_name
-    });
+    try {
+      let candidate = await Quiz_Instance.find({quiz: req.query.id}).sort({grade: -1});
+      let quiz = await Quiz.findById(req.query.id);
+      res.render("quiz_stats", {
+        candidate: candidate,
+        quiz: quiz,
+        login_name: req.user.login_name
+      });
+    } catch (error) {
+      console.log(error);
+      res.redirect("404");
+    }
   });
 
 // Aaron
 exports.candidate_stats =
   (checkAuthenticated,
   async (req, res) => {
-    let candidate = await Quiz_Instance.findById(req.query.id);
-    let quiz = await Quiz.findById(candidate.quiz);
-    let employer = await User.findById(candidate.employer);
-    res.render("candidate_stats", {
-      candidate: candidate,
-      quiz: quiz,
-      employer: employer,
-      login_name: req.user.login_name
-    });
+    try {
+      let candidate = await Quiz_Instance.findById(req.query.id);
+      let quiz = await Quiz.findById(candidate.quiz);
+      let employer = await User.findById(candidate.employer);
+      res.render("candidate_stats", {
+        candidate: candidate,
+        quiz: quiz,
+        employer: employer,
+        login_name: req.user.login_name
+      });
+    } catch (error) {
+      console.log(error);
+      res.redirect("404");
+    }
   });
 
 //Dominique
@@ -799,51 +854,63 @@ exports.canidate_quiz =
   (checkAuthenticated,
   async (req, res) => {
     res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+    try {
+      let id = req.query.id;
+      const quiz = await Quiz.findById(id);
+      const questions = await Question.find({ quiz: id });
 
-    let id = req.query.id;
-    const quiz = await Quiz.findById(id);
-    const questions = await Question.find({ quiz: id });
-
-    res.render("candidate_quiz", {
-      id: id,
-      login_name: req.user.login_name,
-      questions: questions,
-      owner: req.user.email,
-      quiz: quiz,
-    });
+      res.render("candidate_quiz", {
+        id: id,
+        login_name: req.user.login_name,
+        questions: questions,
+        owner: req.user.email,
+        quiz: quiz,
+      });
+    } catch (error) {
+      console.log(error);
+      res.redirect("404");
+    }
   });
 //Dominique
 exports.canidate_survey = async (req, res) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+  try {
+    let id = req.query.id;
+    const quiz_instance = await Quiz_Instance.findById(id);
+    const quiz = await Quiz.findById(quiz_instance.quiz);
+    const users = await User.findById(quiz_instance.employer);
 
-  let id = req.query.id;
-  const quiz_instance = await Quiz_Instance.findById(id);
-  const quiz = await Quiz.findById(quiz_instance.quiz);
-  const users = await User.findById(quiz_instance.employer);
-
-  res.render("candidate_survey", {
-    id: id,
-    quiz: quiz,
-    quiz_instance: quiz_instance,
-    users: users,
-  });
+    res.render("candidate_survey", {
+      id: id,
+      quiz: quiz,
+      quiz_instance: quiz_instance,
+      users: users,
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect("404");
+  }
 };
 
 //Dominique
 exports.get_candidate_complete = async (req, res) => {
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
+  try {
+    let id = req.query.id;
+    const quiz_instance = await Quiz_Instance.findById(id);
+    const quiz = await Quiz.findById(quiz_instance.quiz);
+    const users = await User.findById(quiz_instance.employer);
 
-  let id = req.query.id;
-  const quiz_instance = await Quiz_Instance.findById(id);
-  const quiz = await Quiz.findById(quiz_instance.quiz);
-  const users = await User.findById(quiz_instance.employer);
-
-  res.render("candidate_complete", {
-    id: id,
-    quiz: quiz,
-    quiz_instance: quiz_instance,
-    users: users,
-  });
+    res.render("candidate_complete", {
+      id: id,
+      quiz: quiz,
+      quiz_instance: quiz_instance,
+      users: users,
+    });
+  } catch (error) {
+    console.log(error);
+    res.redirect("404");
+  }
 };
 
 exports.homeRoutes1 = (req, res) => {
