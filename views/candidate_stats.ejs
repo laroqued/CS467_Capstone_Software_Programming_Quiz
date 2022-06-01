@@ -66,7 +66,7 @@
         <hr>
 
         <% if (candidate.completed) { %>
-        <h4>Grade: <%= candidate.grade * 100 %>%</h4>
+        <h4>Grade: <%= (candidate.grade * 100).toFixed(2) %>%</h4>
         <% } else { %>
         <h4>Grade: Waiting for candidate to take quiz</h4>    
         <% } %>

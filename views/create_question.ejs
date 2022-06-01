@@ -51,7 +51,11 @@
                 </div>
                 <h5  style="margin-top: 20px"> <u >Question Prompt</u> </h5>
 
-                <input type="text" name="prompt" placeholder="Question Prompt">
+                <% if (type=="fill" ) { %>
+                    <input type="text" name="prompt" placeholder="Enter Question Here: (ex. There are ___ bits in a byte.)">
+                <% } else { %>
+                    <input type="text" name="prompt" placeholder="Question Prompt">
+                <% } %>
                 <div id="class-1">
                         <hr class="class-1" />
                         </div>
@@ -100,8 +104,10 @@
                             <div type="button" id="a4" class="btn btn-success col-3">Correct</div>
                             <% } else if (type=="fill" ) { %>
                                 <h5>Enter all correct answers separated by commas</h5>
+                                <h8>Answers are not case-sensitive and can contain whitespace</h8>
                                 <textarea class="contact-form-message" name="answer" rows="5"
-                                    placeholder="ex. answer1, answer2"></textarea>
+                                    placeholder="Enter Answers Here: (ex. eight,8)"></textarea>
+                                
                                 <% } %>
                                     <input type="hidden" name="type" value=<%=type %> >
                                     <input type="hidden" name="quiz" value=<%=quizId %> >

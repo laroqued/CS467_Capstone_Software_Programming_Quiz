@@ -200,8 +200,9 @@ exports.post_submit_quiz = async (req, res) => {
           // fill in the blank
         } else if (question.type == "fill") {
           question.answer_multiple.map(String);
+          let lower = question.answer_multiple.map(element => element.toLowerCase());
           if (typeof answer != "string") {
-            if (question.answer_multiple.includes(answer[1])) {
+            if (lower.includes(answer[1].toLowerCase())) {
               correct += 1;
             }
           }
@@ -565,7 +566,6 @@ exports.post_edit_quiz =
   checkAuthenticated,
   async (req, res) => {
     try {
-      console.log(req.body.name);
       Quiz.findByIdAndUpdate(req.body.quiz, {
         name: req.body.name,
         timer: req.body.timer,
@@ -634,7 +634,6 @@ exports.post_create_question =
   ("/create_question",
   checkAuthenticated,
   async (req, res) => {
-    console.log(req.body);
     try {
       let answer = null;
       let answers = null;
