@@ -2,10 +2,10 @@
     <%- include('includes/_header') %>
 
         <head>
-     
+
             <%- include('layouts/head') %>
-         
-            
+
+
         </head>
 
 
@@ -18,6 +18,10 @@
             </div>
         </div>
 
+
+
+
+
         <div id="quiz-greeting">
             <%- include('layouts/welcome_light') %>
         </div>
@@ -28,7 +32,7 @@
                 <div id="">
                     <h3 class="title-page1">Employer</h3>
                 </div>
-            <hr id="index-title-hr">
+                <hr id="index-title-hr">
                 <div id="">
                     <span>
                         <h3 class="title-page1">Quiz List</h3>
@@ -36,29 +40,36 @@
                 </div>
             </div>
 
-            <ul class="list-group">
-                <% quizzes.forEach(quiz=> { %>
+            <section id="index-page-explanation">
+                <p id="index-page-text"> This page lists the Employer’s quizzes by name. If there are no quizzes present, click the “Create New Quiz” button.
+                Name your quiz and add the necessary amount of time needed for your candidates to take the quiz.</p>
+            </section>
+
+            <div id="employer-list">
+                <ul class="list-group">
+                    <% quizzes.forEach(quiz=> { %>
 
 
-                    <div class="card" id="new-quiz-card">
-                        <div class="card-header">
-                            <h5>
-                                <%= quiz.name %> Quiz
-                            </h5>
+                        <div class="card" id="new-quiz-card">
+                            <div class="card-header">
+                                <h5>
+                                    <%= quiz.name %> Quiz
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-title">View, Edit, or Delete Quiz</p>
+                                <hr>
+                                <p class="card-text"></p>
+                                <a id="question-form" class="btn btn-primary" href=<%="/quiz?id=" + quiz._id %>><%=
+                                        quiz.name %></a>
+
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <p class="card-title">View, Edit, or Delete Quiz</p>
-                            <hr>
-                            <p class="card-text"></p>
-    <a id="question-form" class="btn btn-primary" href=<%="/quiz?id=" + quiz._id %>><%=
-                                    quiz.name %></a>
-
-                        </div>
-                    </div>
 
 
-                    <% }) %>
-            </ul>
+                        <% }) %>
+                </ul>
+            </div>
         </div>
 
         <div class="card" id="new-quiz-card">
