@@ -128,6 +128,7 @@
 
                             <!-- FILL IN THE BLANK -->
                             <% } else if (question.type == "fill") { %>
+                                <h10>Fill in the blank (not case-sensitive)</h10>
                                 <input type="hidden" name=<%= question._id %> value=''>
                                 <input class="contact-form-text" type="text" name=<%= question._id %> placeholder="Type answer here">
                                 <% fill += 1; %>
