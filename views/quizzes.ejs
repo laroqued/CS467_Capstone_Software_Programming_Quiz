@@ -2,21 +2,12 @@
     <%- include('includes/_header') %>
 
         <head>
-
             <%- include('layouts/head') %>
-
-
         </head>
 
 
 
-        <div class="container-fluid">
-            <div id="back-button-home">
-                <div class="filter">
-                    <a class="text-white" href="/"><i class="fas fa-angle-double-left text-white"></i> Home</a>
-                </div>
-            </div>
-        </div>
+   
 
 
 
@@ -25,6 +16,14 @@
         <div id="quiz-greeting">
             <%- include('layouts/welcome_light') %>
         </div>
+
+    <div class="container-fluid">
+        <div id="back-button-home">
+            <div class="filter">
+                <a class="text-white" href="/"><i class="fas fa-angle-double-left text-white"></i> Home</a>
+            </div>
+        </div>
+    </div>
 
         <div class="create-quiz-page">
             <div class="manage-quiz-title">
@@ -41,7 +40,7 @@
             </div>
 
             <section id="index-page-explanation">
-                <p id="index-page-text"> This page lists the Employer’s quizzes by name. If there are no quizzes present, click the “Create New Quiz” button.
+                <p id="employer-list-text"> This page manages the employer’s quizzes by name. If there are no quizzes present, click the “Create New Quiz” button.</p><p id="employer-list-text">
                 Name your quiz and add the necessary amount of time needed for your candidates to take the quiz.</p>
             </section>
 

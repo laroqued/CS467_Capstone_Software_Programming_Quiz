@@ -6,6 +6,11 @@
 
 
     <body id="body3">
+
+
+        <div id="email-form-greeting">
+            <%- include('layouts/welcome') %>
+        </div>
         <div class="container-fluid">
             <div id="back-button">
                 <div class="filter">
@@ -14,11 +19,6 @@
                 </div>
             </div>
         </div>
-
-        <div id="email-form-greeting">
-            <%- include('layouts/welcome') %>
-        </div>
-
         <div>
             <h1 id="quiz-page-header">
                 <%= quiz.name %> Quiz

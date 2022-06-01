@@ -18,6 +18,7 @@ table {
 input {
     color: black !important;
 }
+
 textarea {
     color: black !important;
 }
@@ -59,14 +60,89 @@ td {
 
 
 .app-container {
-    margin-top: 6em;
+    margin-top: 8em;
 }
 
 @media screen and (max-width: 51em) {
     body {
         background-image: none;
     }
+    nav{
+            margin-right: -450px;
+                position: fixed;
+    }
 }
+
+@media screen and (max-width: 51em) {
+    #body1 {
+        background-image: none;
+    }
+
+}
+
+@media screen and (max-width: 51em) {
+    #body2 {
+        background-image: none;
+    }
+}
+
+@media screen and (max-width: 51em) {
+    #body3 {
+        background-image: none;
+    }
+}
+
+@media screen and (max-width: 51em) {
+    #body4 {
+        background-image: none;
+    }
+}
+
+@media screen and (max-width: 51em) {
+    #body5 {
+        background-image: none;
+    }
+}
+
+@media screen and (max-width: 51em) {
+    #body6 {
+        background-image: none;
+    }
+}
+
+@media screen and (max-width: 51em) {
+    #body7 {
+        background-image: none;
+    }
+}
+
+@media screen and (max-width: 51em) {
+    #body8 {
+        background-image: none;
+    }
+}
+
+@media screen and (max-width: 51em) {
+    #body9 {
+        background-image: none;
+    }
+}
+
+@media screen and (max-width: 51em) {
+    #body10 {
+        background-image: none;
+    }
+}
+
+@media screen and (max-width: 51em) {
+    #body11 {
+        background-image: none;
+    }
+}
+
+
+
+
 
 
 body {
@@ -409,6 +485,9 @@ padding-top: 8rem;
 nav {
     background-color: #000;
     box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
+
+
+  
 }
 
 #div-greeting {
@@ -445,9 +524,9 @@ nav {
     display: block;
 }
 
-.navbar-brand {
+ .navbar-brand {
     font-size: 1.5em;
-}
+} 
 
 .navbar-text.navbar-brand {
     color: black;
@@ -464,7 +543,7 @@ nav {
 }
 
 .navbar-collapse {
-    overflow: hidden;
+    overflow:visible;
 }
 
 header {
@@ -490,9 +569,7 @@ header {
 }
 
 
-/* #label-spacing {
-  margin-left: 1.5em;
-} */
+
 
 #email-success {
     color: green;
@@ -510,9 +587,7 @@ label {
     float: center; */
 }
 
-/* label:after {
-    content: ": ";
-} */
+
 
 #quiz-cards {}
 
@@ -566,9 +641,6 @@ button.btn {
     margin-bottom: 5rem;
 }
 
-#sidebar-nav {
-    width: 160px;
-}
 
 #animation {
     margin-top: 2rem;
@@ -798,21 +870,26 @@ section {
 
 #index-page-explanation {
     margin-top: 2rem;
-    max-width: 50%;
+
 }
+
 #index-page-text {
 
     font-family: "Roboto";
     font-size: large;
-  
     color: white;
-    
 }
-#employer-list{
-        margin-top: 3rem;
- 
-                display: flex;
-                    align-items: center;
-                    justify-content: center;
-        
+
+#employer-list {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#employer-list-text {
+    font-family: "Roboto";
+    font-size: large;
+    color: white;
+
 }
