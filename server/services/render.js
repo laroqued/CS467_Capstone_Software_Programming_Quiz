@@ -348,7 +348,7 @@ exports.post_contact =
 <p>${req.body.message}</p>
 <p>Click the link below to start your quiz.</p>
 <p></p>
-<li>Local Host Quiz: http://${process.env.HOST}:${process.env.PORT}/start_quiz?id=${id}</li>
+
 <li>Production Quiz: https://software-programming-quiz.herokuapp.com/start_quiz?id=${id}</li>
 </ul>
 `;

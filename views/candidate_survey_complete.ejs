@@ -1,31 +1,31 @@
 <head>
-    <%- include('layouts/head') %>
+  <%- include('layouts/head') %>
 </head>
 
 
 <body>
-    
-    <script>
-        $("#close_page").click(function() {
-          var confirm_result = confirm("Are you sure you want to quit?");
-          if (confirm_result == true) {
-            window.close();
-          }
-        });
-      </script>
-    <div class="main">
-        <h1>Candidate Survey Complete</h1>
-        <br>
-        Thank you for taking our survey.We appreciate your feedback.
-        <br>
-        We appreciate your feedback.
-        <br>
-        <br>
-        <i>You may close this window now.</i>
 
+  <section id="survey-complete">
+    <div class="main">
+      <h1>Candidate Survey Complete</h1>
+
+      Thank you for taking our survey.
+      <br>
+      We appreciate your feedback.
+      <br>
+      <br>
+      <i>You may close this window now.</i>
 
     </div>
 
     <!-- <script src="../public/js/closewindow.js"></script> -->
+    <script>
+      $("#close_page").click(function () {
+        var confirm_result = confirm("Are you sure you want to quit?");
+        if (confirm_result == true) {
+          window.close();
+        }
+      });
+    </script>
+  </section>
 </body>
-

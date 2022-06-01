@@ -782,3 +782,7 @@ section {
     -ms-flex: 1;
     flex: 1;
 }
+
+#survey-complete{
+   margin-bottom: 15rem;
+}
