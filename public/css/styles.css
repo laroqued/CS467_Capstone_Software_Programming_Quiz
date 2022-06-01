@@ -54,11 +54,6 @@ td {
 }
 
 
-
-
-
-
-
 .app-container {
     margin-top: 8em;
 }
@@ -67,9 +62,13 @@ td {
     body {
         background-image: none;
     }
-    nav{
-            margin-right: -450px;
-                position: fixed;
+
+    nav {
+        margin-right: -500px;
+        position: fixed;
+    }
+    #nav-makestick{
+        margin-right: 50%;
     }
 }
 
@@ -487,7 +486,7 @@ nav {
     box-shadow: 5px 5px 19px 0px rgba(0, 0, 0, 0.5);
 
 
-  
+
 }
 
 #div-greeting {
@@ -524,9 +523,9 @@ nav {
     display: block;
 }
 
- .navbar-brand {
+.navbar-brand {
     font-size: 1.5em;
-} 
+}
 
 .navbar-text.navbar-brand {
     color: black;
@@ -543,7 +542,7 @@ nav {
 }
 
 .navbar-collapse {
-    overflow:visible;
+    overflow: visible;
 }
 
 header {
