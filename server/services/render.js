@@ -250,14 +250,17 @@ exports.post_submit_quiz = async (req, res) => {
       host: "smtp.office365.com",
       port: 587,
       secure: false,
-      requireTLS: true,
+      // requireTLS: true,
       auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.PASSWORD,
       },
       tls: {
-        rejectUnauthorized: false,
-      }
+        ciphers: "SSLv3",
+      },
+      // tls: {
+      //   rejectUnauthorized: false,
+      // }
     });
 
     // send mail with defined transport object
@@ -380,14 +383,18 @@ exports.post_contact =
       host: "smtp.office365.com",
       port: 587,
       secure: false,
-      requireTLS: true,
+
+      // requireTLS: true,
       auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.PASSWORD,
       },
-      tls:{
-          rejectUnauthorized:false
-      }
+      tls: {
+        ciphers: "SSLv3",
+      },
+      // tls:{
+      //     rejectUnauthorized:false
+      // }
     });
 
     // send mail with defined transport object
