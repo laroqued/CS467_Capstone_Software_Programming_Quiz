@@ -13,6 +13,7 @@ const bcrypt = require("bcryptjs");
 const axios = require("axios");
 const app = express();
 const methodOverride = require("method-override");
+var nodeoutlook = require("nodejs-nodemailer-outlook");
 
 const initializePassport = require("../../passport-config");
 initializePassport(
@@ -246,13 +247,17 @@ exports.post_submit_quiz = async (req, res) => {
 
     // create reusable transporter object using the default SMTP transport
     let transporter = await nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true,
+      host: "smtp.office365.com",
+      port: 587,
+      secure: false,
+      requireTLS: true,
       auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.PASSWORD,
       },
+      tls: {
+        rejectUnauthorized: false,
+      }
     });
 
     // send mail with defined transport object
@@ -358,7 +363,7 @@ exports.post_contact =
 <ul>
 <li>Name: Donnyves Laroque, Dominique Lazaros, Aaron Harris </li>
 <li>Company: SoftWare Programming Quiz</li>
-<li>Email: softwareprogrammingquiz@gmail.com</li>
+<li>Email: softprogramquiz@outlook.com</li>
 <li>Phone: 555-555-5555</li>
 <h3>Message </h3>
 <p>Hello ${req.body.first_name} ${req.body.last_name}, </p>
@@ -372,21 +377,22 @@ exports.post_contact =
 `;
     // create reusable transporter object using the default SMTP transport
     let transporter = await nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 465,
-      secure: true,
+      host: "smtp.office365.com",
+      port: 587,
+      secure: false,
+      requireTLS: true,
       auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.PASSWORD,
       },
-      // tls:{
-      //     rejectUnauthorized:false
-      // }
+      tls:{
+          rejectUnauthorized:false
+      }
     });
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
-      from: '"Donnyves Laroque" <softwareprogrammingquiz@gmail.com>', // sender address
+      from: '"Donnyves Laroque" <softprogramquiz@outlook.com>', // sender address
       to: req.body.email, // list of receivers
       subject: req.body.subject, // Subject line
       text: "Hello world?", // plain text body

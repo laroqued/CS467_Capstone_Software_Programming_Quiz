@@ -117,8 +117,8 @@ app.listen(port, host, () => {
         `Express started \on http//:${host}:${port} press Ctrl-C to terminate.`
     );
 });
-// Handling Error
-process.on("unhandledRejection", err => {
-  console.log(`An error occurred: ${err.message}`)
-  server.close(() => process.exit(1))
-})
+// // Handling Error
+// process.on("unhandledRejection", err => {
+//   console.log(`An error occurred: ${err.message}`)
+//   server.close(() => process.exit(1))
+// })
