@@ -1,6 +1,7 @@
 # CS467 Capstone Software Programming Quiz  
 A a website that allows employers to create and send software programming quizzes to potential job candidates. Employers can view the statistics of all the results 
 as well as each individual candidate's scores and answers.
+Check out the live site here: https://software-programming-quiz.herokuapp.com/login
 
 ## Built With
 * [Express](https://github.com/expressjs/express)
