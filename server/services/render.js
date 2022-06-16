@@ -245,19 +245,20 @@ exports.post_submit_quiz = async (req, res) => {
       <p><p/>
 `;
 
-    // create reusable transporter object using the default SMTP transport
+
+    // create reusable transporter object
     let transporter = await nodemailer.createTransport({
-      host: "smtp.office365.com",
+      host: "smtp.gmail.com",
       port: 587,
       secure: false,
-      // requireTLS: true,
+      requireTLS: true,
       auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.PASSWORD,
       },
-      tls: {
-        ciphers: "SSLv3",
-      },
+      // tls: {
+      //   ciphers: "SSLv3",
+      // },
       // tls: {
       //   rejectUnauthorized: false,
       // }
@@ -366,7 +367,7 @@ exports.post_contact =
 <ul>
 <li>Name: Donnyves Laroque, Dominique Lazaros, Aaron Harris </li>
 <li>Company: SoftWare Programming Quiz</li>
-<li>Email: softprogramquiz@outlook.com</li>
+<li>Email: softwareprogrammingquiz@gmail.com</li>
 <li>Phone: 555-555-5555</li>
 <h3>Message </h3>
 <p>Hello ${req.body.first_name} ${req.body.last_name}, </p>
@@ -378,13 +379,12 @@ exports.post_contact =
 <li>Production Quiz: https://software-programming-quiz.herokuapp.com/start_quiz?id=${id}</li>
 </ul>
 `;
-    // create reusable transporter object using the default SMTP transport
+    // create reusable transporter object using the default
     let transporter = await nodemailer.createTransport({
-      host: "smtp.office365.com",
+      host: "smtp.gmail.com",
       port: 587,
       secure: false,
-
-      // requireTLS: true,
+      requireTLS: true,
       auth: {
         user: process.env.GMAIL_USER,
         pass: process.env.PASSWORD,
